@@ -11,6 +11,7 @@ https://www.figma.com/file/R0R2DyMdnRtti79EBAkBni/ArtworkProject?node-id=0%3A1&t
 ![alt](https://github.com/agiledev-students-spring-2023/final-project-artwork-marketplace/blob/master/ux-design/wireframes/ALL%20USERS%20-%20FAQ%20Page.png)
 
 ### All Users - Landing Page
+The starting page of the software. 
 
 ![alt](https://github.com/agiledev-students-spring-2023/final-project-artwork-marketplace/blob/master/ux-design/wireframes/ALL%20USERS%20-%20Landing%20Page.png)
 
@@ -73,31 +74,4 @@ https://www.figma.com/file/R0R2DyMdnRtti79EBAkBni/ArtworkProject?node-id=0%3A1&t
 ### Shopper - View Product Page
 
 ![alt](https://github.com/agiledev-students-spring-2023/final-project-artwork-marketplace/blob/master/ux-design/wireframes/SHOPPER%20-%20View%20Product%20Page.png)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
