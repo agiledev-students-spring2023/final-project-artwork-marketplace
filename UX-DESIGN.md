@@ -6,6 +6,8 @@ https://www.figma.com/file/R0R2DyMdnRtti79EBAkBni/ArtworkProject?node-id=0%3A1&t
 
 ## App map & wireframe instructions
 
+All wireframes are separated into artists and shoppers, and some shared authentication pages. The logistic is quite similar to most shopping apps, like Etsy, and we believe the functionalities are well-explained through the subtitles. 
+
 ### All Users - FAQ
 
 ![alt](https://github.com/agiledev-students-spring-2023/final-project-artwork-marketplace/blob/master/ux-design/wireframes/ALL%20USERS%20-%20FAQ%20Page.png)
