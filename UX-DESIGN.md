@@ -2,79 +2,91 @@
 
 ## Prototyping
 
-https://steven692697.invisionapp.com/freehand/ArtworkProject-3fdCdO2TT?dsid_h=3cbd17c7d7cfefa724de029f8a86498df2dd6b0f6ccce58f8744f33e75115017&uid_h=842a62e1349d800991bc88486ad439871b0a7031e4b2e7c6375b23db2c6582b1
+https://www.figma.com/file/R0R2DyMdnRtti79EBAkBni/ArtworkProject?node-id=0%3A1&t=1gbmmDppfzkoWxhj-1
 
 ## App map & wireframe instructions
 
-### FAQ
-Freqentently asked question to help users use the APP
+### All Users - FAQ
 
-![alt text](https://github.com/agiledev-students-spring-2023/final-project-artwork-marketplace/blob/master/ux-design/wireframes/FAQ.png)
+![alt](https://github.com/agiledev-students-spring-2023/final-project-artwork-marketplace/blob/master/ux-design/wireframes/ALL%20USERS%20-%20FAQ%20Page.png)
 
-### Artist - Homepage
-The homepage of artist
+### All Users - Landing Page
 
-![alt text](https://github.com/agiledev-students-spring-2023/final-project-artwork-marketplace/blob/master/ux-design/wireframes/Artist%20-%20Home%20Page.png)
+![alt](https://github.com/agiledev-students-spring-2023/final-project-artwork-marketplace/blob/master/ux-design/wireframes/ALL%20USERS%20-%20Landing%20Page.png)
 
-### Artist - Add NEW
-How the artist add new item to the market
+### All Users - Login Page
 
-![alt text](https://github.com/agiledev-students-spring-2023/final-project-artwork-marketplace/blob/master/ux-design/wireframes/Artist%20-%20Add%20NEW.png)
+![alt](https://github.com/agiledev-students-spring-2023/final-project-artwork-marketplace/blob/master/ux-design/wireframes/ALL%20USERS%20-%20Log%20In%20Page.png)
 
-### Artist - View ITEM
-How the artist review the existed items on the market
+### All Users - Signup Page
 
-![alt text](https://github.com/agiledev-students-spring-2023/final-project-artwork-marketplace/blob/master/ux-design/wireframes/Artist%20-%20View%20ITEM.png)
+![alt](https://github.com/agiledev-students-spring-2023/final-project-artwork-marketplace/blob/master/ux-design/wireframes/ALL%20USERS%20-%20Sign%20Up%20Page.png)
 
-### Visitor - Home Page
-The homepage of visitor
+### Artist - Add New Art Page
 
-![alt text](https://github.com/agiledev-students-spring-2023/final-project-artwork-marketplace/blob/master/ux-design/wireframes/Visitor%20-%20Home%20Page.png)
+![alt](https://github.com/agiledev-students-spring-2023/final-project-artwork-marketplace/blob/master/ux-design/wireframes/ARTIST%20-%20Add%20New%20Art%20Page.png)
 
-### Visitor - View ITEM
-How the visitor review the existed items on the market
+### Artist - Analytics
 
-![alt text](https://github.com/agiledev-students-spring-2023/final-project-artwork-marketplace/blob/master/ux-design/wireframes/Visitor%20-%20View%20ITEM.png)
+![alt](https://github.com/agiledev-students-spring-2023/final-project-artwork-marketplace/blob/master/ux-design/wireframes/ARTIST%20-%20Analytics%20Page.png)
 
-### Visitor - Favorite
-Review all favorite items that the visitor have previously added
+### Artist - My Profile
 
-![alt text](https://github.com/agiledev-students-spring-2023/final-project-artwork-marketplace/blob/master/ux-design/wireframes/Visitor%20-%20Favorite.png)
+![alt](https://github.com/agiledev-students-spring-2023/final-project-artwork-marketplace/blob/master/ux-design/wireframes/ARTIST%20-%20My%20Profile%20Page.png)
 
-### Visitor - History
-Review the visitor's history of viewing items
+### Artist - View Product Page
 
-![alt text](https://github.com/agiledev-students-spring-2023/final-project-artwork-marketplace/blob/master/ux-design/wireframes/Visitor%20-%20History.png)
+![alt](https://github.com/agiledev-students-spring-2023/final-project-artwork-marketplace/blob/master/ux-design/wireframes/ARTIST%20-%20View%20Product%20Page.png)
 
-### Visitor - Payment
-The payment page for visitor to purchase an item
+### Artist - View Profile Page
 
-![alt text](https://github.com/agiledev-students-spring-2023/final-project-artwork-marketplace/blob/master/ux-design/wireframes/Visitor%20-%20Payment.png)
+![alt](https://github.com/agiledev-students-spring-2023/final-project-artwork-marketplace/blob/master/ux-design/wireframes/ARTIST%20-%20View%20Profile%20Page.png)
 
-### Visitor - Cart
-The shopping cart of visitor (item will be removed once it is paid)
+### Artist - Home Page
 
-![alt text](https://github.com/agiledev-students-spring-2023/final-project-artwork-marketplace/blob/master/ux-design/wireframes/Visitor%20-%20cart.png)
+![alt](https://github.com/agiledev-students-spring-2023/final-project-artwork-marketplace/blob/master/ux-design/wireframes/Artist%20-%20Home%20Page.png)
 
-### Visitor - Following
-The visitor's following list to different artists
+### Shopper - Cart Page
 
-![alt text](https://github.com/agiledev-students-spring-2023/final-project-artwork-marketplace/blob/master/ux-design/wireframes/Visitor%20-%20following.png)
+![alt](https://github.com/agiledev-students-spring-2023/final-project-artwork-marketplace/blob/master/ux-design/wireframes/SHOPPER%20-%20Cart%20Page.png)
 
-### Visitor - Profile (you)
-The visitor's profile page
+### Shopper - Following Page
 
-![alt text](https://github.com/agiledev-students-spring-2023/final-project-artwork-marketplace/blob/master/ux-design/wireframes/Visitor%20-%20profile%20(you).png)
+![alt](https://github.com/agiledev-students-spring-2023/final-project-artwork-marketplace/blob/master/ux-design/wireframes/SHOPPER%20-%20Following%20Page.png)
 
-### Visitor - Rising Artists
-Visitor's view to some recommanded artists when they are searching
+### Shopper - Home Page
 
-![alt text](https://github.com/agiledev-students-spring-2023/final-project-artwork-marketplace/blob/master/ux-design/wireframes/Visitor%20-%20rising%20artists.png)
+![alt](https://github.com/agiledev-students-spring-2023/final-project-artwork-marketplace/blob/master/ux-design/wireframes/SHOPPER%20-%20Home%20Page.png)
 
-### Visitor - Selected Category Page
-Visitor's view while selecting items with in the same genre
+### Shopper - My Profile
 
-![alt text](https://github.com/agiledev-students-spring-2023/final-project-artwork-marketplace/blob/master/ux-design/wireframes/Visitor%20-%20selected%20category%20page.png)
+![alt](https://github.com/agiledev-students-spring-2023/final-project-artwork-marketplace/blob/master/ux-design/wireframes/SHOPPER%20-%20My%20Profile%20Page.png)
+
+### Shopper - Rising Artists Page
+
+![alt](https://github.com/agiledev-students-spring-2023/final-project-artwork-marketplace/blob/master/ux-design/wireframes/SHOPPER%20-%20Rising%20Artists%20Page.png)
+
+### Shopper - View Category Page
+
+![alt](https://github.com/agiledev-students-spring-2023/final-project-artwork-marketplace/blob/master/ux-design/wireframes/SHOPPER%20-%20View%20Category%20Page.png)
+
+### Shopper - View Product Page
+
+![alt](https://github.com/agiledev-students-spring-2023/final-project-artwork-marketplace/blob/master/ux-design/wireframes/SHOPPER%20-%20View%20Product%20Page.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
