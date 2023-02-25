@@ -1,19 +1,5 @@
-# Project Repository
+# Artwork Marketplace
 
-This repository will be used for team projects.
+Welcome aboard. This is the introduction page for the Artwork Marketplace project designed and composed by [Anh Tran](https://github.com/Anhtrr), [Zihan Zhang](https://github.com/StevenZhang0116), [](), and [](). Our project would be the first online trading platform specifically designed for amateur artists to advertise and sell their works and improve their public popularity. Most current E-commerce companies focus on handmade or vintage items and craft supplies, like [Etsy](https://www.etsy.com/?utm_source=google&utm_medium=cpc&utm_term=etsy_e&utm_campaign=Search_US_Brand_GGL_ENG_General-Brand_Core_All_Exact&utm_ag=A1&utm_custom1=_k_EAIaIQobChMIlODO9cix_QIVa_7jBx3K5QB2EAAYASAAEgL5o_D_BwE_k_&utm_content=go_227553629_16342445429_536666953103_kwd-1818581752_c_&utm_custom2=227553629&gclid=EAIaIQobChMIlODO9cix_QIVa_7jBx3K5QB2EAAYASAAEgL5o_D_BwE). Other artists-oriented platforms, like [Jean Lurssen](https://www.jeanlurssen.com/), [Amira Rahim](https://www.amirarahim.com/), are designed for popular artists with certain audiences already. Fashion markets are designed for in-person activities with limited flexibility and efficiency in advertising. Thus, our product would help juvenile artists to better initiate and progress their early careers. We will also provide a forum functionality to help them find people with similar interests and seek opportunities for further collaboration. Young artists deserve more attention and protection since they would easily feel depressed (both emotionally and pragmatically) before they attain decent popularity, which may drive them to quit. Our product aspires to change this dilemma. 
 
-Several sets of instructions are included in this repository. They should each be treated as separate assignments with their own due dates and sets of requirements.
-
-1. See the [App Map & Wireframes](instructions-0a-app-map-wireframes.md) and [Prototyping](./instructions-0b-prototyping.md) instructions for the requirements of the initial user experience design of the app.
-
-1. Delete the contents of this file and replace with the contents of a proper README.md, as described in the [project setup instructions](./instructions-0c-project-setup.md)
-
-1. See the [Sprint Planning instructions](instructions-0d-sprint-planning.md) for the requirements of Sprint Planning for each Sprint.
-
-1. See the [Front-End Development instructions](./instructions-1-front-end.md) for the requirements of the initial Front-End Development.
-
-1. See the [Back-End Development instructions](./instructions-2-back-end.md) for the requirements of the initial Back-End Development.
-
-1. See the [Database Integration instructions](./instructions-3-database.md) for the requirements of integrating a database into the back-end.
-
-1. See the [Deployment instructions](./instructions-4-deployment.md) for the requirements of deploying an app.
+Similar to most platforms, users could choose to be artists and/or customers in registration. Artists could add and manage their artwork easily with an individual profile page and featured items. Consumers could view and purchase artworks, while the system will also provide recommendations of "rising stars" and categorizations of arts into various genres. Individual messages and public discussions (e.g. forums, comments) are also allowable. 
