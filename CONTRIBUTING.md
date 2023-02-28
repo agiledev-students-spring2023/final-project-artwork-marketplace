@@ -80,9 +80,7 @@ Keep this document practical and real - make it yours, not someone else's. Pleas
 
 - Each member should clone the project into their own local machine.
 - Each member should create their own branch and work off of that branch.
-- When any member is ready to push to the "main" branch, send a message on discord channel in order to avoid merging conflicts.
-    - Once every member has confirmed, then push.
-    - Then, other members must pull to their local machine.
+- Refer to [the feature branch workflow](https://knowledge.kitchen/content/courses/agile-development-and-devops/slides/feature-branch-workflow/#4)
 
 # Contributions & Considerations
 
