@@ -57,8 +57,9 @@ Important agreements so that everyone knows what is expected of them in terms of
     - Do not make that a habit
     - Communicate with the team when they are busy
 - Take responsibility for communicating your tasks/accomplishments/issues with the team. 
-- agreement that members will not cover for other members who do not participate.
-- agreement that a member who makes no progress on a task for two standups or more in a row will be reported to management.
+- Agreement that members will not cover for other members who do not participate.
+- Agreement that a member who makes no progress on a task for two standups or more in a row will be reported to management.
+- Agreed Weekly Schedule: Thursday, Saturday, Monday
 
 ## Coding standards
 
@@ -79,8 +80,7 @@ Keep this document practical and real - make it yours, not someone else's. Pleas
 # Git Workflow
 
 - Each member should clone the project into their own local machine.
-- Each member should create their own branch and work off of that branch.
-- Refer to [the feature branch workflow](https://knowledge.kitchen/content/courses/agile-development-and-devops/slides/feature-branch-workflow/#4)
+- Then, refer to [the feature branch workflow](https://knowledge.kitchen/content/courses/agile-development-and-devops/slides/feature-branch-workflow/#4)
 
 # Contributions & Considerations
 
