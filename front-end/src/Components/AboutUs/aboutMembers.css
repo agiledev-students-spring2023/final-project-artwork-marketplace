@@ -1,0 +1,86 @@
+.container{
+    width: var(--container-width-lg);
+    margin: 0 auto;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+}
+
+.members{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.5rem;
+}
+.titleMembers{
+    text-align: center;
+    padding-bottom: 2rem;
+}
+
+.memberProfile{
+    text-align: center;
+}
+
+.memberImage > img{
+    border: 2px solid black;
+}
+
+.memberPic{
+    max-width: 100%;
+    border-radius: 50%;
+}
+
+.memberSocials{
+    display: grid;
+    gap: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+}
+.memberSocials a{
+    font-size: 2vw;
+    color: black;
+}
+
+/* FOR TABLETS */
+@media screen and (max-width: 1024px){
+    .container{
+        width: var(--container-width-md);
+    }
+    .members{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+    .memberSocials{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        margin-left: 5rem;
+        margin-right: 5rem;
+    }
+    .memberSocials a{
+        font-size: 5vw;
+        color: black;
+    }
+    section{
+    }
+}
+
+/* FOR PHONES */
+@media screen and (max-width: 600px){
+    .container{
+        width: var(--container-width-sm);
+    }
+    .members{
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    .memberSocials{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .memberSocials a{
+        font-size: 10vw;
+        color: black;
+    }
+    section{
+    }
+}
