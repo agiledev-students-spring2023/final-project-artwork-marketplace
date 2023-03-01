@@ -12,4 +12,5 @@ It is hard to make it as an artist - it's a tough world out there and chances fo
 
 Similar to existing ecommerce platforms, users will be able to choose to be artists and/or customers in registration. Artists will be able to add and manage their artwork easily with an individual profile page and featured items. Consumers will be able to view and purchase artworks, while the system will also provide recommendations of "rising stars" and categorizations of arts into various genres. We are also interested in implementing individual messages and public discussions (e.g. forums, comments) in the future.
 
-## View our [Contributing Document](https://github.com/agiledev-students-spring-2023/final-project-artwork-marketplace/blob/master/CONTRIBUTING.md) here 
+
+## Please view our [Contributing Document](https://github.com/agiledev-students-spring-2023/final-project-artwork-marketplace/blob/master/CONTRIBUTING.md) here 
