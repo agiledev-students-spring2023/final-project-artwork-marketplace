@@ -59,14 +59,14 @@ const aboutMembers = () => {
             </div>
             <div className="memberInfo">
               <h3 className='memberName'>Steven</h3>
-              <h5 className="memberDescription">NYU {/* School */} • {/* Major */} • {/* Year */}</h5>
+              <h5 className="memberDescription">NYU CAS • Math & CS • Senior</h5>
               <div className="memberSocials">
                 {/* LinkedIn */}
-                <a href="" target="_blank"><FaLinkedin/></a>
+                <a href="https://www.linkedin.com/in/zihan-zhang-8295161a2/" target="_blank"><FaLinkedin/></a>
                 {/* Github */}
-                <a href="" target="_blank"><FaGithubSquare/></a>
+                <a href="https://github.com/StevenZhang0116" target="_blank"><FaGithubSquare/></a>
                 {/* Website */}
-                <a href="" target="_blank"><CgWebsite/></a>
+                <a href="https://stevenzhang0116.wordpress.com/" target="_blank"><CgWebsite/></a>
               </div>
             </div>
           </article>
