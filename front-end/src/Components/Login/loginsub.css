@@ -1,0 +1,71 @@
+.caption{
+    text-align: center;
+    font-size: 1w;
+    color: black;
+}
+
+.place{
+    text-align: center;
+    font-size: 3vw;
+    color: black;
+}
+
+.bodyset{
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.loginset{
+    background-color: aliceblue;
+    align-items: center;
+    justify-content: center;
+    color: aqua;
+    padding: 40px;
+    box-shadow: 10px 20px 25px black;
+}
+
+.loginset input{
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    background: none;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    padding: 12px;
+    border-radius: 22px;
+    outline: none;
+    color: blue;
+}
+
+.loginset input[type="text"], .loginset[type="password"]{
+    border: 2px solid orange;
+    width: 220px;
+}
+
+.loginset input[type="text"]:focus, .loginset[type="password"]:focus{
+    border-color: blueviolet;
+    width: 280px;
+    transition: 0.5s;
+}
+
+.loginset input[type="submit"]{
+    width: 150px;
+    border: 2px solid green;
+    cursor: pointer;
+}
+
+.loginset input[type="submit"]:hover{
+    background-color: yellow;
+}
+
+.photoimg > img{
+    border: 2px solid black;
+}
+
+.photopic{
+    max-width: 50%;
+    border-radius: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
