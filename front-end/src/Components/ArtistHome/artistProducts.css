@@ -1,0 +1,134 @@
+.container{
+    width: var(--container-width-lg);
+    padding-bottom: 10rem;
+    margin: 0 auto;
+    padding-top: 1rem;
+    overflow: hidden;
+}
+.welcomeMsg{
+    padding: 1rem;
+    padding-bottom: 3rem;
+}
+.productColumn{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 2rem;
+}
+.productCard{
+    display: grid;
+    grid-template-columns: 60% 40%;
+    gap: 3rem;
+}
+.productCard:hover > .productInfo .info{
+    box-shadow: 0rem 0rem 2rem rgb(87, 87, 87);
+}
+.productCard:hover > .productInfo .info a{
+    color: black;
+}
+.productCard:hover > .productImage img{
+    box-shadow: 0rem 0rem 2rem rgb(87, 87, 87);
+}
+.productImage img{
+    width: 75%;
+    border: 2px solid black;
+    transition: 1s ease;
+}
+.info{
+    border: 2px solid black;
+    border-radius: 2rem;
+    margin-top: 5%;
+    width: 20vw;
+    overflow-wrap: break-word;
+    background-color: rgb(194, 194, 194);
+    transition: 1s ease;
+}
+.info h5{
+    padding-left: 2rem;
+    padding-right: 2rem;
+    color: black;
+    text-decoration: none;
+}
+.info a{
+    color: rgb(80, 80, 80);
+}
+
+:root{
+    --container-width-lg: 75%;
+    --container-width-md: 86%;
+    --container-width-sm: 90%;
+}
+  
+html{
+    scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar{
+    display: none;
+}
+/* FOR TABLETS */
+@media screen and (max-width: 1024px){
+    .container{
+        width: var(--container-width-md);
+        padding-bottom: 10rem;
+        align-items: center;
+    }
+    .productCard{
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 0.5rem;
+        align-items: center;
+    }
+    .productInfo{
+        align-items: center;
+    }
+    .info{
+        margin-top: 0;
+        width: 86vw;
+        display: grid;
+        grid-template-columns: 60% 40%;
+        overflow-wrap: break-word;
+        background-color: rgb(194, 194, 194);
+        transition: 1s ease;
+    }
+    .productImage img{
+        width: 86%;
+        border: 2px solid black;
+        transition: 1s ease;
+    }
+    section{
+    }
+}
+
+/* FOR PHONES */
+@media screen and (max-width: 600px){
+    .container{
+        width: var(--container-width-sm);
+        padding-bottom: 10rem;
+        margin-right: 5%;
+    }
+    .welcomeMsg{
+        padding-bottom: 1rem;
+    }
+    .productCard{
+        display: grid;
+        grid-template-columns: 100%;
+        gap: 0.5rem;
+    }
+    .info{
+        margin-top: 0;
+        width: 90vw;
+        display: grid;
+        grid-template-columns: 60% 40%;
+        overflow-wrap: break-word;
+        background-color: rgb(194, 194, 194);
+        transition: 1s ease;
+    }
+    .productImage img{
+        width: 100%;
+        border: 2px solid black;
+        transition: 1s ease;
+    }
+    
+    section{
+    }
+}
