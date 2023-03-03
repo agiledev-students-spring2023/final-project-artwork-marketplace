@@ -1,0 +1,80 @@
+
+  #app {
+    background: #fff;
+    border-radius: 4px;
+    padding: 20px;
+    transition: all 0.2s;
+  }
+
+.logopic{
+  max-width: 50%;
+  /* border-radius: 50%; */
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 20%;
+}
+  p {
+    color: black;
+    font-size: 22px;
+    text-align: center;
+  }
+  
+  .signupset{
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+  }
+  
+  .signupset input{
+      display: block;
+      margin: 20px auto;
+      text-align: center;
+      background: none;
+      font-size: 20px;
+      padding: 12px;
+      border-radius: 22px;
+      outline: none;
+  }
+  
+  .signupset input[type="text"], .loginset[type="password"]{
+      border: 2px solid blueviolet;
+      width: 220px;
+  }
+  
+  .signupset input[type="text"]:focus, .loginset[type="password"]:focus{
+      border-color: orange;
+      width: 280px;
+      transition: 0.5s;
+  }
+  
+  .signupset input[type="submit"]{
+      width: 150px;
+      border: 2px solid black;
+      cursor: pointer;
+  }
+  
+  .signupset input[type="register"]:hover{
+      background-color: blueviolet;
+  }
+
+.checkmarkset{
+    margin: auto;
+    width: 20%;
+    border: 2px solid black;
+    border-radius: 22px;
+    text-align: center;
+}
+
+.container {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 12px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
