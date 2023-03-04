@@ -5,6 +5,7 @@ import AboutUs from './Pages/AboutUs'
 import Login from './Pages/Login'
 import SignUp from './Pages/SignUp' 
 import ArtistHome from './Pages/ArtistHome'
+import Landing from './Pages/Landing'
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/Login" element={<Login />}/>
         <Route path="/SignUp" element={<SignUp />}/>
         <Route path="/Home" element={<ArtistHome />}/>
+        <Route path="/Landing" element={<Landing />}/>
       </Routes>
     </BrowserRouter>
   )
