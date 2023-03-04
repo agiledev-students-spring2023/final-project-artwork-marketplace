@@ -1,12 +1,10 @@
 import React from 'react'
-import AboutMembers from '../Components/AboutUs/aboutMembers'
-import AboutProject from '../Components/AboutUs/aboutProject'
+import LandingPage from '../Components/Landing/landing'
 
 const Landing = () => {
   return (
     <div>
-        <AboutProject/>
-        <AboutMembers/>
+        <LandingPage/>
     </div>
   )
 }
