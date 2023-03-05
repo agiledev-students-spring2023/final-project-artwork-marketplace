@@ -28,6 +28,7 @@ const Loginsub = () => {
             <div className="loginset">        
                 <input type='text' placeholder='Email' value={theemail} onChange={(e) => setTheemail(e.target.value)} />
                 <input type='text' placeholder='Password' value={thepassword} onChange={(e) => setThepassword(e.target.value)} />
+                {thepassword.length > 10 ? <h3 className='caption'>Password is OK</h3>: <h3 className='caption'>Too short (minimum length = 10) </h3>}
                 <form onSubmit={handleSubmit}>
                     <input type='submit' value='Login' />  
                 </form>
