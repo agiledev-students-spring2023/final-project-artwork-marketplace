@@ -4,7 +4,19 @@
     padding-top: 1rem;
     padding-bottom: 2rem;
 }
+:root{
+    --container-width-lg: 75%;
+    --container-width-md: 86%;
+    --container-width-sm: 90%;
+}
+  
+html{
+    scroll-behavior: smooth;
+}
 
+::-webkit-scrollbar{
+    display: none;
+}
 .members{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
