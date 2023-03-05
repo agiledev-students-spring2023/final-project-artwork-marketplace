@@ -1,0 +1,76 @@
+.place{
+    font-size: 3vw;
+    color: black;
+}
+
+.bodyset{
+    font-family: 'Courier New', Courier, monospace;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    text-align: center;
+}
+
+.photopic{
+    max-width: 25%;
+    border-radius: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.addworkset input{
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    background: none;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    padding: 12px;
+    border-radius: 22px;
+    outline: none;
+    color: blue;
+}
+
+.addworkset input[type="text"], .addworkset[type="password"]{
+    border: 2px solid orange;
+    width: 220px;
+}
+
+.addworkset input[type="text"]:focus, .addworkset[type="password"]:focus{
+    border-color: blueviolet;
+    width: 280px;
+    transition: 0.5s;
+}
+
+.addworkset input[type="submit"]{
+    width: 150px;
+    border: 2px solid green;
+    cursor: pointer;
+}
+
+.addworkset input[type="submit"]:hover{
+    background-color: yellow;
+}
+
+.container {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 12px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 15px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.checkmarkset{
+    margin: auto;
+    width: 20%;
+    border: 2px solid black;
+    border-radius: 22px;
+    text-align: center;
+}
