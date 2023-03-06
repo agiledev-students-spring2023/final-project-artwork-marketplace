@@ -1,4 +1,4 @@
-.container{
+.products_container{
     width: var(--container-width-lg);
     padding-bottom: 10rem;
     margin: 0 auto;
@@ -67,7 +67,7 @@ html{
 }
 /* FOR TABLETS */
 @media screen and (max-width: 1024px){
-    .container{
+    .products_container{
         width: var(--container-width-md);
         padding-bottom: 10rem;
         align-items: center;
@@ -101,7 +101,7 @@ html{
 
 /* FOR PHONES */
 @media screen and (max-width: 600px){
-    .container{
+    .products_container{
         width: var(--container-width-sm);
         padding-bottom: 10rem;
         margin-right: 5%;

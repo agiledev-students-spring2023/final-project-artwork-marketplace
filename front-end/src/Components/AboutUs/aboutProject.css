@@ -26,37 +26,30 @@ html{
     display: none;
 }
 
-.container{
+.aboutProject__container{
     width: var(--container-width-lg);
     margin: 0 auto;
-    padding-top: 1rem;
+    padding-top: 4rem;
+    align-items: center;
 }
 
 /* FOR TABLETS */
 @media screen and (max-width: 1024px){
-    .container{
-        width: var(--container-width-md);
-    }
+    
     .aboutProject__items{
         display: grid;
         grid-template-columns: repeat(1, 1fr);
         gap: 1rem;
     }
-    section{
-    }
+
 }
 
 /* FOR PHONES */
 @media screen and (max-width: 600px){
-    .container{
-        width: var(--container-width-sm);
-    }
     .aboutProject__items{
         display: grid;
         grid-template-columns: repeat(1, 1fr);
         gap: 1rem;
     }
 
-    section{
-    }
 }
