@@ -1,19 +1,20 @@
 import React, {useState} from 'react'
+import { Link } from 'react-router-dom'
 import './landing.css'
-//import BlueWave from '../../Assets/Pictures/blue-wave.jpeg'
+
  
 const LandingPage = () => {
     return(
-        <div>
-            <h1 className='title'>ARTWORK MARKET</h1>
-            <h1 className='title'> </h1>
-            <h1 className='title'> </h1>
-            <div className='buttonSet'>
-                <p className='button'>Log In</p>
-                <p className='button'>Sign Up</p>
+        <>
+            <Link to='/AboutUs' className='aboutUsButton'>?</Link>
+            <div className='container landing__container'>
+                <h1 className='title'>ARTWORK MARKETPLACE</h1>
+                <div className='buttonSet'>
+                    <Link to='/Login' className='button'>Log In</Link>
+                    <Link to='/SignUp' className='button button-Primary'>Sign Up</Link>
+                </div>
             </div>
-        </div>
-
+        </>
     );
 }
 

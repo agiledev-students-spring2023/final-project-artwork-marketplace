@@ -9,9 +9,7 @@ const ArtistHome = () => {
     <div>
       <ArtistProducts/>
       <ArtistNavbar/>
-
     </div>
-
   )
 }
 

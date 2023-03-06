@@ -56,6 +56,9 @@ html{
     .container{
         width: var(--container-width-md);
     }
+    .memberPic{
+        max-width: 90%;
+    }
     .members{
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -71,14 +74,15 @@ html{
         font-size: 5vw;
         color: black;
     }
-    section{
-    }
 }
 
 /* FOR PHONES */
 @media screen and (max-width: 600px){
     .container{
         width: var(--container-width-sm);
+    }
+    .memberPic{
+        max-width: 90%;
     }
     .members{
         display: grid;
@@ -92,7 +96,5 @@ html{
     .memberSocials a{
         font-size: 10vw;
         color: black;
-    }
-    section{
     }
 }

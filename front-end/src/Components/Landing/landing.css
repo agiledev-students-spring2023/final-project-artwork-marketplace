@@ -1,24 +1,123 @@
-.title{
-    color: black;
-    font-family: helvetica;
-    font-weight: bold;
-    text-align: center;
-    padding-top: 7rem;
-}
-
-.buttonSet {
+.landing__container{
+    width: var(--container-width-lg);
+    margin: 0 auto;
     display: block;
-    justify-content: center;
+    padding: 0.7rem 1.7rem;
+    position: fixed;
+    left: 50%;
+    transform:translateX(-50%);
+    bottom: 2rem;
     align-items: center;
 }
-
-.button {
-    background-color: white;
+.aboutUsButton{
+    width: max-content;
+    display: block;
+    position: fixed;
+    right: 10%;
+    transform:translateX(-60%);
+    top: 4rem;
     border: 2px solid black;
-    border-radius: 15px;
+    color: white;
+    background-color: rgb(20, 20, 20);
+    border-radius: 50%;
+    padding: 0.8rem;
+    padding-right: 1.3rem;
+    padding-left: 1.3rem;
+    transition: 1s ease all;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: larger;
+}
+.aboutUsButton:hover{
+    color: white;
+    background-color: rgb(120, 120, 120);
+    border: 2px solid rgb(120, 120, 120);
+}
+:root{
+    --container-width-lg: 75%;
+    --container-width-md: 86%;
+    --container-width-sm: 90%;
+}
+html{
+    scroll-behavior: smooth;
+}
+::-webkit-scrollbar{
+    display: none;
+}
+.title{
+    padding-top: 20%;
+}
+.buttonSet {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    min-width: fit-content;
+    margin-right: 20vw;
+    margin-left: 20vw;
+    padding-bottom: 30vh;
+    padding-top: 20vh;
+}
+.button{
+    border: 2px solid black;
+    border-radius: 3rem;
+    padding: 1rem;
+    transition: 1s ease all;
     color: black;
-    padding: 10px 100px;
-    text-align: center;
-    display: inline-block;
-    font-size: 16px;
+    text-decoration: none;
+    font-weight: 500;
+}
+.button:hover{
+    color: white;
+    background-color: rgb(120, 120, 120);
+    border: 2px solid rgb(120, 120, 120);
+}
+.button-Primary{
+    color: white;
+    background-color: rgb(20, 20, 20);
+}
+/* FOR TABLETS */
+@media screen and (max-width: 1024px){
+    .landing__container{
+        width: var(--container-width-md);
+    }
+    .buttonSet {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        min-width: fit-content;
+        margin-right: 10vw;
+        margin-left: 10vw;
+        padding-bottom: 0;
+        padding-top: 40vh;
+    }
+    .aboutUsButton{
+        top: 3rem;
+        right: 5%;
+        font-weight: 500;
+    }
+}
+
+/* FOR PHONES */
+@media screen and (max-width: 600px){
+    .landing__container{
+        width: var(--container-width-sm);
+    }
+    .buttonSet {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        min-width: fit-content;
+        margin-right: 10vw;
+        margin-left: 10vw;
+        padding-bottom: 0;
+        padding-top: 30vh;
+    }
+    .aboutUsButton{
+        top: 1.5rem;
+        right: 0%;
+        padding: 0.5rem;
+        padding-right: 1rem;
+        padding-left: 1rem;
+        font-weight: 400;
+    }
 }
