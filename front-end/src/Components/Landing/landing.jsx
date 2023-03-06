@@ -6,15 +6,14 @@ const LandingPage = () => {
     return(
         <div>
             <h1 className='title'>ARTWORK MARKET</h1>
-            <h1 className='title'> </h1>
-            <h1 className='title'> </h1>
             <div className='buttonSet'>
-                <p className='button'>Log In</p>
-                <p className='button'>Sign Up</p>
+                <button class="button" role="button">Log In</button>
+                &nbsp;
+                <button class="button" role="button">Create Account</button>
             </div>
+            <p className='aboutUs'>About Us</p>
         </div>
-
-    );
+    )
 }
 
 export default LandingPage
