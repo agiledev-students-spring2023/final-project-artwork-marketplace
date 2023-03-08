@@ -7,6 +7,7 @@ import SignUp from './Pages/SignUp'
 import ArtistHome from './Pages/ArtistHome'
 import Landing from './Pages/Landing'
 import AddArt from './Pages/AddArt'
+import HomeCategories from './Pages/CustomerHomePage'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/Home" element={<ArtistHome />}/>
         <Route path="/Landing" element={<Landing />}/>
         <Route path="/AddArt" element={<AddArt />}/>
+        <Route path="/CustomerHomePage" element={<HomeCategories />}/>
       </Routes>
     </BrowserRouter>
   )
