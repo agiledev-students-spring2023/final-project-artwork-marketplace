@@ -9,6 +9,8 @@ import Landing from './Pages/Landing'
 import AddArt from './Pages/AddArt'
 import HomeCategories from './Pages/CustomerHomePage'
 import Category from './Pages/CategoryPage'
+import ViewItem from './Pages/ViewItem'
+
 
 function App() {
   return (
@@ -22,6 +24,7 @@ function App() {
         <Route path="/AddArt" element={<AddArt />}/>
         <Route path="/CustomerHomePage" element={<HomeCategories />}/>
         <Route path="/CategoryPage" element={<Category/>}/>
+        <Route path="/ViewItem/:productId" element={<ViewItem />}/>
       </Routes>
     </BrowserRouter>
   )
