@@ -17,7 +17,7 @@ function App() {
         <Route path="/SignUp" element={<SignUp />}/>
         <Route path="/Home" element={<ArtistHome />}/>
         <Route path="/Landing" element={<Landing />}/>
-        <Route path="/ViewItem" element={<ViewItem />}/>
+        <Route path="/ViewItem/:productId" element={<ViewItem />}/>
       </Routes>
     </BrowserRouter>
   )
