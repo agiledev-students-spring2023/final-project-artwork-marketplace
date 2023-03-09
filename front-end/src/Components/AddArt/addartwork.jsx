@@ -10,8 +10,11 @@ const AddArtWork = () => {
     const [addrtype, setAddrtype] = useState([])
 
     const [file,setFile] = useState()
+    const [file2,setFile2] = useState()
+    const [file3,setFile3] = useState()
     const [theName,setName] = useState("")
     const [thePrice,setPrice] = useState("")
+    const [theNum,setNum] = useState("")
     const [theDescription,setTheDescription] = useState("")
     
     const testcase = ['comedy','laugh','smile'];
@@ -47,9 +50,15 @@ const AddArtWork = () => {
     
     /* check whether inputs are numeric */
     /* for PRICE input only */
-    function checkNumber(val){
+    function checkNumber(val,indi){
         val = val.replace(/[^\d]/g, '');
-        setPrice(val);
+        if (indi === 1){
+            setPrice(val);
+        }
+        else if (indi === 2){
+            setNum(val);
+        }
+        
     }
 
     /* check whether inputs are character/special character only */
@@ -59,19 +68,31 @@ const AddArtWork = () => {
         setName(val);
     }
     
+    /* maximum 3 photos */ 
     function handleChange(event){
         console.log(event.target.files)
         setFile(URL.createObjectURL(event.target.files[0]));
+    }
+
+    function handleChange2(event){
+        console.log(event.target.files)
+        setFile2(URL.createObjectURL(event.target.files[0]));
+    }
+
+    function handleChange3(event){
+        console.log(event.target.files)
+        setFile3(URL.createObjectURL(event.target.files[0]));
     }
 
     function handleSubmit(event){
         event.preventDefault()
         /* test */ 
         console.log('SUBMIT TEST')
-        console.log(theName)
-        console.log(thePrice)
-        console.log(theDescription)
-        console.log(selected)
+        console.log("Name:", theName)
+        console.log("Price:", thePrice)
+        console.log("Number:", theNum)
+        console.log("Description:", theDescription)
+        console.log("Genre:", selected)
     }
     
     // if (addrtype.length === 0) return <div>loading...</div>
@@ -80,18 +101,26 @@ const AddArtWork = () => {
     }
 
     return (
-        <div className='bodyset'>
-            <h2 className='place'>
+        <div className='addartbodyset'>
+            <h3 className='addartplace'>
                 Add NEW WORK
-            </h2>
+            </h3>
             <h3>
                 Image Illustration
             </h3>
+            <h5>
+                Maximum 3 Photos; Please Upload Sequentially. 
+            </h5>
             <div className='addworkset'>                
                 <input type="file" onChange={handleChange} />
                 <img className="photopic" src={file} />
+                <input type="file" onChange={handleChange2} />
+                <img className="photopic" src={file2} />
+                <input type="file" onChange={handleChange3} />
+                <img className="photopic" src={file3} />
                 <input type='text' placeholder='Name' value={theName} onChange={(e) => checkCharacter(e.target.value)} />
-                <input type='text' placeholder='Price' value={thePrice} onChange={(e) => checkNumber(e.target.value)} />
+                <input type='text' placeholder='Price' value={thePrice} onChange={(e) => checkNumber(e.target.value,1)} />
+                <input type='text' placeholder='Number' value={theNum} onChange={(e) => checkNumber(e.target.value,2)} />
                 <TextareaAutosize type='text' placeholder='Decription' value={theDescription} onChange={(e) => setTheDescription(e.target.value)} />
                 <br/>
                 <br/>
