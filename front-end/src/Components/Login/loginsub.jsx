@@ -22,9 +22,9 @@ const Loginsub = () => {
             <h3 className='caption'>
                 === Our Featured Artwork === 
             </h3>
-            <h2 className='place'>
+            <h3 className='loginplace'>
                 Login
-            </h2>
+            </h3>
             <div className="loginset">        
                 <input type='text' placeholder='Email' value={theemail} onChange={(e) => setTheemail(e.target.value)} />
                 <input type='text' placeholder='Password' value={thepassword} onChange={(e) => setThepassword(e.target.value)} />

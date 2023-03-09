@@ -7,13 +7,19 @@ export default [
         "https://www.goyard.com/media/catalog/product/cache/ce3c1d3c10ece5b9970cb5f53cd72146/S/A/SAC_HOBO_BOHEME_PM_3087.jpg",
         "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSSGQACbI4X64y20aE-POtl3mg1_-0kI18lJjDx6Tm52OkwPOZiVp8aEd4dYnlHrWwMfZ2uX_cMXIG8IEAxg_9A6WV3C_y9shvNSgiIiuMCzVpX6w8MVXmmJQ&usqp=CAE"
     ],
+    /* 
+    activeOrNot should be automatically initialized once src is created in backend 
+    length equal to length of src and set the first one be "active"
+    */
     activeOrNot: [
       "active",
       "",
       ""
     ],
     description: "Good bag",
+    /* truncated the first 2/3 sentences from artwork's uploaded description in AddArt Page */
     content: "short description of bag. ",
+    /* rest of part */ 
     detailcontent: "more more more more more more content", 
     price: 23,
     count: 1
