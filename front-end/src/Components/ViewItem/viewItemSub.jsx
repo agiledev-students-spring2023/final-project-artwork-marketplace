@@ -7,7 +7,7 @@ import './viewItemSub.css'
 import productsData  from './productsData' 
 
 const ViewItemSub = () => {
-  const productId = "2";
+  const productId = "1";
   const [thisProduct,setProduct] = useState({
     products: productsData.find(prod => prod._id === productId)
     }
@@ -24,7 +24,7 @@ const ViewItemSub = () => {
     thisProduct.products.activeOrNot[index] = "active";
     console.log(index);
     console.log(thisProduct.products.activeOrNot)
-    setChangePhoto(changePhoto+1)
+    setChangePhoto(changePhoto + 1)
   }
 
   /* handle whether to show the detailed description */
