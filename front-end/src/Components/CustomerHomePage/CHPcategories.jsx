@@ -5,19 +5,19 @@ import './CHPcategories.css'
 const Lists = () => {
     return (
     <div>
-        <div>
+        <div className='CHPCategory'>
             <h2> 
-                <div className='button'> Category Name</div>
+                <div className='CHPbutton'> Category Name</div>
                 {/* add link to category page */}
             </h2>
         </div>
-        <ul className='images'>
+        <ul className='CHPimages'>
             <li><img src="https://picsum.photos/200/300" alt="alternatetext"/></li>
             <li><img src="https://picsum.photos/200/300" alt="alternatetext"/></li>
             <li><img src="https://picsum.photos/200/300" alt="alternatetext"/></li>
             <li><img src="https://picsum.photos/200/300" alt="alternatetext"/></li>
             <li><img src="https://picsum.photos/200/300" alt="alternatetext"/></li>
-            <li><img src="https://picsum.photos/200/300" alt="alternatetext"/>e</li>
+            <li><img src="https://picsum.photos/200/300" alt="alternatetext"/></li>
             <li><img src="https://picsum.photos/200/300" alt="alternatetext"/></li>
         </ul>
     </div>
@@ -28,7 +28,7 @@ const Categories = () => {
     return(
         <div>
              <div className='search'>Search Bar</div>
-            <div className='banner'>
+            <div className='CHPbanner'>
                 <h1>Check out our editors pick in every category!</h1>
             </div>
             <Lists/>

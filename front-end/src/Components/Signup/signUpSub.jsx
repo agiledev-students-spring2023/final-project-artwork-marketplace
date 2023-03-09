@@ -32,12 +32,12 @@ const SignUpSub = () => {
     <div className='container SignUp__container'>
       
     	{/* Logo */}
-      <img className='logopic' src={Logo} alt="" />
+      <img className='signup_logopic' src={Logo} alt="" />
       
       {/* User Info */}
       <form onSubmit={handleSubmit}>
         {/* User Category */}
-        <div className = "check">
+        <div className = "signup_check">
           <div 
             className="radioButton"
             onClick={() => {setUserType("Artist")}}
@@ -62,7 +62,7 @@ const SignUpSub = () => {
           </div>
         </div>
         {/* Sign Up */}
-        <div className="signupset">   
+        <div className="signup_signupset">   
           <input 
             className='textField'
             type='text' 
@@ -82,7 +82,7 @@ const SignUpSub = () => {
             placeholder='Password'
             ref={passwordRef}
           />
-          <button type="submit" className="button button-Primary">Register</button>
+          <button type="submit" className="signup_button signup_button-Primary">Register</button>
         </div>
       </form>
     </div>

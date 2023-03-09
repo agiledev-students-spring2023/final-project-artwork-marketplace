@@ -1,4 +1,3 @@
-
 .SignUp__container{
   width: var(--container-width-lg);
   display: block;
@@ -8,6 +7,7 @@
   transform:translateX(-50%);
   bottom: 2rem;
   align-items: center;
+  text-align: center;
 }
 :root{
   --container-width-lg: 75%;
@@ -20,7 +20,7 @@ html{
 ::-webkit-scrollbar{
   display: none;
 }
-.check{
+.signup_check{
   display: flex;
   gap: 3rem;
   margin: 1rem;
@@ -28,24 +28,24 @@ html{
   padding-top: 4rem;
   justify-content: center;
 }
-.radioButton{
+.signup_check .radioButton{
   display: grid;
   grid-template-columns: 1fr;
   align-items: center;
   padding-right: 1rem;
   padding-left: 1rem;
 }
-.radioButton input[type=radio]{
+.signup_check .radioButton input[type=radio]{
   accent-color: black;
   height: 2rem;
 }
-.radioButton input[type=radio]:hover{
+.signup_check .radioButton input[type=radio]:hover{
   cursor: pointer;
 }
-.radioButton p{
+.signup_check .radioButton p{
   font-weight: 500;
 }
-.signupset{
+.signup_signupset{
   display: grid;
   grid-template-columns: 1fr;
   gap: 1rem;
@@ -53,7 +53,7 @@ html{
   margin-left: 20vw;
   padding-bottom: 15vh;
 }
-.signupset .textField{
+.signup_signupset .textField{
   border: 2px solid black;
   border-radius: 3rem;
   padding: 1rem;
@@ -61,27 +61,27 @@ html{
   color: black;
   text-decoration: none;
 }
-.signupset .textField:focus{
+.signup_signupset .textField:focus{
   box-shadow: 0rem 0rem 1.5rem rgb(87, 87, 87);
 }
-.logopic{
+.signup_logopic{
   border: 2px solid black;
   max-height: 20vh;
 }
-.button{
+.signup_button{
   border: 2px solid black;
   border-radius: 3rem;
   padding: 1rem;
   transition: 1s ease all;
   color: black;
 }
-.button:hover{
+.signup_button:hover{
   color: white;
   background-color: rgb(120, 120, 120);
   border: 2px solid rgb(120, 120, 120);
   cursor: pointer;
 }
-.button-Primary{
+.signup_button-Primary{
   color: white;
   background-color: rgb(20, 20, 20);
   text-transform: capitalize;
@@ -92,16 +92,16 @@ html{
   .SignUp__container{
     width: var(--container-width-md);
   }
-  .signupset{
+  .signup_signupset{
     margin-right: 10vw;
     margin-left: 10vw;
     padding-bottom: 0;
   }
-  .check{
+  .signup_check{
     padding: 1rem;
     padding-top: 8rem;
   }
-  .logopic{
+  .signup_logopic{
     border: 2px solid black;
     max-height: 25vh;
   }
@@ -112,12 +112,12 @@ html{
   .SignUp__container{
     width: var(--container-width-sm);
   }
-  .signupset{
+  .signup_signupset{
     margin-right: 10vw;
     margin-left: 10vw;
     padding-bottom: 0;
   }
-  .check{
+  .signup_check{
     padding: 1rem;
     padding-top: 4rem;
   }
