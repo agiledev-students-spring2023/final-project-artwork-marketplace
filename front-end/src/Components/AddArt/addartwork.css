@@ -54,18 +54,7 @@
     background-color: yellow;
 }
 
-.container {
-    padding-left: 15px;
-    padding-right: 15px;
-    margin-bottom: 12px;
-    text-align: center;
-    cursor: pointer;
-    font-size: 15px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
+
 
 .checkmarkset{
     margin: auto;

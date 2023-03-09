@@ -1,4 +1,4 @@
-.landing__container{
+.landing__container {
     width: var(--container-width-lg);
     margin: 0 auto;
     display: block;
@@ -8,6 +8,7 @@
     transform:translateX(-50%);
     bottom: 2rem;
     align-items: center;
+    text-align: center;
 }
 .aboutUsButton{
     width: max-content;
@@ -44,10 +45,8 @@ html{
 ::-webkit-scrollbar{
     display: none;
 }
-.title{
-    padding-top: 20%;
-}
-.buttonSet {
+
+.landing .buttonSet {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
@@ -57,7 +56,7 @@ html{
     padding-bottom: 30vh;
     padding-top: 20vh;
 }
-.button{
+.landing .button{
     border: 2px solid black;
     border-radius: 3rem;
     padding: 1rem;
@@ -66,12 +65,12 @@ html{
     text-decoration: none;
     font-weight: 500;
 }
-.button:hover{
+.landing .button:hover{
     color: white;
     background-color: rgb(120, 120, 120);
     border: 2px solid rgb(120, 120, 120);
 }
-.button-Primary{
+.landing .button-Primary{
     color: white;
     background-color: rgb(20, 20, 20);
 }

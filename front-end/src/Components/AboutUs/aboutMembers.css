@@ -1,8 +1,10 @@
-.container{
+.container, .aboutMembers__container{
     width: var(--container-width-lg);
     margin: 0 auto;
     padding-top: 1rem;
     padding-bottom: 2rem;
+    align-items: center;
+    text-align: center;
 }
 :root{
     --container-width-lg: 75%;
@@ -53,11 +55,11 @@ html{
 
 /* FOR TABLETS */
 @media screen and (max-width: 1024px){
-    .container{
+    .container .aboutMembers__container{
         width: var(--container-width-md);
     }
     .memberPic{
-        max-width: 90%;
+        max-width: 86%;
     }
     .members{
         display: grid;
@@ -78,7 +80,7 @@ html{
 
 /* FOR PHONES */
 @media screen and (max-width: 600px){
-    .container{
+    .container .aboutMembers__container{
         width: var(--container-width-sm);
     }
     .memberPic{
@@ -88,6 +90,7 @@ html{
         display: grid;
         grid-template-columns: 1fr;
         gap: 2rem;
+        
     }
     .memberSocials{
         display: grid;
