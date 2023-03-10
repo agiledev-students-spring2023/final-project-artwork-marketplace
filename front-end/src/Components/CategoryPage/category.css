@@ -1,4 +1,4 @@
-.container {
+.category_container {
     display: flex; 
     flex-wrap: wrap; 
     list-style: none;
@@ -6,7 +6,7 @@
     gap: 10px; */
   }
   
-.container div {
+.category_container div {
     border: 2px solid gray;
     width: 300px;
     height: 300px;
@@ -20,7 +20,7 @@
 
 
 
-.categoryHeader{
+.category_categoryHeader{
     width: 100%;
     height: 100px;
     background-color: rgb(222, 222, 231);
@@ -28,13 +28,13 @@
     display:table;
 }
 
-.categoryHeaderText{
+.category_categoryHeaderText{
     font-size: 45px;
     display:table-cell; 
     vertical-align:middle;
 }
 
-.card {
+.category_card {
     /* max-width: 100%;
     max-height: 100%; */
     width: 300px;
@@ -46,7 +46,7 @@
   }
   
 
-  .profP {
+  .category_profP {
     height: 70px;
     width: 70px;
     background-color:rgb(234, 234, 244);
@@ -58,14 +58,14 @@
     z-index: 1;
 }
 
-.logop {
+.category_logop {
     max-width: 100%;
     max-height: 100%;
     border-color: none;
 }
 
 
-.price {
+.category_price {
     color: black;
     margin: 0;
     padding: 0;
@@ -73,7 +73,7 @@
   } 
 
 
-.name{
+.category_name{
     color: black;
     margin: 0;
     padding: 0;
@@ -81,18 +81,13 @@
     width: 220px;
   }
 
-.text{
+.category_text{
     margin: 0;
     padding: 0;
     text-align: left;
   }
 
 
-h5 {
-    margin: 0;
-    padding: 0;
-    text-align: left;
-}
 
 
   /* .card button:hover {
