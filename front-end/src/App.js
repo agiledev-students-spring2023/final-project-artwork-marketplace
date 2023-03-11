@@ -1,5 +1,6 @@
 // import logo from './logo.svg'
 import './App.css'
+import { useState } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import AboutUs from './Pages/AboutUs'
 import Login from './Pages/Login'
@@ -13,6 +14,7 @@ import ViewItem from './Pages/ViewItem'
 
 
 function App() {
+  const [user, setUser] = useState({})
   return (
     <BrowserRouter>
       <Routes>

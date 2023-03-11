@@ -8,7 +8,7 @@ import './artistProducts.css'
 const ArtistProducts = () => {
   const [username, setUsername] = useState("Bruh") // should be "" when API in use
   // temporary random photos - will be fetched in same format from backend/db
-  const products = [
+  const [products, setProducts] = useState([
     {
         productName: "product1aiushdiuashdiuashdiaushdiuashdiuashdiashdiusah",
         productArtist: "Artist Name",
@@ -39,7 +39,7 @@ const ArtistProducts = () => {
         productArtist: "Artist Name",
         imageURL: "https://picsum.photos/200/300",
     },
-  ]
+  ])
   
 
   /*const apiUrl = "https://my.api.mockaroo.com/user.json?key=8bd34fb0"

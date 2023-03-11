@@ -1,0 +1,73 @@
+.CategoryDisplay__container{
+    padding-bottom: 10rem;
+}
+.categoryRow{
+    text-align: start;
+}
+.categoryRow .categoryName{
+    text-transform: capitalize;
+}
+.categoryRow .categoryProductImages .SwiperProductImage img{
+    width: 100%;
+    min-height: 30vh;
+    max-height: 30vh;
+    user-select: none;
+    padding-bottom: 3rem;
+}
+:root {
+    --swiper-theme-color: black!important;
+}
+.category_button{
+    border: 2px solid black;
+    background-color: black;
+    border-radius: 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    transition: 1s ease all;
+    width: fit-content;
+}
+
+.category_button a, .category_button h5{
+    color: white;
+    text-decoration: none;
+}
+.category_button:hover{
+    background-color: rgb(120, 120, 120);
+    border: 2px solid rgb(120, 120, 120);
+    cursor: pointer;
+}
+/* FOR TABLETS */
+@media screen and (max-width: 1024px){
+    .categoryRow .categoryProductImages .swiper-container{
+        width: 1024px;
+    }
+    .categoryRow .categoryProductImages .SwiperProductImage img{
+        width: 100%;
+        min-height: 25vh;
+        max-height: 25vh;
+        user-select: none;
+    }
+    .categoryRow .categoryProductImages .SwiperProductImage{
+        max-height: 35vh;
+    }
+}
+/* FOR PHONES */
+@media screen and (max-width: 600px){
+    .categoryRow .categoryProductImages .swiper-container{
+        width: 600px;
+    }
+    .categoryRow .categoryProductImages .SwiperProductImage img{
+        width: 100%;
+        min-height: 30vh;
+        max-height: 30vh;
+        user-select: none;
+    }
+    .categoryRow .categoryProductImages .SwiperProductImage{
+        max-height: 40vh;
+    }
+    .category_button h5{
+        margin: 0.5rem;
+    }
+}
