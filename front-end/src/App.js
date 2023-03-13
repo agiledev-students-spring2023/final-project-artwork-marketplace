@@ -24,8 +24,8 @@ function App() {
         <Route path="/Home" element={<ArtistHome />}/>
         <Route path="/Landing" element={<Landing />}/>
         <Route path="/AddArt" element={<AddArt />}/>
-        <Route path="/CustomerHomePage" element={<HomeCategories />}/>
-        <Route path="/CategoryPage" element={<Category/>}/>
+        <Route path="/CustomerHome" element={<HomeCategories />}/>
+        <Route path="/Category/:categoryID" element={<Category/>}/>
         <Route path="/ViewItem/:productId" element={<ViewItem />}/>
       </Routes>
     </BrowserRouter>

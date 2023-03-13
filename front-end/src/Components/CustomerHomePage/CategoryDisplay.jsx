@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Pagination, FreeMode } from "swiper"
 import './categoryDisplay.css'
@@ -171,7 +171,9 @@ const CategoryDisplay = props => {
                         {category.products.length && (
                             <div className="categoryRow">
                                 <div className="category_button categoryName">
-                                    <Link to={`/Category/${category.id}`}><h5>{category.category}</h5></Link>
+                                    <Link to={`/Category/${category.id}`}>
+                                        {category.category}
+                                    </Link>
                                 </div>
                                 <div className="categoryProductImages">
                                     <Swiper

@@ -57,20 +57,21 @@
     border: 2px solid black;
     background-color: black;
     border-radius: 2rem;
-    padding-left: 3rem;
-    padding-right: 3rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
     margin-top: 1rem;
     margin-bottom: 1rem;
     transition: 1s ease all;
     width: fit-content;
 }
-.category_button h5{
-    margin: 1rem;
-}
-
-.category_button a, .category_button h5{
+.category_button a{
     color: white;
     text-decoration: none;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    font-weight: 500;
 }
 .category_button:hover{
     background-color: rgb(120, 120, 120);
@@ -94,6 +95,10 @@
     .categoryRow .categoryProductImages .SwiperProductImage{
         max-height: 35vh;
     }
+    .category_button, .category_button a{
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+    }
 }
 /* FOR PHONES */
 @media screen and (max-width: 600px){
@@ -115,7 +120,8 @@
     .categoryRow .categoryProductImages .SwiperProductImage{
         max-height: 40vh;
     }
-    .category_button h5{
-        margin: 0.5rem;
+    .category_button, .category_button a{
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
     }
 }
