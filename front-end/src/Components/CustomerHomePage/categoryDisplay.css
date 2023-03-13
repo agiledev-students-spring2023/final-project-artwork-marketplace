@@ -1,5 +1,6 @@
 .CategoryDisplay__container{
     padding-bottom: 10rem;
+    user-select: none;
 }
 .categoryRow{
     text-align: start;

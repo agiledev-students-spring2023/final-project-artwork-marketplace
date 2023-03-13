@@ -170,6 +170,7 @@ const CategoryDisplay = () => {
                                     className="mySwiper"
                                     freeMode={true}
                                     rewind={true}
+                                    speed="1s"
                                 >
                                 {category.products.map((product) =>
                                     <>
