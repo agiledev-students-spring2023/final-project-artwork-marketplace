@@ -1,0 +1,101 @@
+.searchArtwork__Container,.displayArtworks__Container{
+    width: var(--container-width-lg);
+}
+.searchArtwork__Container{
+    display: grid;
+    grid-template-columns: 10% 80%;
+    gap: 2rem;
+    padding-top: 2rem;
+    padding-bottom: 0;
+}
+.searchArtwork__Container .searchArtworkTextField, .categoryBack_button{
+    border: 2px solid black;
+    border-radius: 3rem;
+    padding: 1rem;
+    transition: 1s ease all;
+    color: black;
+    text-decoration: none;
+    width: auto;
+}
+.categoryBack_button:hover{
+    color: white;
+    background-color: rgb(120, 120, 120);
+    border: 2px solid rgb(120, 120, 120);
+    cursor: pointer;
+}
+.categoryBack_button-Primary{
+    color: white;
+    background-color: rgb(20, 20, 20);
+    text-transform: capitalize;
+}
+.searchArtwork__Container .searchArtworkTextField:focus{
+    box-shadow: 0rem 0rem 1.5rem rgb(87, 87, 87);
+}
+.displayArtworks__Container{
+    padding-bottom: 10rem;
+}
+.categoryComponent .catTitle{
+    text-transform: capitalize;
+}
+.my-masonry-grid {
+    display: -webkit-box; /* Not needed if autoprefixing */
+    display: -ms-flexbox; /* Not needed if autoprefixing */
+    display: flex;
+    margin-left: -30px; /* gutter size offset */
+    width: auto;
+}
+.my-masonry-grid_column {
+    padding-left: 30px; /* gutter size */
+    background-clip: padding-box;
+    padding-top: 2rem;
+}
+.my-masonry-grid_column > .artworkCard{
+    padding-bottom: 2rem;
+    text-align: center;
+    align-items: center;
+}
+.my-masonry-grid_column > .artworkCard img{ /* change div to reference your elements you put in <Masonry> */
+    width: 100%;
+}
+.my-masonry-grid_column > .artworkCard .artworkTitle{ /* change div to reference your elements you put in <Masonry> */
+    overflow-wrap: break-word;
+    max-height: fit-content;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+.my-masonry-grid_column > .artworkCard .artworkTitle a, .artworkCard .artworkTitle h5{ 
+    text-decoration: none;
+    color: white;
+    background-color: black;
+    border-radius: 2rem;
+    font-size: large;
+    transition: 1s all ease;
+}
+.my-masonry-grid_column > .artworkCard .artworkTitle h5{
+    padding: 0.5rem;
+}
+.my-masonry-grid_column > .artworkCard .artworkTitle a:hover, .artworkCard .artworkTitle h5:hover{ 
+    background-color: rgb(120, 120, 120);
+}
+/* FOR TABLETS */
+@media screen and (max-width: 1024px){
+    .searchArtwork__Container, .displayArtworks__Container{
+        width: var(--container-width-md);
+    }
+    .searchArtwork__Container{
+        grid-template-columns: 15% 75%;
+        gap: 1.5rem;
+        padding-top: 3rem;
+    }
+}
+/* FOR PHONES */
+@media screen and (max-width: 600px){
+    .searchArtwork__Container, .displayArtworks__Container{
+        width: var(--container-width-sm);
+    }
+    .searchArtwork__Container{
+        grid-template-columns: 20% 70%;
+        gap: 1rem;
+        padding-top: 4rem;
+    }
+}
