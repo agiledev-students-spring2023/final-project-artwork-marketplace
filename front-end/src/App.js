@@ -1,5 +1,6 @@
 // import logo from './logo.svg'
 import './App.css'
+import { useState } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import AboutUs from './Pages/AboutUs'
 import Login from './Pages/Login'
@@ -13,6 +14,7 @@ import ViewItem from './Pages/ViewItem'
 
 
 function App() {
+  const [user, setUser] = useState({})
   return (
     <BrowserRouter>
       <Routes>
@@ -22,8 +24,8 @@ function App() {
         <Route path="/Home" element={<ArtistHome />}/>
         <Route path="/Landing" element={<Landing />}/>
         <Route path="/AddArt" element={<AddArt />}/>
-        <Route path="/CustomerHomePage" element={<HomeCategories />}/>
-        <Route path="/CategoryPage" element={<Category/>}/>
+        <Route path="/CustomerHome" element={<HomeCategories />}/>
+        <Route path="/Category/:categoryID" element={<Category/>}/>
         <Route path="/ViewItem/:productId" element={<ViewItem />}/>
       </Routes>
     </BrowserRouter>

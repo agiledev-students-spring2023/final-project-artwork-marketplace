@@ -1,11 +1,11 @@
 import React from 'react'
-import Categories from '../Components/CategoryPage/category'
 import ShopperNavbar from '../Components/Navbar/ShopperNavbar'
+import ProductDisplay from '../Components/CategoryPage/ProductDisplay'
 
 const Category = () => {
     return (
       <div>
-        <Categories/>
+        <ProductDisplay/>
         <ShopperNavbar/>
       </div>
     )

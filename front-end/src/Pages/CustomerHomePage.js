@@ -1,14 +1,14 @@
 import React from 'react'
-import Categories from '../Components/CustomerHomePage/CHPcategories'
+import CategoryDisplay from '../Components/CustomerHomePage/CategoryDisplay'
 import ShopperNavbar from '../Components/Navbar/ShopperNavbar'
 
 const HomeCategories = () => {
-    return (
-      <div>
-        <Categories/>
-        <ShopperNavbar/>
-      </div>
-    )
+  return (
+    <div>
+      <CategoryDisplay/>
+      <ShopperNavbar/>
+    </div>
+  )
 }
   
 export default HomeCategories
