@@ -11,6 +11,7 @@ import AddArt from './Pages/AddArt'
 import HomeCategories from './Pages/CustomerHomePage'
 import Category from './Pages/CategoryPage'
 import ViewItem from './Pages/ViewItem'
+import ViewCart from './Pages/ViewCart'
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <Route path="/Landing" element={<Landing />}/>
         <Route path="/AddArt" element={<AddArt />}/>
         <Route path="/CustomerHome" element={<HomeCategories />}/>
+        <Route path="/Cart" element={<ViewCart />}/>
         <Route path="/Category/:categoryID" element={<Category/>}/>
         <Route path="/ViewItem/:productId" element={<ViewItem />}/>
       </Routes>

@@ -1,0 +1,86 @@
+export default {
+    id: 1,
+    user: "Customer",
+    name: "FooBar",
+    cart: [
+        {
+            id: 11,
+            productName: "product1aiushdiuashdiuashdiaushdiuashdiuashdiashdiusah",
+            productArtist: "Artist Name",
+            imageURL: "https://picsum.photos/400/200",
+            price: "$30",
+        },
+        {
+            id: 12,
+            productName: "product2",
+            productArtist: "Artist Name",
+            imageURL: "https://picsum.photos/300/500",
+            price: "$300",
+        },
+        {
+            id: 13,
+            productName: "product3",
+            productArtist: "Artist Name",
+            imageURL: "https://picsum.photos/400",
+            price: "$10",
+        },
+        {
+            id: 14,
+            productName: "product4",
+            productArtist: "Artist Name",
+            imageURL: "https://picsum.photos/500/350",
+            price: "$120",
+        },
+        {
+            id: 15,
+            productName: "product5",
+            productArtist: "Artist Name",
+            imageURL: "https://picsum.photos/700/300",
+            price: "$50",
+        },
+        {
+            id: 16,
+            productName: "product6",
+            productArtist: "Artist Name",
+            imageURL: "https://picsum.photos/200/300",
+            price: "$20",
+        },
+    ],
+    saved: [
+        {
+            id: 31,
+            productName: "productiashdiusah",
+            productArtist: "Artist Name",
+            imageURL: "https://picsum.photos/300/300",
+            price: "$90",
+        },
+        {
+            id: 32,
+            productName: "product2",
+            productArtist: "Artist Name",
+            imageURL: "https://picsum.photos/200/1000",
+            price: "$35",
+        },
+        {
+            id: 33,
+            productName: "product3",
+            productArtist: "Artist Name",
+            imageURL: "https://picsum.photos/600",
+            price: "$1700",
+        },
+        {
+            id: 34,
+            productName: "product4",
+            productArtist: "Artist Name",
+            imageURL: "https://picsum.photos/200/350",
+            price: "$5000",
+        },
+        {
+            id: 35,
+            productName: "product5",
+            productArtist: "Artist Name",
+            imageURL: "https://picsum.photos/700/200",
+            price: "$3900",
+        },
+    ]
+}
