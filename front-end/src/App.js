@@ -12,6 +12,7 @@ import HomeCategories from './Pages/CustomerHomePage'
 import Category from './Pages/CategoryPage'
 import ViewItem from './Pages/ViewItem'
 import ViewCart from './Pages/ViewCart'
+import RisingArtist from './Pages/RisingArtist'
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         <Route path="/CustomerHome" element={<HomeCategories />}/>
         <Route path="/Cart" element={<ViewCart />}/>
         <Route path="/Category/:categoryID" element={<Category/>}/>
+        <Route path="/RisingArtist" element={<RisingArtist />} />
         <Route path="/ViewItem/:productId" element={<ViewItem />}/>
       </Routes>
     </BrowserRouter>
