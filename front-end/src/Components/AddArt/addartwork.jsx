@@ -2,8 +2,6 @@ import React, {useEffect, useState, useMemo} from 'react'
 import './addartwork.css'
 import TextareaAutosize from 'react-textarea-autosize';
 import axios from 'axios'
-import Select from 'react-select'
-import makeAnimated from 'react-select/animated';
 
  
 const AddArtWork = () => {
@@ -20,8 +18,6 @@ const AddArtWork = () => {
     const testcase = ['comedy','laugh','smile'];
 
     const [selected, setSelected] = useState('')
-
-    const animatedComponents = makeAnimated();
 
     const apiUrl = "https://my.api.mockaroo.com/moviegenre.json?key=512c4f30"
 
@@ -46,8 +42,6 @@ const AddArtWork = () => {
         getGenre();
     },[addrtype]);
 
-    
-    
     /* check whether inputs are numeric */
     /* for PRICE input only */
     function checkNumber(val,indi){
@@ -58,7 +52,6 @@ const AddArtWork = () => {
         else if (indi === 2){
             setNum(val);
         }
-        
     }
 
     /* check whether inputs are character/special character only */
@@ -108,9 +101,9 @@ const AddArtWork = () => {
             <h3>
                 Image Illustration
             </h3>
-            <h5>
+            <h4>
                 Maximum 3 Photos; Please Upload Sequentially. 
-            </h5>
+            </h4>
             <div className='addworkset'>                
                 <input type="file" onChange={handleChange} />
                 <img className="photopic" src={file} />

@@ -1,0 +1,72 @@
+.rs-container {
+    margin: auto;
+    width: 300px;
+    margin-top: 50px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    text-align: center;
+    align-content: center;
+  }
+  
+.rs-searchBar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: blue;
+    text-align: center;
+}
+
+.rs-searchBarInput {
+    height: 30px;
+    width: 300px;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 18px;
+}
+
+.rs-artworkTable {
+    margin-top: 80px;
+    text-align: center;
+}
+
+.rs-artwork {
+    margin: 10px 0;
+}
+
+.rs-caption{
+    text-align: center;
+    color: black;
+    font-size: 30px;
+}
+
+@keyframes heartbeat {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.25);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.rs-heart {
+    color: black;
+    opacity: 0.3;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+}
+
+.rs-heart:hover{
+    animation: heartbeat 1s infinite;
+    fill: red;
+    color: red;
+    opacity: 1;
+    transition: opacity 500ms;
+}
