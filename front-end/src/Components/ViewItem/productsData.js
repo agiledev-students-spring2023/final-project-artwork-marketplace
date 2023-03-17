@@ -16,13 +16,14 @@ export default [
       "",
       ""
     ],
-    description: "Good bag",
+    name: "Good bag",
     /* truncated the first 2/3 sentences from artwork's uploaded description in AddArt Page */
     content: "short description of bag. ",
     /* rest of part */ 
     detailcontent: "more more more more more more content", 
     price: 23,
-    count: 1
+    count: 1,
+    artist: "STEVENZHANG"
   },
   {
     _id: "2",
@@ -37,11 +38,12 @@ export default [
       "",
       ""
     ],
-    description: "Good Paint",
+    name: "Good Paint",
     content: "short description of paint. ",
     detailcontent: "more more more more more more content", 
     price: 34,
-    count: 2
+    count: 2,
+    artist: "STEVENZHANG"
   },
 ];
 

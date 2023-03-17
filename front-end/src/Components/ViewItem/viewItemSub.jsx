@@ -58,7 +58,8 @@ const ViewItemSub = () => {
               <h2>{thisProduct.products.title}</h2>
               <span>${thisProduct.products.price}</span>
             </div>
-            <p>{thisProduct.products.description}</p>
+            <p>Crafted/Designed by {thisProduct.products.artist}</p>
+            <p>{thisProduct.products.name}</p>
             <p>{thisProduct.products.content}</p>
             <button className="button" onClick={handleMoreClick}>
               {showMore ? 'Hide' : 'Show'} details
