@@ -20,16 +20,18 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/Landing" element={<Landing />}/>
         <Route path="/AboutUs" element={<AboutUs />}/>
         <Route path="/Login" element={<Login />}/>
         <Route path="/SignUp" element={<SignUp />}/>
+
         <Route path="/Home" element={<ArtistHome />}/>
-        <Route path="/Landing" element={<Landing />}/>
         <Route path="/AddArt" element={<AddArt />}/>
+        
         <Route path="/CustomerHome" element={<HomeCategories />}/>
         <Route path="/Cart" element={<ViewCart />}/>
         <Route path="/Category/:categoryID" element={<Category/>}/>
-        <Route path="/RisingArtist" element={<RisingArtist />} />
+        <Route path="/RisingArtists" element={<RisingArtist />} />
         <Route path="/ViewItem/:productId" element={<ViewItem />}/>
       </Routes>
     </BrowserRouter>
