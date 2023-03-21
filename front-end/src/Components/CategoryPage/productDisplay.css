@@ -77,6 +77,22 @@
 .my-masonry-grid_column > .artworkCard .artworkTitle a:hover, .artworkCard .artworkTitle h5:hover{ 
     background-color: rgb(120, 120, 120);
 }
+.displayArtworks__Container .categoryComponent .popup_productName{
+    position: absolute;
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+    overflow-y: scroll;
+    max-height: 5vh;
+    top: 8rem;
+    background-color: black;
+    color: white;
+    border-radius: 3rem;
+}
+.displayArtworks__Container .categoryComponent .popup_productName h4{
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-weight: 500;
+}
 /* FOR TABLETS */
 @media screen and (max-width: 1024px){
     .searchArtwork__Container, .displayArtworks__Container{
@@ -97,5 +113,8 @@
         grid-template-columns: 20% 70%;
         gap: 1rem;
         padding-top: 4rem;
+    }
+    .displayArtworks__Container .categoryComponent .popup_productName{
+        background-color: white;
     }
 }

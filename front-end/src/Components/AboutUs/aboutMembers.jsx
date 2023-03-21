@@ -7,7 +7,7 @@ import Amy from '../../Assets/MemberPics/Amy.jpeg'
 import Chloe from '../../Assets/MemberPics/Chloe.jpg'
 import Steven from '../../Assets/MemberPics/Steven.jpg'
 
-const aboutMembers = () => {
+const aboutMembers = props => {
   return (
     <div className="container aboutMembers__container">
       <h2 className='titleMembers'>About The Team</h2>

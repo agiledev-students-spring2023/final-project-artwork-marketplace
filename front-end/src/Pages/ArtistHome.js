@@ -1,14 +1,14 @@
 import React from 'react'
-import ArtistNavbar from '../Components/Navbar/ArtistNavbar'
+import Navbar from '../Components/Navbar/Navbar'
 import ArtistProducts from '../Components/ArtistHome/ArtistProducts'
 
 
-const ArtistHome = () => {
+const ArtistHome = props => {
 
   return (
     <div>
-      <ArtistProducts/>
-      <ArtistNavbar/>
+      <ArtistProducts user={props.user} />
+      <Navbar user={props.user} />
     </div>
   )
 }

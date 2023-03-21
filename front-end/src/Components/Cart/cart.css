@@ -69,6 +69,14 @@
     border: 2px solid rgb(120, 120, 120);
     background-color: rgb(120, 120, 120);
 }
+.CartProductsDisplay__Container .artworkColumnDisplay .artworkCartCard .artworkCartText .artworkCartInformation .sold{
+    color: #7a1a1a;
+    text-transform: uppercase;
+}
+.CartProductsDisplay__Container .artworkColumnDisplay .artworkCartCard .artworkCartText .artworkCartInformation .available{
+    color: #357637;
+    text-transform: uppercase;
+}
 /* FOR TABLETS */
 @media screen and (max-width: 1024px){
     .cartHeading__Container, .CartProductsDisplay__Container{

@@ -1,12 +1,12 @@
 import React from 'react'
 import CategoryDisplay from '../Components/CustomerHomePage/CategoryDisplay'
-import ShopperNavbar from '../Components/Navbar/ShopperNavbar'
+import Navbar from '../Components/Navbar/Navbar'
 
-const HomeCategories = () => {
+const HomeCategories = props => {
   return (
     <div>
-      <CategoryDisplay/>
-      <ShopperNavbar/>
+      <CategoryDisplay user={props.user} />
+      <Navbar user={props.user} />
     </div>
   )
 }

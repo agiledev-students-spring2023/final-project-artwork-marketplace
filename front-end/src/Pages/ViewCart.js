@@ -1,12 +1,12 @@
 import React from 'react'
 import Cart from '../Components/Cart/Cart'
-import ShopperNavbar from '../Components/Navbar/ShopperNavbar'
+import Navbar from '../Components/Navbar/Navbar'
 
-const ViewCart = () => {
+const ViewCart = props => {
   return (
     <div>
-        <Cart/>
-        <ShopperNavbar/>
+        <Cart user={props.user} />
+        <Navbar user={props.user} />
     </div>
   )
 }
