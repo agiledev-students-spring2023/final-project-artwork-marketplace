@@ -4,7 +4,7 @@ import TextareaAutosize from 'react-textarea-autosize';
 import axios from 'axios'
 
  
-const AddArtWork = () => {
+const AddArtWork = props => {
     const [addrtype, setAddrtype] = useState([])
 
     const [file,setFile] = useState()

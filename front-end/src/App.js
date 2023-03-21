@@ -14,25 +14,49 @@ import ViewItem from './Pages/ViewItem'
 import ViewCart from './Pages/ViewCart'
 import RisingArtist from './Pages/RisingArtist'
 
-
-function App() {
+const App = props => {
   const [user, setUser] = useState({})
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/Landing" element={<Landing />}/>
-        <Route path="/AboutUs" element={<AboutUs />}/>
-        <Route path="/Login" element={<Login />}/>
-        <Route path="/SignUp" element={<SignUp />}/>
-
-        <Route path="/Home" element={<ArtistHome />}/>
-        <Route path="/AddArt" element={<AddArt />}/>
-        
-        <Route path="/CustomerHome" element={<HomeCategories />}/>
-        <Route path="/Cart" element={<ViewCart />}/>
-        <Route path="/Category/:categoryID" element={<Category/>}/>
-        <Route path="/RisingArtists" element={<RisingArtist />} />
-        <Route path="/ViewItem/:productId" element={<ViewItem />}/>
+        {/* Pre-Login Routes */}
+        {!user.user && (
+          <>
+            <Route path="/" element={<Landing user={user}/>}/>
+            <Route path="/Login" element={<Login user={user} setuser={setUser} />}/>
+            <Route path="/SignUp" element={<SignUp user={user} />}/>
+            <Route path="/AboutUs" element={<AboutUs user={user} />}/>
+          </>
+        )}
+        {/* Post-Login Routes */}
+        {user.user &&(
+          <>
+            {/* ARTIST EXCLUSIVE USER ROUTES */}
+            {user.user == "Artist" &&(
+              <>
+                <Route path="/" element={<ArtistHome user={user} />}/>
+                <Route path="/AddArt" element={<AddArt user={user} />}/>
+              </>
+            )}
+            {/* CUSTOMER EXCLUSIVE USER ROUTES */}
+            {user.user == "Customer" &&(
+              <>
+                <Route path="/" element={<HomeCategories user={user} />}/>
+                <Route path="/Cart" element={<ViewCart user={user} />}/>
+                <Route path="/RisingArtists" element={<RisingArtist user={user} />} />
+                <Route path="/Category/:categoryID" element={<Category user={user} />}/>
+              </>
+            )}
+            {/* NON-EXCLUSIVE USER ROUTES */}
+            <Route path="/Item/:productID" element={<ViewItem user={user} />}/> 
+          </>
+        )}
+        {/* ANY PATH THAT DOES NOT EXIST --> take user back to "/" (home) */}
+        <Route path ='*' element={ <Navigate to ='/' /> } />
+        <Route path="/" element={<Landing user={user}/>}/>
+        <Route path="/Login" element={<Login user={user} setuser={setUser} />}/>
+        <Route path="/SignUp" element={<SignUp user={user} />}/>
+        <Route path="/AboutUs" element={<AboutUs user={user} />}/>
       </Routes>
     </BrowserRouter>
   )

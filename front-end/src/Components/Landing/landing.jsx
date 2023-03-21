@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import './landing.css'
 
  
-const LandingPage = () => {
+const LandingPage = props => {
     return(
         <div>
             <Link to='/AboutUs' className='landing aboutUsButton'>?</Link>

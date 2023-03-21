@@ -1,10 +1,10 @@
 import React from 'react'
 import LandingPage from '../Components/Landing/landing'
 
-const Landing = () => {
+const Landing = props => {
   return (
     <div>
-        <LandingPage/>
+        <LandingPage user={props.user} />
     </div>
   )
 }

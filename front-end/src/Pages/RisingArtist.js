@@ -1,10 +1,12 @@
 import React from 'react'
 import Risingartistsub from '../Components/RisingArtist/risingartistsub'
+import Navbar from '../Components/Navbar/Navbar'
 
-const thisRisingArtist = () => {
+const thisRisingArtist = props => {
     return (
       <div>
-        <Risingartistsub/>
+        <Risingartistsub user={props.user} />
+        <Navbar user={props.user} />
       </div>
     )
 }

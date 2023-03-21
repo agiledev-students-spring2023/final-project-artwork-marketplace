@@ -3,43 +3,40 @@ import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import axios from 'axios'
+import AllProducts from '../../SchemaSamples/AllProducts'
+import AllUsers from '../../SchemaSamples/AllUsers'
 import './artistProducts.css'
 
-const ArtistProducts = () => {
-  const [username, setUsername] = useState("Bruh") // should be "" when API in use
+const ArtistProducts = props => {
+    const [username, setUsername] = useState("")
+    const [products, setProducts] = useState([])
+    // const [searchValue, setSearchValue] = useState('')
+    
+    useEffect(() => {
+      const getArtistInfo=()=>{
+        const artist_id = props.user._id
+        const artist_name = props.user.name
+        const artist_products = AllProducts.filter(product => product.artist_id === artist_id)
+        setUsername(artist_name)
+        setProducts(artist_products)
+      }
+      getArtistInfo()
+    }, [])
+  
+    // const handleSearch = (e) => {
+    //   if(e.target.value == ''){
+    //       setCategories(randomFakeData)
+    //   }
+    //   else{
+    //       const SearchResult = randomFakeData.filter(item => item.category.toLowerCase().includes(e.target.value.toLowerCase()))
+    //       setCategories(SearchResult)
+    //   }
+    //   setSearchValue(e.target.value)
+    // }
+  
+     
   // temporary random photos - will be fetched in same format from backend/db
-  const [products, setProducts] = useState([
-    {
-        productName: "product1aiushdiuashdiuashdiaushdiuashdiuashdiashdiusah",
-        productArtist: "Artist Name",
-        imageURL: "https://picsum.photos/400/200",
-    },
-    {
-        productName: "product2",
-        productArtist: "Artist Name",
-        imageURL: "https://picsum.photos/300/500",
-    },
-    {
-        productName: "product3",
-        productArtist: "Artist Name",
-        imageURL: "https://picsum.photos/400",
-    },
-    {
-        productName: "product4",
-        productArtist: "Artist Name",
-        imageURL: "https://picsum.photos/500/350",
-    },
-    {
-        productName: "product5",
-        productArtist: "Artist Name",
-        imageURL: "https://picsum.photos/700/300",
-    },
-    {
-        productName: "product6",
-        productArtist: "Artist Name",
-        imageURL: "https://picsum.photos/200/300",
-    },
-  ])
+
   
 
   /*const apiUrl = "https://my.api.mockaroo.com/user.json?key=8bd34fb0"
@@ -80,16 +77,16 @@ const ArtistProducts = () => {
                 {products.map((product)=>
                     <div className='productCard'>
                         <div className="productImage">
-                        <Link to='/Home'>{/* Link will need to change to /productPage/:id */}
-                            <img src={product.imageURL} alt={product.productName} />
+                        <Link to='/'>{/* Link will need to change to /productPage/:id */}
+                            <img src={product.thumbnailURL} alt={product.name} />
                         </Link>
                         </div>
                         <div className="productInfo">
                             <div className="info">
-                                <Link to='/Home'>{/* Link will need to change to /productPage/:id */}
-                                    <h5 className="productName">"{product.productName}"</h5>
+                                <Link to='/'>{/* Link will need to change to /productPage/:id */}
+                                    <h5 className="productName">"{product.name}"</h5>
                                 </Link>
-                                <h5 className="productArtist">By: <Link to='/Home'>{/* Link will need to change to /artistProfilePage/:id */}{product.productArtist}</Link>
+                                <h5 className="productArtist">By: <Link to='/'>{/* Link will need to change to /artistProfilePage/:id */}{username}</Link>
                                 </h5>
                             </div>
                         </div>

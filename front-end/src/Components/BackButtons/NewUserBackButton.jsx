@@ -2,10 +2,10 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import './backButton.css'
 
-const NewUserBackButton = () => {
+const NewUserBackButton = props => {
   return (
     <div className='NUback'>
-        <Link to='/Landing' className='backButton'>Back</Link>
+        <Link to='/' className='backButton'>Back</Link>
     </div>
   )
 }

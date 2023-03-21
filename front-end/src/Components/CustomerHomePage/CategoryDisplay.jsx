@@ -5,25 +5,31 @@ import { Pagination, FreeMode } from "swiper"
 import './categoryDisplay.css'
 import "swiper/css"
 import "swiper/css/pagination"
-import randomFakeData from './randomFakeData'
+import AllProducts from '../../SchemaSamples/AllProducts'
+import AllUsers from '../../SchemaSamples/AllUsers'
+import AllCategories from '../../SchemaSamples/AllCategories'
 
 const CategoryDisplay = props => {
   const [categories, setCategories] = useState([])
+  const [copyOfCategories, setCategoriesCopy] = useState([])
   const [searchValue, setSearchValue] = useState('')
   
   useEffect(() => {
     const getCategories=()=>{
-        setCategories(randomFakeData)
+        const categoriesCopy = AllCategories
+        categoriesCopy.forEach(category => {category['products'] =  AllProducts.filter(product => category.products_id.includes(product._id))})    
+        setCategories(categoriesCopy)
+        setCategoriesCopy(categoriesCopy)
     }
     getCategories()
   }, [])
 
   const handleSearch = (e) => {
-    if(e.target.value == ''){
-        setCategories(randomFakeData)
+    if(e.target.value == '' && categories && copyOfCategories){
+        setCategories(copyOfCategories)
     }
     else{
-        const SearchResult = randomFakeData.filter(item => item.category.toLowerCase().includes(e.target.value.toLowerCase()))
+        const SearchResult = categories.filter(item => item.name.toLowerCase().includes(e.target.value.toLowerCase()))
         setCategories(SearchResult)
     }
     setSearchValue(e.target.value)
@@ -49,8 +55,8 @@ const CategoryDisplay = props => {
                         {category.products.length && (
                             <div className="categoryRow">
                                 <div className="category_button categoryName">
-                                    <Link to={`/Category/${category.id}`}>
-                                        {category.category}
+                                    <Link to={`/Category/${category._id}`}>
+                                        {category.name}
                                     </Link>
                                 </div>
                                 <div className="categoryProductImages">
@@ -85,11 +91,11 @@ const CategoryDisplay = props => {
                                     {category.products.map((product) =>
                                         <>
                                             <SwiperSlide 
-                                                key={product.id}
+                                                key={product._id}
                                             >
                                                 <div className="SwiperProductImage">
-                                                <Link to={`/ViewItem/${product.id}`}>
-                                                    <img src={product.imageURL} alt={product.productName} />
+                                                <Link to={`/ViewItem/${product._id}`}>
+                                                    <img src={product.thumbnailURL} alt={product.name} />
                                                 </Link>
                                                 </div>
                                             </SwiperSlide>

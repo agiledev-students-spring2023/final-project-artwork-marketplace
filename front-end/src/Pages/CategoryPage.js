@@ -1,12 +1,12 @@
 import React from 'react'
-import ShopperNavbar from '../Components/Navbar/ShopperNavbar'
+import Navbar from '../Components/Navbar/Navbar'
 import ProductDisplay from '../Components/CategoryPage/ProductDisplay'
 
-const Category = () => {
+const Category = props => {
     return (
       <div>
-        <ProductDisplay/>
-        <ShopperNavbar/>
+        <ProductDisplay user={props.user} />
+        <Navbar user={props.user} />
       </div>
     )
 }

@@ -1,12 +1,12 @@
-import React from 'react'
+import React, {useState} from 'react'
 import LoginSub from '../Components/Login/loginsub'
 import NewUserBackButton from '../Components/BackButtons/NewUserBackButton'
 
-const Login = () => {
+const Login = props => {
     return (
       <div>
-        <NewUserBackButton/>
-        <LoginSub/>
+        <NewUserBackButton user={props.user} />
+        <LoginSub user={props.user} setuser={props.setuser} />
       </div>
     )
 }

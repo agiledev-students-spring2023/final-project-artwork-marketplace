@@ -1,86 +1,110 @@
-/* part of the layout design for this component is inspired from: 
-  https://www.youtube.com/watch?v=hVf6zDbrswc&t=146s
-*/
-
-import React, {useState, useParams, createRef, useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
+import { Link, useParams } from 'react-router-dom'
 import './viewItemSub.css'
-import productsData  from './productsData' 
+import AllCategories from '../../SchemaSamples/AllCategories'
+import AllProducts from '../../SchemaSamples/AllProducts'
+import AllUsers from '../../SchemaSamples/AllUsers'
 
-const ViewItemSub = () => {
-  const productId = "2";
-  const [thisProduct,setProduct] = useState({
-    products: productsData.find(prod => prod._id === productId)
+const ViewItemSub = props => {
+  const getProductParamsID = useParams()
+  const productId = getProductParamsID.productID
+  
+  const [product, setProduct] = useState({})
+  const [productName, setProductName] = useState("")
+  const [productArtist, setProductArtist] = useState({})
+  const [productImages, setProductImages] = useState([])
+  const [productStatus, setProductStatus] = useState("")
+  const [productPrice, setProductPrice] = useState("")
+  const [productCategories, setProductCategories] = useState([])
+  const [productDescription, setProductDescription] = useState("")
+  const [activeImageIndex, setActiveImageIndex] = useState(0)
+  const [showMore, setShowMore] = useState(false);  
+  
+  useEffect(() => {
+    const getProductInfo=()=>{
+        const thisProduct = AllProducts.find(product => product._id == productId)
+        const thisProductName = thisProduct.name
+        const thisProductArtist = AllUsers.find(user => user._id === thisProduct.artist_id)  
+        const thisProductImages = thisProduct.imagesURL
+        const thisProductStatus = thisProduct.status // "sold" or "available"
+        const thisProductPrice = thisProduct.price
+        const thisProductCategories = AllCategories.filter(category => thisProduct.categories_id.includes(category._id))
+        const thisProductDescription = thisProduct.shortDescription
+        setProduct(thisProduct)
+        setProductName(thisProductName)
+        setProductArtist(thisProductArtist)
+        setProductImages(thisProductImages)
+        setProductStatus(thisProductStatus)
+        setProductPrice(thisProductPrice)
+        setProductCategories(thisProductCategories)
+        setProductDescription(thisProductDescription)
     }
-  )
+    getProductInfo()
+  }, [])
+  
+  const addItemToCart = () => {
 
-  const [showMore, setShowMore] = useState(false); 
-  const [buyNum, setBuyNum] = useState(0);
-  const [changePhoto, setChangePhoto] = useState(0); 
-
-  function handleSmallPhotoClick(index){
-    for (let i = 0; i < thisProduct.products.src.length; i++){
-      thisProduct.products.activeOrNot[i] = "";
-    }
-    thisProduct.products.activeOrNot[index] = "active";
-    console.log(index);
-    console.log(thisProduct.products.activeOrNot)
-    setChangePhoto(changePhoto + 1)
   }
 
-  /* handle whether to show the detailed description */
-  /* for the elegance of page */
-  function handleMoreClick(){
+  const handleSmallPhotoClick = (index) => {
+    setActiveImageIndex(index)
+  }
+
+  const handleMoreClick = () => {
     setShowMore(!showMore);
   }
 
-  /* handle how many items are purchased */
-  function addItemToCart(){
-    setBuyNum(buyNum + 1);
-    console.log('current buy num:',{buyNum});
-  }
-
-  /* find the current active photo to display */
-  function findActive(){
-    const indexFind = thisProduct.products.activeOrNot.findIndex(prod => prod === "active");
-    return thisProduct.products.src[indexFind]
-  }
-
-  const myRef = createRef();
-  
   return(
-      <div className="app">
-        <div className="details">
-          <div className="big-img">
-            <img src={findActive()} alt=""/>
+      <div className="container viewItemContainer">
+        <div className="viewItem_card">
+          <div className="viewItem_big-img">
+            <img src={productImages[activeImageIndex]} alt=""/>
           </div>
-          <div className="box">
-            <div className="row">
-              <h2>{thisProduct.products.title}</h2>
-              <span>${thisProduct.products.price}</span>
+          <div className="viewItem_box">
+            <h2 className='viewItem_productName'>"{productName}"</h2>
+            <div className="viewItem_row">
+              {productStatus && productStatus === "available" && (
+                <span className='viewItem_price available'>${productPrice}</span>
+              )}
+              {productStatus && productStatus === "sold" && (
+                <>
+                  <span className='viewItem_price sold price'>${productPrice}</span><br/>
+                  <span className='viewItem_price sold'>SOLD</span>
+                </>
+              )}
             </div>
-            <p>Crafted/Designed by {thisProduct.products.artist}</p>
-            <p>{thisProduct.products.name}</p>
-            <p>{thisProduct.products.content}</p>
-            <button className="button" onClick={handleMoreClick}>
+            <p className='viewItem_Artist'>
+              Artwork By:  {" "}  
+              <Link to={`/Profile/${productArtist._id}`}>
+                {productArtist.name}
+              </Link>
+            </p>
+            <div className="viewItem_prodCategories">
+              <p>Categories: </p>
+              {productCategories.map((category) => 
+                <h5>
+                <Link to={`/Category/${category._id}`}>
+                  {category.name}
+                </Link>
+                </h5>
+              )}
+            </div>
+            <div className='viewItem_thumb'>
+              {productImages.map((thispic,index) => 
+                <img src={thispic} onClick={() => handleSmallPhotoClick(index)}/>
+              )}
+            </div>
+            <button className="viewItem_button" onClick={handleMoreClick}>
               {showMore ? 'Hide' : 'Show'} details
             </button>
             {showMore && 
-              <p className="detailedsetup">{thisProduct.products.detailcontent}</p>
+              <p className="viewItem_detailedDescription">{productDescription}</p>
             }
-            <br/>
-            <div className='thumb'>
-              {thisProduct.products.src.map((thispic,index) => {
-                return(
-                  <img src={thispic} key={Math.random()} onClick={() => handleSmallPhotoClick(index)}/>
-                )
-              })}
-            </div>
-            <button className="cart" onClick={addItemToCart}>
-              Add to cart
-            </button>
-            <p className='buynum'>
-              Current Buy Number: {buyNum}  
-            </p>
+            {props.user.user === "Customer" && productStatus !== "sold" &&(
+              <button className="viewItem_button" onClick={addItemToCart}>
+                Add To Cart
+              </button>
+            )}
           </div>
         </div>
       </div>

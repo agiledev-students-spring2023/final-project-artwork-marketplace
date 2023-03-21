@@ -1,40 +1,87 @@
-import React, {useState} from 'react'
+import React, {useState, useRef, useEffect } from 'react'
 import './loginsub.css'
-import BlueWave from '../../Assets/Pictures/blue-wave.jpeg'
-import NewUserBackButton from '../BackButtons/NewUserBackButton'
+import Logo from '../../Assets/Pictures/logo-placeholder.jpeg'
+import AllUsers from '../../SchemaSamples/AllUsers'
+import AllProducts from '../../SchemaSamples/AllProducts'
+import { useNavigate } from 'react-router-dom'
  
-const Loginsub = () => {
-    const [theemail,setTheemail] = useState("")
-    const [thepassword,setThepassword] = useState("")
+const Loginsub = props => {
+    const navigate = useNavigate()
+    const emailRef = useRef()
+    const passwordRef = useRef()
 
-    function handleSubmit(event){
-        event.preventDefault()
-        /* test */ 
-        console.log('SUBMIT TEST')
-        console.log('email=',theemail)
-        console.log('password=',thepassword)
+    const [randomFeaturedProduct, setRFP] = useState({})
+    const [artistOfProd, setArtistOfProd] = useState({})
+
+    useEffect(() => {
+        const getLatestFeatured=()=>{
+            const random_productID = Math.floor(Math.random() * 15) + 1;
+            const random_product = AllProducts.find(product => product._id === random_productID)
+            const artist = AllUsers.find(user => user._id === random_product.artist_id)
+            setRFP(random_product)
+            setArtistOfProd(artist)
+        }
+        getLatestFeatured()
+    }, [])
+
+    ;const handleSubmit = async (e) =>{
+        e.preventDefault()
+        const newUser = {
+          email: emailRef.current.value,
+          password: passwordRef.current.value,
+        };
+        /* check server here but for now just check our list
+        try{
+          await axios.get(...)
+        }
+        */
+        const user = AllUsers.find(user => user.email.toLowerCase() === newUser.email.toLowerCase())
+        props.setuser(user)
+        navigate("/")
     }
 
     return(
-        <div className="bodyset">
-            <div className="photoimg">
-              <img className="photopic" src={BlueWave} alt="" />
+        <div className='container LogIn__container'>
+    	<div className="login_loginheader">
+            <div className="login_logo">
+                {/* Logo */}
+                <img className='login_logopic' src={Logo} alt="" />
             </div>
-            <h3 className='caption'>
-                === Our Featured Artwork === 
-            </h3>
-            <h3 className='loginplace'>
-                Login
-            </h3>
-            <div className="loginset">        
-                <input type='text' placeholder='Email' value={theemail} onChange={(e) => setTheemail(e.target.value)} />
-                <input type='text' placeholder='Password' value={thepassword} onChange={(e) => setThepassword(e.target.value)} />
-                {thepassword.length > 10 ? <h3 className='caption'>Password is OK</h3>: <h3 className='caption'>Too short (minimum length = 10) </h3>}
-                <form onSubmit={handleSubmit}>
-                    <input type='submit' value='Login' />  
-                </form>
+            <div className="login_featured">
+                {/* Featured Artwork */}
+                {randomFeaturedProduct && (
+                    <>
+                        <h2>FEATURED ART OF THE DAY</h2>
+                        <img className='login_featuredpic' src={randomFeaturedProduct.thumbnailURL} alt="" />
+                        <h5 className="login_featuredInfo">
+                            "{randomFeaturedProduct.name}" - {artistOfProd.name}
+                        </h5>
+                    </>
+                )}
+                
             </div>
         </div>
+        {/* User Login Info */}
+        <form onSubmit={handleSubmit}>
+        {/* Sign Up */}
+            <div className="login_loginset">     
+                <input 
+                    className='textField'
+                    type='email' 
+                    placeholder='Email'
+                    ref={emailRef}
+                />
+                <input 
+                    className='textField'
+                    type='password'
+                    min='8' 
+                    placeholder='Password'
+                    ref={passwordRef}
+                />
+                <button type="submit" className="signup_button signup_button-Primary">Login</button>
+            </div>
+        </form>
+    </div>
     )
 }
 

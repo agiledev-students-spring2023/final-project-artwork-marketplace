@@ -1,7 +1,7 @@
 import React from 'react'
 import './aboutProject.css'
 
-const aboutProject = () => {
+const aboutProject = props => {
   return (
     <section id='aboutProject'>
       <div className="container aboutProject__container">

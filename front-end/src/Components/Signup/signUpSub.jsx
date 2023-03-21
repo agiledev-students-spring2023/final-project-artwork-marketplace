@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import './signup.css'
 import Logo from '../../Assets/Pictures/logo-placeholder.jpeg'
 
-const SignUpSub = () => {
+const SignUpSub = props => {
   const navigate = useNavigate()
   const nameRef = useRef();
   const emailRef = useRef();

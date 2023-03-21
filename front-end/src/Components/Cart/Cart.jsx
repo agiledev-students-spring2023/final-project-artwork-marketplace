@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import './cart.css'
-import FakeUserData from './FakeUserData'
+import AllProducts from '../../SchemaSamples/AllProducts'
+import AllUsers from '../../SchemaSamples/AllUsers'
 
-const Cart = () => {
+const Cart = props => {
   const [cartSwitch, setCartSwitch] = useState("cart")
   const [userCartList, setUserCartList] = useState([])
   const [userSavedList, setUserSavedList] = useState([])
@@ -11,8 +12,10 @@ const Cart = () => {
   // should be replaced with API
   useEffect(() => {
     const getCart=()=>{
-        const cartList = FakeUserData.cart
-        const savedList = FakeUserData.saved
+        const userCart = props.user.cart
+        const userSaved = props.user.saved
+        const cartList = AllProducts.filter(product => userCart.includes(product._id))
+        const savedList = AllProducts.filter(product => userSaved.includes(product._id))
         setUserCartList(cartList)
         setUserSavedList(savedList)
     }
@@ -71,14 +74,25 @@ const Cart = () => {
                             {userCartList.map((artwork) =>
                                 <div className="artworkCartCard">
                                     <div className="artworkCardImage">
-                                        <Link to={`/ViewItem/${artwork.id}`}>
-                                            <img src={artwork.imageURL} />
+                                        <Link to={`/ViewItem/${artwork._id}`}>
+                                            <img src={artwork.thumbnailURL} />
                                         </Link>
                                     </div>
                                     <div className="artworkCartText">
                                         <div className="artworkCartInformation">
-                                            <h4 className='artworkCartName'>"{artwork.productName}"</h4>
-                                            <h5 className='artworkCartPrice'>{artwork.price}</h5>
+                                            <h4 className='artworkCartName'>"{artwork.name}"</h4>
+                                            {artwork.status === "sold" && (
+                                                <>
+                                                    <h5 className='artworkCartPrice sold'>$ {artwork.price}</h5>
+                                                    <h5 className='artworkCartPrice sold'>{artwork.status}</h5>
+                                                </>
+                                            )}
+                                            {artwork.status === "available" && (
+                                                <>
+                                                    <h5 className='artworkCartPrice available'>$ {artwork.price}</h5>
+                                                    <h5 className='artworkCartPrice available'>{artwork.status}</h5>
+                                                </>
+                                            )}
                                         </div>
                                         <div className="artworkCartActions">
                                             <button>Remove</button>
@@ -104,14 +118,25 @@ const Cart = () => {
                             {userSavedList.map((artwork) =>
                                 <div className="artworkCartCard">
                                     <div className="artworkCardImage">
-                                        <Link to={`/ViewItem/${artwork.id}`}>
-                                            <img src={artwork.imageURL} />
+                                        <Link to={`/ViewItem/${artwork._id}`}>
+                                            <img src={artwork.thumbnailURL} />
                                         </Link>
                                     </div>
                                     <div className="artworkCartText">
                                         <div className="artworkCartInformation">
-                                            <h4 className='artworkCartName'>"{artwork.productName}"</h4>
-                                            <h5 className='artworkCartPrice'>{artwork.price}</h5>
+                                            <h4 className='artworkCartName'>"{artwork.name}"</h4>
+                                            {artwork.status === "sold" && (
+                                                <>
+                                                    <h5 className='artworkCartPrice sold'>$ {artwork.price}</h5>
+                                                    <h5 className='artworkCartPrice sold'>{artwork.status}</h5>
+                                                </>
+                                            )}
+                                            {artwork.status === "available" && (
+                                                <>
+                                                    <h5 className='artworkCartPrice available'>$ {artwork.price}</h5>
+                                                    <h5 className='artworkCartPrice available'>{artwork.status}</h5>
+                                                </>
+                                            )}
                                         </div>
                                         <div className="artworkCartActions">
                                             <button>Remove</button>

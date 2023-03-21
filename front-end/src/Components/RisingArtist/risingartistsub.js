@@ -5,7 +5,7 @@
 
 
 import React, { useState, useEffect} from 'react'
-import fakedata from './fakedata'
+import fakedata from '../../SchemaSamples/fakedata'
 import './risingartistsub.css'
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -15,7 +15,7 @@ import { Button, CardActionArea, CardActions } from '@mui/material';
 import { FiHeart } from "react-icons/fi"
 
 /* search bar function */
-const SearchBar = ({callback}) => {
+const SearchBar = ({callback}, props) => {
   const [val, setVal] = useState("");
   
   const handleSubmit = e => {
@@ -36,7 +36,7 @@ const SearchBar = ({callback}) => {
   );
 };
 
-const ArtistShowcase = ({val}) => {
+const ArtistShowcase = ({val}, props) => {
   const viewItem = (val) => {
     console.log("KNOW MORE: ", {val})
   }
@@ -82,7 +82,7 @@ const ArtistShowcase = ({val}) => {
   );
 };
 
-const fetchArtworks = (inputValue) => {
+const fetchArtworks = (inputValue, props) => {
   return new Promise((resolve) => {
     setTimeout(() => {
       if (inputValue === "") {
@@ -105,7 +105,7 @@ const fetchArtworks = (inputValue) => {
   });
 };
 
-const Risingartistsub = () => {
+const Risingartistsub = props => {
   const [articles, setArticles] = useState([]);
   const [inputValue, setInputValue] = useState("");
 
