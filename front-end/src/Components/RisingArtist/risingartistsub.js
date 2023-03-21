@@ -69,7 +69,7 @@ const ArtistShowcase = ({val}) => {
             <CardActions>
               <Button onClick={() => viewItem(artwork.name)}>Learn More</Button>
               {/* <FiHeart onClick={() => loveArtist(artwork)} className="rs-heart" />               */}
-              <Button onClick={() => loveArtist(artwork)}>Follow Him/Her!</Button>
+              <Button onClick={() => loveArtist(artwork)}>Follow</Button>
             </CardActions>
           </Card>
           
