@@ -3,6 +3,7 @@
     display: grid;
     grid-template-columns: 1fr;
     padding-top: 2rem;
+    padding-bottom: 1rem;
 }
 .searchBar__container .searchBarTextField{
     border: 2px solid black;

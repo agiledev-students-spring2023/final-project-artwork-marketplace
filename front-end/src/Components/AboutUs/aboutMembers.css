@@ -2,7 +2,6 @@
     width: var(--container-width-lg);
     margin: 0 auto;
     padding-top: 1rem;
-    padding-bottom: 2rem;
     align-items: center;
     text-align: center;
 }

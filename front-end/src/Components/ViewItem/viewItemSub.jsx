@@ -35,6 +35,7 @@ const ViewItemSub = props => {
         setProductArtist(thisProductArtist)
         setProductImages(thisProductImages)
         setProductStatus(thisProductStatus)
+        console.log(thisProductStatus)
         setProductPrice(thisProductPrice)
         setProductCategories(thisProductCategories)
         setProductDescription(thisProductDescription)
