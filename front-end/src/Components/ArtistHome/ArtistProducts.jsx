@@ -60,41 +60,47 @@ const ArtistProducts = props => {
   */
   
   return (
-    <div className='container products_container'>
-        {/* Welcome Message */}
-        {username &&(
-            <div>
-                <div className='welcomeMsg'>
-                    <h1>Welcome to Artwork Marketplace, {username}!</h1>
-                </div>
-                <div className="sectionHeading">
-                    <h2 className="labell">Artworks by {username}</h2>
-                </div>
-            </div>
+    <>
+      {/* Welcome Message */}
+      {username &&(
+        <div className='welcomeMsg'>
+          <h1>Welcome to Artwork Marketplace, {username}!</h1>
+        </div>
+      )}
+      <div className='container products_container'>   
+        {products.length !== 0 &&(
+          <div className="sectionHeading">
+            <h2 className="labell">Your Artworks</h2>
+          </div>
         )}
-        {products &&(
-            <div className='productColumn'>
-                {products.map((product)=>
-                    <div className='productCard'>
-                        <div className="productImage">
-                        <Link to='/'>{/* Link will need to change to /productPage/:id */}
-                            <img src={product.thumbnailURL} alt={product.name} />
-                        </Link>
-                        </div>
-                        <div className="productInfo">
-                            <div className="info">
-                                <Link to='/'>{/* Link will need to change to /productPage/:id */}
-                                    <h5 className="productName">"{product.name}"</h5>
-                                </Link>
-                                <h5 className="productArtist">By: <Link to='/'>{/* Link will need to change to /artistProfilePage/:id */}{username}</Link>
-                                </h5>
-                            </div>
-                        </div>
+        {products.length === 0 &&(
+          <div className="sectionHeading">
+            <h2 className="labell">Please Add An Artwork To Get Started As An Artist!</h2>
+          </div>
+        )}
+        {products.length !== 0 &&(
+          <div className='productColumn'>
+              {products.map((product)=>
+                <div className='productCard'>
+                  <div className="productImage">
+                  <Link to={`/Item/${product._id}`}>
+                    <img src={product.thumbnailURL} alt={product.name} />
+                  </Link>
+                  </div>
+                  <div className="productInfo">
+                    <div className="info">
+                      <Link to={`/Item/${product._id}`}>
+                        <h5 className="productName">"{product.name}"</h5>
+                      </Link>
+                      <h5 className="productArtist">By: <Link to='/'>{/* Link will need to change to /artistProfilePage/:id */}{username}</Link></h5>
                     </div>
-                )}
-            </div>
+                  </div>
+                </div>
+              )}
+          </div>
         )}
-    </div>
+      </div>
+    </>
   )
 }
 

@@ -2,16 +2,19 @@
     width: var(--container-width-lg);
     padding-bottom: 10rem;
     margin: 0 auto;
-    padding-top: 1rem;
     overflow: hidden;
+    text-align: center;
 }
 .welcomeMsg{
     padding: 1rem;
-    padding-bottom: 3rem;
+    background-color: black;
+    color: white;
+    text-align: center;
 }
 .productColumn{
     display: grid;
     grid-template-columns: repeat(1, 1fr);
+    max-width: 100%;
     gap: 2rem;
 }
 .productCard{
@@ -95,8 +98,6 @@ html{
         border: 2px solid black;
         transition: 1s ease;
     }
-    section{
-    }
 }
 
 /* FOR PHONES */
@@ -111,24 +112,26 @@ html{
     }
     .productCard{
         display: grid;
-        grid-template-columns: 100%;
+        grid-template-columns: 1fr;
+        max-width: 100%;
         gap: 0.5rem;
+    }
+    .productColumn{
+        text-align: center;
+        align-items: center;
     }
     .info{
         margin-top: 0;
-        width: 90vw;
         display: grid;
         grid-template-columns: 60% 40%;
         overflow-wrap: break-word;
         background-color: rgb(194, 194, 194);
         transition: 1s ease;
+        width: auto;
     }
     .productImage img{
-        width: 100%;
+        width: 98%;
         border: 2px solid black;
         transition: 1s ease;
-    }
-    
-    section{
     }
 }

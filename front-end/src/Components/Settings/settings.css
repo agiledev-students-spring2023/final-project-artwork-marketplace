@@ -1,0 +1,97 @@
+.collapse_section{
+    background-color: transparent;
+    text-align: end;
+    transition: 1s all ease;
+}
+.collapse_section-Active{
+    background-color: black;
+    transition: 1s all ease;
+}
+.collapse_button{
+    text-align: center;
+    justify-content: center;
+    font-size: larger;
+    border-radius: 0.5rem;
+    border: 2px solid black;
+    padding: 1rem;
+    padding-bottom: 0.7rem;
+    transition: 1s all ease;
+    cursor: pointer;
+    margin: 1rem;
+}
+.collapse_button:hover{
+    background-color: rgb(120, 120, 120);
+    color: white;
+    border: 2px solid rgb(120, 120, 120);
+}
+.collapse_button-Primary{
+    background-color: black;
+    color: white;
+    transition: 1s all ease;
+}
+.collapse_section .collapseActive_options{
+    display: grid;
+    grid-template-columns: 1fr;
+    padding-left: 5rem;
+    padding-bottom: 1rem;
+}
+.collapse_section .collapseActive_options button{
+    text-align: start;
+    font-size: larger;
+    cursor: pointer;
+    border-top-left-radius: 3rem;
+    border-bottom-left-radius: 3rem;
+    transition: 1s all ease;
+    border-bottom: 2px solid black;
+    border-top: 2px solid black;
+    border-left: 2px solid black;
+    border-right: none;
+}
+.collapse_section .collapseActive_options button h5{
+    margin: 0;
+    padding: 1rem;
+}
+.collapse_section .collapseActive_options button:hover{
+    background-color: rgb(120, 120, 120);
+    color: white;
+}
+.collapseActive_switch{
+    display: flex;
+    color: white;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+    padding-top: 0;
+}
+.collapseActive_switch h3{
+    margin: 0;
+}
+.collapseActive_switch .user_type{
+    color: #357637;
+}
+/* FOR TABLETS */
+@media screen and (max-width: 1024px){
+    
+}
+  
+  /* FOR PHONES */
+@media screen and (max-width: 600px){
+    .collapse_button{
+        font-size: large;
+        font-weight: 500;
+        padding: 0.5rem;
+        padding-bottom: 0.2rem;
+    }
+    .collapse_section .collapseActive_options{
+        padding-left: 3rem;
+    }
+    .collapse_section .collapseActive_options button{
+        font-size: 500;
+        border-top-left-radius: 1.5rem;
+        border-bottom-left-radius: 1.5rem;
+    }
+    .collapse_section .collapseActive_options button h5{
+        margin: 0;
+        padding: 0.5rem;
+    }
+}
