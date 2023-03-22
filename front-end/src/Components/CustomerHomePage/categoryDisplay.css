@@ -49,6 +49,7 @@
     max-height: 30vh;
     user-select: none;
     padding-bottom: 3rem;
+    object-fit: cover;
 }
 :root {
     --swiper-theme-color: black!important;

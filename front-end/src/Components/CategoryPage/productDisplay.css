@@ -82,16 +82,21 @@
     box-sizing: border-box;
     overflow-wrap: break-word;
     overflow-y: scroll;
-    max-height: 5vh;
+    max-height: 6vh;
     top: 8rem;
     background-color: black;
     color: white;
     border-radius: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .displayArtworks__Container .categoryComponent .popup_productName h4{
     padding-left: 1rem;
     padding-right: 1rem;
+    flex:120px;
     font-weight: 500;
+
 }
 /* FOR TABLETS */
 @media screen and (max-width: 1024px){
