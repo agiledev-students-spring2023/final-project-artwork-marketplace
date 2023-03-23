@@ -43,10 +43,6 @@ const Loginsub = props => {
     return(
         <div className='container LogIn__container'>
     	<div className="login_loginheader">
-            <div className="login_logo">
-                {/* Logo */}
-                <img className='login_logopic' src={Logo} alt="" />
-            </div>
             <div className="login_featured">
                 {/* Featured Artwork */}
                 {randomFeaturedProduct && (
