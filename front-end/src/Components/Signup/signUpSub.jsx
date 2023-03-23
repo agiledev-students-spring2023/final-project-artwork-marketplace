@@ -3,6 +3,7 @@ import { useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './signup.css'
 import Logo from '../../Assets/Pictures/logo-placeholder.jpeg'
+import AM2 from '../../Assets/Pictures/AM2.png'
 
 const SignUpSub = props => {
   const navigate = useNavigate()
@@ -32,7 +33,12 @@ const SignUpSub = props => {
     <div className='container SignUp__container'>
       
     	{/* Logo */}
-      <img className='signup_logopic' src={Logo} alt="" />
+      <div className='s_l'>
+        <img className='signup_logopic' src={Logo} alt="" />
+      </div>
+      <div className='s_l'>
+        <img className='signup_logopic_phrase' src={AM2} alt="" />
+      </div>
       
       {/* User Info */}
       <form onSubmit={handleSubmit}>

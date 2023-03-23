@@ -1,14 +1,11 @@
 .SignUp__container{
   width: var(--container-width-lg);
-  display: block;
-  padding: 0.7rem 1.7rem;
-  position: fixed;
-  left: 50%;
-  transform:translateX(-50%);
+  display: grid;
   bottom: 2rem;
   align-items: center;
   text-align: center;
 }
+
 :root{
   --container-width-lg: 75%;
   --container-width-md: 86%;
@@ -20,12 +17,27 @@ html{
 ::-webkit-scrollbar{
   display: none;
 }
+
+.s_l{
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.signup_logopic{
+  max-height: 30vh;
+}
+
+.signup_logopic_phrase{
+  max-height: 7vh;
+}
+
 .signup_check{
   display: flex;
   gap: 3rem;
   margin: 1rem;
-  padding: 2rem;
-  padding-top: 4rem;
   justify-content: center;
 }
 .signup_check .radioButton{
@@ -64,10 +76,7 @@ html{
 .signup_signupset .textField:focus{
   box-shadow: 0rem 0rem 1.5rem rgb(87, 87, 87);
 }
-.signup_logopic{
-  border: 2px solid black;
-  max-height: 20vh;
-}
+
 .signup_button{
   border: 2px solid black;
   border-radius: 3rem;
@@ -102,7 +111,6 @@ html{
     padding-top: 8rem;
   }
   .signup_logopic{
-    border: 2px solid black;
     max-height: 25vh;
   }
 }

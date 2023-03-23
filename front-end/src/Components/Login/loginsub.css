@@ -36,16 +36,9 @@
     text-align: center;
     padding-bottom: 2rem;
 }
-.login_loginheader .login_logo img{
-    max-height: 20vh;
-}
 .login_loginheader .login_featured .login_featuredpic{
     max-height: 25vh;
     max-width: 100%;
-}
-.login_loginheader .login_logopic{
-    border: 2px solid black;
-    max-height: 20vh;
 }
 
 /* FOR TABLETS */
@@ -74,7 +67,5 @@
     max-height: 10vh;
     max-width: 100%;
   }
-  .login_loginheader .login_logo img{
-    max-height: 25vh;
-}
+  
 }
