@@ -32,7 +32,7 @@ const ProfileSub = props => {
                 <ListSubheader component="div">Gallery Showcase</ListSubheader>
             </ImageListItem>
             {productsList.map((item) => (
-                <ImageListItem key={item.url}>
+                <ImageListItem key={Math.random()}>
                 <img
                     src={`${item.url}?w=248&fit=crop&auto=format`}
                     srcSet={`${item.url}?w=248&fit=crop&auto=format&dpr=2 2x`}
