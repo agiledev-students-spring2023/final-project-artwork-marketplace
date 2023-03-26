@@ -14,6 +14,11 @@ app.use(morgan("dev"))
 app.use(express.json()) 
 app.use(express.urlencoded({ extended: true }))
 app.use("/static", express.static("public"))
+
+app.get("/", (req, res) => {
+    res.send(`GET request on port ${process.env.PORT}, path "/" received!`)
+})
+
 app.use('/artworks', artworksRoute)
 app.use('/categories', categoriesRoute)
 app.use('/users', usersRoute)
