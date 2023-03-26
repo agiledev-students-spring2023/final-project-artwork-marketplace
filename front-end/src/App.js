@@ -32,7 +32,7 @@ const App = props => {
         {user.user &&(
           <>
             {/* ARTIST EXCLUSIVE USER ROUTES */}
-            {user.user == "Artist" &&(
+            {user.user === "Artist" &&(
               <>
                 <Route path="/" element={<Home user={user} setuser={setUser} />}/>
                 <Route path="/AddArt" element={<AddArt user={user} setuser={setUser} />}/>
@@ -40,7 +40,7 @@ const App = props => {
               </>
             )}
             {/* CUSTOMER EXCLUSIVE USER ROUTES */}
-            {user.user == "Customer" &&(
+            {user.user === "Customer" &&(
               <>
                 <Route path="/" element={<Home user={user} setuser={setUser} />}/>
                 <Route path="/Cart" element={<ViewCart user={user} setuser={setUser} />}/>

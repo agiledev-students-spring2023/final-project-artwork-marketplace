@@ -1,18 +1,14 @@
-.profileContainer{
-    width: var(--container-width-lg);
-    text-align: center;
-    font-family: 'Courier New', Courier, monospace;
-    width: 100%;
-    height: 100%;
-    margin: auto;
-}
-
 .profileplace{
     font-size: 3vw;
     color: black;
 }
 
-.profile_featuredpic{
-    max-height: 25vh;
-    max-width: 100%;
+.profilebodyset{
+    font-family: 'Courier New', Courier, monospace;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
 }
