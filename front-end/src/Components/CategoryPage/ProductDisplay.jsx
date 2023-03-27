@@ -55,7 +55,7 @@ const ProductDisplay = props => {
     <div>
       <div className="container searchArtwork__Container">
         <Link to="/CustomerHome" className='categoryBack_button categoryBack_button-Primary'>Back</Link>
-        <input className='searchArtworkTextField' placeholder='Search Artwork' value={searchValue} onInput={(e) => handleSearch(e)}/>
+        <input className='searchArtworkTextField' placeholder='Search Artworks' value={searchValue} onInput={(e) => handleSearch(e)}/>
       </div>
       <div className="container displayArtworks__Container">
         {categoryy && (
