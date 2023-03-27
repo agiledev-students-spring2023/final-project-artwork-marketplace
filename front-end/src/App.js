@@ -15,7 +15,24 @@ import Profile from './Pages/Profile'
 
 
 const App = props => {
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState({
+    "_id": 1,
+    "user": "Artist",
+    "name": "Curry Romney",
+    "email": "artist1@artist.com",
+    "products_uploaded": [
+        7,
+        10,
+        15
+    ],
+    "cart": [
+      1,
+      5,
+      10,
+    ],
+    "saved": [
+    ]
+  })
   return (
     <BrowserRouter>
       <Routes>
@@ -36,7 +53,6 @@ const App = props => {
               <>
                 <Route path="/" element={<Home user={user} setuser={setUser} />}/>
                 <Route path="/AddArt" element={<AddArt user={user} setuser={setUser} />}/>
-                <Route path="/Profile" element={<Profile user={user} setuser={setUser} />}/>
               </>
             )}
             {/* CUSTOMER EXCLUSIVE USER ROUTES */}
@@ -49,7 +65,8 @@ const App = props => {
               </>
             )}
             {/* NON-EXCLUSIVE USER ROUTES */}
-            <Route path="/Item/:productID" element={<ViewItem user={user} setuser={setUser} />}/> 
+            <Route path="/Item/:productID" element={<ViewItem user={user} setuser={setUser} />}/>
+            <Route path="/Profile/:userID" element={<Profile user={user} setuser={setUser} />}/> 
           </>
         )}
         {/* ANY PATH THAT DOES NOT EXIST --> take user back to "/" (home) */}

@@ -5,8 +5,7 @@ import { Pagination, FreeMode } from "swiper"
 import './categoryDisplay.css'
 import "swiper/css"
 import "swiper/css/pagination"
-import AllProducts from '../../SchemaSamples/AllProducts'
-import AllUsers from '../../SchemaSamples/AllUsers'
+import axios from "axios"
 import AllCategories from '../../SchemaSamples/AllCategories'
 
 const CategoryDisplay = props => {
@@ -15,11 +14,18 @@ const CategoryDisplay = props => {
   const [searchValue, setSearchValue] = useState('')
   
   useEffect(() => {
-    const getCategories=()=>{
-        const categoriesCopy = AllCategories
-        categoriesCopy.forEach(category => {category['products'] =  AllProducts.filter(product => category.products_id.includes(product._id))})    
-        setCategories(categoriesCopy)
-        setCategoriesCopy(categoriesCopy)
+    const getCategories = async ()=>{
+        try{
+            const categoriesCopy = AllCategories
+            const getProducts = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks`)
+            const AllProducts = getProducts.data
+            categoriesCopy.forEach(category => {category['products'] =  AllProducts.filter(product => category.products_id.includes(product._id))})    
+            setCategories(categoriesCopy)
+            setCategoriesCopy(categoriesCopy)
+        }
+        catch (err){
+            console.log(err)
+        }
     }
     getCategories()
   }, [])
@@ -53,7 +59,10 @@ const CategoryDisplay = props => {
                     {categories.map((category) => 
                         <div>
                         {category.products.length && (
-                            <div className="categoryRow">
+                            <div 
+                                className="categoryRow"
+                                key={category._id}
+                            >
                                 <div className="category_button categoryName">
                                     <Link to={`/Category/${category._id}`}>
                                         {category.name}
@@ -89,17 +98,17 @@ const CategoryDisplay = props => {
                                         speed="1s"
                                     >
                                     {category.products.map((product) =>
-                                        <>
+                                        <div key={product._id}>
                                             <SwiperSlide 
                                                 key={product._id}
                                             >
                                                 <div className="SwiperProductImage">
-                                                <Link to={`/ViewItem/${product._id}`}>
+                                                <Link to={`/Item/${product._id}`}>
                                                     <img src={product.thumbnailURL} alt={product.name} />
                                                 </Link>
                                                 </div>
                                             </SwiperSlide>
-                                        </>
+                                        </div>
                                     )}
                                     </Swiper>
                                 </div> 

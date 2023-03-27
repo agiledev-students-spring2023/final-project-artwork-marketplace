@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import './cart.css'
-import AllProducts from '../../SchemaSamples/AllProducts'
-import AllUsers from '../../SchemaSamples/AllUsers'
+import axios from "axios"
 
 const Cart = props => {
   const [cartSwitch, setCartSwitch] = useState("cart")
@@ -11,13 +10,19 @@ const Cart = props => {
   
   // should be replaced with API
   useEffect(() => {
-    const getCart=()=>{
-        const userCart = props.user.cart
-        const userSaved = props.user.saved
-        const cartList = AllProducts.filter(product => userCart.includes(product._id))
-        const savedList = AllProducts.filter(product => userSaved.includes(product._id))
-        setUserCartList(cartList)
-        setUserSavedList(savedList)
+    const getCart = async () => {
+        try{    
+            const getProducts = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks`)
+            const AllProducts = getProducts.data
+            const userCart = props.user.cart
+            const userSaved = props.user.saved
+            const cartList = AllProducts.filter(product => userCart.includes(product._id))
+            const savedList = AllProducts.filter(product => userSaved.includes(product._id))
+            setUserCartList(cartList)
+            setUserSavedList(savedList)
+        } catch (err){
+            console.log(err)
+        }
     }
     getCart()
   }, [])

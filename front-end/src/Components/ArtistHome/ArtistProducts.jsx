@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import axios from 'axios'
-import AllProducts from '../../SchemaSamples/AllProducts'
-import AllUsers from '../../SchemaSamples/AllUsers'
 import './artistProducts.css'
 
 const ArtistProducts = props => {
@@ -13,12 +11,18 @@ const ArtistProducts = props => {
     // const [searchValue, setSearchValue] = useState('')
     
     useEffect(() => {
-      const getArtistInfo=()=>{
-        const artist_id = props.user._id
-        const artist_name = props.user.name
-        const artist_products = AllProducts.filter(product => product.artist_id === artist_id)
-        setUsername(artist_name)
-        setProducts(artist_products)
+      const getArtistInfo = async () => {
+        try{
+          const getProducts = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks`)
+          const AllProducts = getProducts.data
+          const artist_id = props.user._id
+          const artist_name = props.user.name
+          const artist_products = AllProducts.filter(product => product.artist_id === artist_id)
+          setUsername(artist_name)
+          setProducts(artist_products)
+        } catch (err){
+          console.log(err)
+        }
       }
       getArtistInfo()
     }, [])
@@ -92,7 +96,7 @@ const ArtistProducts = props => {
                       <Link to={`/Item/${product._id}`}>
                         <h5 className="productName">"{product.name}"</h5>
                       </Link>
-                      <h5 className="productArtist">By: <Link to='/'>{/* Link will need to change to /artistProfilePage/:id */}{username}</Link></h5>
+                      <h5 className="productArtist">By: <Link to={`/Profile/${props.user._id}`}>{username}</Link></h5>
                     </div>
                   </div>
                 </div>

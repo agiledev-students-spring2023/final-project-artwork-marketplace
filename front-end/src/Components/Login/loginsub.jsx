@@ -1,8 +1,7 @@
 import React, {useState, useRef, useEffect } from 'react'
 import './loginsub.css'
-import Logo from '../../Assets/Pictures/logo-placeholder.jpeg'
+import axios from "axios"
 import AllUsers from '../../SchemaSamples/AllUsers'
-import AllProducts from '../../SchemaSamples/AllProducts'
 import { useNavigate } from 'react-router-dom'
  
 const Loginsub = props => {
@@ -14,9 +13,10 @@ const Loginsub = props => {
     const [artistOfProd, setArtistOfProd] = useState({})
 
     useEffect(() => {
-        const getLatestFeatured=()=>{
+        const getLatestFeatured = async () => {
             const random_productID = Math.floor(Math.random() * 15) + 1;
-            const random_product = AllProducts.find(product => product._id === random_productID)
+            const getRandomProduct = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks/${random_productID}`)
+            const random_product = getRandomProduct.data
             const artist = AllUsers.find(user => user._id === random_product.artist_id)
             setRFP(random_product)
             setArtistOfProd(artist)
