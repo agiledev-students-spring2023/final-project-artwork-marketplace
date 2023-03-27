@@ -42,7 +42,7 @@ const Settings = props => {
         setChecked(true)
     }
   })
-  
+
   return (
     <>
         {collapse === false && (
@@ -65,8 +65,10 @@ const Settings = props => {
                             checked={checked}
                             checkedIcon={false}
                             uncheckedIcon={false}
-                            onColor="#787878"
-                            offColor="#787878"
+                            onColor="#fff"
+                            offColor="#fff"
+                            onHandleColor="#357637"
+                            offHandleColor="#357637"
                             onChange={handleUserChange}
                         />
                     </div>
