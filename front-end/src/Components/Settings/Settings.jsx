@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useCallback } from 'react'
 import { FiMenu } from 'react-icons/fi'
 import { AiOutlineClose } from 'react-icons/ai'
 import Switch from 'react-switch'
@@ -15,16 +15,18 @@ const Settings = props => {
   const handleLogOut = () => {
     props.setuser({})
   }
-  const handleUserChange = () => {
+  const handleUserChange = (async () => {
     if(props.user.user === "Artist"){
         setUserType("Customer")
         props.setuser({... props.user, user: "Customer"})
+        setChecked(false)
     }
     else{
         setUserType("Artist")
         props.setuser({... props.user, user: "Artist"})
+        setChecked(true)
     }
-  }
+  })
   return (
     <>
         {collapse === false && (
@@ -40,16 +42,25 @@ const Settings = props => {
                         <h3>Customer</h3>
                     )}
                     {userType === "Customer" &&(
-                        <h3>Artist</h3>
+                        <h3 className='user_type'>{userType}</h3>
                     )}
                     <div className="switch">
                         <Switch 
                             checked={checked}
+                            checkedIcon={false}
+                            uncheckedIcon={false}
                             onColor="#357637"
+                            offColor="#357637"
                             onChange={handleUserChange}
                         />
                     </div>
-                    <h3 className='user_type'>{userType}</h3>
+                    {userType === "Artist" &&(
+                        <h3 className='user_type'>{userType}</h3>
+                    )}
+                    {userType === "Customer" &&(
+                        <h3>Artist</h3>
+                    )}
+                    
                 </div>
                 <div className="collapseActive_options">
                     <button className='collapseActive_option'><h5>Settings</h5></button>
