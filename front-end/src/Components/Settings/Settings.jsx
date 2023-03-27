@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react'
+import React, { useState, useEffect } from 'react'
 import { FiMenu } from 'react-icons/fi'
 import { AiOutlineClose } from 'react-icons/ai'
 import Switch from 'react-switch'
@@ -7,14 +7,29 @@ import './settings.css'
 const Settings = props => {
   const [collapse, setCollapse] = useState(false)
   const [userType, setUserType] = useState(props.user.user)
-  const [checked, setChecked] = useState(true);
+  const [checked, setChecked] = useState(true)
+  
+  useEffect(() => {
+    const checkChecked = () => {
+        if(props.user.user === "Artist"){
+            setChecked(true)
+        }
+        else{
+            setChecked(false)
+        }
+      }
+      checkChecked()
+  }, [])
+
   const handleCollapse = () => {
     const negation = !collapse
     setCollapse(negation)
   }
+
   const handleLogOut = () => {
     props.setuser({})
   }
+
   const handleUserChange = (async () => {
     if(props.user.user === "Artist"){
         setUserType("Customer")
@@ -27,6 +42,7 @@ const Settings = props => {
         setChecked(true)
     }
   })
+  
   return (
     <>
         {collapse === false && (
@@ -49,8 +65,8 @@ const Settings = props => {
                             checked={checked}
                             checkedIcon={false}
                             uncheckedIcon={false}
-                            onColor="#357637"
-                            offColor="#357637"
+                            onColor="#787878"
+                            offColor="#787878"
                             onChange={handleUserChange}
                         />
                     </div>

@@ -117,7 +117,7 @@
     .searchArtwork__Container{
         grid-template-columns: 20% 70%;
         gap: 1rem;
-        padding-top: 4rem;
+        padding-top: 1rem;
     }
     .displayArtworks__Container .categoryComponent .popup_productName{
         background-color: white;
