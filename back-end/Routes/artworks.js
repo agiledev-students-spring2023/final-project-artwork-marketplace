@@ -1,5 +1,5 @@
 const router = require("express").Router()
-const ProductsList = require("../SchemaSamples/AllProducts") 
+const ProductsList = require("../SchemaSamples/AllProducts")
 
 // creating && saving a new artwork
 router.post("/", async (req, res) => {
@@ -17,6 +17,7 @@ router.post("/", async (req, res) => {
             categories_id: req.body.categories_id,
             imagesURL: req.body.imagesURL
         }
+        // save to database (later when database integration sprint comes)
         res.status(200).json(newArtwork)
     } catch (err){
         res.status(500).json(err)
@@ -61,6 +62,46 @@ router.get("/:id", async (req, res) => {
         // will be changed with different function once connected to mongoose
         const artwork = ProductsList.find(product => product._id == req.params.id)
         res.status(200).json(artwork)
+    } catch (err){
+        res.status(500).json(err)
+    }
+})
+
+// get artworks by artist_id
+router.get("/artist/:id", async (req, res) => {
+    try{
+        const artworksByArtist = ProductsList.filter(product => product.artist_id == req.params.id)
+        res.status(200).json(artworksByArtist)
+    } catch (err){
+        res.status(500).json(err)
+    }
+})
+
+// get artworks by category_id
+router.get("/category/:id", async (req, res) => {
+    try{
+        const artworksByCategory = ProductsList.filter(product => product.categories_id.includes(req.params.id))
+        res.status(200).json(artworksByCategory)
+    } catch (err){
+        res.status(500).json(err)
+    }
+})
+
+// get artworks in price range
+router.get("/priceRange/:lower/:higher", async (req, res) => {
+    try{
+        const artworksInPriceRange = ProductsList.filter(product => (product.price <= req.params.higher && product.price >= req.params.lower))
+        res.status(200).json(artworksInPriceRange)
+    } catch (err){
+        res.status(500).json(err)
+    }
+})
+
+// get artworks by status
+router.get("/activeStatus/:status", async (req, res) => {
+    try{
+        const artworksByStatus = ProductsList.filter(product => product.status.toLowerCase == req.params.status.toLowerCase)
+        res.status(200).json(artworksByStatus)
     } catch (err){
         res.status(500).json(err)
     }
