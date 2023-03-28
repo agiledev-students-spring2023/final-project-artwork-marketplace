@@ -12,25 +12,25 @@ const Navbar = props => {
         <>
             {/* Home */}
             <NavLink 
-                exact
-                activeClassName="Home" 
+                exact="true"
+                activeclassname="Home" 
                 to='/' >
                 <FiHome/>
             </NavLink>
 
             {/* Add Art */}
             <NavLink 
-                exact
-                activeClassName="Add Art" 
+                exact="true"
+                activeclassname="Add Art" 
                 to='/AddArt' >
                 <IoIosAdd/>
             </NavLink>
 
             {/* Artist Profile */}
             <NavLink 
-                exact
-                activeClassName="Profile" 
-                to='/Profile' >
+                exact="true"
+                activeclassname="Profile" 
+                to={`/Profile/${props.user._id}`} >
                 <FiUser/>
             </NavLink>
         </>
@@ -39,40 +39,40 @@ const Navbar = props => {
         <>
             {/* Cart */}
             <NavLink 
-                exact
-                activeClassName="Cart" 
+                exact="true"
+                activeclassname="Cart" 
                 to='/Cart' >
                 <FiShoppingCart/>
             </NavLink>
 
             {/* You */}
             <NavLink 
-                exact
-                activeClassName="My Profile" 
-                to='/MyProfile' >
+                exact="true"
+                activeclassname="My Profile" 
+                to={`/Profile/${props.user._id}`} >
                 <FiUser/>
             </NavLink>
 
             {/* Home */}
             <NavLink 
-                exact
-                activeClassName="Home" 
+                exact="true"
+                activeclassname="Home" 
                 to='/' >
                 <FiHome/>
             </NavLink>
 
             {/* Rising Artists */}
             <NavLink 
-                exact
-                activeClassName="Rising Artists" 
+                exact="true"
+                activeclassname="Rising Artists" 
                 to='/RisingArtists' >
                 <RiUserStarLine/>
             </NavLink>
 
             {/* Following */}
             <NavLink 
-                exact
-                activeClassName="Following" 
+                exact="true"
+                activeclassname="Following" 
                 to='/Following' >
                 <RiUserHeartLine/>
             </NavLink>

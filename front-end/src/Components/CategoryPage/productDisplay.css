@@ -83,7 +83,9 @@
     overflow-wrap: break-word;
     overflow-y: scroll;
     max-height: 6vh;
-    top: 8rem;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
     background-color: black;
     color: white;
     border-radius: 3rem;
@@ -117,9 +119,9 @@
     .searchArtwork__Container{
         grid-template-columns: 20% 70%;
         gap: 1rem;
-        padding-top: 4rem;
+        padding-top: 1rem;
     }
     .displayArtworks__Container .categoryComponent .popup_productName{
-        background-color: white;
+        top: 2rem;
     }
 }

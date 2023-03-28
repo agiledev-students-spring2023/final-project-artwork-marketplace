@@ -1,13 +1,12 @@
 import React, {useState, useEffect} from 'react'
 import { Link, useParams } from 'react-router-dom'
 import './viewItemSub.css'
+import axios from 'axios'
 import AllCategories from '../../SchemaSamples/AllCategories'
-import AllProducts from '../../SchemaSamples/AllProducts'
 import AllUsers from '../../SchemaSamples/AllUsers'
 
 const ViewItemSub = props => {
   const getProductParamsID = useParams()
-  const productId = getProductParamsID.productID
   
   const [product, setProduct] = useState({})
   const [productName, setProductName] = useState("")
@@ -21,8 +20,11 @@ const ViewItemSub = props => {
   const [showMore, setShowMore] = useState(false);  
   
   useEffect(() => {
-    const getProductInfo=()=>{
-        const thisProduct = AllProducts.find(product => product._id == productId)
+    const getProductInfo = async () => {
+      try{
+        const productId = getProductParamsID.productID
+        const getProduct = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks/${productId}`)
+        const thisProduct = getProduct.data
         const thisProductName = thisProduct.name
         const thisProductArtist = AllUsers.find(user => user._id === thisProduct.artist_id)  
         const thisProductImages = thisProduct.imagesURL
@@ -35,10 +37,12 @@ const ViewItemSub = props => {
         setProductArtist(thisProductArtist)
         setProductImages(thisProductImages)
         setProductStatus(thisProductStatus)
-        console.log(thisProductStatus)
         setProductPrice(thisProductPrice)
         setProductCategories(thisProductCategories)
         setProductDescription(thisProductDescription)
+      } catch (err){
+        console.log(err)
+      } 
     }
     getProductInfo()
   }, [])
@@ -56,59 +60,59 @@ const ViewItemSub = props => {
   }
 
   return(
-      <div className="container viewItemContainer">
-        <div className="viewItem_card">
-          <div className="viewItem_big-img">
-            <img src={productImages[activeImageIndex]} alt=""/>
-          </div>
-          <div className="viewItem_box">
-            <h2 className='viewItem_productName'>"{productName}"</h2>
-            <div className="viewItem_row">
-              {productStatus && productStatus === "available" && (
-                <span className='viewItem_price available'>${productPrice}</span>
-              )}
-              {productStatus && productStatus === "sold" && (
-                <>
-                  <span className='viewItem_price sold price'>${productPrice}</span><br/>
-                  <span className='viewItem_price sold'>SOLD</span>
-                </>
-              )}
-            </div>
-            <p className='viewItem_Artist'>
-              Artwork By:  {" "}  
-              <Link to={`/Profile/${productArtist._id}`}>
-                {productArtist.name}
-              </Link>
-            </p>
-            <div className="viewItem_prodCategories">
-              <p>Categories: </p>
-              {productCategories.map((category) => 
-                <h5>
-                <Link to={`/Category/${category._id}`}>
-                  {category.name}
-                </Link>
-                </h5>
-              )}
-            </div>
-            <div className='viewItem_thumb'>
-              {productImages.map((thispic,index) => 
-                <img src={thispic} onClick={() => handleSmallPhotoClick(index)}/>
-              )}
-            </div>
-            <button className="viewItem_button" onClick={handleMoreClick}>
-              {showMore ? 'Hide' : 'Show'} details
-            </button>
-            {showMore && 
-              <p className="viewItem_detailedDescription">{productDescription}</p>
-            }
-            {props.user.user === "Customer" && productStatus !== "sold" &&(
-              <button className="viewItem_button" onClick={addItemToCart}>
-                Add To Cart
-              </button>
+    <div className="container viewItemContainer">
+      <div className="viewItem_card">
+        <div className="viewItem_big-img">
+          <img src={productImages[activeImageIndex]} alt=""/>
+        </div>
+        <div className="viewItem_box">
+          <h2 className='viewItem_productName'>"{productName}"</h2>
+          <div className="viewItem_row">
+            {productStatus && productStatus === "available" && (
+              <span className='viewItem_price available'>${productPrice}</span>
+            )}
+            {productStatus && productStatus === "sold" && (
+              <>
+                <span className='viewItem_price sold price'>${productPrice}</span><br/>
+                <span className='viewItem_price sold'>SOLD</span>
+              </>
             )}
           </div>
+          <p className='viewItem_Artist'>
+            Artwork By:  {" "}  
+            <Link to={`/Profile/${productArtist._id}`}>
+              {productArtist.name}
+            </Link>
+          </p>
+          <div className="viewItem_prodCategories">
+            <p>Categories: </p>
+            {productCategories.map((category) => 
+              <h5>
+              <Link to={`/Category/${category._id}`}>
+                {category.name}
+              </Link>
+              </h5>
+            )}
+          </div>
+          <div className='viewItem_thumb'>
+            {productImages.map((thispic,index) => 
+              <img src={thispic} onClick={() => handleSmallPhotoClick(index)}/>
+            )}
+          </div>
+          <button className="viewItem_button" onClick={handleMoreClick}>
+            {showMore ? 'Hide' : 'Show'} details
+          </button>
+          {showMore && 
+            <p className="viewItem_detailedDescription">{productDescription}</p>
+          }
+          {props.user.user === "Customer" && productStatus !== "sold" &&(
+            <button className="viewItem_button" onClick={addItemToCart}>
+              Add To Cart
+            </button>
+          )}
         </div>
       </div>
+    </div>
   )
 }
 

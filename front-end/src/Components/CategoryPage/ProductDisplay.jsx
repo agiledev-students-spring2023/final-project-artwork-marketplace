@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import Masonry from 'react-masonry-css'
 import './productDisplay.css'
-import AllProducts from '../../SchemaSamples/AllProducts'
-import AllUsers from '../../SchemaSamples/AllUsers'
+import axios from "axios"
 import AllCategories from '../../SchemaSamples/AllCategories'
 
 const ProductDisplay = props => {
@@ -14,12 +13,18 @@ const ProductDisplay = props => {
   const [hover, setHover] = useState('')
   
   useEffect(() => {
-    const findCategory=()=>{
-      const ID = getCategoryID.categoryID
-      const foundCategory = AllCategories.find(category => category._id == ID)
-      const productsOfCategory = AllProducts.filter(product => foundCategory.products_id.includes(product._id))
-      setCategory(foundCategory)
-      setProducts(productsOfCategory)
+    const findCategory = async () => {
+      try{
+        const getProducts = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks`)
+        const AllProducts = getProducts.data
+        const ID = getCategoryID.categoryID
+        const foundCategory = AllCategories.find(category => category._id == ID)
+        const productsOfCategory = AllProducts.filter(product => foundCategory.products_id.includes(product._id))
+        setCategory(foundCategory)
+        setProducts(productsOfCategory)
+      } catch (err) {
+        console.log(err)
+      }
     }
     findCategory()
   }, [])
@@ -50,7 +55,7 @@ const ProductDisplay = props => {
     <div>
       <div className="container searchArtwork__Container">
         <Link to="/CustomerHome" className='categoryBack_button categoryBack_button-Primary'>Back</Link>
-        <input className='searchArtworkTextField' placeholder='Search Artwork' value={searchValue} onInput={(e) => handleSearch(e)}/>
+        <input className='searchArtworkTextField' placeholder='Search Artworks' value={searchValue} onInput={(e) => handleSearch(e)}/>
       </div>
       <div className="container displayArtworks__Container">
         {categoryy && (

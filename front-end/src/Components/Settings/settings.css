@@ -65,9 +65,10 @@
 }
 .collapseActive_switch h3{
     margin: 0;
+    transition: 1s ease all;
 }
 .collapseActive_switch .user_type{
-    color: #357637;
+    color: #357637;    
 }
 /* FOR TABLETS */
 @media screen and (max-width: 1024px){
