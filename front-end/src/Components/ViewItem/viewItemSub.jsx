@@ -3,7 +3,6 @@ import { Link, useParams } from 'react-router-dom'
 import './viewItemSub.css'
 import axios from 'axios'
 import AllCategories from '../../SchemaSamples/AllCategories'
-import AllUsers from '../../SchemaSamples/AllUsers'
 
 const ViewItemSub = props => {
   const getProductParamsID = useParams()
@@ -26,7 +25,8 @@ const ViewItemSub = props => {
         const getProduct = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks/${productId}`)
         const thisProduct = getProduct.data
         const thisProductName = thisProduct.name
-        const thisProductArtist = AllUsers.find(user => user._id === thisProduct.artist_id)  
+        const getProductArtist = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/${thisProduct.artist_id}`) 
+        const thisProductArtist = getProductArtist.data
         const thisProductImages = thisProduct.imagesURL
         const thisProductStatus = thisProduct.status // "sold" or "available"
         const thisProductPrice = thisProduct.price
@@ -78,12 +78,14 @@ const ViewItemSub = props => {
               </>
             )}
           </div>
-          <p className='viewItem_Artist'>
-            Artwork By:  {" "}  
-            <Link to={`/Profile/${productArtist._id}`}>
-              {productArtist.name}
-            </Link>
-          </p>
+          {productArtist && (
+            <p className='viewItem_Artist'>
+              Artwork By:  {" "}  
+              <Link to={`/Profile/${productArtist._id}`}>
+                {productArtist.name.full}
+              </Link>
+            </p>
+          )}
           <div className="viewItem_prodCategories">
             <p>Categories: </p>
             {productCategories.map((category) => 

@@ -64,8 +64,7 @@
     padding-bottom: 0;
   }
   .login_loginheader .login_featured .login_featuredpic{
-    max-height: 10vh;
+    max-height: 30vh;
     max-width: 100%;
   }
-  
 }

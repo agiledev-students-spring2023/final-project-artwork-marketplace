@@ -1,11 +1,25 @@
 .SignUp__container{
   width: var(--container-width-lg);
-  display: grid;
+  display: block;
+  padding: 0.7rem 1.7rem;
+  position: fixed;
+  left: 50%;
+  transform:translateX(-50%);
   bottom: 2rem;
   align-items: center;
   text-align: center;
 }
-
+.SignUp__container .errorMessage{
+  background-color: rgb(111, 0, 0);
+  color: white;
+  border-radius: 3rem;
+  transition: 1s ease all;
+  margin-right: 20vw;
+  margin-left: 20vw;
+  margin-bottom: 2rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
 :root{
   --container-width-lg: 75%;
   --container-width-md: 86%;
@@ -24,10 +38,6 @@ html{
   justify-items: center;
   justify-content: center;
   padding: 1rem;
-}
-
-.signup_logopic{
-  max-height: 30vh;
 }
 
 .signup_logopic_phrase{
@@ -64,6 +74,11 @@ html{
   margin-right: 20vw;
   margin-left: 20vw;
   padding-bottom: 15vh;
+}
+.signup_signupset .signup_nameInputs{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
 }
 .signup_signupset .textField{
   border: 2px solid black;
@@ -106,6 +121,12 @@ html{
     margin-left: 10vw;
     padding-bottom: 0;
   }
+  .SignUp__container .errorMessage{
+    margin-right: 10vw;
+    margin-left: 10vw;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+  }
   .signup_check{
     padding: 1rem;
     padding-top: 8rem;
@@ -125,8 +146,21 @@ html{
     margin-left: 10vw;
     padding-bottom: 0;
   }
+  .SignUp__container .errorMessage{
+    transition: 1s ease all;
+    margin-right: 10vw;
+    margin-left: 10vw;
+    margin-bottom: 0rem;
+    padding-top: 0.01rem;
+    padding-bottom: 0.01rem;
+  }
   .signup_check{
     padding: 1rem;
     padding-top: 4rem;
+  }
+  .signup_signupset .signup_nameInputs{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
 }

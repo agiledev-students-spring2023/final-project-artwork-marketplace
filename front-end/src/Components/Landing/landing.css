@@ -79,7 +79,7 @@ html{
     .landing__container{
         width: var(--container-width-md);
     }
-    .buttonSet {
+    .landing .buttonSet {
         display: grid;
         grid-template-columns: 1fr;
         gap: 1rem;
@@ -101,13 +101,13 @@ html{
     .landing__container{
         width: var(--container-width-sm);
     }
-    .buttonSet {
+    .landing .buttonSet {
         display: grid;
         grid-template-columns: 1fr;
         gap: 1rem;
         min-width: fit-content;
-        margin-right: 10vw;
-        margin-left: 10vw;
+        margin-right: 5vw;
+        margin-left: 5vw;
         padding-bottom: 0;
         padding-top: 30vh;
     }

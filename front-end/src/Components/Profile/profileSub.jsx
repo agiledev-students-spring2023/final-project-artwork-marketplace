@@ -2,7 +2,6 @@ import React, {useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import './profileSub.css'
 import axios from 'axios'
-import AllUsers from '../../SchemaSamples/AllUsers'
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
@@ -18,7 +17,8 @@ const ProfileSub = props => {
     useEffect(() => {
         const getProductInfo = async () => {
           try{
-            const user = AllUsers.find(user => user._id == userId);
+            const getUser = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/${userId}`)
+            const user = getUser.data
             const getProducts = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks`)
             const AllProducts = getProducts.data
             const userProducts = AllProducts.filter(product => product.artist_id === user._id)
@@ -33,13 +33,13 @@ const ProfileSub = props => {
 
     return(
         <div className='profilebodyset'>
-            {userInfo && (
+            {userInfo && userInfo.name && (
                 <>
                     {userInfo._id == props.user._id && (
                         <h3 className='profileplace'>MY ARTIST PROFILE</h3>
                     )}
                     {userInfo._id != props.user._id && (
-                        <h3 className='profileplace'>{userInfo.name}'S ARTIST PROFILE</h3>
+                        <h3 className='profileplace'>{userInfo.name.full}'S ARTIST PROFILE</h3>
                     )}    
                     <h3>
                         Contact Artist: {userInfo.email}
@@ -49,7 +49,7 @@ const ProfileSub = props => {
                         {userUploadedProducts.length > 0 && (
                             <ImageList sx={{ width: 500, margin: 'auto' }}>
                                 <ImageListItem key="Subheader" cols={2}>
-                                    <ListSubheader component="div">{userInfo.name}'s Artworks</ListSubheader>
+                                    <ListSubheader component="div">{userInfo.name.full}'s Artworks</ListSubheader>
                                 </ImageListItem>
                                 {userUploadedProducts.map((product) => (
                                         <ImageListItem key={product._id}>
@@ -70,7 +70,7 @@ const ProfileSub = props => {
                             </ImageList>
                         )}
                         {userUploadedProducts.length === 0 && (
-                            <div>{userInfo.name} Has Not Published Any Artworks Yet!</div>
+                            <div>{userInfo.name.full} Has Not Published Any Artworks Yet!</div>
                         )}
                         </>
                     )}

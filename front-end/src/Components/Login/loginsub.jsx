@@ -1,7 +1,6 @@
 import React, {useState, useRef, useEffect } from 'react'
 import './loginsub.css'
 import axios from "axios"
-import AllUsers from '../../SchemaSamples/AllUsers'
 import { useNavigate } from 'react-router-dom'
  
 const Loginsub = props => {
@@ -17,7 +16,8 @@ const Loginsub = props => {
             const random_productID = Math.floor(Math.random() * 15) + 1;
             const getRandomProduct = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks/${random_productID}`)
             const random_product = getRandomProduct.data
-            const artist = AllUsers.find(user => user._id === random_product.artist_id)
+            const getArtist = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/${random_product.artist_id}`)
+            const artist = getArtist.data
             setRFP(random_product)
             setArtistOfProd(artist)
         }
@@ -30,14 +30,14 @@ const Loginsub = props => {
           email: emailRef.current.value,
           password: passwordRef.current.value,
         };
-        /* check server here but for now just check our list
         try{
-          await axios.get(...)
-        }
-        */
-        const user = AllUsers.find(user => user.email.toLowerCase() === newUser.email.toLowerCase())
-        props.setuser(user)
-        navigate("/")
+            const res = await axios.post(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/login`, newUser)
+            const user = res.data
+            props.setuser(user)
+            navigate("/")
+        } catch (err){
+            console.log(err)
+        }      
     }
 
     return(
@@ -45,12 +45,12 @@ const Loginsub = props => {
     	<div className="login_loginheader">
             <div className="login_featured">
                 {/* Featured Artwork */}
-                {randomFeaturedProduct && (
+                {randomFeaturedProduct && artistOfProd.name && (
                     <>
                         <h2>FEATURED ART OF THE DAY</h2>
                         <img className='login_featuredpic' src={randomFeaturedProduct.thumbnailURL} alt="" />
                         <h5 className="login_featuredInfo">
-                            "{randomFeaturedProduct.name}" - {artistOfProd.name}
+                            "{randomFeaturedProduct.name}" - {artistOfProd.name.full} 
                         </h5>
                     </>
                 )}
@@ -70,7 +70,7 @@ const Loginsub = props => {
                 <input 
                     className='textField'
                     type='password'
-                    min='8' 
+                    min='6' 
                     placeholder='Password'
                     ref={passwordRef}
                 />
