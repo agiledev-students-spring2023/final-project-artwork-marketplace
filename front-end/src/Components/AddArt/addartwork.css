@@ -9,7 +9,6 @@
     height: 100%;
     margin: auto;
     text-align: center;
-    padding-bottom: 10%;
 }
 
 .photopic{
@@ -37,14 +36,12 @@
 .addworkset input[type="text"], .addworkset[type="password"]{
     border: 2px solid orange;
     width: 220px;
-    overflow-x: hidden;
-    overflow-y: scroll;
 }
 
 .addworkset input[type="text"]:focus, .addworkset[type="password"]:focus{
     border-color: blueviolet;
-    width: 400px;
-    transition: 1s;
+    width: 280px;
+    transition: 0.5s;
 }
 
 .addworkset input[type="submit"]{
