@@ -5,6 +5,8 @@ import axios from 'axios'
 import {NavLink} from 'react-router-dom'
 import { Alert } from 'react-native'
 import AllCategories from '../../SchemaSamples/AllCategories'
+import Select from "react-select";
+
 
  
 const AddArtWork = props => {
@@ -18,12 +20,17 @@ const AddArtWork = props => {
     const [theNum,setNum] = useState("")
     const [theDescription,setTheDescription] = useState("")
 
-    var testcase = [];
-    for (var i = 0; i < AllCategories.length; i++){
-        testcase.push(AllCategories[i].name);
+    const [genres, setGenres] = useState([]);
+
+    const handleSkillChange = (genres) => {
+        setGenres(genres || []);
     }
 
-    const [selected, setSelected] = useState('')
+    var testcase = [];
+    for (var i = 0; i < AllCategories.length; i++){
+        testcase.push({'label': AllCategories[i].name, 'value': AllCategories[i]._id});
+    }
+    console.log(testcase)
 
     const apiUrl = "https://my.api.mockaroo.com/moviegenre.json?key=512c4f30"
 
@@ -126,17 +133,10 @@ const AddArtWork = props => {
                 <br/>
                 <br/>
                 <h3>
-                    Category Selection
+                    Category Selection(s)
                 </h3>
-
-                <form> 
-                    <select value={selected} onChange={e => setSelected(e.target.value)}> 
-                        {testcase.map((value) => (
-                            <option value={value} key={value}>
-                                {value}
-                            </option>
-                        ))}
-                    </select>
+                <form>
+                    <Select options={testcase} onChange={handleSkillChange} value={genres} isMulti/>
                 </form>
             
                 <form onSubmit={handleSubmit}>

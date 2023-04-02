@@ -17,8 +17,14 @@ router.post("/", async (req, res) => {
             categories_id: req.body.categories_id,
             imagesURL: req.body.imagesURL
         }
+        if(newArtwork._id === "" || newArtwork.artist_id === "" || newArtwork.shortDescription === "" || newArtwork.price === "" 
+            || (newArtwork.status !== "Available") || newArtwork.thumbnailURL === "" || (newArtwork.categories_id.length === 0) 
+            || (newArtwork.imagesURL.length === 0)){
+                return res.status(400).json("Artwork does not meet requirement!")
+        }
+        
         // save to database (later when database integration sprint comes)
-        res.status(200).json(newArtwork)
+        return res.status(200).json(newArtwork)
     } catch (err){
         res.status(500).json(err)
     }
