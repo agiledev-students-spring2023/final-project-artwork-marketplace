@@ -15,7 +15,22 @@ import Profile from './Pages/Profile'
 
 
 const App = props => {
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState({"_id": 1,
+  "user": "Artist",
+  "name": "Curry Romney",
+  "email": "artist1@artist.com",
+  "products_uploaded": [
+      7,
+      10,
+      15
+  ],
+  "cart": [
+    1,
+    5,
+    10,
+  ],
+  "saved": [
+  ]})
   return (
     <BrowserRouter>
       <Routes>
