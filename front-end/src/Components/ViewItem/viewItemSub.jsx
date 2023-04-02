@@ -78,7 +78,7 @@ const ViewItemSub = props => {
               </>
             )}
           </div>
-          {productArtist && (
+          {productArtist.name && (
             <p className='viewItem_Artist'>
               Artwork By:  {" "}  
               <Link to={`/Profile/${productArtist._id}`}>
