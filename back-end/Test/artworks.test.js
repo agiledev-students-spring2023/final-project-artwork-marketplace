@@ -66,7 +66,7 @@ describe('The "/artworks" route', () => {
                 .send(errorArtwork)
                 .end((err, res) => {
                     res.should.have.status(400 || 500)
-                    res.body.should.have.include("Artwork does not meet requirement!")
+                    res.body.should.include("Artwork does not meet requirement!")
                     done()
             })
         })
