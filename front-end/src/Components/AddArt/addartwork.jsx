@@ -1,7 +1,10 @@
-import React, {useEffect, useState, useMemo} from 'react'
+import React, {useEffect, useState} from 'react'
 import './addartwork.css'
 import TextareaAutosize from 'react-textarea-autosize';
 import axios from 'axios'
+import {NavLink} from 'react-router-dom'
+import { Alert } from 'react-native'
+import AllCategories from '../../SchemaSamples/AllCategories'
 
  
 const AddArtWork = props => {
@@ -14,8 +17,11 @@ const AddArtWork = props => {
     const [thePrice,setPrice] = useState("")
     const [theNum,setNum] = useState("")
     const [theDescription,setTheDescription] = useState("")
-    
-    const testcase = ['comedy','laugh','smile'];
+
+    var testcase = [];
+    for (var i = 0; i < AllCategories.length; i++){
+        testcase.push(AllCategories[i].name);
+    }
 
     const [selected, setSelected] = useState('')
 
@@ -32,9 +38,9 @@ const AddArtWork = props => {
                     addrtype.push(obj.genre)
                 }
             })
-            console.log(addrtype)
+            // console.log(addrtype)
         } catch(err){
-            console.log(`failure: ${err}`)
+            // console.log(`failure: ${err}`)
         }
     };
 
@@ -79,13 +85,15 @@ const AddArtWork = props => {
 
     function handleSubmit(event){
         event.preventDefault()
-        /* test */ 
-        console.log('SUBMIT TEST')
-        console.log("Name:", theName)
-        console.log("Price:", thePrice)
-        console.log("Number:", theNum)
-        console.log("Description:", theDescription)
-        console.log("Genre:", selected)
+        if (theName.length === 0 || thePrice.length === 0 || theNum.length === 0 || theDescription.length === 0 /* check if the inputs are valid*/
+            || theNum === 0 || thePrice === 0 /* check if the numbers are positive */
+            || typeof(file) === 'undefined'
+            ){
+                alert('Incorrect Information Input. Please check the format and redo it. ')
+        }
+        else{
+            alert('You have successfully added an artwork! ')
+        }
     }
     
     function refreshPage() {
@@ -104,16 +112,17 @@ const AddArtWork = props => {
                 Maximum 3 Photos; Please Upload Sequentially. 
             </h4>
             <div className='addworkset'>                
-                <input type="file" onChange={handleChange} />
+                <input type="file" onChange={handleChange}/>
                 <img className="photopic" src={file} />
-                <input type="file" onChange={handleChange2} />
-                <img className="photopic" src={file2} />
-                <input type="file" onChange={handleChange3} />
-                <img className="photopic" src={file3} />
-                <input type='text' placeholder='Name' value={theName} onChange={(e) => checkCharacter(e.target.value)} />
-                <input type='text' placeholder='Price' value={thePrice} onChange={(e) => checkNumber(e.target.value,1)} />
-                <input type='text' placeholder='Number' value={theNum} onChange={(e) => checkNumber(e.target.value,2)} />
-                <TextareaAutosize type='text' placeholder='Decription' value={theDescription} onChange={(e) => setTheDescription(e.target.value)} />
+                <input type="file" onChange={handleChange2}/>
+                <img className="photopic" src={file2}/>
+                <input type="file" onChange={handleChange3}/>
+                <img className="photopic" src={file3}/>
+                <input type='text' placeholder='Name: Characters Only' value={theName} onChange={(e) => checkCharacter(e.target.value)} />
+                <input type='text' placeholder='Price: Digits Only' value={thePrice} onChange={(e) => checkNumber(e.target.value,1)} />
+                <input type='text' placeholder='Number: Digits Only' value={theNum} onChange={(e) => checkNumber(e.target.value,2)} />
+                <TextareaAutosize type='text' placeholder='Decription' value={theDescription} onChange={(e) => setTheDescription(e.target.value)} 
+                style={{ width: "25%" }} minRows={2} maxRows={10}/>
                 <br/>
                 <br/>
                 <h3>
@@ -121,7 +130,7 @@ const AddArtWork = props => {
                 </h3>
 
                 <form> 
-                    <select value={selected} onChange={e => setSelected(e.target.value)}>
+                    <select value={selected} onChange={e => setSelected(e.target.value)}> 
                         {testcase.map((value) => (
                             <option value={value} key={value}>
                                 {value}
@@ -133,6 +142,8 @@ const AddArtWork = props => {
                 <form onSubmit={handleSubmit}>
                     <input type='submit' value='save' />  
                 </form>
+
+                
             </div>
         </div>
         
@@ -141,4 +152,3 @@ const AddArtWork = props => {
 }
 
 export default AddArtWork
-
