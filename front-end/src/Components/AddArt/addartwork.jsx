@@ -88,7 +88,6 @@ const AddArtWork = props => {
         console.log("Genre:", selected)
     }
     
-    // if (addrtype.length === 0) return <div>loading...</div>
     function refreshPage() {
         window.location.reload(false);
     }
