@@ -8,6 +8,87 @@ chai.use(chaiHttp)
 chai.use(chaiSorted)
 
 describe('The "/artworks" route', () => {
+    describe('The "/" route POST function for a new singular artwork', () => {
+        const newArtwork = {
+            _id: 16,
+            artist_id: 3,
+            name: "Lorem Ipsum",
+            shortDescription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Interdum et malesuada ipsum primis in faucibus",
+            price: 5050,
+            status: "Available",
+            thumbnailURL: "https://picsum.photos/200/300",
+            categories_id: [1],
+            imagesURL: ["https://picsum.photos/400", "https://picsum.photos/300/200"]
+        }
+        const errorArtwork = {
+            _id: 17,
+            artist_id: 2,
+            name: "Lorem Ipsum",
+            shortDescription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Interdum et malesuada ipsum primis in faucibus",
+            price: 5050,
+            status: "Available",
+            thumbnailURL: "https://picsum.photos/200/300",
+            categories_id: [1],
+            imagesURL: ["https://picsum.photos/400", "https://picsum.photos/300/200"]
+        }
+        const random = Math.floor(Math.random() * 8)
+        if(random === 0){
+            errorArtwork._id = ""
+        }else if(random === 1){
+            errorArtwork.artist_id = ""
+        }else if(random === 2){
+            errorArtwork.name = ""
+        }else if(random === 3){
+            errorArtwork.shortDescription = ""
+        }else if(random === 4){
+            errorArtwork.price = ""
+        }else if(random === 5){
+            errorArtwork.status = ""
+        }else if(random === 6){
+            errorArtwork.thumbnailURL = ""
+        }else if(random === 7){
+            errorArtwork.categories_id = ""
+        }else{
+            errorArtwork.imagesURL = ""
+        }
+        it('should be an object', (done) => { 
+            chai.request(server)
+                .post('/artworks')
+                .send(newArtwork)
+                .end((err, res) => {
+                    res.body.should.be.a('object')
+                    done()
+                })
+        })
+        it('should throw error if object does not meet requirements', (done) => {
+            chai.request(server)
+                .post('/artworks')
+                .send(errorArtwork)
+                .end((err, res) => {
+                    res.should.have.status(400 || 500)
+                    res.body.should.have.include("Artwork does not meet requirement!")
+                    done()
+            })
+        })
+        it('should return the object added with all required fields', (done) => {
+            chai.request(server)
+                .post('/artworks')
+                .send(newArtwork)
+                .end((err, res) => {
+                    res.should.have.status(200)
+                    res.body.should.have.property("_id")
+                    res.body.should.have.property("artist_id")
+                    res.body.should.have.property("name")
+                    res.body.should.have.property("shortDescription")
+                    res.body.should.have.property("categories_id")
+                    res.body.categories_id.should.be.a("array")
+                    res.body.status.should.equal("Available")
+                    res.body.price.should.be.a("number")
+                    res.body.should.have.property("thumbnailURL")
+                    done()
+            })
+        })
+    })
     describe('The "/" route GET function for all artworks in storage', () => {
         it('should be an array', (done) => {
             chai.request(server)
