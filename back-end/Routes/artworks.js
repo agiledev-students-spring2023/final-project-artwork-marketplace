@@ -100,7 +100,7 @@ router.get("/priceRange/:lower/:higher", async (req, res) => {
 // get artworks by status
 router.get("/activeStatus/:status", async (req, res) => {
     try{
-        const artworksByStatus = ProductsList.filter(product => product.status.toLowerCase == req.params.status.toLowerCase)
+        const artworksByStatus = ProductsList.filter(product => product.status.toLowerCase() === req.params.status.toLowerCase())
         res.status(200).json(artworksByStatus)
     } catch (err){
         res.status(500).json(err)
