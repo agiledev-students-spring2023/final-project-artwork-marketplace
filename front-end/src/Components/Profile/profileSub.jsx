@@ -35,10 +35,10 @@ const ProfileSub = props => {
         <div className='profilebodyset'>
             {userInfo && userInfo.name && (
                 <>
-                    {userInfo._id == props.user._id && (
+                    {userInfo._id === props.user._id && (
                         <h3 className='profileplace'>MY ARTIST PROFILE</h3>
                     )}
-                    {userInfo._id != props.user._id && (
+                    {userInfo._id !== props.user._id && (
                         <h3 className='profileplace'>{userInfo.name.full}'S ARTIST PROFILE</h3>
                     )}    
                     <h3>
