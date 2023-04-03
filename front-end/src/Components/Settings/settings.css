@@ -34,6 +34,7 @@
     grid-template-columns: 1fr;
     padding-left: 5rem;
     padding-bottom: 1rem;
+    overflow: hidden;
 }
 .collapse_section .collapseActive_options button{
     text-align: start;

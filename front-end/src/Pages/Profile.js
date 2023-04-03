@@ -2,12 +2,21 @@ import React from 'react'
 import ProfileSub from '../Components/Profile/profileSub'
 import Navbar from '../Components/Navbar/Navbar'
 import Settings from '../Components/Settings/Settings'
+import { motion } from 'framer-motion'
 
 const Profile = props => {
   return (
     <div>
-      <Settings user={props.user} setuser={props.setuser}/>
-      <ProfileSub user={props.user} />
+      <motion.div
+        initial={{opacity: 0, y: '100%'}}
+        animate={{opacity: 1, y: '0%'}}
+        exit={{opacity: 0, y: '100%'}}
+        transition={{duration: 1}}
+        key={"ProfilePage"}
+      >
+        <Settings user={props.user} setuser={props.setuser}/>
+        <ProfileSub user={props.user} />
+      </motion.div>
       <Navbar user={props.user} />
     </div>
   )

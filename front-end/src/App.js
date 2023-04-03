@@ -2,6 +2,7 @@
 import './App.css'
 import { useState } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
+import { AnimatePresence } from 'framer-motion'
 import Home from './Pages/Home'
 import AboutUs from './Pages/AboutUs'
 import Login from './Pages/Login'
@@ -32,6 +33,9 @@ const App = props => {
         15
     ],
     "cart": [
+      2,
+      3,
+      5
     ],
     "saved": [
     ],
@@ -42,49 +46,52 @@ const App = props => {
   }
   )
   return (
+    <AnimatePresence mode={'wait'}>
     <BrowserRouter>
       <Routes>
-        {/* Pre-Login Routes */}
-        {!user.user && (
-          <>
-            <Route path="/" element={<Home user={user}/>}/>
-            <Route path="/Login" element={<Login user={user} setuser={setUser} />}/>
-            <Route path="/SignUp" element={<SignUp user={user} />}/>
-            <Route path="/AboutUs" element={<AboutUs user={user} />}/>
-          </>
-        )}
-        {/* Post-Login Routes */}
-        {user.user &&(
-          <>
-            {/* ARTIST EXCLUSIVE USER ROUTES */}
-            {user.user === "Artist" &&(
-              <>
-                <Route path="/" element={<Home user={user} setuser={setUser} />}/>
-                <Route path="/AddArt" element={<AddArt user={user} setuser={setUser} />}/>
-              </>
-            )}
-            {/* CUSTOMER EXCLUSIVE USER ROUTES */}
-            {user.user === "Customer" &&(
-              <>
-                <Route path="/" element={<Home user={user} setuser={setUser} />}/>
-                <Route path="/Cart" element={<ViewCart user={user} setuser={setUser} />}/>
-                <Route path="/RisingArtists" element={<RisingArtist user={user} setuser={setUser} />} />
-                <Route path="/Category/:categoryID" element={<Category user={user} setuser={setUser} />}/>
-              </>
-            )}
-            {/* NON-EXCLUSIVE USER ROUTES */}
-            <Route path="/Item/:productID" element={<ViewItem user={user} setuser={setUser} />}/>
-            <Route path="/Profile/:userID" element={<Profile user={user} setuser={setUser} />}/> 
-          </>
-        )}
-        {/* ANY PATH THAT DOES NOT EXIST --> take user back to "/" (home) */}
-        <Route path ='*' element={ <Navigate to ='/' /> } />
-        <Route path="/" element={<Home user={user}/>}/>
-        <Route path="/Login" element={<Login user={user} setuser={setUser} />}/>
-        <Route path="/SignUp" element={<SignUp user={user} />}/>
-        <Route path="/AboutUs" element={<AboutUs user={user} />}/>
+          {/* Pre-Login Routes */}
+          {!user.user && (
+            <>
+              <Route path="/" element={<Home user={user}/>}/>
+              <Route path="/Login" element={<Login user={user} setuser={setUser}/>}/>
+              <Route path="/SignUp" element={<SignUp user={user}/>}/>
+              <Route path="/AboutUs" element={<AboutUs user={user}/>}/>
+            </>
+          )}
+          {/* Post-Login Routes */}
+          {user.user &&(
+            <>
+              {/* ARTIST EXCLUSIVE USER ROUTES */}
+              {user.user === "Artist" &&(
+                <>
+                  <Route path="/" element={<Home user={user} setuser={setUser}/>}/>
+                  <Route path="/AddArt" element={<AddArt user={user} setuser={setUser}/>}/>
+                </>
+              )}
+              {/* CUSTOMER EXCLUSIVE USER ROUTES */}
+              {user.user === "Customer" &&(
+                <>
+                  <Route path="/" element={<Home user={user} setuser={setUser}/>}/>
+                  <Route path="/Cart" element={<ViewCart user={user} setuser={setUser}/>}/>
+                  <Route path="/RisingArtists" element={<RisingArtist user={user} setuser={setUser}/>} />
+                  <Route path="/Category/:categoryID" element={<Category user={user} setuser={setUser}/>}/>
+                </>
+              )}
+              {/* NON-EXCLUSIVE USER ROUTES */}
+              <Route path="/Item/:productID" element={<ViewItem user={user} setuser={setUser}/>}/>
+              <Route path="/Profile/:userID" element={<Profile user={user} setuser={setUser}/>}/> 
+            </>
+          )}
+          {/* ANY PATH THAT DOES NOT EXIST --> take user back to "/" (home) */}
+          <Route path ='*' element={ <Navigate to ='/' /> } />
+          <Route path="/" element={<Home user={user}/>}/>
+          <Route path="/Login" element={<Login user={user} setuser={setUser}/>}/>
+          <Route path="/SignUp" element={<SignUp user={user}/>}/>
+          <Route path="/AboutUs" element={<AboutUs user={user}/>}/>
+        
       </Routes>
     </BrowserRouter>
+    </AnimatePresence>
   )
 }
 
