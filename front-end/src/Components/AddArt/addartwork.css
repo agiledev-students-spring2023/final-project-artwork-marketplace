@@ -9,6 +9,7 @@
     height: 100%;
     margin: auto;
     text-align: center;
+    padding-bottom: 10%;
 }
 
 .photopic{
@@ -36,25 +37,27 @@
 .addworkset input[type="text"], .addworkset[type="password"]{
     border: 2px solid orange;
     width: 220px;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
 .addworkset input[type="text"]:focus, .addworkset[type="password"]:focus{
     border-color: blueviolet;
-    width: 280px;
-    transition: 0.5s;
+    width: 400px;
+    transition: 1s;
 }
 
 .addworkset input[type="submit"]{
     width: 150px;
     border: 2px solid green;
     cursor: pointer;
+    font-family:'Times New Roman', Times, serif;
+    font-style: italic;
 }
 
 .addworkset input[type="submit"]:hover{
     background-color: yellow;
 }
-
-
 
 .checkmarkset{
     margin: auto;
@@ -62,4 +65,8 @@
     border: 2px solid black;
     border-radius: 22px;
     text-align: center;
+}
+
+.submitstyle{
+    
 }
