@@ -18,7 +18,7 @@ const ProfileSub = props => {
     useEffect(() => {
         const getProductInfo = async () => {
           try{
-            const user = AllUsers.find(user => user._id == userId);
+            const user = AllUsers.find(user => user._id === userId);
             const getProducts = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks`)
             const AllProducts = getProducts.data
             const userProducts = AllProducts.filter(product => product.artist_id === user._id)
@@ -35,10 +35,10 @@ const ProfileSub = props => {
         <div className='profilebodyset'>
             {userInfo && (
                 <>
-                    {userInfo._id == props.user._id && (
+                    {userInfo._id === props.user._id && (
                         <h3 className='profileplace'>MY ARTIST PROFILE</h3>
                     )}
-                    {userInfo._id != props.user._id && (
+                    {userInfo._id !== props.user._id && (
                         <h3 className='profileplace'>{userInfo.name}'S ARTIST PROFILE</h3>
                     )}    
                     <h3>

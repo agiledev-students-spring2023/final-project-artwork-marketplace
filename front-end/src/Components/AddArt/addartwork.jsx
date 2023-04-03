@@ -89,6 +89,11 @@ const AddArtWork = props => {
                 categories_id: categoryresult,
                 imagesURL: ["","",""]
             }
+            /* check server here but for now just print user data to console
+            try{
+                await axios.post(...)
+            }
+            */
             console.log(newProduct)  
             navigate("/")       
         }
