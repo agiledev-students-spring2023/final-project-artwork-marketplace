@@ -42,7 +42,21 @@ router.post("/login", async (req, res) => {
         if (!validatePassword){
             return res.status(400).json("Wrong Username and/or Password!")
         }
-        return res.status(200).json(user)
+        const newUser = {
+            _id: user._id,
+            email: user.email,
+            name: {
+                first: user.name.first,
+                last: user.name.last,
+                full: user.name.full
+            },
+            products_uploaded: user.products_uploaded,
+            cart: user.cart,
+            saved: user.saved,
+            following: user.following,
+            followers: user.followers
+        }
+        return res.status(200).json(newUser)
     } catch (err){
         res.status(500).json(err)
     }
@@ -74,4 +88,57 @@ router.get("/:id", async (req, res) => {
     }
 })
 
+// add product by id to user cart
+router.put("/:userID/cart/:productID", async(req, res) => {
+    try{
+
+    } catch (err){
+
+    }
+})
+
+// remove product by id from user cart
+router.delete("/:userID/cart/:productID", async(req, res) => {
+    try{
+
+    } catch (err){
+
+    }
+})
+
+// add product by id to user saved list
+router.put("/:userID/saved/:productID", async(req, res) => {
+    try{
+
+    } catch (err){
+
+    }
+})
+
+// remove product by id from user saved list
+router.delete("/:userID/saved/:productID", async(req, res) => {
+    try{
+
+    } catch (err){
+
+    }
+})
+
+// user1 follows user2
+router.put("/:user1/follow/:user2", async(req, res) => {
+    try{
+
+    } catch (err){
+
+    }
+})
+
+// user1 unfollows user2
+router.delete("/:user1/unfollow/:user2", async(req, res) => {
+    try{
+
+    } catch (err){
+
+    }
+})
 module.exports = router

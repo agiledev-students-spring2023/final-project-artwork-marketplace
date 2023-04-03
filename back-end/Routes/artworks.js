@@ -22,7 +22,6 @@ router.post("/", async (req, res) => {
             || (newArtwork.imagesURL.length === 0)){
                 return res.status(400).json("Artwork does not meet requirement!")
         }
-        
         // save to database (later when database integration sprint comes)
         return res.status(200).json(newArtwork)
     } catch (err){
@@ -110,6 +109,15 @@ router.get("/activeStatus/:status", async (req, res) => {
         res.status(200).json(artworksByStatus)
     } catch (err){
         res.status(500).json(err)
+    }
+})
+
+// update a single artwork status
+router.put("/:id/activeStatus/:newStatus", async (req, res) => {
+    try{
+        
+    } catch (err){
+
     }
 })
 

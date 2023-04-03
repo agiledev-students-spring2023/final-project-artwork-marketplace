@@ -1,41 +1,71 @@
-import React from 'react'
-import { useState, useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './signup.css'
-import Logo from '../../Assets/Pictures/logo-placeholder.jpeg'
+import axios from 'axios'
 import AM2 from '../../Assets/Pictures/AM2.png'
 
 const SignUpSub = props => {
   const navigate = useNavigate()
-  const nameRef = useRef();
+  const firstNameRef = useRef();
+  const lastNameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
+  const confirmPasswordRef = useRef();
   const [userType, setUserType] = useState("Customer")
-  
+  const [passwordError, setPasswordError] = useState("")
+
   ;const handleSubmit = async (e) =>{
     e.preventDefault()
-    const newUser = {
-      user: userType,
-      name: nameRef.current.value,
-      email: emailRef.current.value,
-      password: passwordRef.current.value,
-    };
-    /* check server here but for now just print user data to console
-    try{
-      await axios.post(...)
+    if(passwordError !== ""){
+      setPasswordError("Your passwords do not match! Try Again!")
     }
-    */
-    console.log(newUser)
-    navigate("/Login")
+    else{
+      const newUser = {
+        _id: Math.floor(Math.random() * 10) + 3,
+        user: userType,
+        name: {
+            first: firstNameRef.current.value,
+            last: lastNameRef.current.value,
+        },
+        email: emailRef.current.value,
+        password: passwordRef.current.value,
+        products_uploaded: [],
+        cart: [],
+        saved: [], 
+        following: [],
+        followers: []
+      }
+      try{
+        await axios.post(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/register`, newUser)
+        console.log(newUser)
+        navigate("/Login")
+      } catch (err) {
+        setPasswordError(err)
+      }
+    }
+  }
+
+  const handlePasswordCheck = (e) => {
+    if(confirmPasswordRef.current.value !== "" && passwordRef.current.value !== confirmPasswordRef.current.value){
+      setPasswordError("Your passwords do not match!")
+    }
+    else{
+      setPasswordError("")
+    }
   }
 
   return (
     <div className='container SignUp__container'>
-      
+      {/* Error Message */}
+      {passwordError !== "" && (
+        <div className="errorMessage">
+          <h5 className="messagee">
+            {passwordError}
+          </h5>
+        </div>
+      )}
     	{/* Logo */}
-      <div className='s_l'>
-        <img className='signup_logopic' src={Logo} alt="" />
-      </div>
+      
       <div className='s_l'>
         <img className='signup_logopic_phrase' src={AM2} alt="" />
       </div>
@@ -69,12 +99,20 @@ const SignUpSub = props => {
         </div>
         {/* Sign Up */}
         <div className="signup_signupset">   
-          <input 
-            className='textField'
-            type='text' 
-            placeholder='Name'
-            ref={nameRef}
-          />  
+          <div className="signup_nameInputs">
+            <input 
+              className='textField'
+              type='text' 
+              placeholder='First Name'
+              ref={firstNameRef}
+            />
+            <input 
+              className='textField'
+              type='text' 
+              placeholder='Last Name'
+              ref={lastNameRef}
+            /> 
+          </div>
           <input 
             className='textField'
             type='email' 
@@ -84,9 +122,17 @@ const SignUpSub = props => {
           <input 
             className='textField'
             type='password'
-            min='8' 
+            min='6'
             placeholder='Password'
             ref={passwordRef}
+          />
+          <input 
+            className='textField'
+            type='password'
+            min='6' 
+            placeholder='Confirm Password'
+            onInput={(e) => handlePasswordCheck(e)}
+            ref={confirmPasswordRef}
           />
           <button type="submit" className="signup_button signup_button-Primary">Register</button>
         </div>

@@ -16,7 +16,7 @@ const ArtistProducts = props => {
           const getProducts = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks`)
           const AllProducts = getProducts.data
           const artist_id = props.user._id
-          const artist_name = props.user.name
+          const artist_name = props.user.name.full
           const artist_products = AllProducts.filter(product => product.artist_id === artist_id)
           setUsername(artist_name)
           setProducts(artist_products)
@@ -37,31 +37,6 @@ const ArtistProducts = props => {
     //   }
     //   setSearchValue(e.target.value)
     // }
-  
-     
-  // temporary random photos - will be fetched in same format from backend/db
-
-  
-
-  /*const apiUrl = "https://my.api.mockaroo.com/user.json?key=8bd34fb0"
-
-  // fake API to get users name
-  useEffect(() => {
-    const getName = async () => {
-      try {
-        const response = await axios.get(apiUrl)
-        console.log(`success: ${response.status}`) // output the status of the response
-        // extract the data from the response
-        const data = response.data
-        setUsername(data.first_name)
-      } catch (err) {
-        // what to do if the request/response fails for some reason
-        console.log(`failure: ${err}`)
-      }
-    };
-    getName();
-  }, []);
-  */
   
   return (
     <>
