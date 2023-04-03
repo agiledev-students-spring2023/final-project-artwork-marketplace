@@ -146,8 +146,7 @@ const AddArtWork = props => {
                     <input type='submit' value='SUBMIT!' />  
                 </form>
             </div>
-        </div>
-        
+        </div>  
     );
 
 }
