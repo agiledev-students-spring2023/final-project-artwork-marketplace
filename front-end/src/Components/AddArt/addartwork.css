@@ -51,6 +51,8 @@
     width: 150px;
     border: 2px solid green;
     cursor: pointer;
+    font-family:'Times New Roman', Times, serif;
+    font-style: italic;
 }
 
 .addworkset input[type="submit"]:hover{
@@ -63,4 +65,8 @@
     border: 2px solid black;
     border-radius: 22px;
     text-align: center;
+}
+
+.submitstyle{
+    
 }

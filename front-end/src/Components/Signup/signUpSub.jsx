@@ -10,9 +10,9 @@ const SignUpSub = props => {
   const nameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
-  const [userType, setUserType] = useState("Customer")
+  const [userType, setUserType] = useState("Customer");
   
-  ;const handleSubmit = async (e) =>{
+  const handleSubmit = async (e) =>{
     e.preventDefault()
     const newUser = {
       user: userType,

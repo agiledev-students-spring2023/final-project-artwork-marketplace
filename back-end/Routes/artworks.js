@@ -2,7 +2,7 @@ const router = require("express").Router()
 const ProductsList = require("../SchemaSamples/AllProducts")
 
 // creating && saving a new artwork
-router.post("/", async (req, res) => {
+router.post("/AddArt", async (req, res) => {
     try{
         const newArtwork = {
             _id: req.body._id,
