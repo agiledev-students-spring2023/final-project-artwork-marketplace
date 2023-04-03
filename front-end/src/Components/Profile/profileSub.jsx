@@ -40,10 +40,10 @@ const ProfileSub = props => {
             {userInfo && userInfo.name && (
                 <>
                     {userInfo._id === props.user._id && (
-                        <h2 className='profile_title'>MY ARTIST PROFILE</h2>
+                        <h2 className='profile_title'>My Artist Profile</h2>
                     )}
                     {userInfo._id !== props.user._id && (
-                        <h2 className='profile_title'>{userInfo.name.full}'S ARTIST PROFILE</h2>
+                        <h2 className='profile_title'>{userInfo.name.full}'s Artist Profile</h2>
                     )}    
                     <div className='profile_contact'>
                        <h4>Contact Artist: </h4>
