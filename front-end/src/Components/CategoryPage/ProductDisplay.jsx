@@ -54,7 +54,7 @@ const ProductDisplay = props => {
   return (
     <div>
       <div className="container searchArtwork__Container">
-        <Link to="/CustomerHome" className='categoryBack_button categoryBack_button-Primary'>Back</Link>
+        <Link to="/" className='categoryBack_button categoryBack_button-Primary'>Back</Link>
         <input className='searchArtworkTextField' placeholder='Search Artworks' value={searchValue} onInput={(e) => handleSearch(e)}/>
       </div>
       <div className="container displayArtworks__Container">
@@ -70,7 +70,7 @@ const ProductDisplay = props => {
                 >
                   {products.map((product) =>
                     <div className='artworkCard' onMouseOver={() => handleMouseHover(product.name)} onMouseLeave={() => setHover('')}>
-                      <Link to={`/ViewItem/${product._id}`} >
+                      <Link to={`/Item/${product._id}`} >
                         <img className='artworkImagee' src={product.thumbnailURL} alt={product.name} />
                       </Link>
                       

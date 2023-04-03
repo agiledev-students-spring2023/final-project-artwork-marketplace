@@ -1,11 +1,8 @@
-import React, {useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import './profileSub.css'
 import axios from 'axios'
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
-import ImageListItemBar from '@mui/material/ImageListItemBar';
-import ListSubheader from '@mui/material/ListSubheader';
+import Masonry from 'react-masonry-css'
 
 const ProfileSub = props => {
     const getUserParamsID = useParams()
@@ -31,43 +28,55 @@ const ProfileSub = props => {
         getProductInfo()
     }, [])
 
+    // for responsive styling
+    const breakpointColumnsObj = {
+        default: 3,
+        1024: 2,
+        600: 1
+    };
+
     return(
-        <div className='profilebodyset'>
+        <div className="container profile_container">
             {userInfo && userInfo.name && (
                 <>
                     {userInfo._id === props.user._id && (
-                        <h3 className='profileplace'>MY ARTIST PROFILE</h3>
+                        <h2 className='profile_title'>My Artist Profile</h2>
                     )}
                     {userInfo._id !== props.user._id && (
-                        <h3 className='profileplace'>{userInfo.name.full}'S ARTIST PROFILE</h3>
+                        <h2 className='profile_title'>{userInfo.name.full}'s Artist Profile</h2>
                     )}    
-                    <h3>
-                        Contact Artist: {userInfo.email}
-                    </h3>
+                    <div className='profile_contact'>
+                       <h4>Contact Artist: </h4>
+                       <div className='user_email'><Link to={`mailto:${userInfo.email}`}>{userInfo.email}</Link></div>
+                    </div>
                     {userUploadedProducts && (
                         <>
                         {userUploadedProducts.length > 0 && (
-                            <ImageList sx={{ width: 500, margin: 'auto' }}>
-                                <ImageListItem key="Subheader" cols={2}>
-                                    <ListSubheader component="div">{userInfo.name.full}'s Artworks</ListSubheader>
-                                </ImageListItem>
-                                {userUploadedProducts.map((product) => (
-                                        <ImageListItem key={product._id}>
-                                        <img
-                                            src={`${product.thumbnailURL}?w=248&fit=crop&auto=format`}
-                                            srcSet={`${product.thumbnailURL}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                                            alt={product.name}
-                                            loading="lazy"
-                                        />
-                                        <Link to={`/Item/${product._id}`}>
-                                        <ImageListItemBar
-                                            title={product.name}
-                                            subtitle={`$${product.price}`}
-                                        />
-                                        </Link>
-                                        </ImageListItem>
-                                ))}
-                            </ImageList>
+                          <Masonry 
+                            breakpointCols={breakpointColumnsObj}
+                            className="my-masonry-grid"
+                            columnClassName="my-masonry-grid_column"
+                          >
+                            {userUploadedProducts.map((product) => 
+                              <div className="profile_product_card">
+                                <div className="product_photo">
+                                    <Link to={`/Item/${product._id}`}>
+                                        <img src={product.thumbnailURL} alt={product.name}/>
+                                    </Link>
+                                </div>
+                                <div className="product_info">
+                                    <Link to={`/Item/${product._id}`}>
+                                        <h3 className="product_name">
+                                            "{product.name}"
+                                        </h3>
+                                        <h4 className='product_price'>
+                                            ${" " + product.price}
+                                        </h4>
+                                    </Link>
+                                </div>
+                              </div>
+                            )}
+                          </Masonry>
                         )}
                         {userUploadedProducts.length === 0 && (
                             <div>{userInfo.name.full} Has Not Published Any Artworks Yet!</div>

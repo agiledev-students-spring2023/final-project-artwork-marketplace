@@ -47,8 +47,9 @@ const ViewItemSub = props => {
     getProductInfo()
   }, [])
   
-  const addItemToCart = () => {
-
+  const addItemToCart = async (id) => {
+    const userId = props.user._id 
+    const newCart = await axios.put(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/${userId}/cart/${id}`)
   }
 
   const handleSmallPhotoClick = (index) => {
@@ -108,7 +109,7 @@ const ViewItemSub = props => {
             <p className="viewItem_detailedDescription">{productDescription}</p>
           }
           {props.user.user === "Customer" && productStatus !== "sold" &&(
-            <button className="viewItem_button" onClick={addItemToCart}>
+            <button className="viewItem_button" onClick={() => addItemToCart(product._id)}>
               Add To Cart
             </button>
           )}

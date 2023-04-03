@@ -46,8 +46,7 @@
 }
 .categoryRow .categoryProductImages .SwiperProductImage img{
     width: 100%;
-    min-height: 30vh;
-    max-height: 30vh;
+    height: 30vh;
     user-select: none;
     padding-bottom: 3rem;
     object-fit: cover;
@@ -114,9 +113,9 @@
         width: 600px;
     }
     .categoryRow .categoryProductImages .SwiperProductImage img{
-        width: 100%;
-        min-height: 30vh;
-        max-height: 30vh;
+        max-width: 100%;
+        height: 30vh;
+        object-fit: cover;
         user-select: none;
     }
     .categoryRow .categoryProductImages .SwiperProductImage{

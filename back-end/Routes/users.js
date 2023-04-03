@@ -88,6 +88,24 @@ router.get("/:id", async (req, res) => {
     }
 })
 
+// get a list of rising artists
+router.get("/risingArtists", async(req, res) => {
+    try{
+        
+    } catch (err){
+
+    }
+})
+
+// get cart by userID
+router.get("/:userID/cart", async(req, res) => {
+    try{
+
+    } catch (err){
+
+    }
+})
+
 // add product by id to user cart
 router.put("/:userID/cart/:productID", async(req, res) => {
     try{
@@ -106,6 +124,15 @@ router.delete("/:userID/cart/:productID", async(req, res) => {
     }
 })
 
+// get saved list by userID
+router.get("/:userID/saved", async(req, res) => {
+    try{
+
+    } catch (err){
+
+    }
+})
+
 // add product by id to user saved list
 router.put("/:userID/saved/:productID", async(req, res) => {
     try{
@@ -117,6 +144,24 @@ router.put("/:userID/saved/:productID", async(req, res) => {
 
 // remove product by id from user saved list
 router.delete("/:userID/saved/:productID", async(req, res) => {
+    try{
+
+    } catch (err){
+
+    }
+})
+
+// get followers list of userID
+router.get("/:userID/followers", async(req, res) => {
+    try{
+
+    } catch (err){
+
+    }
+})
+
+// get following list of userID
+router.get("/:userID/following", async(req, res) => {
     try{
 
     } catch (err){

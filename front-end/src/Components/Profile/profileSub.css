@@ -1,15 +1,108 @@
-.profileplace{
-    font-size: 3vw;
-    color: black;
-    text-transform: uppercase;
+.profile_container{
+    width: var(--container-width-lg);
+    align-items: center;
+    text-align: center;
+    padding-bottom: 10rem;
 }
-
-.profilebodyset{
-    font-family: 'Courier New', Courier, monospace;
-    width: 100%;
-    height: 100%;
-    margin: auto;
+.profile_container .profile_title{
+    overflow-wrap: break-word;
+    max-width: 100%;
+}
+.profile_container .profile_contact{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+.profile_container .profile_contact h4{
+    justify-self: end;
+    align-self: center;
+}
+.profile_container .profile_contact .user_email{
+    justify-self: start;
+    align-self: center;
+    background-color: black;
+    border-radius: 3rem;
+    padding: 0.5rem;
+    transition: 1s ease all;
+}
+.profile_container .profile_contact .user_email:hover{
+    background-color: rgb(120, 120, 120);
+}
+.profile_container .profile_contact .user_email a{
+    color: white;
+    text-decoration: none;
+}
+.my-masonry-grid {
+    display: -webkit-box; /* Not needed if autoprefixing */
+    display: -ms-flexbox; /* Not needed if autoprefixing */
+    display: flex;
+    margin-left: -30px; /* gutter size offset */
+    width: auto;
+}
+.my-masonry-grid_column {
+    padding-left: 30px; /* gutter size */
+    background-clip: padding-box;
+    padding-top: 2rem;
+}
+.my-masonry-grid_column > .profile_product_card{
+    padding-bottom: 2rem;
     text-align: center;
     align-items: center;
-    justify-content: center;
+}
+.my-masonry-grid_column > .profile_product_card img{ /* change div to reference your elements you put in <Masonry> */
+    width: 100%;
+    transition: 1s ease all;
+}
+.my-masonry-grid_column > .profile_product_card .product_info{ /* change div to reference your elements you put in <Masonry> */
+    max-width: 100%;
+    border-radius: 3rem;
+    background-color: black;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+    transition: 1s ease all;
+}
+.my-masonry-grid_column > .profile_product_card .product_info a{ /* change div to reference your elements you put in <Masonry> */
+    color: white;
+    text-decoration: none;
+}
+.my-masonry-grid_column > .profile_product_card .product_info:hover{
+    background-color: rgb(120, 120, 120);
+}
+.my-masonry-grid_column > .profile_product_card img:hover, .my-masonry-grid_column > .profile_product_card .product_info:hover{
+    box-shadow: 0rem 0rem 2rem rgb(87, 87, 87)
+}
+.my-masonry-grid_column > .profile_product_card .product_info h3{
+    margin: 0;
+    overflow-wrap: break-word;
+}
+.my-masonry-grid_column > .profile_product_card .product_info h4{
+    margin: 0;
+    overflow-wrap: break-word;
+}
+
+/* FOR TABLETS */
+@media screen and (max-width: 1024px){
+    .profile_container{
+        width: var(--container-width-md);
+    }
+}
+/* FOR PHONES */
+@media screen and (max-width: 600px){
+    .profile_container{
+        width: var(--container-width-sm);
+    }
+    .profile_container .profile_contact{
+        grid-template-columns: 1fr;
+        gap: 0rem;
+    }
+    .profile_container .profile_contact h4{
+        justify-self: center;
+        align-self: center;
+    }
+    .profile_container .profile_contact .user_email{
+        justify-self: center;
+        align-self: center;
+    }
 }
