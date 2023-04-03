@@ -89,13 +89,13 @@ const CategoryDisplay = props => {
                                         slidesPerView={3}
                                         spaceBetween={30}
                                         pagination={{
-                                        clickable: true,
+                                            clickable: true,
                                         }}
                                         modules={[Pagination, FreeMode]}
                                         className="mySwiper"
-                                        freeMode={true}
+                                        freeMode={false}
                                         rewind={true}
-                                        speed="1s"
+                                        speed={0.1}
                                     >
                                     {category.products.map((product) =>
                                         <div key={product._id}>

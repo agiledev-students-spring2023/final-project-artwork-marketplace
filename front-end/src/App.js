@@ -18,7 +18,7 @@ const App = props => {
   const [user, setUser] = useState(
   {
     "_id": 1,
-    "user": "Artist",
+    "user": "Customer",
     "name": {
       "first": "Curry",
       "last": "Romney",

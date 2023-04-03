@@ -1,9 +1,3 @@
-/* This code is partially referred from: 
--- https://www.youtube.com/@MonsterlessonsAcademy
--- https://mui.com/material-ui/react-card/
-*/
-
-
 import React, { useState, useEffect} from 'react'
 import fakedata from '../../SchemaSamples/fakedata'
 import './risingartistsub.css'
