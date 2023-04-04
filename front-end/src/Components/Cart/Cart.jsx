@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import './cart.css'
+import { motion, AnimatePresence } from 'framer-motion'
 import axios from "axios"
 
 const Cart = props => {
@@ -30,15 +31,29 @@ const Cart = props => {
   return (
     <div>
         <div className="container cartHeading__Container">
-            {cartSwitch == "cart" &&(
-                <h1 className="cartHeading">Your Cart</h1>
+            <AnimatePresence mode={'wait'}>
+            {cartSwitch === "cart" &&(
+                <motion.h1 className="cartHeading"
+                    initial={{opacity: 1, x: '-100%'}}
+                    animate={{opacity: 1, x: '0%'}}
+                    exit={{opacity: 1, x: '-100%'}}
+                    transition={{duration: 0.25}}
+                    key={"userCart"}
+                >Your Cart</motion.h1>
             )}
-            {cartSwitch == "saved" &&(
-                <h1 className="cartHeading">Your Saved List</h1>
+            {cartSwitch === "saved" &&(
+                <motion.h1 className="cartHeading"
+                    initial={{opacity: 1, x: '100%'}}
+                    animate={{opacity: 1, x: '0%'}}
+                    exit={{opacity: 1, x: '100%'}}
+                    transition={{duration: 0.25}}
+                    key={"userSaved"}
+                >Your Saved List</motion.h1>
             )}
+            </AnimatePresence>
         </div>
         <div className="CartSavedSwitch">
-            {cartSwitch == "cart" &&(
+            {cartSwitch === "cart" &&(
                 <>
                     <button 
                         className="cartButton cartButton-primary" 
@@ -54,7 +69,7 @@ const Cart = props => {
                     </button>
                 </>
             )}
-            {cartSwitch == "saved" &&(
+            {cartSwitch === "saved" &&(
                 <>
                     <button 
                         className="cartButton" 
@@ -72,8 +87,15 @@ const Cart = props => {
             )}
         </div>
         <div className="container CartProductsDisplay__Container">
-            {cartSwitch == "cart" &&(
-                <>
+            <AnimatePresence mode={'wait'}>
+            {cartSwitch === "cart" &&(
+                <motion.div
+                    initial={{opacity: 1, x: '-100%'}}
+                    animate={{opacity: 1, x: '0%'}}
+                    exit={{opacity: 1, x: '-100%'}}
+                    transition={{duration: 0.25}}
+                    key={"userCartItems"}
+                >
                     {userCartList && (
                         <div className="artworkColumnDisplay">
                             {userCartList.map((artwork) =>
@@ -109,15 +131,21 @@ const Cart = props => {
                             )}
                         </div>
                     )}
-                    {(userCartList.length == 0 || !userCartList) &&(
+                    {(userCartList.length === 0 || !userCartList) &&(
                         <div className="emptyCart">
                             <h4>Sorry, your cart appears to be empty!</h4>
                         </div>
                     )}
-                </>
+                </motion.div>
             )}
-            {cartSwitch == "saved" &&(
-                <>
+            {cartSwitch === "saved" &&(
+                <motion.div
+                    initial={{opacity: 1, x: '100%'}}
+                    animate={{opacity: 1, x: '0%'}}
+                    exit={{opacity: 1, x: '100%'}}
+                    transition={{duration: 0.25}}
+                    key={"userSavedItems"}
+                >
                     {userSavedList && (
                         <div className="artworkColumnDisplay">
                             {userSavedList.map((artwork) =>
@@ -153,13 +181,14 @@ const Cart = props => {
                             )}
                         </div>
                     )}
-                    {(userSavedList.length == 0 || !userSavedList) &&(
+                    {(userSavedList.length === 0 || !userSavedList) &&(
                         <div className="emptyCart">
                             <h4>Sorry, your saved list appears to be empty!</h4>
                         </div>
                     )}
-                </>
+                </motion.div>
             )}
+            </AnimatePresence>
         </div>
     </div>
   )

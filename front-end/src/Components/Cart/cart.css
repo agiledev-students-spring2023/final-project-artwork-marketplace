@@ -1,5 +1,6 @@
 .cartHeading__Container, .CartProductsDisplay__Container{
     width: var(--container-width-lg);
+    overflow: hidden;
 }
 .CartSavedSwitch{
     display: grid;

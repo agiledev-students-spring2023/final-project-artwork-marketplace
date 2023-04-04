@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { Link, Navigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Pagination, FreeMode } from "swiper"
+import { motion } from 'framer-motion'
 import './categoryDisplay.css'
 import "swiper/css"
 import "swiper/css/pagination"
@@ -42,7 +43,13 @@ const CategoryDisplay = props => {
   }
   
   return (
-    <>
+    <motion.div
+        initial={{opacity: 0, y: '100%'}}
+        animate={{opacity: 1, y: '0%'}}
+        exit={{opacity: 0, y: '-100%'}}
+        transition={{duration: 1}}
+        className='page_customerHomePage'   
+    >
         <div className='container searchBar__container'>
             <input className='searchBarTextField' placeholder='Search Categories' value={searchValue} onInput={(e) => handleSearch(e)}/> 
         </div>
@@ -56,12 +63,16 @@ const CategoryDisplay = props => {
         <div className='container CategoryDisplay__container'>
             {categories && (
                 <div className="categoriesColumn">
-                    {categories.map((category) => 
+                    {categories.map((category, index) => 
                         <div>
                         {category.products.length && (
-                            <div 
+                            <motion.div 
                                 className="categoryRow"
                                 key={category._id}
+                                initial={{opacity: 0,y: '200%'}}
+                                animate={{opacity: 1,y: '0%'}}
+                                exit={{opacity: 0,y: '-200%'}}
+                                transition={{delay: 0.5, duration: 1}}
                             >
                                 <div className="category_button categoryName">
                                     <Link to={`/Category/${category._id}`}>
@@ -112,14 +123,14 @@ const CategoryDisplay = props => {
                                     )}
                                     </Swiper>
                                 </div> 
-                            </div>
+                            </motion.div>
                         )}
                         </div>
                     )}
                 </div>
             )}
         </div>
-    </>
+    </motion.div>
   )
 }
 

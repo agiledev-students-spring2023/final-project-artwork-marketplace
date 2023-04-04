@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import './profileSub.css'
 import axios from 'axios'
 import Masonry from 'react-masonry-css'
+import { motion } from 'framer-motion'
 
 const ProfileSub = props => {
     const getUserParamsID = useParams()

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { FiMenu } from 'react-icons/fi'
 import { AiOutlineClose } from 'react-icons/ai'
+import { motion, AnimatePresence } from 'framer-motion'
 import Switch from 'react-switch'
 import './settings.css'
 
@@ -45,15 +46,38 @@ const Settings = props => {
 
   return (
     <>
+        <AnimatePresence mode={'wait'}>
         {collapse === false && (
-            <div className='collapse_section'>
+            <motion.div className='collapse_section' 
+                key={'collapse_section'}    
+                initial={{opacity:0}} 
+                animate={{opacity:1}}
+                transition={{duration:0.3}} 
+                exit={{opacity:0}}
+            >
                 <button className='collapse_button collapse_button-Primary' onClick={handleCollapse}><FiMenu/></button>
-            </div>
+            </motion.div>
         )}
         {collapse === true && (
-            <div className='collapse_section collapse_section-Active'>
-                <button className='collapse_button' onClick={handleCollapse}><AiOutlineClose/></button>
-                <div className='collapseActive_switch'>
+            <motion.div className='collapse_section collapse_section-Active'
+                key={'collapse_section-Active'}
+                initial={{opacity:0}} 
+                animate={{opacity:1, y: '0%'}}
+                transition={{duration:0.5, ease: "easeInOut", delayChildren: 0.6}} 
+                exit={{y: '-800%'}}
+            >
+                <motion.button className='collapse_button' onClick={handleCollapse}
+                    initial={{opacity:0}} 
+                    animate={{opacity:1}}
+                    transition={{duration:0.3}} 
+                    exit={{opacity:0}}
+                ><AiOutlineClose/></motion.button>
+                <motion.div className='collapseActive_switch'
+                    initial={{opacity:0}} 
+                    animate={{opacity:1}}
+                    transition={{duration:0.3}} 
+                    exit={{opacity:0}}
+                >
                     {userType === "Artist" &&(
                         <h3>Customer</h3>
                     )}
@@ -79,15 +103,31 @@ const Settings = props => {
                         <h3>Artist</h3>
                     )}
                     
-                </div>
+                </motion.div>
                 <div className="collapseActive_options">
-                    <button className='collapseActive_option'><h5>Settings</h5></button>
-                    <button className='collapseActive_option'><h5>Help & FAQ</h5></button>
-                    <button className='collapseActive_option' onClick={handleLogOut}><h5>Log Out</h5></button>
+                    <motion.button className='collapseActive_option'
+                        initial={{opacity:0, x: '100%'}} 
+                        animate={{opacity:1, x: '0%'}}
+                        transition={{duration:0.1}} 
+                        exit={{opacity:1, x: '100%'}}
+                    ><h5>Settings</h5></motion.button>
+                    <motion.button className='collapseActive_option'
+                        initial={{opacity:0, x: '100%'}} 
+                        animate={{opacity:1, x: '0%'}}
+                        transition={{duration:0.2}} 
+                        exit={{opacity:1, x: '100%'}}
+                    ><h5>Help & FAQ</h5></motion.button>
+                    <motion.button className='collapseActive_option' onClick={handleLogOut}
+                        initial={{opacity:0, x: '100%'}} 
+                        animate={{opacity:1, x: '0%'}}
+                        transition={{duration:0.3}} 
+                        exit={{opacity:1, x: '100%'}}
+                    ><h5>Log Out</h5></motion.button>
                 </div>
                 
-            </div>
+            </motion.div>
         )}
+        </AnimatePresence>
     </>
   )
 }

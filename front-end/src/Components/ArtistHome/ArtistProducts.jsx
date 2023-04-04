@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useState } from 'react'
+import { motion } from 'framer-motion'
 import axios from 'axios'
 import './artistProducts.css'
 
@@ -39,7 +40,13 @@ const ArtistProducts = props => {
     // }
   
   return (
-    <>
+    <motion.div
+      initial={{opacity: 0, y: '100%'}}
+      animate={{opacity: 1, y: '0%'}}
+      exit={{opacity: 0, y: '-100%'}}
+      transition={{duration: 1, delayChildren: 0.5}}
+      className='page_artistHomePage' 
+    >
       {/* Welcome Message */}
       {username &&(
         <div className='welcomeMsg'>
@@ -79,7 +86,7 @@ const ArtistProducts = props => {
           </div>
         )}
       </div>
-    </>
+    </motion.div>
   )
 }
 
