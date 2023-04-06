@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { Link, useParams } from 'react-router-dom'
 import './viewItemSub.css'
 import axios from 'axios'
-import AllCategories from '../../SchemaSamples/AllCategories'
+
 
 const ViewItemSub = props => {
   const getProductParamsID = useParams()
@@ -30,6 +30,8 @@ const ViewItemSub = props => {
         const thisProductImages = thisProduct.imagesURL
         const thisProductStatus = thisProduct.status // "sold" or "available"
         const thisProductPrice = thisProduct.price
+        const getAllCategories = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/categories`)
+        const AllCategories = getAllCategories.data
         const thisProductCategories = AllCategories.filter(category => thisProduct.categories_id.includes(category._id))
         const thisProductDescription = thisProduct.shortDescription
         setProduct(thisProduct)
@@ -120,4 +122,3 @@ const ViewItemSub = props => {
 }
 
 export default ViewItemSub
-
