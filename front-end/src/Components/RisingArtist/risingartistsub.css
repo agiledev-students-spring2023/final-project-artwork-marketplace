@@ -91,4 +91,7 @@
     align-items: center;
     margin: auto;
     width: 100%;
+    overflow: "hidden";
+    border-width: 2cm;
+    border-color: brown;
 }

@@ -5,10 +5,10 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions, TextField } from '@mui/material';
-import { FiHeart, FiSearch}  from "react-icons/fi"
+import { Button, CardActionArea, CardActions } from '@mui/material';
+import { FiHeart}  from "react-icons/fi"
 import axios from "axios"
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 /* search bar function */
 const SearchBar = ({callback}, props) => {
@@ -158,15 +158,14 @@ const Risingartistsub = props => {
             <img src={bestProduct.thumbnailURL} alt={bestProduct.name} />
           </Link> 
           <h3 className='rs-subcaption2'>
-                {bestProduct.name}
+                {bestProduct.name} <br/>
+                ${bestProduct.price} <br/>
+                {bestProduct.shortDescription}
           </h3>
         </div>
       ): (
         <div></div>
       )}
-
-
-
       <br/>
       <br/>
       <SearchBar callback={(inputValue) => setInputValue(inputValue)} />
