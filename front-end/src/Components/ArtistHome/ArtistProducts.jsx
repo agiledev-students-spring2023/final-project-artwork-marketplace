@@ -9,7 +9,6 @@ import './artistProducts.css'
 const ArtistProducts = props => {
     const [username, setUsername] = useState("")
     const [products, setProducts] = useState([])
-    // const [searchValue, setSearchValue] = useState('')
     
     useEffect(() => {
       const getArtistInfo = async () => {
@@ -27,17 +26,6 @@ const ArtistProducts = props => {
       }
       getArtistInfo()
     }, [])
-  
-    // const handleSearch = (e) => {
-    //   if(e.target.value == ''){
-    //       setCategories(randomFakeData)
-    //   }
-    //   else{
-    //       const SearchResult = randomFakeData.filter(item => item.category.toLowerCase().includes(e.target.value.toLowerCase()))
-    //       setCategories(SearchResult)
-    //   }
-    //   setSearchValue(e.target.value)
-    // }
   
   return (
     <motion.div

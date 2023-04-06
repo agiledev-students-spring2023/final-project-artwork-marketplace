@@ -23,7 +23,7 @@
     width: 300px;
     text-align: center;
     font-family: 'Courier New', Courier, monospace;
-    font-size: 18px;
+    font-size: 14px;
 }
 
 .rs-artworkTable {
@@ -39,6 +39,19 @@
     text-align: center;
     color: black;
     font-size: 30px;
+}
+
+.rs-subcaption{
+    text-align: center;
+    color: grey;
+    font-size: 20px;
+}
+
+.rs-subcaption2{
+    text-align: center;
+    color: grey;
+    font-size: 15px;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 @keyframes heartbeat {
@@ -63,10 +76,22 @@
     height: 30px;
 }
 
-.rs-heart:hover{
+.rs-heart:hover {
     animation: heartbeat 1s infinite;
     fill: red;
     color: red;
     opacity: 1;
     transition: opacity 500ms;
+}
+
+.smallimageshow img{
+    text-align: center;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 100%;
+    overflow: "hidden";
+    border-width: 2cm;
+    border-color: brown;
 }
