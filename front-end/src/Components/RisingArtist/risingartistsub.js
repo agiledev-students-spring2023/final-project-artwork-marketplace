@@ -106,13 +106,13 @@ function randomNumberInRange(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+// find the best product from database to display
+// the selection algorithm need to be further examined
 function findBestProduct(manyProducts) {
   const bestProductind = randomNumberInRange(1,manyProducts.length)
   const bestProduct = manyProducts.filter(product => product._id === bestProductind)
   return bestProduct[0]
 }
-
-
 
 const Risingartistsub = props => {
   const [articles, setArticles] = useState([]);
@@ -145,6 +145,7 @@ const Risingartistsub = props => {
   
   return (
     <div className="rs-container">
+      <React.StrictMode>  
       <h3 className='rs-caption'>
         Rising-Star Artists
       </h3>
@@ -172,6 +173,7 @@ const Risingartistsub = props => {
       <br/>
       <br/>
       <ArtistShowcase val={articles} />
+      </React.StrictMode> 
     </div>
   );
 }
