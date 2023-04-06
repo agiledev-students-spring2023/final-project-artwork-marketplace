@@ -36,13 +36,16 @@ router.post("/login", async (req, res) => {
     try{
         const user = UsersList.find(user => user.email === req.body.email)
         if (!user){
-            return res.status(400).json("You Have Not Registered with us yet!")
+            return res.status(400).json({success: false, message: `${req.body.email} is not registered with us yet!`})
         }
         const validatePassword = await bcrypt.compare(req.body.password, user.password)
         if (!validatePassword){
-            return res.status(400).json("Wrong Username and/or Password!")
+            return res.status(400).json({success: false, message: "Wrong Username and/or Password!"})
         }
         const newUser = {
+            success: true,
+            message: "Successful Login!",
+            user: user.user,
             _id: user._id,
             email: user.email,
             name: {
@@ -66,9 +69,13 @@ router.post("/login", async (req, res) => {
 router.get("/:id", async (req, res) => {
     try{
         const userFind = UsersList.find(user => user._id == req.params.id)
+        if (!userFind){
+            return res.status(400).json({success: false, message: `User ID: ${req.params.id} is not valid!`})
+        }
         // EXCLUDE PASSWORD
         const user = {
             _id: userFind._id,
+            user: userFind.user,
             email: userFind.email,
             name: {
                 first: userFind.name.first,
@@ -81,7 +88,7 @@ router.get("/:id", async (req, res) => {
             following: userFind.following,
             followers: userFind.followers
         }
-        res.status(200).json(user)
+        return res.status(200).json(user)
     } catch (err){
         console.log(err)
         res.status(500).json(err)

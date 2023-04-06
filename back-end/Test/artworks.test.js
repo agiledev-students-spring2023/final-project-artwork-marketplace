@@ -252,25 +252,29 @@ describe('The "/artworks" route', () => {
         })
     })
     describe('The "/activeStatus/:status" route GET function for all artworks with a certain status', () => {
-        const random = Math.floor(Math.random() * 2) + 1
-        const status = "sold"
-        if (random === 1){
-            status = "available"
-        }
-        it('should be an array', (done) => {
+        it('should return an array', (done) => {
             chai.request(server)
-                .get(`/artworks/activeStatus/${status}`)
+                .get(`/artworks/activeStatus/available`)
                 .end((err, res) => {
                     res.body.should.be.a('array')
                     done()
                 })
         })
-        it(`should find all artworks with ${status} status`, (done) => {
+        it(`should find all artworks with correct status`, (done) => {
             chai.request(server)
-                .get(`/artworks/activeStatus/${status}`)
+                .get(`/artworks/activeStatus/available`)
                 .end((err, res) => {
                     res.should.have.status(200)
-                    res.body.forEach(artwork => artwork.status.should.be.equals(status))
+                    res.body.forEach(artwork => artwork.status.should.equal("available"))
+                    done()
+                })
+        })
+        it(`should find all artworks with correct status`, (done) => {
+            chai.request(server)
+                .get(`/artworks/activeStatus/sold`)
+                .end((err, res) => {
+                    res.should.have.status(200)
+                    res.body.forEach(artwork => artwork.status.should.equal("sold"))
                     done()
                 })
         })
