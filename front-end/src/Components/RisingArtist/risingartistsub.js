@@ -72,7 +72,6 @@ const ArtistShowcase = ({val}, props) => {
         }
         <br/>
         </div>
-        
       ))}
     </div>
   );
@@ -117,7 +116,6 @@ function findBestProduct(manyProducts) {
 const Risingartistsub = props => {
   const [articles, setArticles] = useState([]);
   const [inputValue, setInputValue] = useState("");
-
   const [manyProducts, setManyProducts] = useState([])
 
   useEffect(() => {
