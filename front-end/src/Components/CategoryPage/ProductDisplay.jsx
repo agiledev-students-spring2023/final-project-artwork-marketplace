@@ -3,7 +3,6 @@ import { useParams, Link } from 'react-router-dom'
 import Masonry from 'react-masonry-css'
 import './productDisplay.css'
 import axios from "axios"
-import AllCategories from '../../SchemaSamples/AllCategories'
 
 const ProductDisplay = props => {
   const getCategoryID = useParams()
@@ -18,7 +17,8 @@ const ProductDisplay = props => {
         const getProducts = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks`)
         const AllProducts = getProducts.data
         const ID = getCategoryID.categoryID
-        const foundCategory = AllCategories.find(category => category._id == ID)
+        const getCategory = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/categories/${ID}`)
+        const foundCategory = getCategory.data
         const productsOfCategory = AllProducts.filter(product => foundCategory.products_id.includes(product._id))
         setCategory(foundCategory)
         setProducts(productsOfCategory)

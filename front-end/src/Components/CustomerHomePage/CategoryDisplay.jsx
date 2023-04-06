@@ -7,7 +7,7 @@ import './categoryDisplay.css'
 import "swiper/css"
 import "swiper/css/pagination"
 import axios from "axios"
-import AllCategories from '../../SchemaSamples/AllCategories'
+
 
 const CategoryDisplay = props => {
   const [categories, setCategories] = useState([])
@@ -17,7 +17,8 @@ const CategoryDisplay = props => {
   useEffect(() => {
     const getCategories = async ()=>{
         try{
-            const categoriesCopy = AllCategories
+            const getCategories = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/categories`)
+            const categoriesCopy = getCategories.data
             const getProducts = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks`)
             const AllProducts = getProducts.data
             categoriesCopy.forEach(category => {category['products'] =  AllProducts.filter(product => category.products_id.includes(product._id))})    

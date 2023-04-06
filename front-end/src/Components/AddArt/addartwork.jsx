@@ -3,13 +3,12 @@ import { useParams } from 'react-router-dom'
 import './addartwork.css'
 import TextareaAutosize from 'react-textarea-autosize';
 import axios from 'axios'
-import AllCategories from '../../SchemaSamples/AllCategories'
 import Select from "react-select";
 import { useNavigate } from 'react-router-dom'
 
 const AddArtWork = props => {
     const navigate = useNavigate()
-
+    const [AllCategories, setAllCategories] = useState([])
     const [addrtype, setAddrtype] = useState([])
     const [file,setFile] = useState()
     const [file2,setFile2] = useState()
@@ -23,6 +22,18 @@ const AddArtWork = props => {
     const handleSkillChange = (genres) => {
         setGenres(genres || []);
     }
+    useEffect(() => {
+        const saveCategories = async () => {
+          try{
+            const getCategories = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/categories/`)
+            const Categories = getCategories.data
+            setAllCategories(Categories)
+          } catch (err){
+            console.log(err)
+          } 
+        }
+        saveCategories()
+    }, [])
 
     var testcase = [];
     for (var i = 0; i < AllCategories.length; i++){
