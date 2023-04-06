@@ -1,12 +1,16 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState, useRef} from 'react'
+import { useParams } from 'react-router-dom'
 import './addartwork.css'
 import TextareaAutosize from 'react-textarea-autosize';
+import axios from 'axios'
 import AllCategories from '../../SchemaSamples/AllCategories'
 import Select from "react-select";
 import { useNavigate } from 'react-router-dom'
 
 const AddArtWork = props => {
     const navigate = useNavigate()
+
+    const [addrtype, setAddrtype] = useState([])
     const [file,setFile] = useState()
     const [file2,setFile2] = useState()
     const [file3,setFile3] = useState()
