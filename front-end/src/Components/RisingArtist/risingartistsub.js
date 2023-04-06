@@ -150,7 +150,6 @@ const Risingartistsub = props => {
       <h3 className='rs-subcaption'>
         The Top Artwork Recently
       </h3>
-
       { bestProduct ? (
         <div className="smallimageshow">
           <Link to={`/Item/${bestProduct._id}`}>
