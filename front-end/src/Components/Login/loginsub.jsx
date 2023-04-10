@@ -10,13 +10,14 @@ const Loginsub = props => {
 
     const [randomFeaturedProduct, setRFP] = useState({})
     const [artistOfProd, setArtistOfProd] = useState({})
+    const [loginError, setLoginError] = useState("")
 
     useEffect(() => {
         const getLatestFeatured = async () => {
             const random_productID = Math.floor(Math.random() * 15) + 1;
             const getRandomProduct = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks/${random_productID}`)
             const random_product = getRandomProduct.data
-            const getArtist = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/${random_product.artist_id}`)
+            const getArtist = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/user/${random_product.artist_id}`)
             const artist = getArtist.data
             setRFP(random_product)
             setArtistOfProd(artist)
@@ -32,16 +33,29 @@ const Loginsub = props => {
         };
         try{
             const res = await axios.post(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/login`, newUser)
-            const user = res.data
-            props.setuser(user)
-            navigate("/")
+            if(res.status === 200){
+                setLoginError("")
+                const user = res.data
+                props.setuser(user)
+                navigate("/")
+            }
         } catch (err){
-            console.log(err)
+            if(err.response.status === 400){
+                setLoginError(err.response.data.message)
+            }
+            else{
+                console.log(err.response.data)
+            } 
         }      
     }
 
     return(
         <div className='container LogIn__container'>
+            {loginError && (
+                <div className="login_error">
+                    {loginError}
+                </div>
+            )}
     	<div className="login_loginheader">
             <div className="login_featured">
                 {/* Featured Artwork */}
