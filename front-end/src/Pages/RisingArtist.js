@@ -1,5 +1,5 @@
 import React from 'react'
-import Risingartistsub from '../Components/RisingArtist/Risingartistsub'
+import RisingArtistSub from '../Components/RisingArtist/risingartistsub'
 import Navbar from '../Components/Navbar/Navbar'
 import Settings from '../Components/Settings/Settings'
 import { motion } from 'framer-motion'
@@ -15,7 +15,7 @@ const thisRisingArtist = props => {
         key={"RisingArtistPage"}
         >
           <Settings user={props.user} setuser={props.setuser}/>
-          <Risingartistsub user={props.user} />
+          <RisingArtistSub user={props.user} />
         </motion.div>
         <Navbar user={props.user} />
       </div>

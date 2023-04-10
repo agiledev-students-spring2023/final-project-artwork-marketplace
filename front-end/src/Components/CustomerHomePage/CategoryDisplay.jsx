@@ -76,7 +76,7 @@ const CategoryDisplay = props => {
             {categories && (
                 <div className="categoriesColumn" ref={widthRef}>
                     {categories.map((category, index) => 
-                        <div>
+                        <div key={index}>
                         {category.products.length && (
                             <motion.div 
                                 className="categoryRow"

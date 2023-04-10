@@ -52,6 +52,8 @@
     margin: 1rem;
     box-shadow: 0rem 0rem 1rem rgb(87, 87, 87);
     background: white;
+    display: flex;
+    flex-direction: column;
 }
 .categoryRow .categoryProductImages .carousel .product_Card .product_image_Display{
     height: 80%;
