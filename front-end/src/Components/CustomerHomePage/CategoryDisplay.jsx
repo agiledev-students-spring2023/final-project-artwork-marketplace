@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Pagination, FreeMode } from "swiper"
@@ -13,7 +13,17 @@ const CategoryDisplay = props => {
   const [categories, setCategories] = useState([])
   const [copyOfCategories, setCategoriesCopy] = useState([])
   const [searchValue, setSearchValue] = useState('')
-  
+  const [widths, setWidths] = useState([]);
+  const widthRef = useRef()
+
+  useEffect(() => {
+    const allCarousels = widthRef.current.querySelectorAll('.carousel')
+    const widthsSet = []
+    allCarousels.forEach((carousel, index) => widthsSet[index] = carousel.scrollWidth - carousel.offsetWidth + 15)
+    setWidths(widthsSet)
+    console.log(widths)
+  }, [categories])
+
   useEffect(() => {
     const getCategories = async ()=>{
         try{
@@ -21,7 +31,7 @@ const CategoryDisplay = props => {
             const categoriesCopy = getCategories.data
             const getProducts = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks`)
             const AllProducts = getProducts.data
-            categoriesCopy.forEach(category => {category['products'] =  AllProducts.filter(product => category.products_id.includes(product._id))})    
+            categoriesCopy.forEach(category => {category['products'] =  AllProducts.filter(product => category.products_id.includes(product._id))})
             setCategories(categoriesCopy)
             setCategoriesCopy(categoriesCopy)
         }
@@ -31,6 +41,8 @@ const CategoryDisplay = props => {
     }
     getCategories()
   }, [])
+
+ 
 
   const handleSearch = (e) => {
     if(e.target.value == '' && categories && copyOfCategories){
@@ -63,7 +75,7 @@ const CategoryDisplay = props => {
         </div>
         <div className='container CategoryDisplay__container'>
             {categories && (
-                <div className="categoriesColumn">
+                <div className="categoriesColumn" ref={widthRef}>
                     {categories.map((category, index) => 
                         <div>
                         {category.products.length && (
@@ -75,54 +87,35 @@ const CategoryDisplay = props => {
                                 exit={{opacity: 0,y: '-200%'}}
                                 transition={{delay: 0.5, duration: 1}}
                             >
-                                <div className="category_button categoryName">
+                                <motion.div className="category_button categoryName"
+                                    
+                                >
                                     <Link to={`/Category/${category._id}`}>
                                         {category.name}
                                     </Link>
-                                </div>
+                                </motion.div>
                                 <div className="categoryProductImages">
-                                    <Swiper
-                                        breakpoints={{
-                                            0: {
-                                                width: 0,
-                                                slidesPerView: 1,
-                                            },
-                                            // when window width is >= 640px
-                                            600: {
-                                            width: 600,
-                                            slidesPerView: 2,
-                                            },
-                                            // when window width is >= 768px
-                                            1024: {
-                                            width: 1024,
-                                            slidesPerView: 3,
-                                            },
-                                        }}
-                                        slidesPerView={3}
-                                        spaceBetween={30}
-                                        pagination={{
-                                            clickable: true,
-                                        }}
-                                        modules={[Pagination, FreeMode]}
-                                        className="mySwiper"
-                                        freeMode={false}
-                                        rewind={true}
-                                        speed={0.1}
-                                    >
-                                    {category.products.map((product) =>
-                                        <div key={product._id}>
-                                            <SwiperSlide 
-                                                key={product._id}
-                                            >
-                                                <div className="SwiperProductImage">
-                                                <Link to={`/Item/${product._id}`}>
-                                                    <img src={product.thumbnailURL} alt={product.name} />
-                                                </Link>
-                                                </div>
-                                            </SwiperSlide>
-                                        </div>
-                                    )}
-                                    </Swiper>
+                                    <motion.div className={"carousel "+index} >
+                                        <motion.div className='inner-carousel' 
+                                            drag="x" 
+                                            dragConstraints={{right:0, left: -(widths[index])}}
+                                            whileTap={{cursor: "grabbing"}}
+                                        >
+                                            {category.products.map((product) =>
+                                                <motion.div key={product._id} className='product_Card'>
+                                                    
+                                                    <div className="product_image_Display">
+                                                        <img src={product.thumbnailURL} alt={product.name} />
+                                                    </div>
+                                                    <Link to={`/Item/${product._id}`}>
+                                                    <div className="product_info_Display">
+                                                        <h4>"{product.name}"</h4>
+                                                    </div>
+                                                    </Link>
+                                                </motion.div>
+                                            )}
+                                        </motion.div>
+                                    </motion.div>
                                 </div> 
                             </motion.div>
                         )}

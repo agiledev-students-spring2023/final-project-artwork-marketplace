@@ -44,15 +44,43 @@
 .categoryRow .categoryName{
     text-transform: capitalize;
 }
-.categoryRow .categoryProductImages .SwiperProductImage img{
-    width: 100%;
-    height: 30vh;
-    user-select: none;
-    padding-bottom: 3rem;
-    object-fit: cover;
+.categoryRow .categoryProductImages .carousel .product_Card{
+    height: 25vh;
+    min-width: 25%;
+    border-radius: 3rem;
+    overflow: hidden;
+    margin: 1rem;
+    box-shadow: 0rem 0rem 1rem rgb(87, 87, 87);
+    background: white;
 }
-:root {
-    --swiper-theme-color: black!important;
+.categoryRow .categoryProductImages .carousel .product_Card .product_image_Display{
+    height: 80%;
+    width: 100%;
+}
+.categoryRow .categoryProductImages .carousel .product_Card .product_info_Display{
+    width: 100%;
+    text-align: center;
+}
+.categoryRow .categoryProductImages .carousel .product_Card a{
+    text-decoration: none;
+    color: rgb(39, 39, 39);
+}
+.categoryRow .categoryProductImages .carousel .product_Card img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    overflow: hidden;
+}
+.categoryRow .categoryProductImages .carousel .inner-carousel{
+    display: flex;
+    background: rgb(230, 230, 230);
+}
+.categoryRow .categoryProductImages .carousel{
+    cursor: grab;
+    overflow-x: hidden;
+    background: rgb(230, 230, 230);
+    border-radius: 3rem;
 }
 .category_button{
     border: 2px solid black;
@@ -84,17 +112,9 @@
     .searchBar__container, .CategoryDisplay__container{
         width: var(--container-width-md);
     }
-    .categoryRow .categoryProductImages .swiper-container{
-        width: 1024px;
-    }
-    .categoryRow .categoryProductImages .SwiperProductImage img{
-        width: 100%;
-        min-height: 25vh;
-        max-height: 25vh;
-        user-select: none;
-    }
-    .categoryRow .categoryProductImages .SwiperProductImage{
-        max-height: 35vh;
+    .categoryRow .categoryProductImages .carousel .product_Card{
+        height: 30vh;
+        min-width: 50%;
     }
     .category_button, .category_button a{
         padding-top: 0.75rem;
@@ -109,17 +129,12 @@
     .searchBar__container{
         padding-top: 4rem;
     }
-    .categoryRow .categoryProductImages .swiper-container{
-        width: 600px;
-    }
-    .categoryRow .categoryProductImages .SwiperProductImage img{
-        max-width: 100%;
+    .categoryRow .categoryProductImages .carousel .product_Card{
         height: 30vh;
-        object-fit: cover;
-        user-select: none;
+        min-width: 90%;
     }
-    .categoryRow .categoryProductImages .SwiperProductImage{
-        max-height: 40vh;
+    .categoryRow .categoryProductImages .carousel .product_Card .product_info_Display{
+        margin-top: -2.5%;
     }
     .category_button, .category_button a{
         padding-top: 0.5rem;

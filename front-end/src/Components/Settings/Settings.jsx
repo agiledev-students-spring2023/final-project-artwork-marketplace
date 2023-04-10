@@ -63,7 +63,7 @@ const Settings = props => {
                 key={'collapse_section-Active'}
                 initial={{opacity:0}} 
                 animate={{opacity:1, y: '0%'}}
-                transition={{duration:0.5, ease: "easeInOut", delayChildren: 0.6}} 
+                transition={{duration:0.8, ease: "easeInOut", delayChildren: 0.6}} 
                 exit={{y: '-800%'}}
             >
                 <motion.button className='collapse_button' onClick={handleCollapse}

@@ -113,12 +113,10 @@ router.get("/activeStatus/:status", async (req, res) => {
 })
 
 // update a single artwork status
-router.put("/:id/activeStatus/:newStatus", async (req, res) => {
-    try{
-        
-    } catch (err){
-
-    }
-})
+// router.put("/:id/activeStatus/:newStatus", async (req, res) => {
+//     try{
+//     } catch (err){
+//     }
+// })
 
 module.exports = router
