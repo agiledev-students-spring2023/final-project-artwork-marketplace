@@ -15,7 +15,7 @@ const ProfileSub = props => {
     useEffect(() => {
         const getProductInfo = async () => {
           try{
-            const getUser = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/${userId}`)
+            const getUser = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/user/${userId}`)
             const user = getUser.data
             const getProducts = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks`)
             const AllProducts = getProducts.data

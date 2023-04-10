@@ -1,97 +1,97 @@
-.rs-container {
-    margin: auto;
-    width: 300px;
-    margin-top: 50px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    align-items: center;
-    text-align: center;
-    align-content: center;
-  }
-  
-.rs-searchBar {
+.RisingArtists_container {
+    width: var(--container-width-lg);
+    padding-bottom: 10rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+.RA_artistCard{
     display: flex;
-    align-items: center;
-    justify-content: center;
-    color: blue;
-    text-align: center;
+    flex-direction: column;
+    height: 40vh;
+    width: 80%;
+    background: black;
+    overflow: hidden;
+    align-self: center;
+    justify-self: center;
+    border-radius: 3rem;
+    box-shadow: 0rem 0rem 1rem rgb(87, 87, 87);
+    margin-bottom: 2rem;
 }
-
-.rs-searchBarInput {
-    height: 30px;
-    width: 300px;
-    text-align: center;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 14px;
-}
-
-.rs-artworkTable {
-    margin-top: 80px;
-    text-align: center;
-}
-
-.rs-artwork {
-    margin: 10px 0;
-}
-
-.rs-caption{
-    text-align: center;
-    color: black;
-    font-size: 30px;
-}
-
-.rs-subcaption{
-    text-align: center;
-    color: grey;
-    font-size: 20px;
-}
-
-.rs-subcaption2{
-    text-align: center;
-    color: grey;
-    font-size: 15px;
-    font-family: 'Times New Roman', Times, serif;
-}
-
-@keyframes heartbeat {
-    0% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.25);
-    }
-
-    100% {
-        transform: scale(1);
-    }
-}
-
-.rs-heart {
-    color: black;
-    opacity: 0.3;
-    cursor: pointer;
-    width: 30px;
-    height: 30px;
-}
-
-.rs-heart:hover {
-    animation: heartbeat 1s infinite;
-    fill: red;
-    color: red;
-    opacity: 1;
-    transition: opacity 500ms;
-}
-
-.smallimageshow img{
-    text-align: center;
-    display: block;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
+.RA_artistCard .RA_artistProfileCard{
+    height: 90%;
     width: 100%;
-    overflow: "hidden";
-    border-width: 2cm;
-    border-color: brown;
+    overflow: hidden;
+    background: rgb(227, 227, 227);
+    display: flex;
+    flex-direction: column;
+}
+.RA_artistCard .RA_artistProfileCard .RA_artistName{
+    height: 20%;
+}
+.RA_artistCard .RA_artistProfileCard .RA_artistDP{
+    height: 70%;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+}
+.RA_artistCard .RA_artistProfileCard .RA_artistDP img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    overflow: hidden;
+}
+.RA_artistCard .RA_artistActions{
+    justify-content: center;
+    height: 10%;
+}
+.RA_artistCard .RA_artistActions button{
+    height: 80%;
+    border-radius: 3rem;
+    width: fit-content;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-top: 0.25rem;
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
+    transition: 1s ease all;
+    font-weight: 600;
+}
+.RA_artistCard .RA_artistActions button.followed{
+    background: rgb(120, 59, 59);
+    color: white;
+}
+.RA_artistCard .RA_artistActions button:hover{
+    cursor: pointer;
+}
+
+/* FOR TABLETS */
+@media screen and (max-width: 1024px){
+    .RisingArtists_container{
+        width: var(--container-width-md);
+        gap: 0.5rem;
+    }
+    .RA_artistCard{
+        width: 90%;
+    }
+}
+/* FOR PHONES */
+@media screen and (max-width: 600px){
+    .RisingArtists_container{
+        width: var(--container-width-sm);
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    .RA_artistCard{
+        display: flex;
+        flex-direction: column;
+        height: 60vh;
+        width: 100%;
+        background: black;
+        overflow: hidden;
+        align-self: center;
+        justify-self: center;
+        border-radius: 3rem;
+        box-shadow: 0rem 0rem 1rem rgb(87, 87, 87);
+    }
 }

@@ -40,6 +40,7 @@ const App = props => {
     "saved": [
     ],
     "following" : [
+      2
     ],
     "followers" : [
     ]

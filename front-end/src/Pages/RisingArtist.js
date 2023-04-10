@@ -1,5 +1,5 @@
 import React from 'react'
-import Risingartistsub from '../Components/RisingArtist/risingartistsub'
+import Risingartistsub from '../Components/RisingArtist/Risingartistsub'
 import Navbar from '../Components/Navbar/Navbar'
 import Settings from '../Components/Settings/Settings'
 import { motion } from 'framer-motion'

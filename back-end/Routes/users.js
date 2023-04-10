@@ -66,7 +66,7 @@ router.post("/login", async (req, res) => {
 })
 
 // get user info by user id
-router.get("/:id", async (req, res) => {
+router.get("/user/:id", async (req, res) => {
     try{
         const userFind = UsersList.find(user => user._id == req.params.id)
         if (!userFind){
@@ -95,12 +95,15 @@ router.get("/:id", async (req, res) => {
     }
 })
 
-// // get a list of rising artists
-// router.get("/risingArtists", async(req, res) => {
-//     try{
-//     } catch (err){
-//     }
-// })
+// get a list of rising artists
+router.get("/risingArtists", async(req, res) => {
+    try{
+        const users = UsersList
+        res.status(200).json(users)
+    } catch (err){
+        res.status(500).json(err)
+    }
+})
 
 // // get cart by userID
 // router.get("/:userID/cart", async(req, res) => {

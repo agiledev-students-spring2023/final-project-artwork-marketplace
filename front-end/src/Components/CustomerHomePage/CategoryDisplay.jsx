@@ -21,9 +21,8 @@ const CategoryDisplay = props => {
     const widthsSet = []
     allCarousels.forEach((carousel, index) => widthsSet[index] = carousel.scrollWidth - carousel.offsetWidth + 15)
     setWidths(widthsSet)
-    console.log(widths)
   }, [categories])
-
+  
   useEffect(() => {
     const getCategories = async ()=>{
         try{

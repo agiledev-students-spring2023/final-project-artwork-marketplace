@@ -25,7 +25,7 @@ const ViewItemSub = props => {
         const getProduct = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks/${productId}`)
         const thisProduct = getProduct.data
         const thisProductName = thisProduct.name
-        const getProductArtist = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/${thisProduct.artist_id}`) 
+        const getProductArtist = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/user/${thisProduct.artist_id}`) 
         const thisProductArtist = getProductArtist.data
         const thisProductImages = thisProduct.imagesURL
         const thisProductStatus = thisProduct.status // "sold" or "available"
