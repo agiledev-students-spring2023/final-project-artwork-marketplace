@@ -1,12 +1,5 @@
 import React, { useState, useEffect} from 'react'
-import fakedata from '../../SchemaSamples/fakedata'
 import './risingartistsub.css'
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions } from '@mui/material';
-import { FiHeart}  from "react-icons/fi"
 import axios from "axios"
 import { Link } from 'react-router-dom'
 
@@ -33,9 +26,6 @@ const RisingArtistSub = props => {
   }, [])
 
   const handleFollow = (userID, followsID) => {
-
-  }
-  const handleUnfollow = (userID, unfollowsID) => {
 
   }
   
