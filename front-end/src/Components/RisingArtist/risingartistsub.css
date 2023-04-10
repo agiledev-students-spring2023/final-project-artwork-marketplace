@@ -1,3 +1,10 @@
+.RA_heading{
+    text-align: center;
+    padding: 1rem;
+    margin-left: 5%;
+    margin-right: 5%;
+    overflow-wrap: break-word;
+}
 .RisingArtists_container {
     width: var(--container-width-lg);
     padding-bottom: 10rem;

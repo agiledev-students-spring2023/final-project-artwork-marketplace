@@ -45,6 +45,7 @@
     height: 30vw;
     overflow: scroll auto;
     scroll-behavior: smooth;
+    background: black;
     border: 2px solid black;
 }
 .viewItem_card .viewItem_price{

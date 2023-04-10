@@ -45,33 +45,35 @@
     padding-top: 2rem;
 }
 .my-masonry-grid_column > .profile_product_card{
-    padding-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
     text-align: center;
     align-items: center;
+    background: white;
+    border-bottom-left-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+    box-shadow: 0rem 0rem 1rem rgb(87, 87, 87);
+    margin-bottom: 2rem;
 }
-.my-masonry-grid_column > .profile_product_card img{ /* change div to reference your elements you put in <Masonry> */
+.my-masonry-grid_column > .profile_product_card .product_photo{ /* change div to reference your elements you put in <Masonry> */
     width: 100%;
+    height: 80%;
+    transition: 1s ease all;
+}
+.my-masonry-grid_column > .profile_product_card .product_photo img{ /* change div to reference your elements you put in <Masonry> */
+    width: 100%;
+    height: auto;
     transition: 1s ease all;
 }
 .my-masonry-grid_column > .profile_product_card .product_info{ /* change div to reference your elements you put in <Masonry> */
     max-width: 100%;
-    border-radius: 3rem;
-    background-color: black;
-    padding-bottom: 0.5rem;
+    height: 20%;
     padding-top: 0.5rem;
-    padding-left: 0.25rem;
-    padding-right: 0.25rem;
-    transition: 1s ease all;
+    padding-bottom: 0.5rem;
 }
 .my-masonry-grid_column > .profile_product_card .product_info a{ /* change div to reference your elements you put in <Masonry> */
-    color: white;
+    color: black;
     text-decoration: none;
-}
-.my-masonry-grid_column > .profile_product_card .product_info:hover{
-    background-color: rgb(120, 120, 120);
-}
-.my-masonry-grid_column > .profile_product_card img:hover, .my-masonry-grid_column > .profile_product_card .product_info:hover{
-    box-shadow: 0rem 0rem 2rem rgb(87, 87, 87)
 }
 .my-masonry-grid_column > .profile_product_card .product_info h3{
     margin: 0;
@@ -81,7 +83,14 @@
     margin: 0;
     overflow-wrap: break-word;
 }
-
+.my-masonry-grid_column > .profile_product_card .product_info .product_price.sold{
+    text-decoration: line-through;
+    color: #7a1a1a;
+}
+.my-masonry-grid_column > .profile_product_card .product_info .product_price.available{
+    text-decoration: none;
+    color: #357637;
+}
 /* FOR TABLETS */
 @media screen and (max-width: 1024px){
     .profile_container{

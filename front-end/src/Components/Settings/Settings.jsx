@@ -55,11 +55,12 @@ const Settings = props => {
                 transition={{duration:0.3}} 
                 exit={{opacity:0}}
             >
+                <h2 className="welcome_CustomerHeading">Welcome, {props.user.name.first}!</h2>
                 <button className='collapse_button collapse_button-Primary' onClick={handleCollapse}><FiMenu/></button>
             </motion.div>
         )}
         {collapse === true && (
-            <motion.div className='collapse_section collapse_section-Active'
+            <motion.div className='collapse_section-Active'
                 key={'collapse_section-Active'}
                 initial={{opacity:0}} 
                 animate={{opacity:1, y: '0%'}}

@@ -99,7 +99,7 @@ const Cart = props => {
                     {userCartList && (
                         <div className="artworkColumnDisplay">
                             {userCartList.map((artwork) =>
-                                <div className="artworkCartCard">
+                                <div className="artworkCartCard" key={artwork._id}>
                                     <div className="artworkCardImage">
                                         <Link to={`/ViewItem/${artwork._id}`}>
                                             <img src={artwork.thumbnailURL} />

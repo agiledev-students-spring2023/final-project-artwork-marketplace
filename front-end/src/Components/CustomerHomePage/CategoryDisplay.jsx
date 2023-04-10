@@ -62,8 +62,10 @@ const CategoryDisplay = props => {
         transition={{duration: 1}}
         className='page_customerHomePage'   
     >
-        <div className='container searchBar__container'>
-            <input className='searchBarTextField' placeholder='Search Categories' value={searchValue} onInput={(e) => handleSearch(e)}/> 
+        <div className="searchBar_bg">
+            <div className='container searchBar__container'>
+                <input className='searchBarTextField' placeholder='Search Categories' value={searchValue} onInput={(e) => handleSearch(e)}/> 
+            </div>
         </div>
         <div className="TopPicks">
             <Link  to="/RisingArtists">

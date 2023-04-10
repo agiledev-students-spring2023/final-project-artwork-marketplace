@@ -70,7 +70,7 @@ const ProfileSub = props => {
                                         <h3 className="product_name">
                                             "{product.name}"
                                         </h3>
-                                        <h4 className='product_price'>
+                                        <h4 className={`product_price ${product.status === "sold" ? "sold" : "available"}` }>
                                             ${" " + product.price}
                                         </h4>
                                     </Link>

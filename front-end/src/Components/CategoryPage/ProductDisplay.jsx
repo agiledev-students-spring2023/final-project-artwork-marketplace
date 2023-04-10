@@ -9,7 +9,6 @@ const ProductDisplay = props => {
   const [categoryy, setCategory] = useState([])
   const [products, setProducts] = useState([])
   const [searchValue, setSearchValue] = useState('')
-  const [hover, setHover] = useState('')
   
   useEffect(() => {
     const findCategory = async () => {
@@ -47,10 +46,6 @@ const ProductDisplay = props => {
     setSearchValue(e.target.value)
   }
 
-  const handleMouseHover = (name) => {
-    setHover(name)
-  }
-
   return (
     <div>
       <div className="container searchArtwork__Container">
@@ -69,17 +64,20 @@ const ProductDisplay = props => {
                   columnClassName="my-masonry-grid_column"
                 >
                   {products.map((product) =>
-                    <div className='artworkCard' onMouseOver={() => handleMouseHover(product.name)} onMouseLeave={() => setHover('')}>
+                    <div className='cat_artworkCard' key={product._id}>
+                      <div className="cat_artworkPhoto">
+                        <Link to={`/Item/${product._id}`} >
+                          <img className='artworkImagee' src={product.thumbnailURL} alt={product.name} />
+                        </Link>
+                      </div>
                       <Link to={`/Item/${product._id}`} >
-                        <img className='artworkImagee' src={product.thumbnailURL} alt={product.name} />
-                      </Link>
-                      
+                        <div className="cat_artworkInfo">
+                          <h5>"{product.name}"</h5>
+                        </div>    
+                      </Link>                  
                     </div>
                   )}
                 </Masonry>
-              )}
-              {hover && (
-                <div className="popup_productName"><h4>"{hover}"</h4></div>
               )}
               </div>
           </div>
