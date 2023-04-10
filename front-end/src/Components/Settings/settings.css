@@ -6,6 +6,7 @@
 .collapse_section-Active{
     background-color: black;
     transition: 1s all ease;
+    overflow: hidden;
 }
 .collapse_button{
     text-align: center;
