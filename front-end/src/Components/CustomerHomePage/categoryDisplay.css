@@ -46,7 +46,7 @@
 }
 .categoryRow .categoryProductImages .carousel .product_Card{
     height: 25vh;
-    min-width: 33%;
+    min-width: 25%;
     border-radius: 3rem;
     overflow: hidden;
     margin: 1rem;
