@@ -1,6 +1,7 @@
 const express = require("express") 
 const app = express()
 const path = require("path")
+const mongoose = require('mongoose')
 const multer = require("multer") 
 const cors = require('cors')
 const axios = require("axios")
@@ -16,6 +17,11 @@ app.use(morgan("dev"))
 app.use(express.json()) 
 app.use(express.urlencoded({ extended: true }))
 app.use("/static", express.static("public"))
+
+mongoose
+  .connect(`${process.env.DB_CONNECTION_STRING}`)
+  .then(data => console.log(`Connected to MongoDB`))
+  .catch(err => console.error(`Failed to connect to MongoDB: ${err}`))
 
 app.get("/", (req, res) => {
     res.status(200).send(`GET request on port ${process.env.PORT}, path "/" received!`)
