@@ -92,7 +92,7 @@ const ViewItemSub = props => {
           <div className="viewItem_prodCategories">
             <p>Categories: </p>
             {productCategories.map((category) => 
-              <h5>
+              <h5 key={category._id}>
               <Link to={`/Category/${category._id}`}>
                 {category.name}
               </Link>
@@ -101,7 +101,7 @@ const ViewItemSub = props => {
           </div>
           <div className='viewItem_thumb'>
             {productImages.map((thispic,index) => 
-              <img src={thispic} onClick={() => handleSmallPhotoClick(index)}/>
+              <img src={thispic} onClick={() => handleSmallPhotoClick(index)} key={index}/>
             )}
           </div>
           <button className="viewItem_button" onClick={handleMoreClick}>

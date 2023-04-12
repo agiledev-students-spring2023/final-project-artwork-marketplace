@@ -49,49 +49,30 @@
     background-clip: padding-box;
     padding-top: 2rem;
 }
-.my-masonry-grid_column > .artworkCard{
-    padding-bottom: 2rem;
+.my-masonry-grid_column > .cat_artworkCard{
+    width: 100%;
+    border-bottom-right-radius: 2rem;
+    border-bottom-left-radius: 2rem;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
     text-align: center;
     align-items: center;
+    box-shadow: 0rem 0rem 1rem rgb(87, 87, 87);
 }
-.my-masonry-grid_column > .artworkCard img{ /* change div to reference your elements you put in <Masonry> */
+.my-masonry-grid_column > .cat_artworkCard .cat_artworkPhoto{ 
     width: 100%;
 }
-.my-masonry-grid_column > .artworkCard .artworkTitle{ /* change div to reference your elements you put in <Masonry> */
-    overflow-wrap: break-word;
-    max-height: fit-content;
-    margin-left: 20%;
-    margin-right: 20%;
+.my-masonry-grid_column > .cat_artworkCard .cat_artworkInfo{ 
+    width: 100%;
+    height: max-content;
 }
-.my-masonry-grid_column > .artworkCard .artworkTitle a, .artworkCard .artworkTitle h5{ 
+.my-masonry-grid_column > .cat_artworkCard a{ 
     text-decoration: none;
-    color: white;
-    background-color: black;
-    border-radius: 2rem;
-    font-size: large;
-    transition: 1s all ease;
+    color: black;
 }
-.my-masonry-grid_column > .artworkCard .artworkTitle h5{
-    padding: 0.5rem;
-}
-.my-masonry-grid_column > .artworkCard .artworkTitle a:hover, .artworkCard .artworkTitle h5:hover{ 
-    background-color: rgb(120, 120, 120);
-}
-.displayArtworks__Container .categoryComponent .popup_productName{
-    position: absolute;
-    box-sizing: border-box;
-    overflow-wrap: break-word;
-    overflow-y: scroll;
-    max-height: 6vh;
-    top: 1rem;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: black;
-    color: white;
-    border-radius: 3rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.my-masonry-grid_column > .cat_artworkCard img{ 
+    width: 100%;
 }
 .displayArtworks__Container .categoryComponent .popup_productName h4{
     padding-left: 1rem;

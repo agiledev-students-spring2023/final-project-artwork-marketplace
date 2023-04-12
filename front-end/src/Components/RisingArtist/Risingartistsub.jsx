@@ -30,11 +30,12 @@ const RisingArtistSub = props => {
   }
   
   return (
-    <div className='container RisingArtists_container'>
+    <div className='RA_Parent'>
+      <h1 className="RA_heading">Our Top Artist Picks Of The Day</h1>
       {artists && (
-        <>
+        <div className='container RisingArtists_container'>
         {artists.map((artist) => 
-          <div className='RA_artistCard'>
+          <div className='RA_artistCard' key={artist._id}>
             {artist.products && (
               <div className='RA_artistProfileCard'>
                 {artist.name && (
@@ -63,7 +64,7 @@ const RisingArtistSub = props => {
             </div>
           </div>
         )}
-        </>
+        </div>
       )}
     </div>
   )

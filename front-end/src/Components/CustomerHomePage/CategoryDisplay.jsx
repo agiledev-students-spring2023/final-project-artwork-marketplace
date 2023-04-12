@@ -62,8 +62,10 @@ const CategoryDisplay = props => {
         transition={{duration: 1}}
         className='page_customerHomePage'   
     >
-        <div className='container searchBar__container'>
-            <input className='searchBarTextField' placeholder='Search Categories' value={searchValue} onInput={(e) => handleSearch(e)}/> 
+        <div className="searchBar_bg">
+            <div className='container searchBar__container'>
+                <input className='searchBarTextField' placeholder='Search Categories' value={searchValue} onInput={(e) => handleSearch(e)}/> 
+            </div>
         </div>
         <div className="TopPicks">
             <Link  to="/RisingArtists">
@@ -76,7 +78,7 @@ const CategoryDisplay = props => {
             {categories && (
                 <div className="categoriesColumn" ref={widthRef}>
                     {categories.map((category, index) => 
-                        <div>
+                        <div key={index}>
                         {category.products.length && (
                             <motion.div 
                                 className="categoryRow"

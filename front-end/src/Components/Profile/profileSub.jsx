@@ -59,7 +59,7 @@ const ProfileSub = props => {
                             columnClassName="my-masonry-grid_column"
                           >
                             {userUploadedProducts.map((product) => 
-                              <div className="profile_product_card">
+                              <div className="profile_product_card" key={product._id}>
                                 <div className="product_photo">
                                     <Link to={`/Item/${product._id}`}>
                                         <img src={product.thumbnailURL} alt={product.name}/>
@@ -70,7 +70,7 @@ const ProfileSub = props => {
                                         <h3 className="product_name">
                                             "{product.name}"
                                         </h3>
-                                        <h4 className='product_price'>
+                                        <h4 className={`product_price ${product.status === "sold" ? "sold" : "available"}` }>
                                             ${" " + product.price}
                                         </h4>
                                     </Link>

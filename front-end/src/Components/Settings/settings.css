@@ -1,11 +1,21 @@
 .collapse_section{
     background-color: transparent;
-    text-align: end;
+    display: inline-flex;
+    justify-content: space-between;
+    width: 100%;
     transition: 1s all ease;
+    background-color: black;
+}
+.collapse_section .welcome_CustomerHeading{
+    margin-left: 10%;
+    font-weight: 400;
+    color: white;
+    align-self: center;
 }
 .collapse_section-Active{
     background-color: black;
     transition: 1s all ease;
+    text-align: end;
     overflow: hidden;
 }
 .collapse_button{
@@ -26,18 +36,18 @@
     border: 2px solid rgb(120, 120, 120);
 }
 .collapse_button-Primary{
-    background-color: black;
-    color: white;
+    background-color: white;
+    color: black;
     transition: 1s all ease;
 }
-.collapse_section .collapseActive_options{
+.collapse_section-Active .collapseActive_options{
     display: grid;
     grid-template-columns: 1fr;
     padding-left: 5rem;
     padding-bottom: 1rem;
     overflow: hidden;
 }
-.collapse_section .collapseActive_options button{
+.collapse_section-Active .collapseActive_options button{
     text-align: start;
     font-size: larger;
     cursor: pointer;
@@ -49,11 +59,11 @@
     border-left: 2px solid black;
     border-right: none;
 }
-.collapse_section .collapseActive_options button h5{
+.collapse_section-Active .collapseActive_options button h5{
     margin: 0;
     padding: 1rem;
 }
-.collapse_section .collapseActive_options button:hover{
+.collapse_section-Active .collapseActive_options button:hover{
     background-color: rgb(120, 120, 120);
     color: white;
 }
