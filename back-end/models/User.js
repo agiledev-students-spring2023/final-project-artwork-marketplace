@@ -48,6 +48,10 @@ const userSchema = new Schema(
             required: true,
             min: 8
         },
+        profilePicture_Path: {
+            type: String,
+            required: true
+        },
         products_uploaded: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Artwork'
