@@ -2,6 +2,8 @@ const router = require("express").Router()
 const UsersList = require("../SchemaSamples/AllUsers")
 const bcrypt = require("bcrypt")
 
+const { User } = require('../models/User')
+
 // Register
 router.post("/register", async (req, res) => {
     try{
