@@ -3,50 +3,74 @@ const Schema = mongoose.Schema
 
 const userSchema = new Schema(
     {
-        _id: {
-            type: Number,
-            required: true,
-        },
+        // user Type (customer or artist)
         user: {
             type: String,
             require: true,
+            min: 6,
+            max: 8,
+            trim: true,
+            lowercase: true
         },
         /* first, last, full */
-        name: [{
-            type: String,
-            required: true
-        }],
+        name: {
+            first: {
+                type: String,
+                required: true,
+                trim: true,
+                lowercase: true,
+                min: 1
+            },
+            last: {
+                type: String,
+                required: true,
+                trim: true,
+                lowercase: true,
+                min: 1
+            },
+            full: {
+                type: String,
+                required: true,
+                trim: true,
+                lowercase: true,
+                min: 3 
+            }
+        },
         email: {
             type: String,
             required: true,
+            trim: true,
+            lowercase: true,
+            unique: true
         },
         password: {
             type: String,
             required: true,
+            min: 8
         },
         products_uploaded: [{
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Artwork',
+            ref: 'Artwork'
         }],
         cart: [{
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Artwork',
+            ref: 'Artwork'
         }],
         saved: [{
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Artwork',
+            ref: 'Artwork'
         }],
         following: [{
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'User',
+            ref: 'User'
         }],
         followers: [{
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'User',
+            ref: 'User'
         }]
     },
     {
-        timestamps: true,
+        timestamps: true
     }
 )
 

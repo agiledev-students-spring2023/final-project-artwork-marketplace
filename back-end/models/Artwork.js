@@ -3,10 +3,6 @@ const Schema = mongoose.Schema
 
 const artworkSchema = new Schema(
     {
-        _id: {
-            type: Number,
-            required: true
-        },
         /* connect with user */
         artist_id: {
             type: mongoose.Schema.Types.ObjectId,
@@ -15,19 +11,27 @@ const artworkSchema = new Schema(
         },
         name: {
             type: String,
-            required: true
+            required: true,
+            trim: true,
+            min: 1
         },
         shortDescription: {
             type: String,
-            required: true
+            required: true,
+            trim: true,
+            min: 1
         },
         price: {
             type: Number,
-            required: true
+            required: true,
+            min: 1
         },
         status: {
             type: String,
-            required: true
+            required: true,
+            trim: true,
+            min: 4,
+            max: 5
         },
         thumbnailURL: {
             type: String,

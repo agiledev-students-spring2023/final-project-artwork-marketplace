@@ -3,17 +3,16 @@ const Schema = mongoose.Schema
 
 const categorySchema = new Schema(
     {
-        _id: {
-            type: Number,
-            required: true
-        },
         name: {
             type: String,
-            required: true
+            required: true,
+            trim: true,
+            min: 1
         },
         products_id: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Artwork'
+            ref: 'Artwork',
+            required: false
         }
     },
     {
