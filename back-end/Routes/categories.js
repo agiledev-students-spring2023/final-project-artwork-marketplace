@@ -2,6 +2,10 @@ const router = require("express").Router()
 const CategoryList = require("../SchemaSamples/AllCategories")
 const ProductsList = require("../SchemaSamples/AllProducts")
 
+const { User } = require('../models/User')
+const { Category } = require('../models/Category')
+const { Artwork } = require('../models/Artwork')
+
 // POST new category
 // WIP
 router.post("/", (req, res) => {
