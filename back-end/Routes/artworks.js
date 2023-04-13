@@ -1,10 +1,15 @@
 const router = require("express").Router()
 const ProductsList = require("../SchemaSamples/AllProducts")
 
+const { User } = require('../models/User')
+const { Category } = require('../models/Category')
+const { Artwork } = require('../models/Artwork')
+
 // creating && saving a new artwork
 router.post("/", async (req, res) => {
     try{
         const newArtwork = {
+        // const newartwork = await Artwork.create({
             _id: req.body._id,
             // for now, just id but later, we'll populate with an ARTIST schema
             artist_id: req.body.artist_id,
@@ -17,6 +22,7 @@ router.post("/", async (req, res) => {
             categories_id: req.body.categories_id,
             imagesURL: req.body.imagesURL
         }
+        // )
         if(newArtwork._id === "" || newArtwork.artist_id === "" || newArtwork.shortDescription === "" || newArtwork.price === "" 
             || (newArtwork.status !== "Available") || newArtwork.thumbnailURL === "" || (newArtwork.categories_id.length === 0) 
             || (newArtwork.imagesURL.length === 0)){
@@ -66,6 +72,8 @@ router.get("/:id", async (req, res) => {
     try{
         // will be changed with different function once connected to mongoose
         const artwork = ProductsList.find(product => product._id == req.params.id)
+        // const artwork = await Artwork.find({_id: req.params.id})
+        console.log(artwork)
         res.status(200).json(artwork)
     } catch (err){
         res.status(500).json(err)
@@ -111,12 +119,5 @@ router.get("/activeStatus/:status", async (req, res) => {
         res.status(500).json(err)
     }
 })
-
-// update a single artwork status
-// router.put("/:id/activeStatus/:newStatus", async (req, res) => {
-//     try{
-//     } catch (err){
-//     }
-// })
 
 module.exports = router
