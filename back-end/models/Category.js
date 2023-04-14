@@ -9,11 +9,11 @@ const categorySchema = new Schema(
             trim: true,
             min: 1
         },
-        products_id: {
+        products_id: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Artwork',
             required: false
-        }
+        }]
     },
     {
         timestamps: true

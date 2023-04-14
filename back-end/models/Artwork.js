@@ -31,7 +31,6 @@ const artworkSchema = new Schema(
             required: true,
             trim: true,
             min: 4,
-            max: 5
         },
         thumbnailURL: {
             type: String,
