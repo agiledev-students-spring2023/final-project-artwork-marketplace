@@ -27,6 +27,17 @@ router.post("/AddArt", async (req, res) => {
         }
         const saveArtwork = new Artwork(newArtwork)
         const artwork = await saveArtwork.save()
+
+        /* update category */
+        const categories = await Category.find({_id: req.body.categories_id})
+        const thecategories = categories[0]
+        /* update artwork id into the category field */
+        thecategories.products_id.push(artwork._id)
+        console.log(thecategories)
+        /* save it properly */
+        thecategories.markModified('products_id')
+        await thecategories.save()
+
         return res.status(200).json(artwork._id)
     } catch (err){
         res.status(500).json(err)
@@ -38,6 +49,7 @@ router.post("/AddArt", async (req, res) => {
 router.get("/", async (req, res) => {
     try{
         const artworks = await Artwork.find({})
+        console.log(artworks)
         res.status(200).json(artworks)
     } catch (err){
         res.status(500).json(err)
