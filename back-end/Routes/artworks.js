@@ -14,7 +14,7 @@ router.post("/AddArt", async (req, res) => {
             name: req.body.name,
             shortDescription: req.body.shortDescription,
             price: req.body.price,
-            status: req.body.status,
+            status: "Available",
             thumbnailURL: req.body.thumbnailURL,
             categories_id: req.body.categories_id,
             imagesURL: req.body.imagesURL
@@ -33,7 +33,7 @@ router.post("/AddArt", async (req, res) => {
     }
 })
 
-// getting a list of all artworks (find all of them)
+// getting a list of all artworks
 // routing: done! 
 router.get("/", async (req, res) => {
     try{
@@ -48,7 +48,7 @@ router.get("/", async (req, res) => {
 // routing: done! 
 router.get("/sortedASC", async (req, res) => {
     try{
-        const ascPriceArtworks = await Artwork.find({}).sort({price: -1})
+        const ascPriceArtworks = await Artwork.find({}).sort({price: 1})
         res.status(200).json(ascPriceArtworks)
     } catch (err){
         res.status(500).json(err)
