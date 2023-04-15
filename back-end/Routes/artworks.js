@@ -1,44 +1,67 @@
 const router = require("express").Router()
-const ProductsList = require("../SchemaSamples/AllProducts")
+const multer = require("multer") 
+const path = require("path")
 
 const { User } = require('../models/User')
 const { Category } = require('../models/Category')
 const { Artwork } = require('../models/Artwork')
 
+// multer settings
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, "Public/ProductImages")
+    },
+    filename: function (req, file, cb) {
+      // take apart the uploaded file's name so we can create a new one based on it
+      const extension = path.extname(file.originalname)
+      const basenameWithoutExtension = path.basename(file.originalname, extension)
+      // create a new filename with a timestamp in the middle
+      const newName = `${basenameWithoutExtension}-${Date.now()}${extension}`
+      // tell multer to use this new filename for the uploaded file
+      cb(null, newName)
+    },
+})
+const fileFilter = (req, file, cb) => {
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png']
+    if(allowedTypes.includes(file.mimetype)){
+        cb(null, true)
+    }
+    else{
+        cb(null, false)
+    }
+}
+const upload = multer({ storage, fileFilter })
+
 // creating && saving a new artwork
-// routing: done! 
-router.post("/AddArt", async (req, res) => {
+router.post("/AddArt", upload.array("user_uploads", 3), async (req, res, next) => {
     try{
-        const newArtwork = {
-            artist_id: req.body.artist_id,
-            name: req.body.name,
-            shortDescription: req.body.shortDescription,
-            price: req.body.price,
-            status: "Available",
-            thumbnailURL: req.body.thumbnailURL,
-            categories_id: req.body.categories_id,
-            imagesURL: req.body.imagesURL
+        if (!req.files || req.files.length == 0) {
+            return res.status(400).json({success: false, message: "Please upload some photos!"})
+        } 
+        else if (req.files.length > 3) {
+            return res.status(400).json({success: false, message: "rejected your files... try harder" })
         }
-        if(newArtwork.artist_id === "" || newArtwork.name === "" || newArtwork.shortDescription === "" || newArtwork.price === ""  
-            || (newArtwork.status !== "Available") || newArtwork.thumbnailURL === "" || (newArtwork.categories_id.length === 0) 
-            || (newArtwork.imagesURL.length === 0)){
-                console.log(req.body)
-                return res.status(400).json("Artwork does not meet requirement!")
+        else{
+            const thumbnailPath = "/static/ProductImages/" + req.files[0].filename
+            const imagePaths = []
+            await req.files.forEach(file => imagePaths.push("/static/ProductImages/" + file.filename))
+            const newArtwork = {
+                artist_id: req.body.artist_id,
+                name: req.body.name,
+                shortDescription: req.body.shortDescription,
+                price: req.body.price,
+                status: "Available",
+                thumbnailURL: thumbnailPath,
+                categories_id: req.body.categories_id,
+                imagesURL: imagePaths
+            }
+            const saveArtwork = new Artwork(newArtwork)
+            const artwork = await saveArtwork.save({returnOriginal: false})
+
+            /* update each category */
+            const categories = await Category.updateMany({_id: req.body.categories_id}, {$addToSet: { products_id: artwork._id }}, {returnOriginal: false})
+            return res.status(200).json(artwork)
         }
-        const saveArtwork = new Artwork(newArtwork)
-        const artwork = await saveArtwork.save()
-
-        /* update category */
-        const categories = await Category.find({_id: req.body.categories_id})
-        const thecategories = categories[0]
-        /* update artwork id into the category field */
-        thecategories.products_id.push(artwork._id)
-        console.log(thecategories)
-        /* save it properly */
-        thecategories.markModified('products_id')
-        await thecategories.save()
-
-        return res.status(200).json(artwork._id)
     } catch (err){
         res.status(500).json(err)
     }

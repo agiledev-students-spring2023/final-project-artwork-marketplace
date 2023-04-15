@@ -1,6 +1,4 @@
 const router = require("express").Router()
-const CategoryList = require("../SchemaSamples/AllCategories")
-const ProductsList = require("../SchemaSamples/AllProducts")
 
 const { User } = require('../models/User')
 const { Category } = require('../models/Category')
@@ -21,7 +19,7 @@ router.post("/addCategory", async (req, res) => {
 // GET all categories + artworks 
 router.get("/", async (req, res) => {
     try{
-        const categories = await Category.find({})
+        const categories = await Category.find({}).populate({path: "products_id"})
         res.status(200).json(categories)
     } catch (err){
         res.status(500).json(err)
@@ -29,19 +27,19 @@ router.get("/", async (req, res) => {
 })
 
 // GET category by ID
-router.get("/:id", async (req, res) => {
+router.get("/category/:id", async (req, res) => {
     try{
-        const categories = await Category.find({_id: req.params.id})
-        res.status(200).json(categories)
+        const category = await Category.findOne({_id: req.params.id}).populate({path: "products_id"})
+        res.status(200).json(category)
     } catch (err){
         res.status(500).json(err)
     }
 })
 
-// GET category by product ID
+// GET categories by product ID
 router.get("/product/:id", async(req, res) => {
     try{
-        const artworkCategories = await Category.find({products_id: req.params.id})
+        const artworkCategories = await Category.find({products_id: req.params.id}).populate({path: "products_id"})
         res.status(200).json(artworkCategories)
     } catch (err){
         res.status(500).json(err)

@@ -1,10 +1,37 @@
 const router = require("express").Router()
-const UsersList = require("../SchemaSamples/AllUsers")
 const bcrypt = require("bcrypt")
+const multer = require("multer") 
+const path = require("path")
 
 const { User } = require('../models/User')
 const { Category } = require('../models/Category')
 const { Artwork } = require('../models/Artwork')
+
+// multer settings
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, "Public/Images/DisplayPictures")
+    },
+    filename: function (req, file, cb) {
+      // take apart the uploaded file's name so we can create a new one based on it
+      const extension = path.extname(file.originalname)
+      const basenameWithoutExtension = path.basename(file.originalname, extension)
+      // create a new filename with a timestamp in the middle
+      const newName = `${basenameWithoutExtension}-${Date.now()}${extension}`
+      // tell multer to use this new filename for the uploaded file
+      cb(null, newName)
+    },
+})
+const fileFilter = (req, file, cb) => {
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png']
+    if(allowedTypes.includes(file.mimetype)){
+        cb(null, true)
+    }
+    else{
+        cb(null, false)
+    }
+}
+const uploadd = multer({ storage, fileFilter })
 
 // Register
 router.post("/register", async (req, res) => {
@@ -129,6 +156,23 @@ router.get("/user/:id", async (req, res) => {
         return res.status(200).json(user)
     } catch (err){
         console.log(err)
+        res.status(500).json(err)
+    }
+})
+
+// change profile picture
+router.post("/user/:id/changeProfilePicture", uploadd.single('user_profilePicture'), async (req, res, next) => {
+    try {
+        if (!req.file){
+            return res.status(400).json({success: false, message: "Please upload a profile picture!"})
+        }
+        else{
+            const user = await User.findByIdAndUpdate({_id: req.params.id}, {$set: {"profilePicture_Path" : "/static/Images/DisplayPictures/" + req.file.filename}}, {returnOriginal: false})
+            // return new profile pic path
+            const newProfilePicPath = user.profilePicture_Path
+            return res.status(200).json(newProfilePicPath)
+        }
+    } catch (err){
         res.status(500).json(err)
     }
 })
