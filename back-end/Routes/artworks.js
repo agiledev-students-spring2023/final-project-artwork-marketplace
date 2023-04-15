@@ -160,4 +160,15 @@ router.get("/activeStatus/:status", async (req, res) => {
     }
 })
 
+// update status of an artwork
+router.put("/artwork/:id/changeStatus/:newStatus", async (req, res) => {
+    try{
+        const newStatusString = req.params.newStatus.trim().toLowerCase()
+        const artworkWithUpdatedStatus = await Artwork.findByIdAndUpdate({_id: req.params.id}, {$set: { "status": newStatusString}}, {returnOriginal: false})
+        res.status(200).json(artworkWithUpdatedStatus.status)
+    } catch (err){
+        res.status(500).json(err)
+    }
+})
+
 module.exports = router
