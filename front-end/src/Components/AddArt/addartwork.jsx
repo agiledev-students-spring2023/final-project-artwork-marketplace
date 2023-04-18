@@ -103,12 +103,13 @@ const AddArtWork = props => {
                 artist_id: props.user._id,
                 name: theName,
                 shortDescription: theDescription,
-                price: thePrice,
+                price: Number(thePrice),
                 categories_id: categoryresult,
                 imagesURL: ["111","222","333"]
             }
+            console.log(props.user._id)
             try{
-                const response = await axios.post(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks/AddArt`, 
+                const res = await axios.post(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks/AddArt`, 
                     newProduct,
                     {headers: {Authorization: `JWT ${localStorage.getItem("token")}`}}
                 )

@@ -27,6 +27,7 @@ const App = props => {
     else{
       setUser({})
     }
+    console.log(user)
   }, [localStorage.getItem("user")])
 
   return (
