@@ -47,7 +47,7 @@ router.get("/featuredArtwork", async (req, res) => {
 // creating && saving a new artwork
 router.post("/AddArt", passport.authenticate("jwt", { session: false }), upload.array("user_uploads", 3), async (req, res, next) => {
     try{
-        console.log(req)
+        console.log("1111")
         if (!req.files || req.files.length == 0) {
             return res.status(400).json({success: false, message: "Please upload some photos!"})
         } 
