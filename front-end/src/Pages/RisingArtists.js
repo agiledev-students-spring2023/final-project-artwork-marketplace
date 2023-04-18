@@ -4,7 +4,7 @@ import Navbar from '../Components/Navbar/Navbar'
 import Settings from '../Components/Settings/Settings'
 import { motion } from 'framer-motion'
 
-const thisRisingArtist = props => {
+const RisingArtists = props => {
     return (
       <div>
         <motion.div
@@ -30,4 +30,4 @@ const thisRisingArtist = props => {
     )
 }
   
-export default thisRisingArtist
+export default RisingArtists

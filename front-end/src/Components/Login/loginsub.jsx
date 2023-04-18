@@ -14,12 +14,10 @@ const Loginsub = props => {
 
     useEffect(() => {
         const getLatestFeatured = async () => {
-            const random_productID = Math.floor(Math.random() * 15) + 1;
-            const getRandomProduct = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks/${random_productID}`)
-            const random_product = getRandomProduct.data
-            const getArtist = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/user/${random_product.artist_id}`)
-            const artist = getArtist.data
-            setRFP(random_product)
+            const getFeaturedProduct = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks/featuredArtwork`)
+            const featured_product = getFeaturedProduct.data
+            const artist = featured_product.artist_id
+            setRFP(featured_product)
             setArtistOfProd(artist)
         }
         getLatestFeatured()
@@ -35,9 +33,20 @@ const Loginsub = props => {
             const res = await axios.post(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/login`, newUser)
             if(res.status === 200){
                 setLoginError("")
-                const user = res.data
-                props.setuser(user)
-                navigate("/")
+                if(res.data.success && res.data.id && res.data.token){
+                    try {
+                        const getUser = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/user/${res.data.id}`,
+                            {headers: {Authorization: `JWT ${res.data.token}`}, 
+                        })
+                        const user = getUser.data
+                        localStorage.setItem("token", res.data.token)
+                        localStorage.setItem("user", JSON.stringify(user))
+                        props.setuser(user)
+                        navigate("/")
+                    } catch (err) {
+                        setLoginError(err.response.data.message)
+                    }
+                }
             }
         } catch (err){
             if(err.response.status === 400){
@@ -56,7 +65,7 @@ const Loginsub = props => {
                     {loginError}
                 </div>
             )}
-    	<div className="login_loginheader">
+        <div className="login_loginheader">
             <div className="login_featured">
                 {/* Featured Artwork */}
                 {randomFeaturedProduct && artistOfProd.name && (

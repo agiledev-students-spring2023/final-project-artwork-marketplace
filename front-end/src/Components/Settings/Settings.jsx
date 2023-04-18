@@ -12,7 +12,7 @@ const Settings = props => {
   
   useEffect(() => {
     const checkChecked = () => {
-        if(props.user.user === "Artist"){
+        if(props.user.user === "artist"){
             setChecked(true)
         }
         else{
@@ -29,17 +29,19 @@ const Settings = props => {
 
   const handleLogOut = () => {
     props.setuser({})
+    localStorage.removeItem("token")
+    localStorage.removeItem("user")
   }
 
   const handleUserChange = (async () => {
-    if(props.user.user === "Artist"){
-        setUserType("Customer")
-        props.setuser({... props.user, user: "Customer"})
+    if(props.user.user === "artist"){
+        setUserType("customer")
+        props.setuser({...props.user, user: "customer"})
         setChecked(false)
     }
     else{
-        setUserType("Artist")
-        props.setuser({... props.user, user: "Artist"})
+        setUserType("artist")
+        props.setuser({...props.user, user: "artist"})
         setChecked(true)
     }
   })
@@ -79,10 +81,10 @@ const Settings = props => {
                     transition={{duration:0.3}} 
                     exit={{opacity:0}}
                 >
-                    {userType === "Artist" &&(
+                    {userType === "artist" &&(
                         <h3>Customer</h3>
                     )}
-                    {userType === "Customer" &&(
+                    {userType === "customer" &&(
                         <h3 className='user_type'>{userType}</h3>
                     )}
                     <div className="switch">
@@ -97,10 +99,10 @@ const Settings = props => {
                             onChange={handleUserChange}
                         />
                     </div>
-                    {userType === "Artist" &&(
+                    {userType === "artist" &&(
                         <h3 className='user_type'>{userType}</h3>
                     )}
-                    {userType === "Customer" &&(
+                    {userType === "customer" &&(
                         <h3>Artist</h3>
                     )}
                     

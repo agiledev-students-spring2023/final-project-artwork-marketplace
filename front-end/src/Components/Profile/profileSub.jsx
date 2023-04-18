@@ -8,23 +8,30 @@ import { motion } from 'framer-motion'
 const ProfileSub = props => {
     const getUserParamsID = useParams()
     const userId = getUserParamsID.userID
+    const userObject = JSON.parse(localStorage.getItem("user"))
 
     const [userInfo, setUserInfo] = useState({})
     const [userUploadedProducts, setUserUploadedProducts] = useState([])
 
     useEffect(() => {
         const getProductInfo = async () => {
-          try{
-            const getUser = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/user/${userId}`)
-            const user = getUser.data
-            const getProducts = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks`)
-            const AllProducts = getProducts.data
-            const userProducts = AllProducts.filter(product => product.artist_id === user._id)
-            setUserInfo(user)
-            setUserUploadedProducts(userProducts)
-          } catch (err){
-            console.log(err)
-          } 
+            if(userObject._id === userId){
+                setUserInfo(userObject)
+                setUserUploadedProducts(userObject.products_uploaded)
+            }
+            else{
+                try{
+                    const getUser = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/user/${userId}`, 
+                        {headers: {Authorization: `JWT ${localStorage.getItem("token")}`}, 
+                    })
+                    const user = getUser.data
+                    const products = user.products_uploaded
+                    setUserInfo(user)
+                    setUserUploadedProducts(products)
+                } catch (err){
+                    console.log(err)
+                } 
+            }          
         }
         getProductInfo()
     }, [])
@@ -80,7 +87,7 @@ const ProfileSub = props => {
                           </Masonry>
                         )}
                         {userUploadedProducts.length === 0 && (
-                            <div>{userInfo.name.full} Has Not Published Any Artworks Yet!</div>
+                            <div className='profile_emptyProducts'>{userInfo.name.full} Has Not Published Any Artworks Yet!</div>
                         )}
                         </>
                     )}

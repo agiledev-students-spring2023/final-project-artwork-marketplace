@@ -11,6 +11,7 @@
     font-weight: 400;
     color: white;
     align-self: center;
+    text-transform: capitalize;
 }
 .collapse_section-Active{
     background-color: black;
@@ -80,7 +81,8 @@
     transition: 1s ease all;
 }
 .collapseActive_switch .user_type{
-    color: #357637;    
+    color: #357637;
+    text-transform: capitalize;    
 }
 /* FOR TABLETS */
 @media screen and (max-width: 1024px){

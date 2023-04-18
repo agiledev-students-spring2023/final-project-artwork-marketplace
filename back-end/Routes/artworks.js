@@ -1,6 +1,7 @@
 const router = require("express").Router()
 const multer = require("multer") 
 const path = require("path")
+const passport = require("passport")
 
 const { User } = require('../models/User')
 const { Category } = require('../models/Category')
@@ -32,8 +33,19 @@ const fileFilter = (req, file, cb) => {
 }
 const upload = multer({ storage, fileFilter })
 
+// public featuredArtwork route
+router.get("/featuredArtwork", async (req, res) => {
+    try{
+        // get most recent uploaded artwork and populate with artist name
+        const featuredArtwork = Artwork.find().limit(1).sort({$natural: -1}).populate({path: 'artist_id', select: 'name'})
+        return res.status(400).json(featuredArtwork)
+    } catch (err){
+        res.status(500).json(err)
+    }
+})
+
 // creating && saving a new artwork
-router.post("/AddArt", upload.array("user_uploads", 3), async (req, res, next) => {
+router.post("/AddArt", passport.authenticate("jwt", { session: false }), upload.array("user_uploads", 3), async (req, res, next) => {
     try{
         if (!req.files || req.files.length == 0) {
             return res.status(400).json({success: false, message: "Please upload some photos!"})
@@ -69,7 +81,7 @@ router.post("/AddArt", upload.array("user_uploads", 3), async (req, res, next) =
 
 // getting a list of all artworks
 // routing: done! 
-router.get("/", async (req, res) => {
+router.get("/", passport.authenticate("jwt", { session: false }), async (req, res) => {
     try{
         const artworks = await Artwork.find({})
         console.log(artworks)
@@ -81,7 +93,7 @@ router.get("/", async (req, res) => {
 
 // getting a list of all artworks sorted by price ASC (ascending/ low->high)
 // routing: done! 
-router.get("/sortedASC", async (req, res) => {
+router.get("/sortedASC", passport.authenticate("jwt", { session: false }), async (req, res) => {
     try{
         const ascPriceArtworks = await Artwork.find({}).sort({price: 1})
         res.status(200).json(ascPriceArtworks)
@@ -92,7 +104,7 @@ router.get("/sortedASC", async (req, res) => {
 
 // getting a list of all artworks sorted by price DES (descending/ high->low)
 // routing: done! 
-router.get("/sortedDES", async (req, res) => {
+router.get("/sortedDES", passport.authenticate("jwt", { session: false }), async (req, res) => {
     try{
         const desPriceArtworks = await Artwork.find({}).sort({price: -1})
         res.status(200).json(desPriceArtworks)
@@ -115,7 +127,7 @@ router.get("/:id", async (req, res) => {
 
 // get artworks by artist_id
 // routing: done! 
-router.get("/artist/:id", async (req, res) => {
+router.get("/artist/:id", passport.authenticate("jwt", { session: false }), async (req, res) => {
     try{
         const artworksByArtist = await Artwork.find({artist_id: req.params.id})
         res.status(200).json(artworksByArtist)
@@ -126,7 +138,7 @@ router.get("/artist/:id", async (req, res) => {
 
 // get artworks by category_id
 // routing: done! 
-router.get("/category/:id", async (req, res) => {
+router.get("/category/:id", passport.authenticate("jwt", { session: false }), async (req, res) => {
     try{
         const artworksByCategory = await Artwork.find({categories_id: req.params.id})
         res.status(200).json(artworksByCategory)
@@ -137,7 +149,7 @@ router.get("/category/:id", async (req, res) => {
 
 // get artworks in price range
 // routing: done! 
-router.get("/priceRange/:lower/:higher", async (req, res) => {
+router.get("/priceRange/:lower/:higher", passport.authenticate("jwt", { session: false }), async (req, res) => {
     try{
         const artworksInPriceRange = await Artwork.find({price: {$lte: req.params.higher, $gte: req.params.lower}})
         res.status(200).json(artworksInPriceRange)
@@ -151,7 +163,7 @@ router.get("/priceRange/:lower/:higher", async (req, res) => {
 
 // get artworks by status
 // routing: done! 
-router.get("/activeStatus/:status", async (req, res) => {
+router.get("/activeStatus/:status", passport.authenticate("jwt", { session: false }), async (req, res) => {
     try{
         const artworksByStatus = await Artwork.find({status: req.params.status})
         res.status(200).json(artworksByStatus)
@@ -161,7 +173,7 @@ router.get("/activeStatus/:status", async (req, res) => {
 })
 
 // update status of an artwork
-router.put("/artwork/:id/changeStatus/:newStatus", async (req, res) => {
+router.put("/artwork/:id/changeStatus/:newStatus", passport.authenticate("jwt", { session: false }), async (req, res) => {
     try{
         const newStatusString = req.params.newStatus.trim().toLowerCase()
         const artworkWithUpdatedStatus = await Artwork.findByIdAndUpdate({_id: req.params.id}, {$set: { "status": newStatusString}}, {returnOriginal: false})

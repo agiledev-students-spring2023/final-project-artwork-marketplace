@@ -38,10 +38,10 @@ const Home = props => {
             transition={{duration: 1}}
             key={"HomePage"}
           >
-            {props.user.user === "Customer" && (
+            {props.user.user === "customer" && (
                 <CategoryDisplay user={props.user} />
             )}
-            {props.user.user === "Artist" && (
+            {props.user.user === "artist" && (
                 <ArtistProducts user={props.user} />
             )}
           </motion.div>
