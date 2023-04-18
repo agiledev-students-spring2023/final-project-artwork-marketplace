@@ -13,7 +13,9 @@ const ArtistProducts = props => {
     useEffect(() => {
       const getArtistInfo = async () => {
         try{
-          const getProducts = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks`)
+          const getProducts = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks`,
+            {headers: {Authorization: `JWT ${localStorage.getItem("token")}`}}
+          )
           const AllProducts = getProducts.data
           const artist_id = props.user._id
           const artist_name = props.user.name.full
