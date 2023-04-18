@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom'
 const AddArtWork = props => {
     const navigate = useNavigate()
     const [AllCategories, setAllCategories] = useState([])
+    const [AllCategoriesid, setAllCategoriesid] = useState([])
     const [addrtype, setAddrtype] = useState([])
     const [file,setFile] = useState()
     const [file2,setFile2] = useState()
@@ -25,9 +26,18 @@ const AddArtWork = props => {
     useEffect(() => {
         const saveCategories = async () => {
           try{
-            const getCategories = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/categories/`)
+            const getCategories = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/categories/`,
+                {headers:{Authorization: `JWT ${localStorage.getItem("token")}`}},
+            )
             const Categories = getCategories.data
-            setAllCategories(Categories)
+            var categorylst = [];
+            var categoryid = [];
+            for (i = 0; i < Categories.length; i++){
+                categorylst.push(Categories[i].name)
+                categoryid.push(Categories[i]._id)
+            }
+            setAllCategories(categorylst)
+            setAllCategoriesid(categoryid)
           } catch (err){
             console.log(err)
           } 
@@ -37,7 +47,7 @@ const AddArtWork = props => {
 
     var testcase = [];
     for (var i = 0; i < AllCategories.length; i++){
-        testcase.push({'label': AllCategories[i].name, 'value': AllCategories[i]._id});
+        testcase.push({'label': AllCategories[i], 'value': AllCategoriesid[i]});
     }
 
     /* check whether inputs are numeric */
@@ -90,21 +100,22 @@ const AddArtWork = props => {
             alert('You have successfully added an artwork! ')   
             /* product profile */
             const newProduct = {
-                _id: Math.random(),
                 artist_id: props.user._id,
                 name: theName,
                 shortDescription: theDescription,
-                price: thePrice,
-                status: "available",
-                thumbnailURL: "",
+                price: Number(thePrice),
                 categories_id: categoryresult,
-                imagesURL: ["","",""]
+                imagesURL: ["111","222","333"]
             }
-            /* check server here but for now just print user data to console
+            console.log(props.user._id)
             try{
-                await axios.post(...)
+                const res = await axios.post(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks/AddArt`, 
+                    newProduct,
+                    {headers: {Authorization: `JWT ${localStorage.getItem("token")}`}}
+                )
+            } catch (err){
+                console.log(err)
             }
-            */
             console.log(newProduct)  
             navigate("/")       
         }

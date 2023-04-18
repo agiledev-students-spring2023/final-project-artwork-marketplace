@@ -26,9 +26,13 @@ const CategoryDisplay = props => {
   useEffect(() => {
     const getCategories = async ()=>{
         try{
-            const getCategories = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/categories`)
+            const getCategories = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/categories`,
+                {headers: {Authorization: `JWT ${localStorage.getItem("token")}`}}
+            )
             const categoriesCopy = getCategories.data
-            const getProducts = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks`)
+            const getProducts = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks`,
+                {headers: {Authorization: `JWT ${localStorage.getItem("token")}`}}
+            )
             const AllProducts = getProducts.data
             categoriesCopy.forEach(category => {category['products'] =  AllProducts.filter(product => category.products_id.includes(product._id))})
             setCategories(categoriesCopy)
