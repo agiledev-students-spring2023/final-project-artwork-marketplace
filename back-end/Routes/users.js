@@ -2,10 +2,10 @@ const router = require("express").Router()
 const bcrypt = require("bcrypt")
 const multer = require("multer") 
 const path = require("path")
+const jwt = require("jsonwebtoken")
+const passport = require("passport")
 
 const { User } = require('../models/User')
-const { Category } = require('../models/Category')
-const { Artwork } = require('../models/Artwork')
 
 // multer settings
 const storage = multer.diskStorage({
@@ -58,9 +58,19 @@ router.post("/register", async (req, res) => {
 
         const saveUser = new User(newUser)
         const user = await saveUser.save()
-        res.status(200).json(user._id)
+        const token = user.generateJWT()
+        res.status(200).json({ 
+            success: true,
+            message: "User saved successfully",
+            token: token,
+            id: user._id
+        })
     } catch (err){
-        res.status(500).json(err)
+        res.status(500).json({
+            success: false,
+            message: "Error saving user to database.",
+            error: err,
+        })
     }
 })
 
@@ -90,33 +100,27 @@ router.post("/login", async (req, res) => {
             return res.status(400).json({success: false, message: "Wrong Username and/or Password!"})
         }
         else{
-            const newUser = {
+            const token = user.generateJWT()
+            const foundUser = {
                 success: true,
                 message: "Successful Login!",
-                _id: user._id,
-                user: user.user,
-                email: user.email,
-                name: {
-                    first: user.name.first,
-                    last: user.name.last,
-                    full: user.name.full
-                },
-                profilePicture_Path: user.profilePicture_Path,
-                products_uploaded: user.products_uploaded,
-                cart: user.cart,
-                saved: user.saved,
-                following: user.following,
-                followers: user.followers
+                token: token, 
+                id: user._id
             }
-            return res.status(200).json(newUser)
+            return res.status(200).json(foundUser)
         }
     } catch (err){
-        res.status(500).json(err)
+        console.log(err)
+        res.status(500).json({
+            success: false,
+            message: "Error looking up user in database.",
+            error: err
+        })
     }
 })
 
 // get user info by user id
-router.get("/user/:id", async (req, res) => {
+router.get("/user/:id", passport.authenticate("jwt", { session: false }), async (req, res) => {
     try{
         const userFind = await User.findOne({_id: req.params.id})
             .populate([
@@ -161,7 +165,7 @@ router.get("/user/:id", async (req, res) => {
 })
 
 // change profile picture
-router.post("/user/:id/changeProfilePicture", uploadd.single('user_profilePicture'), async (req, res, next) => {
+router.post("/user/:id/changeProfilePicture", passport.authenticate("jwt", { session: false }), uploadd.single('user_profilePicture'), async (req, res, next) => {
     try {
         if (!req.file){
             return res.status(400).json({success: false, message: "Please upload a profile picture!"})
@@ -178,7 +182,7 @@ router.post("/user/:id/changeProfilePicture", uploadd.single('user_profilePictur
 })
 
 // get a list of rising artists
-router.get("/risingArtists", async(req, res) => {
+router.get("/risingArtists", passport.authenticate("jwt", { session: false }), async(req, res) => {
     try{
         // find user with at least one product uploaded
         const users = await User.find({ $nor: [{products_uploaded: {$exists: false}}, {products_uploaded: {$size: 0}}]}).select('-password -cart -saved')
@@ -193,7 +197,7 @@ router.get("/risingArtists", async(req, res) => {
 })
 
 // add product by id to user cart
-router.put("/user/:userID/cart/:productID", async(req, res) => {
+router.put("/user/:userID/cart/:productID", passport.authenticate("jwt", { session: false }), async(req, res) => {
     try{
         // find user by ID and then add to their cart
         const findUserAndUpdateCart = await User
@@ -208,7 +212,7 @@ router.put("/user/:userID/cart/:productID", async(req, res) => {
 })
 
 // remove product by id from user cart
-router.delete("/user/:userID/cart/:productID", async(req, res) => {
+router.delete("/user/:userID/cart/:productID", passport.authenticate("jwt", { session: false }), async(req, res) => {
     try{
         // find user by ID and then remove from their cart
         const findUserAndUpdateCart = await User
@@ -223,7 +227,7 @@ router.delete("/user/:userID/cart/:productID", async(req, res) => {
 })
 
 // add product by id to user saved list
-router.put("/user/:userID/saved/:productID", async(req, res) => {
+router.put("/user/:userID/saved/:productID", passport.authenticate("jwt", { session: false }), async(req, res) => {
     try{
         // find user by ID and then add to their saved list
         const findUserAndUpdateSaved = await User
@@ -238,7 +242,7 @@ router.put("/user/:userID/saved/:productID", async(req, res) => {
 })
 
 // remove product by id from user saved list
-router.delete("/user/:userID/saved/:productID", async(req, res) => {
+router.delete("/user/:userID/saved/:productID", passport.authenticate("jwt", { session: false }), async(req, res) => {
     try{
         // find user by ID and then remove from their saved list
         const findUserAndUpdateSaved = await User
@@ -253,7 +257,7 @@ router.delete("/user/:userID/saved/:productID", async(req, res) => {
 })
 
 // user1 follows user2
-router.put("/:user1/follow/:user2", async(req, res) => {
+router.put("/:user1/follow/:user2", passport.authenticate("jwt", { session: false }), async(req, res) => {
     try{
         const findUser1AndUpdateFollowing = await User
             .findByIdAndUpdate({_id: req.params.user1}, {$addToSet: { following: req.params.user2 }}, {returnOriginal: false})
@@ -271,7 +275,7 @@ router.put("/:user1/follow/:user2", async(req, res) => {
 })
 
 // user1 unfollows user2
-router.delete("/:user1/unfollow/:user2", async(req, res) => {
+router.delete("/:user1/unfollow/:user2", passport.authenticate("jwt", { session: false }), async(req, res) => {
     try{
         // find user by ID and then remove from their saved list
         const findUser1AndUpdateFollowing = await User

@@ -37,7 +37,6 @@ const SignUpSub = props => {
       }
       try{
         await axios.post(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/register`, newUser)
-        console.log(newUser)
         navigate("/Login")
       } catch (err) {
         setPasswordError(err)

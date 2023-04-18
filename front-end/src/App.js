@@ -1,6 +1,6 @@
 // import logo from './logo.svg'
 import './App.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import { AnimatePresence } from 'framer-motion'
 import Home from './Pages/Home'
@@ -11,41 +11,25 @@ import AddArt from './Pages/AddArt'
 import Category from './Pages/CategoryPage'
 import ViewItem from './Pages/ViewItem'
 import ViewCart from './Pages/ViewCart'
-import RisingArtist from './Pages/RisingArtist'
+import RisingArtist from './Pages/RisingArtists'
 import Profile from './Pages/Profile'
 
 
 const App = props => {
-  const [user, setUser] = useState(
-  {
-    "_id": 1,
-    "user": "Customer",
-    "name": {
-      "first": "Curry",
-      "last": "Romney",
-      "full": "Curry Romney"
-    },
-    "email": "artist1@artist.com",
-    "password": "$2b$10$dqfbi162SmJAB6NNlyelZuB8Mu.pX4NV6ldCgKMbNunHoWHERTMuu",
-    "products_uploaded": [
-        7,
-        10,
-        15
-    ],
-    "cart": [
-      2,
-      3,
-      5
-    ],
-    "saved": [
-    ],
-    "following" : [
-      2
-    ],
-    "followers" : [
-    ]
-  }
-  )
+  const [user, setUser] = useState(localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : {})
+  
+  useEffect(() => {
+    const getUser = localStorage.getItem("user")
+    if (getUser){
+      const userObject = JSON.parse(getUser)
+      setUser(userObject)
+    }
+    else{
+      setUser({})
+    }
+    console.log(user)
+  }, [localStorage.getItem("user")])
+
   return (
     <AnimatePresence mode={'wait'}>
     <BrowserRouter>
@@ -63,14 +47,14 @@ const App = props => {
           {user.user &&(
             <>
               {/* ARTIST EXCLUSIVE USER ROUTES */}
-              {user.user === "Artist" &&(
+              {user.user === "artist" &&(
                 <>
                   <Route path="/" element={<Home user={user} setuser={setUser}/>}/>
                   <Route path="/AddArt" element={<AddArt user={user} setuser={setUser}/>}/>
                 </>
               )}
               {/* CUSTOMER EXCLUSIVE USER ROUTES */}
-              {user.user === "Customer" &&(
+              {user.user === "customer" &&(
                 <>
                   <Route path="/" element={<Home user={user} setuser={setUser}/>}/>
                   <Route path="/Cart" element={<ViewCart user={user} setuser={setUser}/>}/>

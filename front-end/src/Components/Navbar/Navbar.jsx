@@ -8,7 +8,7 @@ import './navbar.css'
 const Navbar = props => {
   return (
     <nav>
-      {props.user.user === "Artist" && (
+      {props.user.user === "artist" && (
         <>
             {/* Home */}
             <NavLink 
@@ -35,7 +35,7 @@ const Navbar = props => {
             </NavLink>
         </>
       )}
-      {props.user.user === "Customer" &&(
+      {props.user.user === "customer" &&(
         <>
             {/* Cart */}
             <NavLink 
