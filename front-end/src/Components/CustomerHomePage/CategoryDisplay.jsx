@@ -107,7 +107,6 @@ const CategoryDisplay = props => {
                                         >
                                             {category.products_id.map((product) =>
                                                 <motion.div key={product._id} className='product_Card'>
-                                                    
                                                     <div className="product_image_Display">
                                                         <img src={product.thumbnailURL} alt={product.name} />
                                                     </div>

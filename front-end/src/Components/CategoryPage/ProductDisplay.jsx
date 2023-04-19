@@ -18,11 +18,25 @@ const ProductDisplay = props => {
         )
         const AllProducts = getProducts.data
         const ID = getCategoryID.categoryID
-        const getCategory = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/categories/${ID}`,
+        const getCategory = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/categories/category/${ID}`,
           {headers: {Authorization: `JWT ${localStorage.getItem("token")}`}}
         )
         const foundCategory = getCategory.data
-        const productsOfCategory = AllProducts.filter(product => foundCategory.products_id.includes(product._id))
+        
+        // const productsOfCategory = AllProducts.filter(product => foundCategory.products_id.includes(product._id))
+
+        /* that is a stupid way of finding */
+        /* but to some reasons the data format through filter does not work properly, so using that way */
+        var productsOfCategory = []
+        for (var i = 0; i < AllProducts.length; i++){
+          const prodid = AllProducts[i]._id
+          const cateidlst = foundCategory.products_id
+          for (var j = 0; j < cateidlst.length; j++){
+            if (prodid === cateidlst[j]._id){
+              productsOfCategory.push(AllProducts[i])
+            }
+          }
+        }
         setCategory(foundCategory)
         setProducts(productsOfCategory)
       } catch (err) {
@@ -31,6 +45,7 @@ const ProductDisplay = props => {
     }
     findCategory()
   }, [])
+
 
   // for responsive styling
   const breakpointColumnsObj = {
