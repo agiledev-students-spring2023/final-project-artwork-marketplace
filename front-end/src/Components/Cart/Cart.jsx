@@ -13,7 +13,9 @@ const Cart = props => {
   useEffect(() => {
     const getCart = async () => {
         try{    
-            const getProducts = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks`)
+            const getProducts = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks`,
+                {headers: {Authorization: `JWT ${localStorage.getItem("token")}`}}
+            )
             const AllProducts = getProducts.data
             const userCart = props.user.cart
             const userSaved = props.user.saved

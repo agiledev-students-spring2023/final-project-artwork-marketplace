@@ -10,10 +10,14 @@ const RisingArtistSub = props => {
   useEffect(() => {
     const getProductInfo = async () => {
       try{
-        const getUsers = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/risingArtists`)
+        const getUsers = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/risingArtists`,
+          {headers: {Authorization: `JWT ${localStorage.getItem("token")}`}}
+        )
         const users = getUsers.data
         const usersWithProducts = users.filter(user => user.products_uploaded.length !== 0)
-        const getProducts = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks`)
+        const getProducts = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks`,
+          {headers: {Authorization: `JWT ${localStorage.getItem("token")}`}}
+        )
         const AllProducts = getProducts.data
         usersWithProducts.forEach(user => {user['products'] = AllProducts.filter(product => user.products_uploaded.includes(product._id))})
         usersWithProducts.forEach(user => user.products.length = 1)

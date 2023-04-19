@@ -14,7 +14,6 @@ import ViewCart from './Pages/ViewCart'
 import RisingArtist from './Pages/RisingArtists'
 import Profile from './Pages/Profile'
 
-
 const App = props => {
   const [user, setUser] = useState(localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : {})
   
