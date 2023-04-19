@@ -44,7 +44,7 @@ const CategoryDisplay = props => {
     }
     getCategories()
   }, [])
-  console.log(categories)
+//   console.log(categories)
 
   const handleSearch = (e) => {
     if(e.target.value == '' && categories && copyOfCategories){
