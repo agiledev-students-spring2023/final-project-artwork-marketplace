@@ -27,7 +27,6 @@ const App = props => {
     else{
       setUser({})
     }
-    console.log(user)
   }, [localStorage.getItem("user")])
 
   return (
@@ -37,10 +36,10 @@ const App = props => {
           {/* Pre-Login Routes */}
           {!user.user && (
             <>
-              <Route path="/" element={<Home user={user}/>}/>
+              <Route path="/" element={<Home user={user} setuser={setUser}/>}/>
               <Route path="/Login" element={<Login user={user} setuser={setUser}/>}/>
-              <Route path="/SignUp" element={<SignUp user={user}/>}/>
-              <Route path="/AboutUs" element={<AboutUs user={user}/>}/>
+              <Route path="/SignUp" element={<SignUp user={user} setuser={setUser}/>}/>
+              <Route path="/AboutUs" element={<AboutUs user={user} setuser={setUser}/>}/>
             </>
           )}
           {/* Post-Login Routes */}

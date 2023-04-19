@@ -1,4 +1,5 @@
 import React from 'react'
+import ListNewArtwork from '../Components/AddArt/ListNewArtwork'
 import AddArtWork from '../Components/AddArt/addartwork'
 import Navbar from '../Components/Navbar/Navbar'
 import Settings from '../Components/Settings/Settings'
@@ -23,7 +24,7 @@ const AddArt = props => {
           transition={{duration: 1}}
           key={"AddArtPage"}
         >
-          <AddArtWork user={props.user} />
+          <ListNewArtwork user={props.user} setuser={props.setuser}/>
         </motion.div>
         <Navbar user={props.user} />
       </div>

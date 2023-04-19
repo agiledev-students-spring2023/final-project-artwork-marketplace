@@ -124,14 +124,8 @@ const AddArtWork = props => {
     return (
         <div className='addartbodyset'>
             <h3 className='addartplace'>
-                Add NEW WORK
+                List New Artwork
             </h3>
-            <h3>
-                Image Illustration
-            </h3>
-            <h4>
-                Maximum 3 Photos; Please Upload Sequentially. 
-            </h4>
             <div className='addworkset'>                 
                 <input type="file" onChange={handleChange}/>
                 <img className="photopic" src={file}/>
