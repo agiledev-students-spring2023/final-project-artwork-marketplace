@@ -5,6 +5,8 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import axios from 'axios'
 import './artistProducts.css'
+import { useLocation } from 'react-router-dom';
+
 
 const ArtistProducts = props => {
     const [username, setUsername] = useState("")
@@ -28,7 +30,11 @@ const ArtistProducts = props => {
       }
       getArtistInfo()
     }, [])
-  
+
+  // console.log(products)
+  // const location = useLocation();
+  // console.log(location.pathname)
+
   return (
     <motion.div
       initial={{opacity: 0, y: '100%'}}

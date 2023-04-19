@@ -32,7 +32,9 @@ const CategoryDisplay = props => {
                 {headers: {Authorization: `JWT ${localStorage.getItem("token")}`}}
             )
             const AllProducts = getProducts.data
+            // console.log(AllProducts)
             categoriesCopy.forEach(category => {category['products'] =  AllProducts.filter(product => category.products_id.includes(product._id))})
+            // console.log(categoriesCopy)
             setCategories(categoriesCopy)
             setCategoriesCopy(categoriesCopy)
         }
@@ -42,8 +44,7 @@ const CategoryDisplay = props => {
     }
     getCategories()
   }, [])
-
- 
+  console.log(categories)
 
   const handleSearch = (e) => {
     if(e.target.value == '' && categories && copyOfCategories){
@@ -81,7 +82,7 @@ const CategoryDisplay = props => {
                 <div className="categoriesColumn" ref={widthRef}>
                     {categories.map((category, index) => 
                         <div key={index}>
-                        {category.products.length && (
+                        {category._id.length && (
                             <motion.div 
                                 className="categoryRow"
                                 key={category._id}
@@ -104,7 +105,7 @@ const CategoryDisplay = props => {
                                             dragConstraints={{right:0, left: -(widths[index])}}
                                             whileTap={{cursor: "grabbing"}}
                                         >
-                                            {category.products.map((product) =>
+                                            {category.products_id.map((product) =>
                                                 <motion.div key={product._id} className='product_Card'>
                                                     
                                                     <div className="product_image_Display">

@@ -15,7 +15,7 @@ const ProfileSub = props => {
 
     useEffect(() => {
         const getProductInfo = async () => {
-            if(userObject._id === userId){
+            if(userObject._id !== userId){
                 setUserInfo(userObject)
                 setUserUploadedProducts(userObject.products_uploaded)
             }

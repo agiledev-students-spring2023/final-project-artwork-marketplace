@@ -22,15 +22,22 @@ const ViewItemSub = props => {
     const getProductInfo = async () => {
       try{
         const productId = getProductParamsID.productID
-        const getProduct = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks/${productId}`)
-        const thisProduct = getProduct.data
+        const getProduct = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks/${productId}`,
+          {headers: {Authorization: `JWT ${localStorage.getItem("token")}`}}
+        )
+        const thisProduct = getProduct.data[0]
         const thisProductName = thisProduct.name
-        const getProductArtist = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/user/${thisProduct.artist_id}`) 
+        console.log(thisProduct)
+        const getProductArtist = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/user/${thisProduct.artist_id}`,
+          {headers: {Authorization: `JWT ${localStorage.getItem("token")}`}}
+        ) 
         const thisProductArtist = getProductArtist.data
         const thisProductImages = thisProduct.imagesURL
         const thisProductStatus = thisProduct.status // "sold" or "available"
         const thisProductPrice = thisProduct.price
-        const getAllCategories = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/categories`)
+        const getAllCategories = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/categories`,
+          {headers: {Authorization: `JWT ${localStorage.getItem("token")}`}}
+        )
         const AllCategories = getAllCategories.data
         const thisProductCategories = AllCategories.filter(category => thisProduct.categories_id.includes(category._id))
         const thisProductDescription = thisProduct.shortDescription

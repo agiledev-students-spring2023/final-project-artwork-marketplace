@@ -13,10 +13,14 @@ const ProductDisplay = props => {
   useEffect(() => {
     const findCategory = async () => {
       try{
-        const getProducts = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks`)
+        const getProducts = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks`,
+          {headers: {Authorization: `JWT ${localStorage.getItem("token")}`}}
+        )
         const AllProducts = getProducts.data
         const ID = getCategoryID.categoryID
-        const getCategory = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/categories/${ID}`)
+        const getCategory = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/categories/${ID}`,
+          {headers: {Authorization: `JWT ${localStorage.getItem("token")}`}}
+        )
         const foundCategory = getCategory.data
         const productsOfCategory = AllProducts.filter(product => foundCategory.products_id.includes(product._id))
         setCategory(foundCategory)
