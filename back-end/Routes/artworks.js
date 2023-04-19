@@ -73,6 +73,8 @@ router.post("/AddArt", passport.authenticate("jwt", { session: false }), upload.
 
             /* update each category */
             const categories = await Category.updateMany({_id: req.body.categories_id}, {$addToSet: { products_id: artwork._id }}, {returnOriginal: false})
+            // update artist products_uploaded list
+            const userUpdate = await User.findByIdAndUpdate({_id: req.body.artist_id}, {$addToSet: { products_uploaded: artwork._id }}, {returnOriginal: false})
             return res.status(200).json(artwork)
         }
     } catch (err){

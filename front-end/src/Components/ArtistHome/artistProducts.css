@@ -10,6 +10,7 @@
     background-color: black;
     color: white;
     text-align: center;
+    text-transform: capitalize;
 }
 .productColumn{
     display: grid;

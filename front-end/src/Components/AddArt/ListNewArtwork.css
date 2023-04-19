@@ -1,0 +1,187 @@
+.LNA_container{
+    padding-top: 3rem;
+    padding-bottom: 10rem;
+    width: var(--container-width-lg);
+}
+.LNA_container .LNA_errors{
+    color: rgb(111, 0, 0);
+}
+.LNA_headers{
+    padding-bottom: 3rem;
+}
+.LNA_container form{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 3rem;
+    border-radius: 3rem;
+    box-shadow: 0rem 0rem 1rem rgb(87, 87, 87);
+    background-color: rgb(221, 221, 221);
+}
+.LNA_container form .LNA_imagesInput{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 30vh;
+}
+.LNA_container form .LNA_imagesInput .LNA_uploadedImagesDisplay{
+    box-shadow: 0rem 0rem 1rem rgb(87, 87, 87);
+    border-radius: 3rem;
+    padding: 1rem;
+    box-sizing: border-box;
+    display: flex;
+    gap: 2rem;
+    height: 80%;
+    overflow: hidden;
+    background-color: white;
+}
+.LNA_promptAndIcon{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+.LNA_uploadedImageCard{
+    height: 100%;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 2rem;
+    overflow: hidden;
+    box-shadow: 0rem 0rem 1rem rgb(87, 87, 87);
+}
+.LNA_promptAndIcon .filesUploadIcon{
+    cursor: pointer;
+    box-shadow: 0rem 0rem 0.5rem rgb(87, 87, 87);
+    padding: 0.5rem;
+    font-size: larger;
+    border-radius: 50%;
+    background-color: white;
+}
+.LNA_uploadedImageCard img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    overflow: hidden;
+}
+.LNA_uploadedImageCard button{
+    background: rgb(87, 87, 87);
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+.LNA_categoriesInput{
+    display: flex;
+    flex-direction: column;
+}
+.LNA_categoriesInput .LNA_categoriesPrompts{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+.LNA_categoriesInput .multiSelectContainer{
+    border-radius: 2rem;
+    background-color: white;
+    box-shadow: 0rem 0rem 1rem rgb(87, 87, 87);
+}
+.LNA_categoriesInput .multiSelectContainer .searchWrapper{
+    border: none;
+    padding: 1rem;
+}
+.LNA_categoriesInput .LNA_categoriesPrompts a{
+    text-decoration: none;
+    margin-left: 1rem;
+    box-shadow: 0rem 0rem 0.5rem rgb(87, 87, 87);
+    background-color: white;
+    padding: 0.5rem;
+    border-radius: 1rem;
+}
+.LNA_descriptionInput{
+    display: flex;
+    flex-direction: column;
+}
+.LNA_descriptionInput .LNA_descriptionPrompt{
+    text-align: start;
+    padding-left: 2rem;
+}
+.LNA_descriptionInput .descriptionField{
+    padding: 1rem;
+    border: none;
+    background: white;
+    border-radius: 3rem;
+    box-shadow: 0rem 0rem 1rem rgb(87, 87, 87);
+}
+
+.LNA_priceInput{
+    display: flex;
+    flex-direction: column;
+}
+.LNA_priceInput .LNA_pricePrompt{
+    text-align: start;
+    padding-left: 2rem;
+}
+.LNA_priceInput .react-numeric-input{
+    width: 100%;
+    box-shadow: 0rem 0rem 1rem rgb(87, 87, 87);
+    padding-left: 1rem;
+    background-color: white;
+    border-radius: 3rem;
+    overflow: hidden;
+}
+.LNA_priceInput .react-numeric-input b{
+    right: 1rem !important;
+}
+.LNA_priceInput .react-numeric-input input{
+    width: 90%;
+    border: none !important;
+    padding: 1rem;
+    font-size: small !important;
+}
+.LNA_priceInput .react-numeric-input input:focus{
+    border: none !important;
+}
+
+.LNA_titleInput{
+    display: flex;
+    flex-direction: column;
+}
+.LNA_titleInput .LNA_titlePrompt{
+    text-align: start;
+    padding-left: 2rem;
+}
+.LNA_titleInput .titleField{
+    padding: 1rem;
+    border: none;
+    background: white;
+    border-radius: 3rem;
+    box-shadow: 0rem 0rem 1rem rgb(87, 87, 87);
+}
+.LNA_postArtworkButton{
+    background: rgb(87, 87, 87);
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: larger;
+    text-transform: uppercase;
+    border-radius: 3rem;
+    padding: 1rem;
+}
+/* FOR TABLETS */
+@media screen and (max-width: 1024px){
+    .LNA_container{
+        width: var(--container-width-md);
+    }
+}
+/* FOR PHONES */
+@media screen and (max-width: 600px){
+    .LNA_container{
+        width: var(--container-width-sm);
+    }
+}

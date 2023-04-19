@@ -1,7 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { Swiper, SwiperSlide } from "swiper/react"
-import { Pagination, FreeMode } from "swiper"
+import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import './categoryDisplay.css'
 import "swiper/css"
