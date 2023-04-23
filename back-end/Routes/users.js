@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt")
 const multer = require("multer") 
 const path = require("path")
 const jwt = require("jsonwebtoken")
-const passport = require("passport")
+const { auth } = require('../middleware/auth')
 
 const { User } = require('../models/User')
 
@@ -58,11 +58,10 @@ router.post("/register", async (req, res) => {
 
         const saveUser = new User(newUser)
         const user = await saveUser.save()
-        const token = user.generateJWT()
+
         res.status(200).json({ 
             success: true,
             message: "User saved successfully",
-            token: token,
             id: user._id
         })
     } catch (err){
@@ -100,14 +99,16 @@ router.post("/login", async (req, res) => {
             return res.status(400).json({success: false, message: "Wrong Username and/or Password!"})
         }
         else{
-            const token = user.generateJWT()
+            const payload = {
+                id: user._id,
+            }
+            const token = jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: "1d"})
             const foundUser = {
                 success: true,
-                message: "Successful Login!",
-                token: token, 
-                id: user._id
+                message: "User logged in successfully",
+                _id: user._id
             }
-            return res.status(200).json(foundUser)
+            return res.status(200).cookie('access_token', token, {httpOnly:true, path: "/"}).json(foundUser)
         }
     } catch (err){
         console.log(err)
@@ -119,8 +120,21 @@ router.post("/login", async (req, res) => {
     }
 })
 
+router.get("/logout", auth, async (req, res) => {
+    try{
+        res.clearCookie("access_token")
+        res.status(200).json({ success: true, message: "Logged out successfully"})
+    } catch (err){
+        res.status(500).json({
+            success: false,
+            message: "Error logging out.",
+            error: err
+        })
+    }
+})
+
 // get user info by user id
-router.get("/user/:id", passport.authenticate("jwt", { session: false }), async (req, res) => {
+router.get("/user/:id", auth, async (req, res) => {
     try{
         const userFind = await User.findOne({_id: req.params.id})
             .populate([
@@ -165,7 +179,7 @@ router.get("/user/:id", passport.authenticate("jwt", { session: false }), async 
 })
 
 // change profile picture
-router.post("/user/:id/changeProfilePicture", passport.authenticate("jwt", { session: false }), uploadd.single('user_profilePicture'), async (req, res, next) => {
+router.post("/user/:id/changeProfilePicture", auth, uploadd.single('user_profilePicture'), async (req, res, next) => {
     try {
         if (!req.file){
             return res.status(400).json({success: false, message: "Please upload a profile picture!"})
@@ -182,7 +196,7 @@ router.post("/user/:id/changeProfilePicture", passport.authenticate("jwt", { ses
 })
 
 // get a list of rising artists
-router.get("/risingArtists", passport.authenticate("jwt", { session: false }), async(req, res) => {
+router.get("/risingArtists", auth, async(req, res) => {
     try{
         // find user with at least one product uploaded
         const users = await User.find({ $nor: [{products_uploaded: {$exists: false}}, {products_uploaded: {$size: 0}}]}).select('-password -cart -saved')
@@ -197,7 +211,7 @@ router.get("/risingArtists", passport.authenticate("jwt", { session: false }), a
 })
 
 // add product by id to user cart
-router.put("/user/:userID/cart/:productID", passport.authenticate("jwt", { session: false }), async(req, res) => {
+router.put("/user/:userID/cart/:productID", auth, async(req, res) => {
     try{
         // find user by ID and then add to their cart
         const findUserAndUpdateCart = await User
@@ -212,7 +226,7 @@ router.put("/user/:userID/cart/:productID", passport.authenticate("jwt", { sessi
 })
 
 // remove product by id from user cart
-router.delete("/user/:userID/cart/:productID", passport.authenticate("jwt", { session: false }), async(req, res) => {
+router.delete("/user/:userID/cart/:productID", auth, async(req, res) => {
     try{
         // find user by ID and then remove from their cart
         const findUserAndUpdateCart = await User
@@ -227,7 +241,7 @@ router.delete("/user/:userID/cart/:productID", passport.authenticate("jwt", { se
 })
 
 // add product by id to user saved list
-router.put("/user/:userID/saved/:productID", passport.authenticate("jwt", { session: false }), async(req, res) => {
+router.put("/user/:userID/saved/:productID", auth, async(req, res) => {
     try{
         // find user by ID and then add to their saved list
         const findUserAndUpdateSaved = await User
@@ -242,7 +256,7 @@ router.put("/user/:userID/saved/:productID", passport.authenticate("jwt", { sess
 })
 
 // remove product by id from user saved list
-router.delete("/user/:userID/saved/:productID", passport.authenticate("jwt", { session: false }), async(req, res) => {
+router.delete("/user/:userID/saved/:productID", auth, async(req, res) => {
     try{
         // find user by ID and then remove from their saved list
         const findUserAndUpdateSaved = await User
@@ -257,7 +271,7 @@ router.delete("/user/:userID/saved/:productID", passport.authenticate("jwt", { s
 })
 
 // user1 follows user2
-router.put("/:user1/follow/:user2", passport.authenticate("jwt", { session: false }), async(req, res) => {
+router.put("/:user1/follow/:user2", auth, async(req, res) => {
     try{
         const findUser1AndUpdateFollowing = await User
             .findByIdAndUpdate({_id: req.params.user1}, {$addToSet: { following: req.params.user2 }}, {returnOriginal: false})
@@ -275,7 +289,7 @@ router.put("/:user1/follow/:user2", passport.authenticate("jwt", { session: fals
 })
 
 // user1 unfollows user2
-router.delete("/:user1/unfollow/:user2", passport.authenticate("jwt", { session: false }), async(req, res) => {
+router.delete("/:user1/unfollow/:user2", auth, async(req, res) => {
     try{
         // find user by ID and then remove from their saved list
         const findUser1AndUpdateFollowing = await User

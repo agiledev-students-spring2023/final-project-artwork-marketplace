@@ -1,12 +1,12 @@
 const router = require("express").Router()
-const passport = require("passport")
+const { auth } = require('../middleware/auth')
 
 const { User } = require('../models/User')
 const { Category } = require('../models/Category')
 const { Artwork } = require('../models/Artwork')
 
 // POST new category
-router.post("/addCategory", passport.authenticate("jwt", { session: false }), async (req, res) => {
+router.post("/addCategory", auth, async (req, res) => {
     const newCategory = new Category(req.body)
     try{
         const savedCategory = await newCategory.save()
@@ -18,7 +18,7 @@ router.post("/addCategory", passport.authenticate("jwt", { session: false }), as
 })
 
 // GET all categories + artworks 
-router.get("/", passport.authenticate("jwt", { session: false }), async (req, res) => {
+router.get("/", auth, async (req, res) => {
     try{
         const categories = await Category.find({}).populate({path: "products_id"})
         res.status(200).json(categories)
@@ -28,7 +28,7 @@ router.get("/", passport.authenticate("jwt", { session: false }), async (req, re
 })
 
 // GET category by ID
-router.get("/category/:id", passport.authenticate("jwt", { session: false }), async (req, res) => {
+router.get("/category/:id", auth, async (req, res) => {
     try{
         const category = await Category.findOne({_id: req.params.id}).populate({path: "products_id"})
         res.status(200).json(category)
@@ -38,7 +38,7 @@ router.get("/category/:id", passport.authenticate("jwt", { session: false }), as
 })
 
 // GET categories by product ID
-router.get("/product/:id", passport.authenticate("jwt", { session: false }), async(req, res) => {
+router.get("/product/:id", auth, async(req, res) => {
     try{
         const artworkCategories = await Category.find({products_id: req.params.id}).populate({path: "products_id"})
         res.status(200).json(artworkCategories)
@@ -48,4 +48,3 @@ router.get("/product/:id", passport.authenticate("jwt", { session: false }), asy
 })
 
 module.exports = router
-
