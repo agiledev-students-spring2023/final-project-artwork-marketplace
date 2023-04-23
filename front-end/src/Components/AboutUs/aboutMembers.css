@@ -54,7 +54,7 @@ html{
 
 /* FOR TABLETS */
 @media screen and (max-width: 1024px){
-    .container .aboutMembers__container{
+    .container, .aboutMembers__container{
         width: var(--container-width-md);
     }
     .memberPic{
@@ -79,7 +79,7 @@ html{
 
 /* FOR PHONES */
 @media screen and (max-width: 600px){
-    .container .aboutMembers__container{
+    .container, .aboutMembers__container{
         width: var(--container-width-sm);
     }
     .memberPic{

@@ -97,6 +97,12 @@
         padding: 0.5rem;
         padding-bottom: 0.2rem;
     }
+    .collapse_section{
+        padding-top: 2rem;
+    }
+    .collapse_section-Active{
+        padding-top: 2rem;
+    }
     .collapse_section .collapseActive_options{
         padding-left: 3rem;
     }

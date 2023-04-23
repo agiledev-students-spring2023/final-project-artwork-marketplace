@@ -12,7 +12,7 @@ const SignUp = props => {
         transition={{duration: 1}}
         key={"SignUpPage"}
       >
-        <NewUserBackButton user={props.user} />
+        <NewUserBackButton user={props.user} setuser={props.setuser}/>
         <SignUpSub user={props.user} />
     </motion.div>
   )

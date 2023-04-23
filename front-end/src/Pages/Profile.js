@@ -23,7 +23,7 @@ const Profile = props => {
         transition={{duration: 1}}
         key={"ProfilePage"}
       >
-        <ProfileSub user={props.user} />
+        <ProfileSub user={props.user} setuser={props.setuser}/>
       </motion.div>
       <Navbar user={props.user} />
     </div>

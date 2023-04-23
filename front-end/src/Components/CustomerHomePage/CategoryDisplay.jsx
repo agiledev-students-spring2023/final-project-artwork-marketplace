@@ -25,11 +25,11 @@ const CategoryDisplay = props => {
     const getCategories = async ()=>{
         try{
             const getCategories = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/categories`,
-                {headers: {Authorization: `JWT ${localStorage.getItem("token")}`}}
+                {withCredentials: true}
             )
             const categoriesCopy = getCategories.data
             const getProducts = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks`,
-                {headers: {Authorization: `JWT ${localStorage.getItem("token")}`}}
+                {withCredentials: true}
             )
             const AllProducts = getProducts.data
             // console.log(AllProducts)
@@ -108,7 +108,7 @@ const CategoryDisplay = props => {
                                             {category.products_id.map((product) =>
                                                 <motion.div key={product._id} className='product_Card'>
                                                     <div className="product_image_Display">
-                                                        <img src={product.thumbnailURL} alt={product.name} />
+                                                        <img src={process.env.REACT_APP_SERVER_HOSTNAME + product.thumbnailURL} alt={product.name} />
                                                     </div>
                                                     <Link to={`/Item/${product._id}`}>
                                                     <div className="product_info_Display">

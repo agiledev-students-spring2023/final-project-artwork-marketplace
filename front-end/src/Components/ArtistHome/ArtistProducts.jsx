@@ -16,7 +16,7 @@ const ArtistProducts = props => {
       const getArtistInfo = async () => {
         try{
           const getProducts = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks`,
-            {headers: {Authorization: `JWT ${localStorage.getItem("token")}`}}
+            {withCredentials: true}
           )
           const AllProducts = getProducts.data
           const artist_id = props.user._id
@@ -30,10 +30,6 @@ const ArtistProducts = props => {
       }
       getArtistInfo()
     }, [])
-
-  // console.log(products)
-  // const location = useLocation();
-  // console.log(location.pathname)
 
   return (
     <motion.div
@@ -66,7 +62,7 @@ const ArtistProducts = props => {
                 <div className='productCard'>
                   <div className="productImage">
                   <Link to={`/Item/${product._id}`}>
-                    <img src={product.thumbnailURL} alt={product.name} />
+                    <img src={process.env.REACT_APP_SERVER_HOSTNAME + product.thumbnailURL} alt={product.name} />
                   </Link>
                   </div>
                   <div className="productInfo">

@@ -1,6 +1,5 @@
 import React from 'react'
 import ListNewArtwork from '../Components/AddArt/ListNewArtwork'
-import AddArtWork from '../Components/AddArt/addartwork'
 import Navbar from '../Components/Navbar/Navbar'
 import Settings from '../Components/Settings/Settings'
 import { motion } from 'framer-motion'
