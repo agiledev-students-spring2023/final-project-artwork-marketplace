@@ -6,11 +6,7 @@ const axios = require("axios")
 require("dotenv").config({ silent: true })
 const morgan = require("morgan")
 const cookieParser = require("cookie-parser") 
-const jwt = require("jsonwebtoken")
-const passport = require("passport")
-const jwtStrategy = require("./config/jwt-config.js") // import setup options for using JWT in passport
-passport.use(jwtStrategy)
-app.use(passport.initialize())
+
 
 const artworksRoute = require("./Routes/artworks")
 const categoriesRoute = require("./Routes/categories")
