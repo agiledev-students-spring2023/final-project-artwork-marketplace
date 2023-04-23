@@ -118,6 +118,9 @@
     border-radius: 3rem;
     box-shadow: 0rem 0rem 1rem rgb(87, 87, 87);
 }
+.LNA_categoriesInput .LNA_categoriesPrompts h6{
+    font-weight: 400;
+}
 
 .LNA_priceInput{
     display: flex;
@@ -130,16 +133,20 @@
 .LNA_priceInput .react-numeric-input{
     width: 100%;
     box-shadow: 0rem 0rem 1rem rgb(87, 87, 87);
-    padding-left: 1rem;
     background-color: white;
     border-radius: 3rem;
     overflow: hidden;
 }
 .LNA_priceInput .react-numeric-input b{
-    right: 1rem !important;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin: 0.5rem;
+    background-color: rgb(221, 221, 221) !important;
+    transition: 1s ease all !important;
+    border-radius: 2rem !important;
 }
 .LNA_priceInput .react-numeric-input input{
-    width: 90%;
+    width: 100%;
     border: none !important;
     padding: 1rem;
     font-size: small !important;
@@ -164,7 +171,7 @@
     box-shadow: 0rem 0rem 1rem rgb(87, 87, 87);
 }
 .LNA_postArtworkButton{
-    background: rgb(87, 87, 87);
+    background: black;
     border: none;
     color: white;
     cursor: pointer;
@@ -172,6 +179,11 @@
     text-transform: uppercase;
     border-radius: 3rem;
     padding: 1rem;
+    transition: 1s ease all;
+}
+.LNA_postArtworkButton:hover{
+    background: rgb(87, 87, 87);
+    box-shadow: 0rem 0rem 1rem rgb(87, 87, 87);
 }
 /* FOR TABLETS */
 @media screen and (max-width: 1024px){
@@ -183,5 +195,60 @@
 @media screen and (max-width: 600px){
     .LNA_container{
         width: var(--container-width-sm);
+        padding-top: 1rem;
+    }
+    .LNA_headers{
+        padding-bottom: 1rem;
+    }
+    .LNA_container form{
+        padding: 1rem;
+    }
+    .LNA_priceInput .LNA_pricePrompt{
+        padding-left: 0.5rem;
+    }
+    .LNA_titleInput .LNA_titlePrompt{
+        padding-left: 0.5rem;
+    }
+    .LNA_descriptionInput .LNA_descriptionPrompt{
+        padding-left: 0.5rem;
+    }
+    .LNA_categoriesInput .LNA_categoriesPrompts{
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
+    .LNA_categoriesInput h5{
+        text-align: start;
+    }
+    .LNA_categoriesInput .LNA_categoriesPrompts h6{
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin: 0;
+    }
+    .LNA_container form .LNA_imagesInput{
+        height: 40vh;
+    }
+    .LNA_container form .LNA_imagesInput .LNA_uploadedImagesDisplay{
+        padding: 0.5rem;
+        gap: 1rem;
+    }
+    .LNA_promptAndIcon{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 3rem;
+        align-items: center;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+    .LNA_promptAndIcon h5{
+        text-align: start;
+    }
+    .LNA_priceInput .react-numeric-input b{
+        padding-left: 1rem;
+        padding-right: 1rem;
+        margin: 0.5rem;
+        border-radius: 3rem !important;
     }
 }

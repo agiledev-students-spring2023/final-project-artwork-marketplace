@@ -39,10 +39,10 @@ const Home = props => {
             key={"HomePage"}
           >
             {props.user.user === "customer" && (
-                <CategoryDisplay user={props.user} />
+                <CategoryDisplay user={props.user} setuser={props.setuser}/>
             )}
             {props.user.user === "artist" && (
-                <ArtistProducts user={props.user} />
+                <ArtistProducts user={props.user} setuser={props.setuser}/>
             )}
           </motion.div>
           <Navbar user={props.user} />

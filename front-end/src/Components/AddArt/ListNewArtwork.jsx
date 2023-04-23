@@ -15,14 +15,13 @@ const ListNewArtwork = props => {
     const getAllCategories = async () => {
         try{
             const getCategories = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/categories`,
-                {headers:{Authorization: `JWT ${localStorage.getItem("token")}`}},
+                {withCredentials: true},
             )
             const allCategories = getCategories.data
             setCategories(allCategories)
         } catch (err){
             // if invalid token
             if(err.response.status === 401){
-                localStorage.removeItem("token")
                 localStorage.removeItem("user")
                 props.setuser({})
                 navigate("/")
@@ -60,7 +59,7 @@ const ListNewArtwork = props => {
     try{
         await axios.post(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks/AddArt`,
             formData, 
-            {headers:{Authorization: `JWT ${localStorage.getItem("token")}`}}
+            {withCredentials: true}
         )
         .then(res => {
             console.log(res)

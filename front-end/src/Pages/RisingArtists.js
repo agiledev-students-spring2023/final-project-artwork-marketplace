@@ -23,7 +23,7 @@ const RisingArtists = props => {
         transition={{duration: 1}}
         key={"RisingArtistPage"}
         >
-          <RisingArtistSub user={props.user} />
+          <RisingArtistSub user={props.user} setuser={props.setuser}/>
         </motion.div>
         <Navbar user={props.user} />
       </div>

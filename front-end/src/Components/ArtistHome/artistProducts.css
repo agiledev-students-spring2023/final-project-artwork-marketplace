@@ -18,6 +18,9 @@
     max-width: 100%;
     gap: 2rem;
 }
+.productArtist{
+    text-transform: capitalize;
+}
 .productCard{
     display: grid;
     grid-template-columns: 60% 40%;

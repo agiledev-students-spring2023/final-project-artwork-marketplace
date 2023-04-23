@@ -3,6 +3,7 @@ import './App.css'
 import { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import { AnimatePresence } from 'framer-motion'
+import axios from 'axios'
 import Home from './Pages/Home'
 import AboutUs from './Pages/AboutUs'
 import Login from './Pages/Login'
@@ -15,18 +16,28 @@ import RisingArtist from './Pages/RisingArtists'
 import Profile from './Pages/Profile'
 
 const App = props => {
-  const [user, setUser] = useState(localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : {})
+  const [user, setUser] = useState({})
   
   useEffect(() => {
-    const getUser = localStorage.getItem("user")
-    if (getUser){
-      const userObject = JSON.parse(getUser)
-      setUser(userObject)
+    const checkUserCredentials = async () => {
+      const LSUser = localStorage.getItem("user")
+      if (LSUser){
+        const userObject = JSON.parse(LSUser)
+        try {
+          const getUser = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/user/${userObject._id}`, {withCredentials: true})
+          const user = getUser.data
+          localStorage.setItem("user", JSON.stringify(user))
+          setUser(user)
+        } catch (error) {
+          setUser({})
+        }
+      }
+      else{
+        setUser({})
+      }
     }
-    else{
-      setUser({})
-    }
-  }, [localStorage.getItem("user")])
+    checkUserCredentials()
+  }, [])
 
   return (
     <AnimatePresence mode={'wait'}>

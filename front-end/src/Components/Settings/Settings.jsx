@@ -2,10 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { FiMenu } from 'react-icons/fi'
 import { AiOutlineClose } from 'react-icons/ai'
 import { motion, AnimatePresence } from 'framer-motion'
+import axios from 'axios'
 import Switch from 'react-switch'
 import './settings.css'
+import { useNavigate } from 'react-router-dom'
 
 const Settings = props => {
+  const navigate = useNavigate()
   const [collapse, setCollapse] = useState(false)
   const [userType, setUserType] = useState(props.user.user)
   const [checked, setChecked] = useState(true)
@@ -27,24 +30,33 @@ const Settings = props => {
     setCollapse(negation)
   }
 
-  const handleLogOut = () => {
-    props.setuser({})
-    localStorage.removeItem("token")
-    localStorage.removeItem("user")
+  const handleLogOut = async () => {
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/logout`, {withCredentials: true})
+    if (res.data.success === true){
+        localStorage.removeItem("user")
+        props.setuser({})
+    }
   }
 
-  const handleUserChange = (async () => {
+  const handleUserChange = async () => {
     if(props.user.user === "artist"){
+        const userObject = JSON.parse(localStorage.getItem("user"))
+        userObject.user = "customer"
+        localStorage.setItem("user", JSON.stringify(userObject))
         setUserType("customer")
         props.setuser({...props.user, user: "customer"})
         setChecked(false)
     }
     else{
+        const userObject = JSON.parse(localStorage.getItem("user"))
+        userObject.user = "artist"
+        localStorage.setItem("user", JSON.stringify(userObject))
         setUserType("artist")
         props.setuser({...props.user, user: "artist"})
         setChecked(true)
     }
-  })
+    navigate('/')
+  }
 
   return (
     <>

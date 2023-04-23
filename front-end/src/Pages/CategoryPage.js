@@ -23,7 +23,7 @@ const Category = props => {
             transition={{duration: 1}}
             key={"CategoryPage"}
         >
-          <ProductDisplay user={props.user} />
+          <ProductDisplay user={props.user} setuser={props.setuser}/>
         </motion.div>
         <Navbar user={props.user} />
       </div>
