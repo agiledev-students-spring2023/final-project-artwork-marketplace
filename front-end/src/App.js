@@ -14,6 +14,7 @@ import ViewItem from './Pages/ViewItem'
 import ViewCart from './Pages/ViewCart'
 import RisingArtist from './Pages/RisingArtists'
 import Profile from './Pages/Profile'
+import AddCategory from './Pages/AddCategory'
 
 const App = props => {
   const [user, setUser] = useState({})
@@ -60,6 +61,7 @@ const App = props => {
                 <>
                   <Route path="/" element={<Home user={user} setuser={setUser}/>}/>
                   <Route path="/AddArt" element={<AddArt user={user} setuser={setUser}/>}/>
+                  <Route path="/AddCategory" element={<AddCategory user={user} setuser={setUser}/>}/>
                 </>
               )}
               {/* CUSTOMER EXCLUSIVE USER ROUTES */}
