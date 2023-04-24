@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken")
 const { auth } = require('../middleware/auth')
 
 const { User } = require('../models/User')
+const { Artwork } = require('../models/Artwork')
 
 // multer settings
 const storage = multer.diskStorage({
@@ -50,6 +51,7 @@ router.post("/register", async (req, res) => {
             password: hashedPassword,
             profilePicture_Path: "/static/Images/DefaultProfilePicture.jpg",
             products_uploaded: [],
+            purchased: [],
             cart: [],
             saved: [], 
             following: [],
@@ -77,20 +79,6 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
     try{
         const user = await User.findOne({email: req.body.email})
-            .populate([
-                {path: 'products_uploaded'},
-                {path: 'cart'},
-                {path: 'saved'},
-                // EXCLUDE PASSWORD, CART, SAVED
-                {
-                    path: 'following',
-                    select: '-password -cart -saved'
-                },
-                {
-                    path: 'followers',
-                    select: '-password -cart -saved'
-                }
-            ])
         if (!user){
             return res.status(400).json({success: false, message: `${req.body.email} is not registered with us yet!`})
         }
@@ -111,7 +99,6 @@ router.post("/login", async (req, res) => {
             return res.status(200).cookie('access_token', token, {httpOnly:true, path: "/"}).json(foundUser)
         }
     } catch (err){
-        console.log(err)
         res.status(500).json({
             success: false,
             message: "Error looking up user in database.",
@@ -141,6 +128,7 @@ router.get("/user/:id", auth, async (req, res) => {
                 {path: 'products_uploaded'},
                 {path: 'cart'},
                 {path: 'saved'},
+                {path: 'purchased'},
                 // EXCLUDE PASSWORD, CART, SAVED
                 {
                     path: 'following',
@@ -168,12 +156,12 @@ router.get("/user/:id", auth, async (req, res) => {
             products_uploaded: userFind.products_uploaded,
             cart: userFind.cart,
             saved: userFind.saved,
+            purchased: userFind.purchased,
             following: userFind.following,
             followers: userFind.followers
         }
         return res.status(200).json(user)
     } catch (err){
-        console.log(err)
         res.status(500).json(err)
     }
 })
@@ -185,7 +173,7 @@ router.post("/user/:id/changeProfilePicture", auth, uploadd.single('user_profile
             return res.status(400).json({success: false, message: "Please upload a profile picture!"})
         }
         else{
-            const user = await User.findByIdAndUpdate({_id: req.params.id}, {$set: {"profilePicture_Path" : "/static/Images/DisplayPictures/" + req.file.filename}}, {returnOriginal: false})
+            const user = await User.findByIdAndUpdate({_id: req.params.id}, {$set: { profilePicture_Path : "/static/Images/DisplayPictures/" + req.file.filename}}, {returnOriginal: false})
             // return new profile pic path
             const newProfilePicPath = user.profilePicture_Path
             return res.status(200).json(newProfilePicPath)
@@ -210,8 +198,22 @@ router.get("/risingArtists", auth, async(req, res) => {
     }
 })
 
+// change user type
+router.put("/user/:userID/changeToType/:type", auth, async(req, res) => {
+    try{
+        // find user by ID and then add to their cart
+        const findUserAndUpdateType = await User
+            .findByIdAndUpdate({_id: req.params.userID}, {$set: { user: req.params.type }}, {returnOriginal: false})
+        const updatedType = findUserAndUpdateType.user
+        // return cart
+        res.status(200).json(updatedType)
+    } catch (err){
+        res.status(500).json(err)
+    }
+})
+
 // add product by id to user cart
-router.put("/user/:userID/cart/:productID", auth, async(req, res) => {
+router.put("/user/:userID/addToCart/:productID", auth, async(req, res) => {
     try{
         // find user by ID and then add to their cart
         const findUserAndUpdateCart = await User
@@ -226,7 +228,7 @@ router.put("/user/:userID/cart/:productID", auth, async(req, res) => {
 })
 
 // remove product by id from user cart
-router.delete("/user/:userID/cart/:productID", auth, async(req, res) => {
+router.put("/user/:userID/removeFromCart/:productID", auth, async(req, res) => {
     try{
         // find user by ID and then remove from their cart
         const findUserAndUpdateCart = await User
@@ -241,7 +243,7 @@ router.delete("/user/:userID/cart/:productID", auth, async(req, res) => {
 })
 
 // add product by id to user saved list
-router.put("/user/:userID/saved/:productID", auth, async(req, res) => {
+router.put("/user/:userID/addToSaved/:productID", auth, async(req, res) => {
     try{
         // find user by ID and then add to their saved list
         const findUserAndUpdateSaved = await User
@@ -256,7 +258,7 @@ router.put("/user/:userID/saved/:productID", auth, async(req, res) => {
 })
 
 // remove product by id from user saved list
-router.delete("/user/:userID/saved/:productID", auth, async(req, res) => {
+router.put("/user/:userID/removeFromSaved/:productID", auth, async(req, res) => {
     try{
         // find user by ID and then remove from their saved list
         const findUserAndUpdateSaved = await User
@@ -307,5 +309,35 @@ router.put("/:user1/unfollow/:user2", auth, async(req, res) => {
     }
 })
 
+// user checkout 
+router.put("/checkout/user/:userID", auth, async(req, res) => {
+    try{
+        // find user by ID 
+        const findUser = await User
+            .findOne({_id: req.params.userID})
+            .populate({path: 'cart', model: 'Artwork'})
+        
+        // get user cart
+        const userCart = findUser.cart
+        // update items in user cart as sold, add to user's purchased list, remove from user's cart
+        userCart.forEach(async (artwork) => {
+            await Artwork.findByIdAndUpdate({_id: artwork._id}, {$set: { status: "Sold" }}, {returnOriginal: false})
+            await User.findByIdAndUpdate({_id: req.params.userID}, {$addToSet: { purchased: artwork._id }, $pull: {cart: artwork._id}}, {returnOriginal: false})
+        })
+        // find updated user by ID 
+        const findUpdatedUser = await User
+            .findOne({_id: req.params.userID})
+            .populate([{path: 'cart', model: 'Artwork'}, {path: 'purchased', model: 'Artwork'}])
+        console.log(findUpdatedUser)
+        const updatedCartAndPurchased = {
+            cart: findUpdatedUser.cart,
+            purchased: findUpdatedUser.purchased
+        }
+        // return new Saved List
+        res.status(200).json(updatedCartAndPurchased)
+    } catch (err){
+        res.status(500).json(err)
+    }
+})
 
 module.exports = router

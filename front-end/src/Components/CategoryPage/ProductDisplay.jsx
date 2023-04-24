@@ -14,12 +14,12 @@ const ProductDisplay = props => {
     const findCategory = async () => {
       try{
         const getProducts = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks`,
-          {headers: {Authorization: `JWT ${localStorage.getItem("token")}`}}
+          {withCredentials: true}
         )
         const AllProducts = getProducts.data
         const ID = getCategoryID.categoryID
         const getCategory = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/categories/category/${ID}`,
-          {headers: {Authorization: `JWT ${localStorage.getItem("token")}`}}
+          {withCredentials: true}
         )
         const foundCategory = getCategory.data
         
@@ -86,7 +86,7 @@ const ProductDisplay = props => {
                     <div className='cat_artworkCard' key={product._id}>
                       <div className="cat_artworkPhoto">
                         <Link to={`/Item/${product._id}`} >
-                          <img className='artworkImagee' src={product.thumbnailURL} alt={product.name} />
+                          <img className='artworkImagee' src={process.env.REACT_APP_SERVER_HOSTNAME + product.thumbnailURL} alt={product.name} />
                         </Link>
                       </div>
                       <Link to={`/Item/${product._id}`} >

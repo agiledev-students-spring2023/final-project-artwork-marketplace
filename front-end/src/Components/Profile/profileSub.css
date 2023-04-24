@@ -33,7 +33,6 @@
 }
 .profile_picAndActions .profile_ff button{
     border: none;
-    cursor: pointer;
     padding: 0.5rem;
     font-weight: 300;
     color: white;
@@ -99,13 +98,14 @@
 .profile_information .profile_contact .user_email{
     justify-self: start;
     align-self: center;
-    background-color: black;
+    background: linear-gradient(90deg, rgb(180, 29, 255) 0%, rgb(133, 12, 255) 50%, rgb(66, 129, 255) 100%);
+    box-shadow: 0rem 0rem 1rem rgb(80, 80, 80);
     border-radius: 3rem;
     padding: 0.5rem;
     transition: 1s ease all;
 }
 .profile_information .profile_contact .user_email:hover{
-    background-color: rgb(120, 120, 120);
+    box-shadow: 0rem 0rem 1rem rgb(133, 12, 255);
 }
 .profile_information .profile_contact .user_email a{
     color: white;
@@ -131,7 +131,7 @@
     flex-direction: column;
     text-align: center;
     align-items: center;
-    background: white;
+    background: black;
     border-bottom-left-radius: 2rem;
     border-bottom-right-radius: 2rem;
     box-shadow: 0rem 0rem 1rem rgb(87, 87, 87);
@@ -148,13 +148,12 @@
     transition: 1s ease all;
 }
 .my-masonry-grid_column > .profile_product_card .product_info{ /* change div to reference your elements you put in <Masonry> */
-    max-width: 100%;
-    height: 20%;
+    width: 100%;
     padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.8rem;
 }
 .my-masonry-grid_column > .profile_product_card .product_info a{ /* change div to reference your elements you put in <Masonry> */
-    color: black;
+    color: white;
     text-decoration: none;
 }
 .my-masonry-grid_column > .profile_product_card .product_info h3{

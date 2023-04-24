@@ -35,6 +35,7 @@
 }
 .RA_artistCard .RA_artistProfileCard .RA_artistName{
     height: 20%;
+    text-transform: capitalize;
 }
 .RA_artistCard .RA_artistProfileCard .RA_artistDP{
     height: 70%;

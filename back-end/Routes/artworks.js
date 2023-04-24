@@ -46,9 +46,8 @@ router.get("/featuredArtwork", async (req, res) => {
 })
 
 // creating && saving a new artwork
-router.post("/AddArt", auth, async (req, res, next) => {
+router.post("/AddArt", auth, upload.array("user_uploads", 3), async (req, res, next) => {
     try{
-        console.log("1111")
         if (!req.files || req.files.length == 0) {
             return res.status(400).json({success: false, message: "Please upload some photos!"})
         } 
@@ -76,7 +75,10 @@ router.post("/AddArt", auth, async (req, res, next) => {
             const categories = await Category.updateMany({_id: req.body.categories_id}, {$addToSet: { products_id: artwork._id }}, {returnOriginal: false})
             // update artist products_uploaded list
             const userUpdate = await User.findByIdAndUpdate({_id: req.body.artist_id}, {$addToSet: { products_uploaded: artwork._id }}, {returnOriginal: false})
-            return res.status(200).json(artwork)
+                
+            const updatedUser = await User.findOne({_id: req.body.artist_id}).populate({path: 'products_uploaded'})
+            const updatedProductsList = updatedUser.products_uploaded
+            return res.status(200).json(updatedProductsList)
         }
     } catch (err){
         res.status(500).json(err)
@@ -121,7 +123,6 @@ router.get("/sortedDES", auth, async (req, res) => {
 router.get("/:id", async (req, res) => {
     try{
         const artwork = await Artwork.find({_id: req.params.id})
-        console.log(artwork)
         res.status(200).json(artwork)
     } catch (err){
         res.status(500).json(err)

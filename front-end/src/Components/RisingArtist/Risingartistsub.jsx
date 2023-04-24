@@ -11,12 +11,12 @@ const RisingArtistSub = props => {
     const getProductInfo = async () => {
       try{
         const getUsers = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/risingArtists`,
-          {headers: {Authorization: `JWT ${localStorage.getItem("token")}`}}
+          {withCredentials: true}
         )
         const users = getUsers.data
         const usersWithProducts = users.filter(user => user.products_uploaded.length !== 0)
         const getProducts = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks`,
-          {headers: {Authorization: `JWT ${localStorage.getItem("token")}`}}
+          {withCredentials: true}
         )
         const AllProducts = getProducts.data
         usersWithProducts.forEach(user => {user['products'] = AllProducts.filter(product => user.products_uploaded.includes(product._id))})
@@ -48,7 +48,7 @@ const RisingArtistSub = props => {
                   </div>
                 )}
                 <div className="RA_artistDP">
-                  <Link to={`/Item/${artist.products[0]._id}`}><img src={artist.products[0].thumbnailURL} alt={artist.products[0].name}/></Link>
+                  <Link to={`/Item/${artist.products[0]._id}`}><img src={process.env.REACT_APP_SERVER_HOSTNAME + artist.products[0].thumbnailURL} alt={artist.products[0].name}/></Link>
                 </div>
                 <div className="RA_artistProductName">
                   <h3>"{artist.products[0].name}"</h3>
@@ -58,13 +58,7 @@ const RisingArtistSub = props => {
             <div className="RA_artistActions">
               <Link to={`/Profile/${artist._id}`}>
                 <button>Profile</button>
-              </Link>
-              {props.user._id !== artist._id && (
-                <>
-                  <button className={props.user.following.includes(artist._id) ? "followed" : "follow"} onClick={() => handleFollow(props.user._id, artist._id)}>Follow</button>
-                </>
-              )}
-              
+              </Link>              
             </div>
           </div>
         )}

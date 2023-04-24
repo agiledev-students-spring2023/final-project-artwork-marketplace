@@ -40,6 +40,9 @@
     max-height: 25vh;
     max-width: 100%;
 }
+.login_featuredInfo{
+  text-transform: capitalize;
+}
 
 /* FOR TABLETS */
 @media screen and (max-width: 1024px){
