@@ -8,7 +8,7 @@ import { motion } from 'framer-motion'
 const ProfileSub = props => {
     const getUserParamsID = useParams()
     const userId = getUserParamsID.userID
-    const userObject = props.user
+    const [userObject, setUserObject] = useState(props.user)
 
     const [userInfo, setUserInfo] = useState({})
     const [userUploadedProducts, setUserUploadedProducts] = useState([])
@@ -44,7 +44,7 @@ const ProfileSub = props => {
             }          
         }
         getProductInfo()
-    }, [])
+    }, [userObject])
 
     // for responsive styling
     const breakpointColumnsObj = {
@@ -52,9 +52,8 @@ const ProfileSub = props => {
         1024: 2,
         600: 1
     };
-
     const checkFollow = () => {
-        if(userObject.following.includes(user => user._id === userId)){
+        if(userObject.following.filter(user => user._id === userInfo._id ).length > 0){
             return true
         }
         else{
@@ -62,28 +61,33 @@ const ProfileSub = props => {
         }
     }
     const handleFollow = async () => {
+        console.log(checkFollow())
         if (checkFollow()){
-            const res = await axios.post(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/${userObject._id}/unfollow/${userId}`, 
-                {withCredentials: true}
+            const res = await axios.put(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/${userObject._id}/unfollow/${userId}`, 
+                {},
+                {withCredentials: true, credentials: 'include'}
             )
-            if(res.data.success === true){
+            if(res.status === 200){
                 const userObject = JSON.parse(localStorage.getItem("user"))
-                const updatedFollowing = userObject.following.filter(user => user._id !== userId)
+                const updatedFollowing = res.data
                 userObject.following = updatedFollowing
                 localStorage.setItem("user", JSON.stringify(userObject))
                 props.setuser({...props.user, following: updatedFollowing})
+                setUserObject({...userObject, following: updatedFollowing})
             }
         }
         else{
-            const res = await axios.post(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/${userObject._id}/follow/${userId}`, 
-                {withCredentials: true}
+            const res = await axios.put(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/${userObject._id}/follow/${userId}`, 
+                {},
+                {withCredentials: true, credentials: 'include'}
             )
-            if(res.data.success === true){
+            if(res.status === 200){
                 const userObject = JSON.parse(localStorage.getItem("user"))
-                const updatedFollowing = [...userObject.following, userInfo]
+                const updatedFollowing = res.data
                 userObject.following = updatedFollowing
                 localStorage.setItem("user", JSON.stringify(userObject))
                 props.setuser({...props.user, following: updatedFollowing})
+                setUserObject({...userObject, following: updatedFollowing})
             }
         }
     }
@@ -159,4 +163,3 @@ const ProfileSub = props => {
 }
 
 export default ProfileSub
-

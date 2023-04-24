@@ -23,20 +23,20 @@ const ViewItemSub = props => {
       try{
         const productId = getProductParamsID.productID
         const getProduct = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks/${productId}`,
-          {headers: {Authorization: `JWT ${localStorage.getItem("token")}`}}
+          {withCredentials: true}
         )
         const thisProduct = getProduct.data[0]
         const thisProductName = thisProduct.name
         // console.log(thisProduct)
         const getProductArtist = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/user/${thisProduct.artist_id}`,
-          {headers: {Authorization: `JWT ${localStorage.getItem("token")}`}}
+          {withCredentials: true}
         ) 
         const thisProductArtist = getProductArtist.data
         const thisProductImages = thisProduct.imagesURL
         const thisProductStatus = thisProduct.status 
         const thisProductPrice = thisProduct.price
         const getAllCategories = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/categories`,
-          {headers: {Authorization: `JWT ${localStorage.getItem("token")}`}}
+          {withCredentials: true}
         )
         const AllCategories = getAllCategories.data
         const thisProductCategories = AllCategories.filter(category => thisProduct.categories_id.includes(category._id))

@@ -14,7 +14,7 @@
     flex-direction: column;
     align-items: center;
     padding: 1rem;
-    gap: 1rem;
+    gap: 2rem;
 }
 .profile_picAndActions .profile_ff{
     display: flex;
@@ -31,13 +31,34 @@
     box-shadow: 0 0 1rem rgb(80, 80, 80);
     overflow: hidden;
 }
-.profile_picAndActions button{
+.profile_picAndActions .profile_ff button{
     border: none;
     cursor: pointer;
     padding: 0.5rem;
     font-weight: 300;
     color: white;
     background-color: black;
+}
+.profile_picAndActions .follow_button{
+    border-radius: 3rem;
+    padding: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    border: none;
+    cursor: pointer;
+    font-weight: 800;
+    transition: 1s ease all;
+    color: white;
+}
+.profile_picAndActions .follow_button.followed{
+    background-color: #7a1a1a;
+    border: 1px solid #7a1a1a;
+    box-shadow: 0 0 1rem rgb(162, 58, 58);
+}
+.profile_picAndActions .follow_button.follow{
+    background-color: rgb(180, 180, 180);
+    border: 1px solid #7a1a1a;
+    box-shadow: 0 0 1rem rgb(80, 80, 80);
 }
 .profile_picAndActions .profile_ff h5{
     margin: 0;
