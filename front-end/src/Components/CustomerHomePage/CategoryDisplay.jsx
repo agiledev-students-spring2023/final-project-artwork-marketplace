@@ -28,14 +28,15 @@ const CategoryDisplay = props => {
                 {withCredentials: true}
             )
             const categoriesCopy = getCategories.data
+            const categories = categoriesCopy.filter(category => category.products_id.length > 0)
             const getProducts = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks`,
                 {withCredentials: true}
             )
             const AllProducts = getProducts.data
             // console.log(AllProducts)
-            categoriesCopy.forEach(category => {category['products'] =  AllProducts.filter(product => category.products_id.includes(product._id))})
+            categories.forEach(category => {category['products'] =  AllProducts.filter(product => category.products_id.includes(product._id))})
             // console.log(categoriesCopy)
-            setCategories(categoriesCopy)
+            setCategories(categories)
             setCategoriesCopy(categoriesCopy)
         }
         catch (err){
@@ -82,7 +83,7 @@ const CategoryDisplay = props => {
                 <div className="categoriesColumn" ref={widthRef}>
                     {categories.map((category, index) => 
                         <div key={index}>
-                        {category._id.length && (
+                        {category.products_id.length && (
                             <motion.div 
                                 className="categoryRow"
                                 key={category._id}

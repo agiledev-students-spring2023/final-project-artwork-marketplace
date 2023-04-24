@@ -120,7 +120,7 @@ router.post("/login", async (req, res) => {
     }
 })
 
-router.get("/logout", auth, async (req, res) => {
+router.get("/logout", async (req, res) => {
     try{
         res.clearCookie("access_token")
         res.status(200).json({ success: true, message: "Logged out successfully"})
@@ -289,7 +289,7 @@ router.put("/:user1/follow/:user2", auth, async(req, res) => {
 })
 
 // user1 unfollows user2
-router.delete("/:user1/unfollow/:user2", auth, async(req, res) => {
+router.put("/:user1/unfollow/:user2", auth, async(req, res) => {
     try{
         // find user by ID and then remove from their saved list
         const findUser1AndUpdateFollowing = await User

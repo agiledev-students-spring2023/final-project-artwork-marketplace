@@ -147,4 +147,4 @@ const Settings = props => {
   )
 }
 
-export default Settings
+export default Settings 

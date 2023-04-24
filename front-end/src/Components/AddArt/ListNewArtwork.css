@@ -99,9 +99,14 @@
     text-decoration: none;
     margin-left: 1rem;
     box-shadow: 0rem 0rem 0.5rem rgb(87, 87, 87);
-    background-color: white;
+    color: white;
+    background: linear-gradient(90deg, rgb(180, 29, 255) 0%, rgb(133, 12, 255) 50%, rgb(66, 129, 255) 100%);
     padding: 0.5rem;
     border-radius: 1rem;
+    transition: 1s ease all;
+}
+.LNA_categoriesInput .LNA_categoriesPrompts a:hover{
+    box-shadow: 0rem 0rem 1rem rgb(255, 255, 255);
 }
 .LNA_descriptionInput{
     display: flex;
