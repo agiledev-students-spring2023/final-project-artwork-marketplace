@@ -5,31 +5,48 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import axios from 'axios'
 import './artistProducts.css'
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 
 const ArtistProducts = props => {
-    const [username, setUsername] = useState("")
-    const [products, setProducts] = useState([])
-    
-    useEffect(() => {
-      const getArtistInfo = async () => {
-        try{
-          const getProducts = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks`,
-            {withCredentials: true}
-          )
-          const AllProducts = getProducts.data
-          const artist_id = props.user._id
-          const artist_name = props.user.name.full
-          const artist_products = AllProducts.filter(product => product.artist_id === artist_id)
-          setUsername(artist_name)
-          setProducts(artist_products)
-        } catch (err){
+  const [username, setUsername] = useState("")
+  const [products, setProducts] = useState([])
+  const navigate = useNavigate()
+
+  const handleLogOut = async () => {
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/logout`, {withCredentials: true})
+    if (res.data.success === true){
+      alert("You have been logged out. Please Log In again to continue.")
+      localStorage.removeItem("user")
+      props.setuser({})
+      navigate("/")
+    }
+  }
+
+  useEffect(() => {
+    const getArtistInfo = async () => {
+      try{
+        const getProducts = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks`,
+          {withCredentials: true}
+        )
+        const AllProducts = getProducts.data
+        const artist_id = props.user._id
+        const artist_name = props.user.name.full
+        const artist_products = AllProducts.filter(product => product.artist_id === artist_id)
+        setUsername(artist_name)
+        setProducts(artist_products)
+      } catch (err){
+        // if invalid token
+        if(err.response.status === 401){
+          handleLogOut()
+        }
+        else{
           console.log(err)
         }
       }
-      getArtistInfo()
-    }, [])
+    }
+    getArtistInfo()
+  }, [])
 
   return (
     <motion.div

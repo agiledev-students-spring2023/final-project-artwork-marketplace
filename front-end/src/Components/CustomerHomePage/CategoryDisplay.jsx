@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import './categoryDisplay.css'
 import "swiper/css"
@@ -13,6 +13,17 @@ const CategoryDisplay = props => {
   const [searchValue, setSearchValue] = useState('')
   const [widths, setWidths] = useState([]);
   const widthRef = useRef()
+  const navigate = useNavigate()
+
+  const handleLogOut = async () => {
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/logout`, {withCredentials: true})
+    if (res.data.success === true){
+      alert("You have been logged out. Please Log In again to continue.")
+      localStorage.removeItem("user")
+      props.setuser({})
+      navigate("/")
+    }
+  }
 
   useEffect(() => {
     const allCarousels = widthRef.current.querySelectorAll('.carousel')
@@ -27,20 +38,18 @@ const CategoryDisplay = props => {
             const getCategories = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/categories`,
                 {withCredentials: true}
             )
-            const categoriesCopy = getCategories.data
-            const categories = categoriesCopy.filter(category => category.products_id.length > 0)
-            const getProducts = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks`,
-                {withCredentials: true}
-            )
-            const AllProducts = getProducts.data
-            // console.log(AllProducts)
-            categories.forEach(category => {category['products'] =  AllProducts.filter(product => category.products_id.includes(product._id))})
-            // console.log(categoriesCopy)
-            setCategories(categories)
-            setCategoriesCopy(categoriesCopy)
+            const categories = getCategories.data
+            const categoriesFilter = categories.filter(category => category.products_id.length > 0)
+            setCategories(categoriesFilter)
+            setCategoriesCopy(categoriesFilter)
         }
         catch (err){
-            console.log(err)
+            if(err.response.status === 401){
+                handleLogOut()
+            }
+            else{
+                console.log(err)
+            }
         }
     }
     getCategories()
@@ -52,7 +61,7 @@ const CategoryDisplay = props => {
         setCategories(copyOfCategories)
     }
     else{
-        const SearchResult = categories.filter(item => item.name.toLowerCase().includes(e.target.value.toLowerCase()))
+        const SearchResult = categories.filter(category => category.name.toLowerCase().includes(e.target.value.toLowerCase()))
         setCategories(SearchResult)
     }
     setSearchValue(e.target.value)

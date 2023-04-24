@@ -44,6 +44,7 @@
 }
 .categoryRow{
     text-align: start;
+    padding-top: 2rem;
 }
 .categoryRow .categoryName{
     text-transform: capitalize;
@@ -95,8 +96,9 @@
     border-radius: 3rem;
 }
 .category_button{
-    border: 2px solid black;
-    background-color: black;
+    background: linear-gradient(45deg, rgb(176, 176, 176) 0%, rgb(74, 74, 74) 20%, black 50%, rgb(74, 74, 74) 80%, rgb(176, 176, 176) 100%);
+    border: 2px solid rgb(120, 120, 120);
+    box-shadow: 0rem 0rem 1rem rgb(87, 87, 87);
     border-radius: 2rem;
     padding-top: 1rem;
     padding-bottom: 1rem;
@@ -116,7 +118,7 @@
 }
 .category_button:hover{
     background-color: rgb(120, 120, 120);
-    border: 2px solid rgb(120, 120, 120);
+    border: 2px solid white;
     cursor: pointer;
 }
 /* FOR TABLETS */

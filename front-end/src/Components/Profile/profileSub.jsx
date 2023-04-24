@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 import './profileSub.css'
 import axios from 'axios'
 import Masonry from 'react-masonry-css'
@@ -8,12 +8,22 @@ import { motion } from 'framer-motion'
 const ProfileSub = props => {
     const getUserParamsID = useParams()
     const userId = getUserParamsID.userID
+    const navigate = useNavigate()
     const [userObject, setUserObject] = useState(props.user)
-
     const [userInfo, setUserInfo] = useState({})
     const [userUploadedProducts, setUserUploadedProducts] = useState([])
     const [followersList, setFollowersList] = useState([{}])
     const [followingList, setFollowingList] = useState([{}])
+
+    const handleLogOut = async () => {
+        const res = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/logout`, {withCredentials: true})
+        if (res.data.success === true){
+          alert("You have been logged out. Please Log In again to continue.")
+          localStorage.removeItem("user")
+          props.setuser({})
+          navigate("/")
+        }
+    }
 
     useEffect(() => {
         const getProductInfo = async () => {
@@ -39,7 +49,12 @@ const ProfileSub = props => {
                     setUserInfo(user)
                     setUserUploadedProducts(products)
                 } catch (err){
-                    console.log(err)
+                    if(err.response.status === 401){
+                        handleLogOut()
+                    }
+                    else{
+                        console.log(err)
+                    }
                 } 
             }          
         }
@@ -52,6 +67,7 @@ const ProfileSub = props => {
         1024: 2,
         600: 1
     };
+
     const checkFollow = () => {
         if(userObject.following.filter(user => user._id === userInfo._id ).length > 0){
             return true
@@ -60,33 +76,52 @@ const ProfileSub = props => {
             return false
         }
     }
+    
     const handleFollow = async () => {
         if (checkFollow()){
-            const res = await axios.put(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/${userObject._id}/unfollow/${userId}`, 
-                {},
-                {withCredentials: true, credentials: 'include'}
-            )
-            if(res.status === 200){
-                const userObject = JSON.parse(localStorage.getItem("user"))
-                const updatedFollowing = res.data
-                userObject.following = updatedFollowing
-                localStorage.setItem("user", JSON.stringify(userObject))
-                props.setuser({...props.user, following: updatedFollowing})
-                setUserObject({...userObject, following: updatedFollowing})
+            try {
+                const res = await axios.put(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/${userObject._id}/unfollow/${userId}`, 
+                    {},
+                    {withCredentials: true, credentials: 'include'}
+                )
+                if(res.status === 200){
+                    const userObject = JSON.parse(localStorage.getItem("user"))
+                    const updatedFollowing = res.data
+                    userObject.following = updatedFollowing
+                    localStorage.setItem("user", JSON.stringify(userObject))
+                    props.setuser({...props.user, following: updatedFollowing})
+                    setUserObject({...userObject, following: updatedFollowing})
+                }
+            } catch (err) {
+                if(err.response.status === 401){
+                    handleLogOut()
+                }
+                else{
+                    console.log(err)
+                }
             }
         }
         else{
-            const res = await axios.put(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/${userObject._id}/follow/${userId}`, 
-                {},
-                {withCredentials: true, credentials: 'include'}
-            )
-            if(res.status === 200){
-                const userObject = JSON.parse(localStorage.getItem("user"))
-                const updatedFollowing = res.data
-                userObject.following = updatedFollowing
-                localStorage.setItem("user", JSON.stringify(userObject))
-                props.setuser({...props.user, following: updatedFollowing})
-                setUserObject({...userObject, following: updatedFollowing})
+            try {
+                const res = await axios.put(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/${userObject._id}/follow/${userId}`, 
+                    {},
+                    {withCredentials: true, credentials: 'include'}
+                )
+                if(res.status === 200){
+                    const userObject = JSON.parse(localStorage.getItem("user"))
+                    const updatedFollowing = res.data
+                    userObject.following = updatedFollowing
+                    localStorage.setItem("user", JSON.stringify(userObject))
+                    props.setuser({...props.user, following: updatedFollowing})
+                    setUserObject({...userObject, following: updatedFollowing})
+                }
+            } catch (err) {
+                if(err.response.status === 401){
+                    handleLogOut()
+                }
+                else{
+                    console.log(err)
+                }
             }
         }
     }
