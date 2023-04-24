@@ -13,6 +13,16 @@ const Settings = props => {
   const [userType, setUserType] = useState(props.user.user)
   const [checked, setChecked] = useState(true)
   
+  const handleLogOut = async () => {
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/logout`, {withCredentials: true})
+    if (res.data.success === true){
+        alert("You have been logged out. Please Log In again to continue.")
+        localStorage.removeItem("user")
+        props.setuser({})
+        navigate("/")
+    }
+  }
+
   useEffect(() => {
     const checkChecked = () => {
         if(props.user.user === "artist"){
@@ -30,41 +40,52 @@ const Settings = props => {
     setCollapse(negation)
   }
 
-  const handleLogOut = async () => {
-    const res = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/logout`, {withCredentials: true})
-    if (res.data.success === true){
-        localStorage.removeItem("user")
-        props.setuser({})
-    }
-  }
-
   const handleUserChange = async () => {
     if(props.user.user === "artist"){
-        const res = await axios.put(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/user/${props.user._id}/changeToType/customer`, 
-            {},
-            {withCredentials: true, credentials: 'include'}
-        )
-        if(res.status === 200){
-            const userObject = JSON.parse(localStorage.getItem("user"))
-            userObject.user = res.data
-            localStorage.setItem("user", JSON.stringify(userObject))
-            setUserType(res.data)
-            props.setuser({...props.user, user: res.data})
-            setChecked(false)
+        try {
+            const res = await axios.put(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/user/${props.user._id}/changeToType/customer`, 
+                {},
+                {withCredentials: true, credentials: 'include'}
+            )
+            if(res.status === 200){
+                const userObject = JSON.parse(localStorage.getItem("user"))
+                userObject.user = res.data
+                localStorage.setItem("user", JSON.stringify(userObject))
+                setUserType(res.data)
+                props.setuser({...props.user, user: res.data})
+                setChecked(false)
+            }
+        } catch (err) {
+            if(err.response.status === 401){
+                handleLogOut()
+            }
+            else{
+                console.log(err)
+            }
         }
+        
     }
     else{
-        const res = await axios.put(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/user/${props.user._id}/changeToType/artist`, 
-            {},
-            {withCredentials: true, credentials: 'include'}
-        )
-        if(res.status === 200){
-            const userObject = JSON.parse(localStorage.getItem("user"))
-            userObject.user = res.data
-            localStorage.setItem("user", JSON.stringify(userObject))
-            setUserType(res.data)
-            props.setuser({...props.user, user: res.data})
-            setChecked(true)
+        try {
+            const res = await axios.put(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/user/${props.user._id}/changeToType/artist`, 
+                {},
+                {withCredentials: true, credentials: 'include'}
+            )
+            if(res.status === 200){
+                const userObject = JSON.parse(localStorage.getItem("user"))
+                userObject.user = res.data
+                localStorage.setItem("user", JSON.stringify(userObject))
+                setUserType(res.data)
+                props.setuser({...props.user, user: res.data})
+                setChecked(true)
+            }
+        } catch (err) {
+            if(err.response.status === 401){
+                handleLogOut()
+            }
+            else{
+                console.log(err)
+            }
         }
     }
     navigate('/')

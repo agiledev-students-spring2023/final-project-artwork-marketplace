@@ -19,6 +19,16 @@ const ViewItemSub = props => {
   const [activeImageIndex, setActiveImageIndex] = useState(0)
   const [showMore, setShowMore] = useState(false);  
   
+  const handleLogOut = async () => {
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/logout`, {withCredentials: true})
+    if (res.data.success === true){
+      alert("You have been logged out. Please Log In again to continue.")
+      localStorage.removeItem("user")
+      props.setuser({})
+      navigate("/")
+    }
+  }
+
   useEffect(() => {
     const getProductInfo = async () => {
       try{
@@ -28,7 +38,6 @@ const ViewItemSub = props => {
         )
         const thisProduct = getProduct.data[0]
         const thisProductName = thisProduct.name
-        // console.log(thisProduct)
         const getProductArtist = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/user/${thisProduct.artist_id}`,
           {withCredentials: true}
         ) 
@@ -50,24 +59,38 @@ const ViewItemSub = props => {
         setProductCategories(thisProductCategories)
         setProductDescription(thisProductDescription)
       } catch (err){
-        console.log(err)
+        if(err.response.status === 401){
+          handleLogOut()
+        }
+        else{
+          console.log(err)
+        }
       } 
     }
     getProductInfo()
   }, [])
   
   const addItemToCart = async (id) => {
-    const userId = props.user._id 
-    const res = await axios.put(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/user/${userId}/addToCart/${id}`,
-      {},
-      {withCredentials: true}
-    )
-    if(res.status === 200){
-      const userObject = JSON.parse(localStorage.getItem("user"))
-      userObject.cart = res.data
-      localStorage.setItem("user", JSON.stringify(userObject))
-      props.setuser({...props.user, cart: res.data})
-      navigate("/Cart")
+    try {
+      const userId = props.user._id 
+      const res = await axios.put(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/user/${userId}/addToCart/${id}`,
+        {},
+        {withCredentials: true}
+      )
+      if(res.status === 200){
+        const userObject = JSON.parse(localStorage.getItem("user"))
+        userObject.cart = res.data
+        localStorage.setItem("user", JSON.stringify(userObject))
+        props.setuser({...props.user, cart: res.data})
+        navigate("/Cart")
+      }
+    } catch (err) {
+      if(err.response.status === 401){
+        handleLogOut()
+      }
+      else{
+        console.log(err)
+      }
     }
   }
 

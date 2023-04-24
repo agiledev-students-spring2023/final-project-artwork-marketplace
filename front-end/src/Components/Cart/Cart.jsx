@@ -14,13 +14,13 @@ const Cart = props => {
   const handleLogOut = async () => {
     const res = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/logout`, {withCredentials: true})
     if (res.data.success === true){
-      alert("You have been logged out. Please Log In again to continue.")
-      localStorage.removeItem("user")
-      props.setuser({})
-      navigate("/")
+        alert("You have been logged out. Please Log In again to continue.")
+        localStorage.removeItem("user")
+        props.setuser({})
+        navigate("/")
     }
   }
-  // should be replaced with API
+
   useEffect(() => {
     const getCart = async () => {
         try{

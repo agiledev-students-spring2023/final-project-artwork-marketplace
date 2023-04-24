@@ -10,10 +10,18 @@ const ListNewArtwork = props => {
   const navigate = useNavigate()
   const [categories, setCategories] = useState([])
   const [error, setError] = useState("")
+  const artistID = props.user._id ? props.user._id : JSON.parse(localStorage.getItem('user')._id)
+  const [artworkImages, setArtworkImages] = useState([])
+  const [artworkImagesDisplay, setArtworkImagesDisplay] = useState([])
+  const [artworkCategories, setArtworkCategories] = useState([])
+  const [artworkPrice, setArtworkPrice] = useState()
+  const artworkName = useRef()
+  const artworkDescription = useRef()
 
   const handleLogOut = async () => {
     const res = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/logout`, {withCredentials: true})
     if (res.data.success === true){
+        alert("You have been logged out. Please Log In again to continue.")
         localStorage.removeItem("user")
         props.setuser({})
         navigate("/")
@@ -40,32 +48,19 @@ const ListNewArtwork = props => {
     }
     getAllCategories()
   }, [])
-  
-  const artistID = props.user._id ? props.user._id : JSON.parse(localStorage.getItem('user')._id)
-  const [artworkImages, setArtworkImages] = useState([])
-  const [artworkImagesDisplay, setArtworkImagesDisplay] = useState([])
-  const [artworkCategories, setArtworkCategories] = useState([])
-  const [artworkPrice, setArtworkPrice] = useState()
-  const artworkName = useRef()
-  const artworkDescription = useRef()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     const formData = new FormData()
-    
     const images = artworkImages
     images.forEach((image) => formData.append('user_uploads', image))
-    
     const artworkCategoriesID = artworkCategories.map(category => category._id)
     artworkCategoriesID.forEach((id) => formData.append('categories_id', id))
-    
     formData.append('artist_id', artistID)
     formData.append('name', artworkName.current.value)
     formData.append('price', artworkPrice)
     formData.append('shortDescription', artworkDescription.current.value)
-    
     try{
-        console.log(formData)
         await axios.post(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks/AddArt`,
             formData, 
             {withCredentials: true}
@@ -81,7 +76,7 @@ const ListNewArtwork = props => {
     } catch (err){
         // if invalid token
         if(err.response.status === 401){
-            //handleLogOut()
+            handleLogOut()
         }
         else{
             console.log(err)

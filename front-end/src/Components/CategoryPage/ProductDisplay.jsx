@@ -3,44 +3,43 @@ import { useParams, Link } from 'react-router-dom'
 import Masonry from 'react-masonry-css'
 import './productDisplay.css'
 import axios from "axios"
+import { useNavigate } from 'react-router-dom'
 
 const ProductDisplay = props => {
   const getCategoryID = useParams()
   const [categoryy, setCategory] = useState([])
   const [products, setProducts] = useState([])
   const [searchValue, setSearchValue] = useState('')
-  
+  const navigate = useNavigate()
+
+  const handleLogOut = async () => {
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/logout`, {withCredentials: true})
+    if (res.data.success === true){
+      alert("You have been logged out. Please Log In again to continue.")
+      localStorage.removeItem("user")
+      props.setuser({})
+      navigate("/")
+    }
+  }
+
   useEffect(() => {
     const findCategory = async () => {
       try{
-        const getProducts = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks`,
-          {withCredentials: true}
-        )
-        const AllProducts = getProducts.data
         const ID = getCategoryID.categoryID
         const getCategory = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/categories/category/${ID}`,
           {withCredentials: true}
         )
         const foundCategory = getCategory.data
-        
-        // const productsOfCategory = AllProducts.filter(product => foundCategory.products_id.includes(product._id))
-
-        /* that is a stupid way of finding */
-        /* but to some reasons the data format through filter does not work properly, so using that way */
-        var productsOfCategory = []
-        for (var i = 0; i < AllProducts.length; i++){
-          const prodid = AllProducts[i]._id
-          const cateidlst = foundCategory.products_id
-          for (var j = 0; j < cateidlst.length; j++){
-            if (prodid === cateidlst[j]._id){
-              productsOfCategory.push(AllProducts[i])
-            }
-          }
-        }
+        const productsOfCategory = foundCategory.products_id
         setCategory(foundCategory)
         setProducts(productsOfCategory)
       } catch (err) {
-        console.log(err)
+        if(err.response.status === 401){
+          handleLogOut()
+        }
+        else{
+          console.log(err)
+        }
       }
     }
     findCategory()

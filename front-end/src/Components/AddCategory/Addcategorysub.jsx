@@ -16,9 +16,8 @@ const Addcategorysub = props => {
     }
   }
 
-  /* submit handler */
   const handleSubmit = async (e) => {
-  e.preventDefault()
+    e.preventDefault()
     const newCategory = {
       'name': categoryName.current.value,
       'products_id': []
