@@ -40,20 +40,32 @@ const Settings = props => {
 
   const handleUserChange = async () => {
     if(props.user.user === "artist"){
-        const userObject = JSON.parse(localStorage.getItem("user"))
-        userObject.user = "customer"
-        localStorage.setItem("user", JSON.stringify(userObject))
-        setUserType("customer")
-        props.setuser({...props.user, user: "customer"})
-        setChecked(false)
+        const res = await axios.put(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/user/${props.user._id}/changeToType/customer`, 
+            {},
+            {withCredentials: true, credentials: 'include'}
+        )
+        if(res.status === 200){
+            const userObject = JSON.parse(localStorage.getItem("user"))
+            userObject.user = res.data
+            localStorage.setItem("user", JSON.stringify(userObject))
+            setUserType(res.data)
+            props.setuser({...props.user, user: res.data})
+            setChecked(false)
+        }
     }
     else{
-        const userObject = JSON.parse(localStorage.getItem("user"))
-        userObject.user = "artist"
-        localStorage.setItem("user", JSON.stringify(userObject))
-        setUserType("artist")
-        props.setuser({...props.user, user: "artist"})
-        setChecked(true)
+        const res = await axios.put(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/user/${props.user._id}/changeToType/artist`, 
+            {},
+            {withCredentials: true, credentials: 'include'}
+        )
+        if(res.status === 200){
+            const userObject = JSON.parse(localStorage.getItem("user"))
+            userObject.user = res.data
+            localStorage.setItem("user", JSON.stringify(userObject))
+            setUserType(res.data)
+            props.setuser({...props.user, user: res.data})
+            setChecked(true)
+        }
     }
     navigate('/')
   }

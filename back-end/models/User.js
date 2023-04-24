@@ -65,6 +65,10 @@ const userSchema = new Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Artwork'
         }],
+        purchased: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Artwork'
+        }],
         following: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User'

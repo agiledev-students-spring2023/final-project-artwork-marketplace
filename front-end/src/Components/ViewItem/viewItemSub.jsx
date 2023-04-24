@@ -2,11 +2,12 @@ import React, {useState, useEffect} from 'react'
 import { Link, useParams } from 'react-router-dom'
 import './viewItemSub.css'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 
 const ViewItemSub = props => {
   const getProductParamsID = useParams()
-  
+  const navigate = useNavigate()
   const [product, setProduct] = useState({})
   const [productName, setProductName] = useState("")
   const [productArtist, setProductArtist] = useState({})
@@ -35,11 +36,10 @@ const ViewItemSub = props => {
         const thisProductImages = thisProduct.imagesURL
         const thisProductStatus = thisProduct.status 
         const thisProductPrice = thisProduct.price
-        const getAllCategories = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/categories`,
+        const getCategories = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/categories/product/${productId}`,
           {withCredentials: true}
         )
-        const AllCategories = getAllCategories.data
-        const thisProductCategories = AllCategories.filter(category => thisProduct.categories_id.includes(category._id))
+        const thisProductCategories = getCategories.data
         const thisProductDescription = thisProduct.shortDescription
         setProduct(thisProduct)
         setProductName(thisProductName)
@@ -58,7 +58,17 @@ const ViewItemSub = props => {
   
   const addItemToCart = async (id) => {
     const userId = props.user._id 
-    const newCart = await axios.put(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/${userId}/cart/${id}`)
+    const res = await axios.put(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/user/${userId}/addToCart/${id}`,
+      {},
+      {withCredentials: true}
+    )
+    if(res.status === 200){
+      const userObject = JSON.parse(localStorage.getItem("user"))
+      userObject.cart = res.data
+      localStorage.setItem("user", JSON.stringify(userObject))
+      props.setuser({...props.user, cart: res.data})
+      navigate("/Cart")
+    }
   }
 
   const handleSmallPhotoClick = (index) => {
@@ -73,15 +83,15 @@ const ViewItemSub = props => {
     <div className="container viewItemContainer">
       <div className="viewItem_card">
         <div className="viewItem_big-img">
-          <img src={productImages[activeImageIndex]} alt=""/>
+          <img src={process.env.REACT_APP_SERVER_HOSTNAME + productImages[activeImageIndex]} alt=""/>
         </div>
         <div className="viewItem_box">
           <h2 className='viewItem_productName'>"{productName}"</h2>
           <div className="viewItem_row">
-            {productStatus && productStatus === "available" && (
+            {productStatus && productStatus === "Available" && (
               <span className='viewItem_price available'>${productPrice}</span>
             )}
-            {productStatus && productStatus === "sold" && (
+            {productStatus && productStatus === "Sold" && (
               <>
                 <span className='viewItem_price sold price'>${productPrice}</span><br/>
                 <span className='viewItem_price sold'>SOLD</span>
@@ -108,7 +118,7 @@ const ViewItemSub = props => {
           </div>
           <div className='viewItem_thumb'>
             {productImages.map((thispic,index) => 
-              <img src={thispic} onClick={() => handleSmallPhotoClick(index)} key={index}/>
+              <img src={process.env.REACT_APP_SERVER_HOSTNAME + thispic} onClick={() => handleSmallPhotoClick(index)} key={index} alt={`Image ${index}`}/>
             )}
           </div>
           <button className="viewItem_button" onClick={handleMoreClick}>
@@ -117,7 +127,7 @@ const ViewItemSub = props => {
           {showMore && 
             <p className="viewItem_detailedDescription">{productDescription}</p>
           }
-          {props.user.user === "Customer" && productStatus !== "sold" &&(
+          {props.user.user === "customer" && productStatus !== "sold" && props.user._id !== productArtist._id &&(
             <button className="viewItem_button" onClick={() => addItemToCart(product._id)}>
               Add To Cart
             </button>

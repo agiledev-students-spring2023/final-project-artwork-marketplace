@@ -12,7 +12,6 @@ router.post("/addCategory", auth, async (req, res) => {
         const savedCategory = await newCategory.save()
         res.status(200).json(savedCategory)  
     } catch (err){
-        console.log(err)
         res.status(500).json(err)
     }
 })

@@ -10,6 +10,15 @@ const ListNewArtwork = props => {
   const navigate = useNavigate()
   const [categories, setCategories] = useState([])
   const [error, setError] = useState("")
+
+  const handleLogOut = async () => {
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/logout`, {withCredentials: true})
+    if (res.data.success === true){
+        localStorage.removeItem("user")
+        props.setuser({})
+        navigate("/")
+    }
+  }
   
   useEffect(() => {
     const getAllCategories = async () => {
@@ -22,9 +31,7 @@ const ListNewArtwork = props => {
         } catch (err){
             // if invalid token
             if(err.response.status === 401){
-                localStorage.removeItem("user")
-                props.setuser({})
-                navigate("/")
+                handleLogOut()
             }
             else{
                 console.log(err)
@@ -56,23 +63,25 @@ const ListNewArtwork = props => {
     formData.append('name', artworkName.current.value)
     formData.append('price', artworkPrice)
     formData.append('shortDescription', artworkDescription.current.value)
+    
     try{
+        console.log(formData)
         await axios.post(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks/AddArt`,
             formData, 
             {withCredentials: true}
         )
         .then(res => {
-            console.log(res)
-            // update user in local storage and props - NOT YET DONE
+            const userObject = JSON.parse(localStorage.getItem("user"))
+            const updatedProducts = res.data
+            userObject.products_uploaded = updatedProducts
+            localStorage.setItem("user", JSON.stringify(userObject))
+            props.setuser({...props.user, products_uploaded: updatedProducts})
             navigate("/")
         })
     } catch (err){
         // if invalid token
         if(err.response.status === 401){
-            localStorage.removeItem("token")
-            localStorage.removeItem("user")
-            props.setuser({})
-            navigate("/")
+            //handleLogOut()
         }
         else{
             console.log(err)

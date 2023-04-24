@@ -1,6 +1,12 @@
-.cartHeading__Container, .CartProductsDisplay__Container{
+.CartProductsDisplay__Container{
     width: var(--container-width-lg);
     overflow: hidden;
+}
+.banner_cartHeading{
+    background-color: black;
+    overflow: hidden;
+    color: white;
+    text-align: center;
 }
 .CartSavedSwitch{
     display: grid;
@@ -17,7 +23,7 @@
 }
 .CartSavedSwitch .cartButton-primary{
     text-decoration: underline;
-    background-color: black;
+    background: linear-gradient(90deg, rgb(180, 29, 255) 0%, rgb(133, 12, 255) 50%, rgb(66, 129, 255) 100%);
     color: white;
 }
 .CartProductsDisplay__Container{

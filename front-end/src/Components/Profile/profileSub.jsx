@@ -61,7 +61,6 @@ const ProfileSub = props => {
         }
     }
     const handleFollow = async () => {
-        console.log(checkFollow())
         if (checkFollow()){
             const res = await axios.put(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/${userObject._id}/unfollow/${userId}`, 
                 {},
