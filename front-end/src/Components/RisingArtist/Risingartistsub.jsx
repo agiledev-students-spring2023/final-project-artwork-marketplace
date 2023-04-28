@@ -58,6 +58,7 @@ const RisingArtistSub = props => {
               <div className='RA_artistProfileCard'>
                 {artist.name && (
                   <div className="RA_artistName">
+                    <img src={process.env.REACT_APP_SERVER_HOSTNAME + artist.profilePicture_Path} alt="" />
                     <h2>{artist.name.full}</h2>
                   </div>
                 )}
