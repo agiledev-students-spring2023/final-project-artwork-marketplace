@@ -1,23 +1,16 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
-import {FiHome, FiUser, FiShoppingCart} from 'react-icons/fi'
-import {IoIosAdd} from 'react-icons/io'
+import {FiHome, FiUser, FiShoppingCart, FiEdit2} from 'react-icons/fi'
+import {IoIosAdd, IoMdAnalytics} from 'react-icons/io'
 import {RiUserStarLine, RiUserHeartLine} from 'react-icons/ri'
 import './navbar.css'
 
 const Navbar = props => {
   return (
     <nav>
-      {props.user.user === "artist" && (
+      {props.user.user.toLowerCase() === "artist" && (
         <>
-            {/* Home */}
-            <NavLink 
-                exact="true"
-                activeclassname="Home" 
-                to='/' >
-                <FiHome/>
-            </NavLink>
-
+            
             {/* Add Art */}
             <NavLink 
                 exact="true"
@@ -33,9 +26,33 @@ const Navbar = props => {
                 to={`/Profile/${props.user._id}`} >
                 <FiUser/>
             </NavLink>
+
+            {/* Home */}
+            <NavLink 
+                exact="true"
+                activeclassname="Home" 
+                to='/' >
+                <FiHome/>
+            </NavLink>
+
+            {/* Artist Earnings Analytics */}
+            <NavLink 
+                exact="true"
+                activeclassname="Edit" 
+                to={`/Edit`} >
+                <FiEdit2/>
+            </NavLink>
+
+            {/* Artist Earnings Analytics */}
+            <NavLink 
+                exact="true"
+                activeclassname="Analytics" 
+                to={`/Analytics`} >
+                <IoMdAnalytics/>
+            </NavLink>
         </>
       )}
-      {props.user.user === "customer" &&(
+      {props.user.user.toLowerCase() === "customer" &&(
         <>
             {/* Cart */}
             <NavLink 
