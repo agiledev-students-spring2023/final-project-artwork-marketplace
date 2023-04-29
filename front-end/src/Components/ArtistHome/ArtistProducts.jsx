@@ -76,7 +76,7 @@ const ArtistProducts = props => {
         {products.length !== 0 &&(
           <div className='productColumn'>
               {products.map((product)=>
-                <div className='productCard'>
+                <div className='productCard' key={product._id}>
                   <div className="productImage">
                   <Link to={`/Item/${product._id}`}>
                     <img src={process.env.REACT_APP_SERVER_HOSTNAME + product.thumbnailURL} alt={product.name} />

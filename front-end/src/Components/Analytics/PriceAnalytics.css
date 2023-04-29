@@ -1,0 +1,134 @@
+.priceAnalytics_container{
+    width: var(--container-width-lg);
+    text-align: center;
+    padding-top: 4rem;
+    padding-bottom: 10rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.analyticsConatiner_heading{
+    padding-bottom: 2rem;
+}
+.chart_quantityCard, .chart_priceCard{
+    background: rgb(227, 227, 227);
+    width: 100%;
+    padding: 1rem;
+    padding-bottom: 2rem;
+    border-radius: 3rem;
+    box-shadow: 0rem 0rem 1rem rgb(87, 87, 87);
+    transition: 1s ease all;
+}
+.chart_quantityCard .analytics_row, .chart_priceCard .analytics_row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.analytics_row .analytics_summary{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: auto;
+    text-align: start;
+}
+.analytics_row .analytics_summary .analytics_summaryContent{
+    font-weight: 400;
+    background: white;
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: 0rem 0rem 1rem rgb(87, 87, 87);
+}
+.analytics_row .analytics_summary .analytics_summaryContent .highlight{
+    font-weight: 700;
+    font-style: italic;
+}
+.analytics_row .analytics_summary .analytics_summaryContent .highlight.uploaded{
+    color: #575757;
+}
+.analytics_row .analytics_summary .analytics_summaryContent .highlight.soldd{
+    color: #357637;
+}
+.analytics_row .analytics_summary .analytics_summaryContent .highlight.unsoldd{
+    color: #7a1a1a;
+}
+.analytics_row .analytics_summary .analytics_heading{
+    font-style: italic;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: small;
+    padding-left: 1rem;
+    margin-bottom: 0;
+}
+.chart_quantityCard h3, .chart_priceCard h3{
+    margin-top: 0;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2rem;
+    padding: 0.5rem;
+    padding-right: 4rem;
+    padding-left: 4rem;
+    border-radius: 3rem;
+    width: fit-content;
+    background: linear-gradient(90deg, rgb(180, 29, 255) 0%, rgb(133, 12, 255) 50%, rgb(66, 129, 255) 100%);
+    box-shadow: 0rem 0rem 1rem rgb(87, 87, 87);
+    border: 1px solid white;
+    color: white;
+    font-style: italic;
+    transition: 1s ease all;
+}
+.chart_quantityCard .chart_quantityChart, .chart_priceCard .chart_priceChart{
+    width: 350px;
+    height: 200px;
+    border-radius: 3rem;
+    background: white;
+    box-shadow: 0rem 0rem 1rem rgb(87, 87, 87);
+    transition: 1s ease all;
+}
+
+/* FOR TABLETS */
+@media screen and (max-width: 1024px){
+    .priceAnalytics_container{
+      width: var(--container-width-md);
+      padding-top: 1rem;
+    }
+    .analyticsConatiner_heading{
+        padding-bottom: 0;
+    }
+    .chart_quantityCard .analytics_row, .chart_priceCard .analytics_row{
+        gap: 1rem;
+    }
+    .analytics_row .analytics_summary{
+        width: 40%;
+    }
+}
+  
+/* FOR PHONES */
+@media screen and (max-width: 600px){
+    .priceAnalytics_container{
+        width: var(--container-width-sm);
+        padding-top: 2rem;
+    }
+    .chart_quantityCard .analytics_row, .chart_priceCard .analytics_row{
+        flex-direction: column;
+        justify-content: center;
+    }
+    .chart_quantityCard .chart_quantityChart, .chart_priceCard .chart_priceChart{
+        width: 310px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .chart_quantityCard, .chart_priceCard{
+        background: rgb(227, 227, 227);
+        width: auto;
+        padding-bottom: 0;
+    }
+    .analytics_row .analytics_summary{
+        width: 100%;
+    }
+    .analytics_row .analytics_summary .analytics_summaryContent{
+        border-radius: 2rem;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+}

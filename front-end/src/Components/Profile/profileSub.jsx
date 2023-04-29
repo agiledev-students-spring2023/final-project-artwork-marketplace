@@ -49,7 +49,6 @@ const ProfileSub = props => {
                     setFollowingList(following)
                     setUserInfo(user)
                     setUserUploadedProducts(products)
-                    console.log(products)
                 } catch (err){
                     if(err.response.status === 401){
                         handleLogOut()

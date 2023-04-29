@@ -30,13 +30,14 @@
     "react-select": "^5.7.0",
     "react-switch": "^7.0.0",
     "react-textarea-autosize": "^8.4.0",
+    "recharts": "^2.5.0",
     "swiper": "^9.1.0",
     "timeago.js": "^4.0.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "CI=false && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
