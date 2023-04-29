@@ -1,14 +1,11 @@
 .priceAnalytics_container{
     width: var(--container-width-lg);
     text-align: center;
-    padding-top: 4rem;
+    padding-top: 2rem;
     padding-bottom: 10rem;
     display: flex;
     flex-direction: column;
     gap: 2rem;
-}
-.analyticsConatiner_heading{
-    padding-bottom: 2rem;
 }
 .chart_quantityCard, .chart_priceCard{
     background: rgb(227, 227, 227);
@@ -107,7 +104,6 @@
 @media screen and (max-width: 600px){
     .priceAnalytics_container{
         width: var(--container-width-sm);
-        padding-top: 2rem;
     }
     .chart_quantityCard .analytics_row, .chart_priceCard .analytics_row{
         flex-direction: column;

@@ -2,6 +2,7 @@ import React, { useEffect, useState, PureComponent } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts'
+import { motion } from 'framer-motion'
 import './PriceAnalytics.css'
 
 const PriceAnalytics = props => {
@@ -125,7 +126,12 @@ const PriceAnalytics = props => {
             {allUploadedProducts.length !== 0 && (
                 <>
                 {soldUnsoldData.length !== 0 && quantityUploadedData.length !== 0 && (
-                    <div className='chart_quantityCard'>
+                    <motion.div className='chart_quantityCard'
+                        initial={{opacity: 0, y: '100%'}}
+                        animate={{opacity: 1, y: '0%'}}
+                        exit={{opacity: 0, y: '-100%'}}
+                        transition={{duration: 1}}
+                    >
                         <h3 className='chart_quantityHeading'>Quantity</h3>
                         <div className='analytics_row'>
                             <div className='chart_quantityChart'>
@@ -179,10 +185,15 @@ const PriceAnalytics = props => {
                                 </h5>
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
                 )}
                 {soldUnsoldPriceData.length !== 0 && priceUploadedData.length !== 0 && (
-                    <div className='chart_priceCard'>
+                    <motion.div className='chart_priceCard'
+                        initial={{opacity: 0, y: '100%'}}
+                        animate={{opacity: 1, y: '0%'}}
+                        exit={{opacity: 0, y: '-100%'}}
+                        transition={{delay: 0.25, duration: 1}}
+                    >
                         <h3 className='chart_priceHeading'>Revenue</h3>
                         <div className='analytics_row'>
                             <div className='chart_priceChart'>
@@ -236,10 +247,12 @@ const PriceAnalytics = props => {
                                 </h5>
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
                 )}
-
                 </>
+            )}
+            {allUploadedProducts.length === 0 && (
+                <h5>Please upload artworks to see your performance!</h5>
             )}
         </div>
     )
