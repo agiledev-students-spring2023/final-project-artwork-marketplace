@@ -17,13 +17,14 @@
     flex-direction: column;
     height: 40vh;
     width: 80%;
-    background: black;
+    background: rgb(227, 227, 227);
     overflow: hidden;
     align-self: center;
     justify-self: center;
     border-radius: 3rem;
     box-shadow: 0rem 0rem 1rem rgb(87, 87, 87);
     margin-bottom: 2rem;
+    padding-bottom: 1rem;
 }
 .RA_artistCard .RA_artistProfileCard{
     height: 90%;
@@ -36,6 +37,29 @@
 .RA_artistCard .RA_artistProfileCard .RA_artistName{
     height: 20%;
     text-transform: capitalize;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    pointer-events: none;
+}
+.RA_artistCard .RA_artistProfileCard .RA_artistName img{
+    height: 4rem;
+    width: 4rem;
+    object-fit: cover;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    box-shadow: 0rem 0rem 1rem rgb(87, 87, 87);
+}
+.RA_artistCard .RA_artistProfileCard .RA_artistProductName h3{
+    font-weight: 600;
+    font-size: medium;
+    text-align: start;
+    font-style: italic;
+    padding-left: 1.5rem;
+    margin-top: 0.5rem;
 }
 .RA_artistCard .RA_artistProfileCard .RA_artistDP{
     height: 70%;
@@ -56,7 +80,8 @@
 .RA_artistCard .RA_artistActions button{
     height: 80%;
     border-radius: 3rem;
-    width: fit-content;
+    border: none;
+    width: 80%;
     padding-left: 1rem;
     padding-right: 1rem;
     margin-top: 0.25rem;
@@ -64,10 +89,10 @@
     margin-right: 0.25rem;
     transition: 1s ease all;
     font-weight: 600;
-}
-.RA_artistCard .RA_artistActions button.followed{
-    background: rgb(120, 59, 59);
+    box-shadow: 0rem 0rem 0.5rem rgb(87, 87, 87);
+    background: linear-gradient(90deg, rgb(180, 29, 255) 0%, rgb(133, 12, 255) 50%, rgb(66, 129, 255) 100%);
     color: white;
+    text-transform: uppercase;
 }
 .RA_artistCard .RA_artistActions button:hover{
     cursor: pointer;
@@ -95,7 +120,6 @@
         flex-direction: column;
         height: 60vh;
         width: 100%;
-        background: black;
         overflow: hidden;
         align-self: center;
         justify-self: center;

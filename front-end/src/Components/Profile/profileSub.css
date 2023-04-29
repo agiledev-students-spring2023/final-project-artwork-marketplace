@@ -16,6 +16,22 @@
     padding: 1rem;
     gap: 2rem;
 }
+.profile_uploadedProducts_title{
+    text-align: start;
+    padding-left: 2rem;
+    padding-top: 2rem;
+    font-weight: 400;
+    font-style: italic;
+}
+.profile_picAndActions .profile_userSince{
+    font-size: smaller;
+    font-weight: 400;
+    color: rgb(80, 80, 80);
+    text-transform: capitalize;
+    font-style: italic;
+    margin: 0;
+    padding: 0;
+}
 .profile_picAndActions .profile_ff{
     display: flex;
     flex-direction: row;
@@ -194,5 +210,9 @@
     .profile_container .profile_contact .user_email{
         justify-self: center;
         align-self: center;
+    }
+    .profile_uploadedProducts_title{
+        text-align: center;
+        padding-left: 0;
     }
 }

@@ -216,7 +216,7 @@ const Cart = props => {
                         className="cartButton cartButton-primary" 
                         onClick={() => setCartSwitch("cart")}
                     >
-                        Shopping Cart
+                        Cart
                     </button>
                     <button 
                         className="cartButton" 
@@ -232,7 +232,7 @@ const Cart = props => {
                         className="cartButton" 
                         onClick={() => setCartSwitch("cart")}
                     >
-                        Shopping Cart
+                        Cart
                     </button>
                     <button 
                         className="cartButton cartButton-primary" 

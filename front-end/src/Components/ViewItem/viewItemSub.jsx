@@ -3,6 +3,8 @@ import { Link, useParams } from 'react-router-dom'
 import './viewItemSub.css'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { format } from 'timeago.js'
+import { motion } from 'framer-motion'
 
 
 const ViewItemSub = props => {
@@ -17,7 +19,6 @@ const ViewItemSub = props => {
   const [productCategories, setProductCategories] = useState([])
   const [productDescription, setProductDescription] = useState("")
   const [activeImageIndex, setActiveImageIndex] = useState(0)
-  const [showMore, setShowMore] = useState(false);  
   
   const handleLogOut = async () => {
     const res = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/logout`, {withCredentials: true})
@@ -98,66 +99,82 @@ const ViewItemSub = props => {
     setActiveImageIndex(index)
   }
 
-  const handleMoreClick = () => {
-    setShowMore(!showMore);
-  }
-
   return(
-    <div className="container viewItemContainer">
+    <motion.div className="container viewItemContainer"
+      initial={{opacity: 0, y: '100%'}}
+      animate={{opacity: 1, y: '0%'}}
+      exit={{opacity: 0, y: '-100%'}}
+      transition={{delay: 0.5, duration: 1}}
+    >
       <div className="viewItem_card">
-        <div className="viewItem_big-img">
+        <motion.div className="viewItem_big-img">
           <img src={process.env.REACT_APP_SERVER_HOSTNAME + productImages[activeImageIndex]} alt=""/>
-        </div>
+        </motion.div>
         <div className="viewItem_box">
+
           <h2 className='viewItem_productName'>"{productName}"</h2>
+
           <div className="viewItem_row">
-            {productStatus && productStatus === "Available" && (
-              <span className='viewItem_price available'>${productPrice}</span>
+            <p>Price & Status: </p>
+            {productStatus && productStatus.toLowerCase() === "available" && (
+              <>
+                <span className='viewItem_price available'>${productPrice}</span><br/>
+                <span className='viewItem_price available'>AVAILABLE</span>
+              </>
             )}
-            {productStatus && productStatus === "Sold" && (
+            {productStatus && productStatus.toLowerCase() === "sold" && (
               <>
                 <span className='viewItem_price sold price'>${productPrice}</span><br/>
-                <span className='viewItem_price sold'>SOLD</span>
+                <span className='viewItem_price sold'>SOLD {format(product.updatedAt)}</span>
               </>
             )}
           </div>
-          {productArtist.name && (
-            <p className='viewItem_Artist'>
-              Artwork By:  {" "}  
+
+          <div className='viewItem_Artist'>
+            <p>Artwork By: </p>
+            <h5>
               <Link to={`/Profile/${productArtist._id}`}>
-                {productArtist.name.full}
+                <img src={process.env.REACT_APP_SERVER_HOSTNAME + productArtist.profilePicture_Path} alt={productArtist.profilePicture_Path} />
+                {productArtist.name && (
+                  productArtist.name.full
+                )}
               </Link>
-            </p>
-          )}
+            </h5>
+          </div>
+          
           <div className="viewItem_prodCategories">
             <p>Categories: </p>
-            {productCategories.map((category) => 
-              <h5 key={category._id}>
-              <Link to={`/Category/${category._id}`}>
-                {category.name}
-              </Link>
-              </h5>
-            )}
+            <div className='viewItem_categoriesss'>
+              {productCategories.map((category) => 
+                <h5 key={category._id}>
+                  <Link to={`/Category/${category._id}`}>
+                    {category.name}
+                  </Link>
+                </h5>
+              )}
+            </div>
           </div>
-          <div className='viewItem_thumb'>
-            {productImages.map((thispic,index) => 
-              <img src={process.env.REACT_APP_SERVER_HOSTNAME + thispic} onClick={() => handleSmallPhotoClick(index)} key={index} alt={`Image ${index}`}/>
-            )}
+          <div className="viewItem_prodDescription">
+            <p>Description: </p>
+            <h5 className="viewItem_detailedDescription">{productDescription}</h5>
           </div>
-          <button className="viewItem_button" onClick={handleMoreClick}>
-            {showMore ? 'Hide' : 'Show'} details
-          </button>
-          {showMore && 
-            <p className="viewItem_detailedDescription">{productDescription}</p>
-          }
-          {props.user.user === "customer" && productStatus !== "sold" && props.user._id !== productArtist._id &&(
+          <div className='viewItem_inactiveThumb'>
+            <p>Images: </p>
+            <div className='viewItem_thumb'>
+              {productImages.map((thispic,index) => 
+                <img className={index === activeImageIndex ? "active" : ""} src={process.env.REACT_APP_SERVER_HOSTNAME + thispic} onClick={() => handleSmallPhotoClick(index)} key={index} alt={`${index}`}/>
+              )}
+            </div>
+          </div>
+          <h5 className="viewItem_postedTimeAgo">Posted {format(product.createdAt)}</h5>
+          {props.user.user === "customer" && productStatus.toLowerCase() !== "sold" && props.user._id !== productArtist._id &&(
             <button className="viewItem_button" onClick={() => addItemToCart(product._id)}>
               Add To Cart
             </button>
           )}
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 }
 

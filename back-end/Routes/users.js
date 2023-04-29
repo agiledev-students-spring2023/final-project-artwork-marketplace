@@ -158,7 +158,8 @@ router.get("/user/:id", auth, async (req, res) => {
             saved: userFind.saved,
             purchased: userFind.purchased,
             following: userFind.following,
-            followers: userFind.followers
+            followers: userFind.followers,
+            createdAt: userFind.createdAt
         }
         return res.status(200).json(user)
     } catch (err){
