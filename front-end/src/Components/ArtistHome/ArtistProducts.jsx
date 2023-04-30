@@ -11,6 +11,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 const ArtistProducts = props => {
   const [username, setUsername] = useState("")
   const [products, setProducts] = useState([])
+  const [copyOfProducts, setProductsCopy] = useState([])
+  const [searchValue, setSearchValue] = useState('')
   const navigate = useNavigate()
 
   const handleLogOut = async () => {
@@ -35,6 +37,7 @@ const ArtistProducts = props => {
         const artist_products = AllProducts.filter(product => product.artist_id === artist_id)
         setUsername(artist_name)
         setProducts(artist_products)
+        setProductsCopy(artist_products)
       } catch (err){
         // if invalid token
         if(err.response.status === 401){
@@ -48,19 +51,39 @@ const ArtistProducts = props => {
     getArtistInfo()
   }, [])
 
+  const handleSearch = (e) => {
+    if(e.target.value == '' && products && copyOfProducts){
+      setProducts(copyOfProducts)
+    }
+    else{
+      const SearchResult = products.filter(product => product.name.toLowerCase().includes(e.target.value.toLowerCase()))
+      setProducts(SearchResult)
+    }
+    setSearchValue(e.target.value)
+  }
+
   return (
     <motion.div
       initial={{opacity: 0, y: '100%'}}
       animate={{opacity: 1, y: '0%'}}
       exit={{opacity: 0, y: '-100%'}}
-      transition={{duration: 1, delayChildren: 0.5}}
+      transition={{duration: 1, delay: 0.5}}
       className='page_artistHomePage' 
     >
+      <div className="searchBar_bg">
+        <div className='container searchBar__container'>
+          <input className='searchBarTextField' placeholder='Search Your Artworks' value={searchValue} onInput={(e) => handleSearch(e)}/> 
+        </div>
+      </div>
       {/* Welcome Message */}
       {username &&(
-        <div className='welcomeMsg'>
-          <h1>Welcome to Artwork Marketplace, {username}!</h1>
-        </div>
+        <div className="PerformanceMSG">
+          <Link to="/Analytics">
+            <div className='PerformanceBanner'>
+              <h1>Check Out Your Performance As An Artist!</h1>
+            </div>
+          </Link>
+        </div> 
       )}
       <div className='container products_container'>   
         {products.length !== 0 &&(

@@ -15,8 +15,9 @@ import ViewCart from './Pages/ViewCart'
 import RisingArtist from './Pages/RisingArtists'
 import Profile from './Pages/Profile'
 import AddCategory from './Pages/AddCategory'
-import Edit from './Pages/Edit'
+import Followers from './Pages/Followers'
 import Analytics from './Pages/Analytics'
+import Following from './Pages/Following'
 
 const App = props => {
   const [user, setUser] = useState({})
@@ -64,7 +65,7 @@ const App = props => {
                   <Route path="/" element={<Home user={user} setuser={setUser}/>}/>
                   <Route path="/AddArt" element={<AddArt user={user} setuser={setUser}/>}/>
                   <Route path="/AddCategory" element={<AddCategory user={user} setuser={setUser}/>}/>
-                  <Route path="/Edit" element={<Edit user={user} setuser={setUser}/>}/>
+                  <Route path="/Followers" element={<Followers user={user} setuser={setUser}/>}/>
                   <Route path="/Analytics" element={<Analytics user={user} setuser={setUser}/>}/>
                 </>
               )}
@@ -74,6 +75,7 @@ const App = props => {
                   <Route path="/" element={<Home user={user} setuser={setUser}/>}/>
                   <Route path="/Cart" element={<ViewCart user={user} setuser={setUser}/>}/>
                   <Route path="/RisingArtists" element={<RisingArtist user={user} setuser={setUser}/>} />
+                  <Route path="/Following" element={<Following user={user} setuser={setUser}/>}/>
                   <Route path="/Category/:categoryID" element={<Category user={user} setuser={setUser}/>}/>
                 </>
               )}

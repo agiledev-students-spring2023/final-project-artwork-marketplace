@@ -1,8 +1,8 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
-import {FiHome, FiUser, FiShoppingCart, FiEdit2} from 'react-icons/fi'
+import {FiHome, FiUser, FiShoppingCart} from 'react-icons/fi'
 import {IoIosAdd, IoMdAnalytics} from 'react-icons/io'
-import {RiUserStarLine, RiUserHeartLine} from 'react-icons/ri'
+import {RiUserStarLine, RiUserHeartLine, RiUserSharedLine} from 'react-icons/ri'
 import './navbar.css'
 
 const Navbar = props => {
@@ -38,9 +38,9 @@ const Navbar = props => {
             {/* Artist Earnings Analytics */}
             <NavLink 
                 exact="true"
-                activeclassname="Edit" 
-                to={`/Edit`} >
-                <FiEdit2/>
+                activeclassname="Followers" 
+                to={`/Followers`} >
+                <RiUserSharedLine/>
             </NavLink>
 
             {/* Artist Earnings Analytics */}
@@ -78,20 +78,20 @@ const Navbar = props => {
                 <FiHome/>
             </NavLink>
 
-            {/* Rising Artists */}
-            <NavLink 
-                exact="true"
-                activeclassname="Rising Artists" 
-                to='/RisingArtists' >
-                <RiUserStarLine/>
-            </NavLink>
-
             {/* Following */}
             <NavLink 
                 exact="true"
                 activeclassname="Following" 
                 to='/Following' >
                 <RiUserHeartLine/>
+            </NavLink>
+
+            {/* Rising Artists */}
+            <NavLink 
+                exact="true"
+                activeclassname="Rising Artists" 
+                to='/RisingArtists' >
+                <RiUserStarLine/>
             </NavLink>
         </>
       )}

@@ -1,10 +1,10 @@
 import React from 'react'
-import EditArtworks from '../Components/Edit/EditArtworks'
+import FollowersFeed from '../Components/Followers/FollowersFeed'
 import Navbar from '../Components/Navbar/Navbar'
 import Settings from '../Components/Settings/Settings'
 import { motion } from 'framer-motion'
 
-const Edit = props => {
+const Followers = props => {
   return (
     <div>
       <motion.div
@@ -23,11 +23,11 @@ const Edit = props => {
         transition={{duration: 1}}
         key={"ProfilePage"}
       >
-        <EditArtworks user={props.user} setuser={props.setuser}/>
+        <FollowersFeed user={props.user} setuser={props.setuser}/>
       </motion.div>
       <Navbar user={props.user} />
     </div>
   )
 }
   
-export default Edit
+export default Followers
