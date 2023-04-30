@@ -2,12 +2,16 @@
     width: var(--container-width-lg);
     align-items: center;
     text-align: center;
+    padding-top: 2rem;
     padding-bottom: 10rem;
 }
 .profile_container .profile_information{
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+.profile_container .profile_information .profile_title{
+    padding-bottom: 1rem;
 }
 .profile_picAndActions{
     display: flex;

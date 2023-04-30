@@ -1,5 +1,5 @@
 .LNA_container{
-    padding-top: 3rem;
+    padding-top: 2rem;
     padding-bottom: 10rem;
     width: var(--container-width-lg);
 }
@@ -7,7 +7,7 @@
     color: rgb(111, 0, 0);
 }
 .LNA_headers{
-    padding-bottom: 3rem;
+    padding-bottom: 2rem;
 }
 .LNA_container form{
     display: grid;
@@ -137,6 +137,8 @@
 }
 .LNA_priceInput .react-numeric-input{
     width: 100%;
+    display: flex !important;
+    flex-direction: row !important;
     box-shadow: 0rem 0rem 1rem rgb(87, 87, 87);
     background-color: white;
     border-radius: 3rem;
@@ -145,7 +147,7 @@
 .LNA_priceInput .react-numeric-input b{
     padding-left: 2rem;
     padding-right: 2rem;
-    margin: 0.5rem;
+    margin-right: 0.5rem;
     background-color: rgb(221, 221, 221) !important;
     transition: 1s ease all !important;
     border-radius: 2rem !important;
@@ -154,6 +156,7 @@
     width: 100%;
     border: none !important;
     padding: 1rem;
+    padding-left: 1rem !important;
     font-size: small !important;
 }
 .LNA_priceInput .react-numeric-input input:focus{

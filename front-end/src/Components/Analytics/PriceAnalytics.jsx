@@ -94,7 +94,7 @@ const PriceAnalytics = props => {
         }
         else{
             return (
-                <text x={x} y={y} dy={y < cy ? -20 : 0} dx={x > cx ? 20 : x < cx ? -20 : 0} fill={fill} textAnchor='middle'>
+                <text x={x} y={y} dy={y < cy ? -20 : 0} dx={x > cx ? 20 : x < cx ? -20 : 0} fill={fill} textAnchor='middle' style={{fontWeight:600}}>
                     {payload.value}
                 </text>
             )
@@ -113,7 +113,7 @@ const PriceAnalytics = props => {
         }
         else{
             return (
-                <text x={x} y={y} dy={y < cy ? -20 : 0} dx={x > cx ? 20 : x < cx ? -20 : 0} fill={fill} textAnchor='middle'>
+                <text x={x} y={y} dy={y < cy ? -20 : 0} dx={x > cx ? 20 : x < cx ? -20 : 0} fill={fill} textAnchor='middle' style={{fontWeight:600}}>
                     {"$" + payload.value}
                 </text>
             )
@@ -130,7 +130,7 @@ const PriceAnalytics = props => {
                         initial={{opacity: 0, y: '100%'}}
                         animate={{opacity: 1, y: '0%'}}
                         exit={{opacity: 0, y: '-100%'}}
-                        transition={{duration: 1}}
+                        transition={{duration: 0.25}}
                     >
                         <h3 className='chart_quantityHeading'>Quantity</h3>
                         <div className='analytics_row'>
@@ -192,7 +192,7 @@ const PriceAnalytics = props => {
                         initial={{opacity: 0, y: '100%'}}
                         animate={{opacity: 1, y: '0%'}}
                         exit={{opacity: 0, y: '-100%'}}
-                        transition={{delay: 0.25, duration: 1}}
+                        transition={{delay: 0.25, duration: 0.25}}
                     >
                         <h3 className='chart_priceHeading'>Revenue</h3>
                         <div className='analytics_row'>

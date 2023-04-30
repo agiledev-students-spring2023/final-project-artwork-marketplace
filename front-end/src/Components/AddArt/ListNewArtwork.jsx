@@ -4,6 +4,7 @@ import NumericInput from 'react-numeric-input'
 import Multiselect from 'multiselect-react-dropdown'
 import { FiUpload } from 'react-icons/fi'
 import { useNavigate, Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import './ListNewArtwork.css'
 
 const ListNewArtwork = props => {
@@ -127,7 +128,12 @@ const ListNewArtwork = props => {
                 Post A New Artwork
             </h2>
         </div>
-        <form onSubmit={handleSubmit} encType='multipart/form-data'>
+        <motion.form onSubmit={handleSubmit} encType='multipart/form-data'
+            initial={{opacity: 0, y: '100%'}}
+            animate={{opacity: 1, y: '0%'}}
+            exit={{opacity: 0, y: '-100%'}}
+            transition={{delay: 0.5, duration: 1}}
+        >
             <div className="LNA_titleInput">
                 <h5 className="LNA_titlePrompt">Title Your Artwork:</h5>
                 <input 
@@ -221,7 +227,7 @@ const ListNewArtwork = props => {
             <button className="LNA_postArtworkButton" type='submit'>
                 Post Artwork
             </button>
-        </form>
+        </motion.form>
     </div>
   )
 }

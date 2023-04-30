@@ -5,6 +5,22 @@
     overflow: hidden;
     text-align: center;
 }
+.PerformanceMSG a{
+    text-decoration: none;
+    color: white;
+}
+.PerformanceMSG a .PerformanceBanner{
+    background-color: black;
+    text-align: center;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    transition: 1s ease all;
+}
+.PerformanceMSG a .PerformanceBanner:hover{
+    background-color: rgb(120, 120, 120);
+}
 .welcomeMsg{
     padding: 1rem;
     background-color: black;
