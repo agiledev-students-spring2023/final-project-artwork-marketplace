@@ -169,12 +169,13 @@ router.get("/user/:id", auth, async (req, res) => {
 
 // change profile picture
 router.post("/user/:id/changeProfilePicture", auth, uploadd.single('user_profilePicture'), async (req, res, next) => {
-    console.log(req.file)
+    // console.log("in backend test:", req.file)
     try {
         if (!req.file){
             return res.status(400).json({success: false, message: "Please upload a profile picture!"})
         }
         else{
+            // console.log(req.file.filename)
             const user = await User.findByIdAndUpdate({_id: req.params.id}, {$set: { profilePicture_Path : "/static/Images/DisplayPictures/" + req.file.filename}}, {returnOriginal: false})
             // return new profile pic path
             const newProfilePicPath = user.profilePicture_Path

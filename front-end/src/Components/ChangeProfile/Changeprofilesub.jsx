@@ -40,18 +40,18 @@ const Changeprofilesub = props => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     const formData = new FormData() 
-    const image = artworkImages
-    formData.append('user_profilePicture', image)
+    const images = artworkImages
+    images.forEach((image) => formData.append('user_profilePicture', image))
     // for (const value of formData.values()) {
     //   console.log(value);
     // }
     try{
       await axios.post(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/user/${userId}/changeProfilePicture`,
-      formData, 
+        formData, 
         {withCredentials: true}
       )
       .then(res => {
-        navigate("/Profile/:userID")
+        navigate(`/Profile/${userId}`)
       })
     } catch (err){
       // if invalid token
