@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useId } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import './profileSub.css'
 import axios from 'axios'
@@ -9,6 +9,7 @@ import { motion } from 'framer-motion'
 const ProfileSub = props => {
     const getUserParamsID = useParams()
     const userId = getUserParamsID.userID
+    // console.log(userId)
     const navigate = useNavigate()
     const [userObject, setUserObject] = useState(props.user)
     const [userInfo, setUserInfo] = useState({})
@@ -49,6 +50,7 @@ const ProfileSub = props => {
                     setFollowingList(following)
                     setUserInfo(user)
                     setUserUploadedProducts(products)
+                    // this.forceUpdate()
                 } catch (err){
                     if(err.response.status === 401){
                         handleLogOut()
@@ -60,7 +62,7 @@ const ProfileSub = props => {
             }          
         }
         getProductInfo()
-    }, [userObject])
+    }, [userObject,userInfo])
 
     // for responsive styling
     const breakpointColumnsObj = {
@@ -137,6 +139,7 @@ const ProfileSub = props => {
                             <div className='profile_pic'>
                                 <img src={process.env.REACT_APP_SERVER_HOSTNAME + userInfo.profilePicture_Path} alt={userInfo.name.full}/>
                             </div>
+                            <div className='content'><Link to={'/ChangeProfile'}>Change Profile Photo!</Link></div>
                             <h5 className="profile_userSince">User since {format(userInfo.createdAt)}</h5>
                             {userObject._id !== userId && (
                                 <button className={`follow_button ${checkFollow() ? "followed" : "follow"}`} onClick={handleFollow}>Follow</button>
@@ -149,8 +152,7 @@ const ProfileSub = props => {
                                 <div className="profile_following">
                                     <h5>{followingList.length}</h5>
                                     <button>Following</button>  
-                                </div>
-                                                          
+                                </div>                   
                             </div>
                         </div>
                         <div className='profile_contact'>

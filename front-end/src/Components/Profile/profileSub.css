@@ -215,8 +215,42 @@
         justify-self: center;
         align-self: center;
     }
+    .profile_container .profile_picAndActions .changeprofilebutton{
+        grid-template-columns: 1fr;
+        gap: 0rem;
+    }
+    .profile_container .profile_picAndActions .changeprofilebutton h4{
+        justify-self: center;
+        align-self: center;
+    }
+    .profile_container .profile_picAndActions .changeprofilebutton .content{
+        justify-self: center;
+        align-self: center;
+    }
     .profile_uploadedProducts_title{
         text-align: center;
         padding-left: 0;
     }
+}
+
+.profile_information .profile_picAndActions .changeprofilebutton{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+.profile_information .profile_picAndActions .changeprofilebutton .content{
+    justify-self: end;
+    align-self: center;
+    background: linear-gradient(90deg, rgb(180, 29, 255) 0%, rgb(133, 12, 255) 50%, rgb(66, 129, 255) 100%);
+    box-shadow: 0rem 0rem 1rem rgb(80, 80, 80);
+    border-radius: 3rem;
+    padding: 0.5rem;
+    transition: 1s ease all;
+}
+.profile_information .profile_picAndActions .changeprofilebutton .content:hover{
+    box-shadow: 0rem 0rem 1rem rgb(133, 12, 255);
+}
+.profile_information .profile_picAndActions .changeprofilebutton .content a{
+    color: white;
+    text-decoration: none;
 }
