@@ -40,11 +40,8 @@ const Changeprofilesub = props => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     const formData = new FormData() 
-    const images = artworkImages
-    images.forEach((image) => formData.append('user_profilePicture', image))
-    // for (const value of formData.values()) {
-    //   console.log(value);
-    // }
+    formData.append('user_profilePicture', artworkImages[0])
+    // console.log(artworkImages[0])
     try{
       await axios.post(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/user/${userId}/changeProfilePicture`,
         formData, 

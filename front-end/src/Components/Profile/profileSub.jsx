@@ -50,6 +50,7 @@ const ProfileSub = props => {
                     setFollowingList(following)
                     setUserInfo(user)
                     setUserUploadedProducts(products)
+                    // this.forceUpdate()
                 } catch (err){
                     if(err.response.status === 401){
                         handleLogOut()
@@ -61,7 +62,7 @@ const ProfileSub = props => {
             }          
         }
         getProductInfo()
-    }, [userObject])
+    }, [userObject,userInfo])
 
     // for responsive styling
     const breakpointColumnsObj = {
