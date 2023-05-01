@@ -137,6 +137,7 @@ const ProfileSub = props => {
                             <div className='profile_pic'>
                                 <img src={process.env.REACT_APP_SERVER_HOSTNAME + userInfo.profilePicture_Path} alt={userInfo.name.full}/>
                             </div>
+                            <div className='content'><Link to={'/ChangeProfile'}>Change Profile Photo!</Link></div>
                             <h5 className="profile_userSince">User since {format(userInfo.createdAt)}</h5>
                             {userObject._id !== userId && (
                                 <button className={`follow_button ${checkFollow() ? "followed" : "follow"}`} onClick={handleFollow}>Follow</button>
@@ -149,8 +150,7 @@ const ProfileSub = props => {
                                 <div className="profile_following">
                                     <h5>{followingList.length}</h5>
                                     <button>Following</button>  
-                                </div>
-                                                          
+                                </div>                   
                             </div>
                         </div>
                         <div className='profile_contact'>
