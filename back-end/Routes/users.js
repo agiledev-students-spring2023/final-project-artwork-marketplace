@@ -169,6 +169,7 @@ router.get("/user/:id", auth, async (req, res) => {
 
 // change profile picture
 router.post("/user/:id/changeProfilePicture", auth, uploadd.single('user_profilePicture'), async (req, res, next) => {
+    console.log(req.file)
     try {
         if (!req.file){
             return res.status(400).json({success: false, message: "Please upload a profile picture!"})

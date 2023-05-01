@@ -3,11 +3,14 @@ import axios from 'axios'
 import NumericInput from 'react-numeric-input'
 import Multiselect from 'multiselect-react-dropdown'
 import { FiUpload } from 'react-icons/fi'
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate, Link, useParams} from 'react-router-dom'
 import { motion } from 'framer-motion'
 import './ListNewArtwork.css'
 
 const ListNewArtwork = props => {
+//   const getUserParamsID = useParams()
+//   const userId = getUserParamsID.userID
+//   console.log(userId)
   const navigate = useNavigate()
   const [categories, setCategories] = useState([])
   const [error, setError] = useState("")

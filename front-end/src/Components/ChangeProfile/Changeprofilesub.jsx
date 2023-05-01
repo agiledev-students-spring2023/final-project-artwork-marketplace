@@ -1,20 +1,23 @@
-import React, {useEffect, useState, useRef} from 'react'
+import React, {useEffect, useState} from 'react'
 import axios from 'axios'
-import { useNavigate, Link } from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 import { FiUpload } from 'react-icons/fi'
+import './Changeprofilesub.css'
 
 const Changeprofilesub = props => {
+  const userId = props.user._id
+
   const navigate = useNavigate()
-  const categoryName = useRef()
   const [artworkImages, setArtworkImages] = useState([])
   const [artworkImagesDisplay, setArtworkImagesDisplay] = useState([])
-
+  
   // images
   const handleFilesChange = e => {
     const image = e.target.files[0]
     setArtworkImages([...artworkImages, image])
     setArtworkImagesDisplay([...artworkImagesDisplay, URL.createObjectURL(image)])
   }
+  console.log(artworkImages)
   const handleRemoveImageUploaded = (index) => {
     const artworkImagesArray = [...artworkImages]
     const artworkImagesDisplayArray = [...artworkImagesDisplay]
@@ -36,17 +39,19 @@ const Changeprofilesub = props => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const newCategory = {
-      'name': categoryName.current.value,
-      'products_id': []
-    }
+    const formData = new FormData() 
+    const image = artworkImages
+    formData.append('user_profilePicture', image)
+    // for (const value of formData.values()) {
+    //   console.log(value);
+    // }
     try{
-      await axios.post(`${process.env.REACT_APP_SERVER_HOSTNAME}/categories/addCategory`,
-        newCategory, 
+      await axios.post(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/user/${userId}/changeProfilePicture`,
+      formData, 
         {withCredentials: true}
       )
       .then(res => {
-        navigate("/AddArt")
+        navigate("/Profile/:userID")
       })
     } catch (err){
       // if invalid token
@@ -75,8 +80,7 @@ const Changeprofilesub = props => {
                           className='filesUploadField'
                           type='file'
                           id='LNA_inputFileUpload'
-                          accept='.png, .jpg, .jpeg'
-                          multiple
+                          accept='.png, .jpg, .jpeg .webp'
                           onChange={handleFilesChange}
                           hidden
                       />

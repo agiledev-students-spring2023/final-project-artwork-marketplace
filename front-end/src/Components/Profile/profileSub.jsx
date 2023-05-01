@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useId } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import './profileSub.css'
 import axios from 'axios'
@@ -9,6 +9,7 @@ import { motion } from 'framer-motion'
 const ProfileSub = props => {
     const getUserParamsID = useParams()
     const userId = getUserParamsID.userID
+    // console.log(userId)
     const navigate = useNavigate()
     const [userObject, setUserObject] = useState(props.user)
     const [userInfo, setUserInfo] = useState({})
