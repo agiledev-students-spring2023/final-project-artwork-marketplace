@@ -18,7 +18,6 @@ import AddCategory from './Pages/AddCategory'
 import Followers from './Pages/Followers'
 import Analytics from './Pages/Analytics'
 import Following from './Pages/Following'
-import ChangeProfile from './Pages/ChangeProfile'
 
 const App = props => {
   const [user, setUser] = useState({})
@@ -66,7 +65,6 @@ const App = props => {
                   <Route path="/" element={<Home user={user} setuser={setUser}/>}/>
                   <Route path="/AddArt" element={<AddArt user={user} setuser={setUser}/>}/>
                   <Route path="/AddCategory" element={<AddCategory user={user} setuser={setUser}/>}/>
-                  <Route path="/ChangeProfile" element={<ChangeProfile user={user} setuser={setUser}/>}/>
                   <Route path="/Followers" element={<Followers user={user} setuser={setUser}/>}/>
                   <Route path="/Analytics" element={<Analytics user={user} setuser={setUser}/>}/>
                 </>

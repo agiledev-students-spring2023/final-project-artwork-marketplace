@@ -52,6 +52,7 @@
     margin-left: 1rem;
     margin-right: 1rem;
     box-shadow: 0rem 0rem 1rem rgb(87, 87, 87);
+    border: 1px solid white;
 }
 .RA_artistCard .RA_artistProfileCard .RA_artistProductName h3{
     font-weight: 600;
