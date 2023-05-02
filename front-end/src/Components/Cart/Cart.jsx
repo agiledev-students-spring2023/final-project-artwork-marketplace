@@ -169,8 +169,8 @@ const Cart = props => {
             userObject.cart = res.data.cart
             userObject.purchased = res.data.purchased
             localStorage.setItem("user", JSON.stringify(userObject))
-            setUserCartList(res.data.cart)
-            props.setuser({...props.user, cart: res.data.cart})
+            setUserCartList([])
+            props.setuser({...props.user, cart: []})
             props.setuser({...props.user, purchased: res.data.purchased})
             alert("Successfully checked out!")
         }
@@ -265,13 +265,13 @@ const Cart = props => {
                                     <div className="artworkCartText">
                                         <div className="artworkCartInformation">
                                             <h4 className='artworkCartName'>"{artwork.name}"</h4>
-                                            {artwork.status === "Sold" && (
+                                            {artwork.status.toLowerCase() === "sold" && (
                                                 <>
                                                     <h5 className='artworkCartPrice sold'>$ {artwork.price}</h5>
                                                     <h5 className='artworkCartPrice sold'>{artwork.status}</h5>
                                                 </>
                                             )}
-                                            {artwork.status === "Available" && (
+                                            {artwork.status.toLowerCase() === "available" && (
                                                 <>
                                                     <h5 className='artworkCartPrice available'>$ {artwork.price}</h5>
                                                     <h5 className='artworkCartPrice available'>{artwork.status}</h5>
@@ -286,7 +286,9 @@ const Cart = props => {
                                 </div>
                             )}
                             <div className="cartCheckout">
-                                <button onClick={handleCheckout}>Checkout Cart</button>
+                                {userCartList.length > 0 && (
+                                    <button onClick={handleCheckout}>Checkout Cart</button>
+                                )}
                             </div>
                         </div>
                     )}
@@ -317,13 +319,13 @@ const Cart = props => {
                                     <div className="artworkCartText">
                                         <div className="artworkCartInformation">
                                             <h4 className='artworkCartName'>"{artwork.name}"</h4>
-                                            {artwork.status === "sold" && (
+                                            {artwork.status.toLowerCase() === "sold" && (
                                                 <>
                                                     <h5 className='artworkCartPrice sold'>$ {artwork.price}</h5>
                                                     <h5 className='artworkCartPrice sold'>{artwork.status}</h5>
                                                 </>
                                             )}
-                                            {artwork.status === "available" && (
+                                            {artwork.status.toLowerCase() === "available" && (
                                                 <>
                                                     <h5 className='artworkCartPrice available'>$ {artwork.price}</h5>
                                                     <h5 className='artworkCartPrice available'>{artwork.status}</h5>
