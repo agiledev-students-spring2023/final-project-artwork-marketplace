@@ -20,6 +20,46 @@
     padding: 1rem;
     gap: 2rem;
 }
+.profile_picAndChangePic form label{
+    position: absolute;
+    cursor: pointer;
+    background: linear-gradient(90deg, rgb(180, 29, 255) 0%, rgb(133, 12, 255) 50%, rgb(66, 129, 255) 100%);
+    box-shadow: 0 0 1rem rgb(80, 80, 80);
+    border-radius: 50%;
+    border: 1px solid white;
+    margin-left: 3rem;
+    margin-top: 12rem;
+    padding: 1rem;
+    z-index: 2;
+    color: white;
+}
+.profile_picAndChangePic .profile_closeChangePic{
+    position: absolute;
+    z-index: 2;
+    margin-left: 3rem;
+    padding: 1rem;
+    color: white;
+    background: linear-gradient(70deg, #7a1a1a 0%, #b02424 10%, #7a1a1a 50%, #b02424 90%, #7a1a1a 100% );
+    box-shadow: 0 0 1rem rgb(80, 80, 80);
+    border-radius: 50%;
+    border: 1px solid white;
+    cursor: pointer;
+    transition: 1s ease all;
+}
+.profile_picAndChangePic .profile_submitChangePic{
+    position: absolute;
+    z-index: 2;
+    margin-left: 5rem;
+    margin-top: 3rem;
+    padding: 1rem;
+    color: white;
+    background: linear-gradient(70deg, #357637 0%, #439246 10%, #357637 50%, #439246 90%, #357637 100% );
+    box-shadow: 0 0 1rem rgb(80, 80, 80);
+    border-radius: 50%;
+    border: 1px solid white;
+    cursor: pointer;
+    transition: 1s ease all;
+}
 .profile_uploadedProducts_title{
     text-align: start;
     padding-left: 2rem;
@@ -89,6 +129,7 @@
 .profile_picAndActions .profile_pic{
     width: 15rem;
     height: 15rem;
+    border: 1px solid white;
     border-radius: 50%;
     overflow: hidden;
     box-shadow: 0rem 0rem 1rem rgb(80, 80, 80);
@@ -97,7 +138,8 @@
 }
 .profile_picAndActions .profile_pic img{
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
     transition: 1s ease all;
 }
 .profile_information .profile_title{

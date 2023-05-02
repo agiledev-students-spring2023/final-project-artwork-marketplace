@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useId } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
+import { FiEdit2 } from 'react-icons/fi'
+import { IoClose } from 'react-icons/io5'
+import { GiConfirmed } from 'react-icons/gi'
 import './profileSub.css'
 import axios from 'axios'
 import Masonry from 'react-masonry-css'
@@ -16,6 +19,10 @@ const ProfileSub = props => {
     const [userUploadedProducts, setUserUploadedProducts] = useState([])
     const [followersList, setFollowersList] = useState([{}])
     const [followingList, setFollowingList] = useState([{}])
+    const [displayPicture, setDisplayPicture] = useState("")
+    const [formDisplayPicture, setFormDisplayPicture] = useState({})
+
+    const [changeProfilePic, setChangeProfilePic] = useState(false)
 
     const handleLogOut = async () => {
         const res = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/logout`, {withCredentials: true})
@@ -32,6 +39,8 @@ const ProfileSub = props => {
             if(userObject._id === userId){
                 const followers = userObject.followers
                 const following = userObject.following
+                const DPPath = process.env.REACT_APP_SERVER_HOSTNAME + userObject.profilePicture_Path
+                setDisplayPicture(DPPath)
                 setFollowersList(followers)
                 setFollowingList(following)
                 setUserInfo(userObject)
@@ -129,6 +138,50 @@ const ProfileSub = props => {
         }
     }
 
+    const handleFilesChange = e => {
+        const image = e.target.files[0]
+        setDisplayPicture(URL.createObjectURL(image))
+        setFormDisplayPicture(image)
+        setChangeProfilePic(true)
+    }
+
+    const handlePhotoSubmit = async e => {
+        e.preventDefault()
+        const formData = new FormData() 
+        formData.append('user_profilePicture', formDisplayPicture)
+        try{
+            await axios.post(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/user/${userId}/changeProfilePicture`,
+                formData, 
+                {withCredentials: true}
+            )
+            .then(res => {
+                const userObject = JSON.parse(localStorage.getItem("user"))
+                userObject.profilePicture_Path = res.data
+                localStorage.setItem("user", JSON.stringify(userObject))
+                props.setuser({...props.user, profilePicture_Path: res.data})
+                setUserObject({...userObject, profilePicture_Path: res.data})
+            })
+        } catch (err){
+            // if invalid token
+            if(err.response.status === 401){
+                handleLogOut()
+            }
+            else{
+                console.log(err)
+            }
+        }
+        console.log("submit initiated")
+        setFormDisplayPicture({})
+        setDisplayPicture("")
+        setChangeProfilePic(false)
+    }
+
+    const handleCloseChangeDP = e => {
+        setFormDisplayPicture({})
+        setDisplayPicture("")
+        setChangeProfilePic(false)
+    }
+
     return(
         <div className="container profile_container">
             {userInfo && userInfo.name && (
@@ -136,10 +189,32 @@ const ProfileSub = props => {
                     <div className='profile_information'>
                         <h2 className='profile_title'>{userInfo.name.full}'s Artist Profile</h2>
                         <div className="profile_picAndActions">
-                            <div className='profile_pic'>
-                                <img src={process.env.REACT_APP_SERVER_HOSTNAME + userInfo.profilePicture_Path} alt={userInfo.name.full}/>
+                            <div className="profile_picAndChangePic">
+                                {userObject._id === userId && (
+                                    <form onSubmit={handlePhotoSubmit}>
+                                        <label htmlFor='profile_FileUpload'>
+                                            <input 
+                                                className='filesUploadField'
+                                                type='file'
+                                                id='profile_FileUpload'
+                                                accept='.png, .jpg, .jpeg .webp'
+                                                onChange={handleFilesChange}
+                                                hidden
+                                            />
+                                            <FiEdit2 className='filesUploadIcon'/>
+                                        </label>
+                                    </form>
+                                )}
+                                {changeProfilePic === true && (
+                                    <>
+                                        <button className='profile_closeChangePic' type='button' onClick={handleCloseChangeDP}><IoClose/></button>
+                                        <button className='profile_submitChangePic' onClick={handlePhotoSubmit}><GiConfirmed/></button>
+                                    </>
+                                )}
+                                <div className='profile_pic'>
+                                    <img src={changeProfilePic === true ? (displayPicture !== "" && (displayPicture)) : process.env.REACT_APP_SERVER_HOSTNAME + userInfo.profilePicture_Path} alt={userInfo.name.full}/>
+                                </div>
                             </div>
-                            <div className='content'><Link to={'/ChangeProfile'}>Change Profile Photo!</Link></div>
                             <h5 className="profile_userSince">User since {format(userInfo.createdAt)}</h5>
                             {userObject._id !== userId && (
                                 <button className={`follow_button ${checkFollow() ? "followed" : "follow"}`} onClick={handleFollow}>Follow</button>

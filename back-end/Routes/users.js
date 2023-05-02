@@ -49,7 +49,7 @@ router.post("/register", async (req, res) => {
             },
             email: req.body.email,
             password: hashedPassword,
-            profilePicture_Path: "/static/Images/DisplayPictures/DefaultProfilePicture.jpg",
+            profilePicture_Path: "/static/Images/DefaultProfilePicture.jpg",
             products_uploaded: [],
             purchased: [],
             cart: [],
