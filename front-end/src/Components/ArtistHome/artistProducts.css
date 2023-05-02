@@ -1,10 +1,4 @@
-.products_container{
-    width: var(--container-width-lg);
-    padding-bottom: 10rem;
-    margin: 0 auto;
-    overflow: hidden;
-    text-align: center;
-}
+
 .PerformanceMSG a{
     text-decoration: none;
     color: white;
@@ -28,130 +22,129 @@
     text-align: center;
     text-transform: capitalize;
 }
-.productColumn{
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    max-width: 100%;
-    gap: 2rem;
+.ArtistCategoryDisplay_container{
+    padding-bottom: 10rem;
+    padding-top: 2rem !important;
+    user-select: none;
+    width: var(--container-width-lg);
 }
-.productArtist{
+.categoryRow{
+    text-align: start;
+    padding-top: 2rem;
+}
+.categoryRow .categoryName{
     text-transform: capitalize;
 }
-.productCard{
-    display: grid;
-    grid-template-columns: 60% 40%;
-    gap: 3rem;
+.categoryRow .categoryProductImages .carousel .product_Card{
+    height: 25vh;
+    min-width: 25%;
+    max-width: 25%;
+    border-radius: 3rem;
+    overflow: hidden;
+    margin: 1rem;
+    box-shadow: 0rem 0rem 1rem rgb(87, 87, 87);
+    background: white;
+    display: flex;
+    flex-direction: column;
 }
-.productCard:hover > .productInfo .info{
-    box-shadow: 0rem 0rem 2rem rgb(87, 87, 87);
+.categoryRow .categoryProductImages .carousel .product_Card .product_image_Display{
+    height: 80%;
+    width: 100%;
 }
-.productCard:hover > .productInfo .info a{
-    color: black;
+.categoryRow .categoryProductImages .carousel .product_Card .product_info_Display{
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(transparent , rgb(50, 50, 50) 60%);
+    text-align: center;
+    justify-content: end;
 }
-.productCard:hover > .productImage img{
-    box-shadow: 0rem 0rem 2rem rgb(87, 87, 87);
+.categoryRow .categoryProductImages .carousel .product_Card .product_info_Display h4{
+    font-weight: 300;
 }
-.productImage img{
-    width: 75%;
-    border: 2px solid black;
-    transition: 1s ease;
-}
-.info{
-    border: 2px solid black;
-    border-radius: 2rem;
-    margin-top: 5%;
-    width: 20vw;
-    overflow-wrap: break-word;
-    background-color: rgb(194, 194, 194);
-    transition: 1s ease;
-}
-.info h5{
-    padding-left: 2rem;
-    padding-right: 2rem;
-    color: black;
+.categoryRow .categoryProductImages .carousel .product_Card a{
+    height: 21%;
     text-decoration: none;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    z-index: 3;
 }
-.info a{
-    color: rgb(80, 80, 80);
+.categoryRow .categoryProductImages .carousel .product_Card img{
+    width: 100%;
+    min-height: 115%;
+    object-fit: cover;
+    pointer-events: none;
+    overflow: hidden;
 }
-
-:root{
-    --container-width-lg: 75%;
-    --container-width-md: 86%;
-    --container-width-sm: 90%;
+.categoryRow .categoryProductImages .carousel .inner-carousel{
+    display: flex;
+    background: rgb(230, 230, 230);
 }
-  
-html{
-    scroll-behavior: smooth;
+.categoryRow .categoryProductImages .carousel{
+    cursor: grab;
+    overflow-x: hidden;
+    background: rgb(230, 230, 230);
+    border-radius: 3rem;
 }
-
-::-webkit-scrollbar{
-    display: none;
+.category_button{
+    background: linear-gradient(45deg, rgb(176, 176, 176) 0%, rgb(74, 74, 74) 20%, black 50%, rgb(74, 74, 74) 80%, rgb(176, 176, 176) 100%);
+    border: 2px solid rgb(120, 120, 120);
+    box-shadow: 0rem 0rem 1rem rgb(87, 87, 87);
+    border-radius: 2rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    transition: 1s ease all;
+    width: fit-content;
+}
+.category_button a{
+    color: white;
+    text-decoration: none;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    font-weight: 600;
+}
+.category_button:hover{
+    background-color: rgb(120, 120, 120);
+    border: 2px solid white;
+    cursor: pointer;
 }
 /* FOR TABLETS */
 @media screen and (max-width: 1024px){
-    .products_container{
+    .searchBar__container, .CategoryDisplay__container{
         width: var(--container-width-md);
-        padding-bottom: 10rem;
-        align-items: center;
     }
-    .productCard{
-        display: grid;
-        grid-template-columns: repeat(1, 1fr);
-        gap: 0.5rem;
-        align-items: center;
+    .categoryRow .categoryProductImages .carousel .product_Card{
+        height: 30vh;
+        min-width: 40%;
+        max-width: 40%;
     }
-    .productInfo{
-        align-items: center;
-    }
-    .info{
-        margin-top: 0;
-        width: 86vw;
-        display: grid;
-        grid-template-columns: 60% 40%;
-        overflow-wrap: break-word;
-        background-color: rgb(194, 194, 194);
-        transition: 1s ease;
-    }
-    .productImage img{
-        width: 86%;
-        border: 2px solid black;
-        transition: 1s ease;
+    .category_button, .category_button a{
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
     }
 }
-
 /* FOR PHONES */
 @media screen and (max-width: 600px){
-    .products_container{
-        width: var(--container-width-sm);
-        padding-bottom: 10rem;
-        margin-right: 5%;
+    .searchBar__container, .CategoryDisplay__container{
+        width: var(--container-width-sm) ;
     }
-    .welcomeMsg{
-        padding-bottom: 1rem;
+    .searchBar__container{
+        padding-top: 4rem;
     }
-    .productCard{
-        display: grid;
-        grid-template-columns: 1fr;
-        max-width: 100%;
-        gap: 0.5rem;
+    .categoryRow .categoryProductImages .carousel .product_Card{
+        height: 30vh;
+        min-width: 50%;
+        max-width: 50%;
     }
-    .productColumn{
-        text-align: center;
-        align-items: center;
+    .categoryRow .categoryProductImages .carousel .product_Card .product_info_Display{
+        margin-top: -2.5%;
     }
-    .info{
-        margin-top: 0;
-        display: grid;
-        grid-template-columns: 60% 40%;
-        overflow-wrap: break-word;
-        background-color: rgb(194, 194, 194);
-        transition: 1s ease;
-        width: auto;
-    }
-    .productImage img{
-        width: 98%;
-        border: 2px solid black;
-        transition: 1s ease;
+    .category_button, .category_button a{
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
     }
 }
