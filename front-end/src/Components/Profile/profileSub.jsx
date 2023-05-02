@@ -12,7 +12,6 @@ import { motion } from 'framer-motion'
 const ProfileSub = props => {
     const getUserParamsID = useParams()
     const userId = getUserParamsID.userID
-    // console.log(userId)
     const navigate = useNavigate()
     const [userObject, setUserObject] = useState(props.user)
     const [userInfo, setUserInfo] = useState({})
