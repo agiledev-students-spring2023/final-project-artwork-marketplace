@@ -70,6 +70,7 @@
     overflow: hidden;
     border-radius: 50%;
     box-shadow: 0rem 0rem 1rem rgb(87, 87, 87);
+    border: 1px solid white;
 }
 .viewItem_card .viewItem_productName{
     text-transform: capitalize;
