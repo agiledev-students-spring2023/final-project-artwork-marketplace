@@ -1,8 +1,8 @@
-.followingListStyle{
+.followersStyle{
     text-align: center;
     padding: 1rem;
 }
-.followingListStyle .unText{
+.followersStyle .fwrText{
     padding-left: 2rem;
     text-align: start;
     font-weight: 600;
@@ -10,7 +10,7 @@
     /* font-style: bold; */
     /* text-transform: uppercase; */
 }
-.followingListStyle a{
+.followersStyle a{
     display: flex;
     flex-direction: row;
     text-decoration: none;
@@ -28,7 +28,7 @@
     transition: 1s ease all;
     text-transform: capitalize;
 }
-.followingListStyle a img{
+.followersStyle a img{
     height: 5rem;
     width: 5rem;
     object-fit: cover;

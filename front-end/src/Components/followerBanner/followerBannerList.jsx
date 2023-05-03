@@ -1,14 +1,14 @@
 import React, {useState, useEffect} from 'react'
 import { Link, useParams } from 'react-router-dom'
-import './followBanner.css'
+import './followerBanner.css'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { format } from 'timeago.js'
 import { motion } from 'framer-motion'
 
-const ViewFollowing = props => {
+const ViewFollowers = props => {
     const navigate = useNavigate()
-    const [followingList, setFollowingList] = useState([{}])
+    const [followersList, setFollowersList] = useState([{}])
     
     const handleLogOut = async () => {
       const res = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/logout`, {withCredentials: true})
@@ -22,8 +22,8 @@ const ViewFollowing = props => {
 
     useEffect(() => {
     const getProductInfo = () => {
-        const following = props.user.following
-        setFollowingList(following)
+        const followers = props.user.followers
+        setFollowersList(followers)
     }
     getProductInfo()
 },[])
@@ -36,11 +36,11 @@ const ViewFollowing = props => {
         transition={{delay: 0.5, duration: 1}}
         >
 
-        <div>{followingList && (
-            <div>{followingList.map((user) => 
-                <div className='followingListStyle'>
+        <div>{followersList && (
+            <div>{followersList.map((user) => 
+                <div className='followersStyle'>
                 <Link to={`/Profile/${user._id}`}>
-                    {user.name&&(<div className='unText'>{user.name.full}</div>)}
+                    {user.name&&(<div className='fwrText'>{user.name.full}</div>)}
                     <div><img src={process.env.REACT_APP_SERVER_HOSTNAME+user.profilePicture_Path} alt="profile pic"/></div>
                 </Link>
                 </div>
@@ -51,4 +51,4 @@ const ViewFollowing = props => {
         </motion.div>
     );
 };
-export default ViewFollowing;
+export default ViewFollowers;

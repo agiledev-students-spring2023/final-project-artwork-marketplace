@@ -7,8 +7,9 @@ import { useNavigate } from 'react-router-dom'
 
 const ProductDisplay = props => {
   const getCategoryID = useParams()
-  const [categoryy, setCategory] = useState([])
+  const [categoryy, setCategory] = useState({})
   const [products, setProducts] = useState([])
+  const [copyProducts, setCopyProducts] = useState([]) 
   const [searchValue, setSearchValue] = useState('')
   const navigate = useNavigate()
 
@@ -33,6 +34,7 @@ const ProductDisplay = props => {
         const productsOfCategory = foundCategory.products_id
         setCategory(foundCategory)
         setProducts(productsOfCategory)
+        setCopyProducts(productsOfCategory)
       } catch (err) {
         if(err.response.status === 401){
           handleLogOut()
@@ -55,10 +57,10 @@ const ProductDisplay = props => {
 
   const handleSearch = (e) => {
     if(e.target.value == ''){
-        setProducts(categoryy[0].products)
+        setProducts(copyProducts)
     }
     else{
-        const SearchResult = products.filter(item => item.productName.toLowerCase().includes(e.target.value.toLowerCase()))
+        const SearchResult = products.filter(item => item.name.toLowerCase().includes(e.target.value.toLowerCase()))
         setProducts(SearchResult)
     }
     setSearchValue(e.target.value)

@@ -71,7 +71,7 @@ const ProfileSub = props => {
             }          
         }
         getProductInfo()
-    }, [])
+    }, [userObject.followers, userObject.following, userId])
 
     // for responsive styling
     const breakpointColumnsObj = {
@@ -221,8 +221,13 @@ const ProfileSub = props => {
                             )}
                             <div className='profile_ff'>
                                 <div className="profile_followers">
-                                    <h5>{followersList.length}</h5>
-                                    <button>Followers</button>
+                                <h5>{followersList.length}</h5>
+                                    {userObject._id !== userId &&(
+                                        <button>Followers</button>  
+                                    )}
+                                    {userObject._id === userId &&(
+                                        <Link to={`/Profile/Followerslist`}>Followers</Link>                                         
+                                    )}
                                 </div>
                                 <div className="profile_following">
                                     <h5>{followingList.length}</h5>
@@ -230,7 +235,7 @@ const ProfileSub = props => {
                                         <button>Following</button>  
                                     )}
                                     {userObject._id === userId &&(
-                                        <Link to={`/Profile/Followerslist`}>Following</Link>                                         
+                                        <Link to={`/Profile/Followinglist`}>Following</Link>                                         
                                     )}
                                 </div>             
                             </div>
