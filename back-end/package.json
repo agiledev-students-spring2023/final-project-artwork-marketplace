@@ -4,7 +4,9 @@
   "description": "The back-end of your project will live in this directory.",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon ./server"
+    "start": "nodemon ./server",
+    "test": "mocha Test",
+    "coverage": "nyc npm run test"
   },
   "author": "",
   "license": "ISC",
@@ -14,13 +16,18 @@
     "chai": "^4.3.7",
     "chai-http": "^4.3.0",
     "chai-sorted": "^0.2.0",
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
     "mocha": "^10.2.0",
+    "mongoose": "^7.0.3",
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
     "nodemon": "^2.0.22",
-    "nyc": "^15.1.0"
+    "nyc": "^15.1.0",
+    "passport": "^0.6.0",
+    "passport-jwt": "^4.0.1"
   }
 }
