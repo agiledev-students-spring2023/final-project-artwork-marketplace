@@ -4,9 +4,7 @@
   "description": "The back-end of your project will live in this directory.",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon ./server",
-    "test": "mocha Test",
-    "coverage": "nyc npm run test"
+    "start": "nodemon ./server"
   },
   "author": "",
   "license": "ISC",
