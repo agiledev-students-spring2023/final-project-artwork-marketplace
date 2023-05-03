@@ -8,6 +8,7 @@ import axios from 'axios'
 import Masonry from 'react-masonry-css'
 import { format } from 'timeago.js'
 import { motion } from 'framer-motion'
+import { Navigate } from 'react-router-dom'
 
 const ProfileSub = props => {
     const getUserParamsID = useParams()
@@ -70,7 +71,7 @@ const ProfileSub = props => {
             }          
         }
         getProductInfo()
-    }, [userObject,userInfo])
+    }, [])
 
     // for responsive styling
     const breakpointColumnsObj = {
@@ -225,8 +226,13 @@ const ProfileSub = props => {
                                 </div>
                                 <div className="profile_following">
                                     <h5>{followingList.length}</h5>
-                                    <button>Following</button>  
-                                </div>                   
+                                    {userObject._id !== userId &&(
+                                        <button>Following</button>  
+                                    )}
+                                    {userObject._id === userId &&(
+                                        <Link to={`/Profile/Followerslist`}>Following</Link>                                         
+                                    )}
+                                </div>             
                             </div>
                         </div>
                         <div className='profile_contact'>

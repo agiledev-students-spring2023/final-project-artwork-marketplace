@@ -98,6 +98,15 @@
     color: white;
     background-color: black;
 }
+
+.profile_picAndActions .profile_ff a{
+    border: none;
+    padding: 0.5rem;
+    font-weight: 300;
+    color: white;
+    background-color: black;
+}
+
 .profile_picAndActions .follow_button{
     border-radius: 3rem;
     padding: 1rem;
