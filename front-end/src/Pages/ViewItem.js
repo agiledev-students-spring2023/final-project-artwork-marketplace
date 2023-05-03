@@ -15,7 +15,7 @@ const ViewItem = props => {
         key={"ViewItemPage"}
       >
         <Settings user={props.user} setuser={props.setuser}/>
-        <ViewItemSub user={props.user} />
+        <ViewItemSub user={props.user} setuser={props.setuser}/>
       </motion.div>
         <Navbar user={props.user} />
       </div>

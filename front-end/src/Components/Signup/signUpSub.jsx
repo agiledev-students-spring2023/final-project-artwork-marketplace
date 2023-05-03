@@ -21,7 +21,6 @@ const SignUpSub = props => {
     }
     else{
       const newUser = {
-        _id: Math.floor(Math.random() * 10) + 3,
         user: userType,
         name: {
             first: firstNameRef.current.value,
@@ -37,7 +36,6 @@ const SignUpSub = props => {
       }
       try{
         await axios.post(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/register`, newUser)
-        console.log(newUser)
         navigate("/Login")
       } catch (err) {
         setPasswordError(err)
@@ -122,14 +120,14 @@ const SignUpSub = props => {
           <input 
             className='textField'
             type='password'
-            min='6'
+            min='8'
             placeholder='Password'
             ref={passwordRef}
           />
           <input 
             className='textField'
             type='password'
-            min='6' 
+            min='8' 
             placeholder='Confirm Password'
             onInput={(e) => handlePasswordCheck(e)}
             ref={confirmPasswordRef}

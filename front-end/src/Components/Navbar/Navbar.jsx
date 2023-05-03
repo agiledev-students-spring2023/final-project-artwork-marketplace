@@ -1,23 +1,16 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
 import {FiHome, FiUser, FiShoppingCart} from 'react-icons/fi'
-import {IoIosAdd} from 'react-icons/io'
-import {RiUserStarLine, RiUserHeartLine} from 'react-icons/ri'
+import {IoIosAdd, IoMdAnalytics} from 'react-icons/io'
+import {RiUserStarLine, RiUserHeartLine, RiUserSharedLine} from 'react-icons/ri'
 import './navbar.css'
 
 const Navbar = props => {
   return (
     <nav>
-      {props.user.user === "Artist" && (
+      {props.user.user.toLowerCase() === "artist" && (
         <>
-            {/* Home */}
-            <NavLink 
-                exact="true"
-                activeclassname="Home" 
-                to='/' >
-                <FiHome/>
-            </NavLink>
-
+            
             {/* Add Art */}
             <NavLink 
                 exact="true"
@@ -33,9 +26,33 @@ const Navbar = props => {
                 to={`/Profile/${props.user._id}`} >
                 <FiUser/>
             </NavLink>
+
+            {/* Home */}
+            <NavLink 
+                exact="true"
+                activeclassname="Home" 
+                to='/' >
+                <FiHome/>
+            </NavLink>
+
+            {/* Artist Earnings Analytics */}
+            <NavLink 
+                exact="true"
+                activeclassname="Followers" 
+                to={`/Followers`} >
+                <RiUserSharedLine/>
+            </NavLink>
+
+            {/* Artist Earnings Analytics */}
+            <NavLink 
+                exact="true"
+                activeclassname="Analytics" 
+                to={`/Analytics`} >
+                <IoMdAnalytics/>
+            </NavLink>
         </>
       )}
-      {props.user.user === "Customer" &&(
+      {props.user.user.toLowerCase() === "customer" &&(
         <>
             {/* Cart */}
             <NavLink 
@@ -61,20 +78,20 @@ const Navbar = props => {
                 <FiHome/>
             </NavLink>
 
-            {/* Rising Artists */}
-            <NavLink 
-                exact="true"
-                activeclassname="Rising Artists" 
-                to='/RisingArtists' >
-                <RiUserStarLine/>
-            </NavLink>
-
             {/* Following */}
             <NavLink 
                 exact="true"
                 activeclassname="Following" 
                 to='/Following' >
                 <RiUserHeartLine/>
+            </NavLink>
+
+            {/* Rising Artists */}
+            <NavLink 
+                exact="true"
+                activeclassname="Rising Artists" 
+                to='/RisingArtists' >
+                <RiUserStarLine/>
             </NavLink>
         </>
       )}

@@ -23,18 +23,26 @@ const Home = props => {
       {props.user.user &&(
         <>
           <motion.div
+            initial={{opacity: 0}}
+            animate={{opacity: 1}}
+            exit={{opacity: 0}}
+            transition={{duration: 1.5}}
+            key={"HomeSettings"}
+          >
+            <Settings user={props.user} setuser={props.setuser} />
+          </motion.div>
+          <motion.div
             initial={{opacity: 0, y: '100%'}}
             animate={{opacity: 1, y: '0%'}}
             exit={{opacity: 0, y: '100%'}}
             transition={{duration: 1}}
             key={"HomePage"}
           >
-            <Settings user={props.user} setuser={props.setuser} />
-            {props.user.user === "Customer" && (
-                <CategoryDisplay user={props.user} />
+            {props.user.user === "customer" && (
+                <CategoryDisplay user={props.user} setuser={props.setuser}/>
             )}
-            {props.user.user === "Artist" && (
-                <ArtistProducts user={props.user} />
+            {props.user.user === "artist" && (
+                <ArtistProducts user={props.user} setuser={props.setuser}/>
             )}
           </motion.div>
           <Navbar user={props.user} />

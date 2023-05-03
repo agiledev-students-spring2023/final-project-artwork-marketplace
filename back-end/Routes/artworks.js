@@ -1,38 +1,95 @@
 const router = require("express").Router()
-const ProductsList = require("../SchemaSamples/AllProducts")
+const multer = require("multer") 
+const path = require("path")
+const { auth } = require('../middleware/auth')
+
+const { User } = require('../models/User')
+const { Category } = require('../models/Category')
+const { Artwork } = require('../models/Artwork')
+
+// multer settings
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, "Public/ProductImages")
+    },
+    filename: function (req, file, cb) {
+      // take apart the uploaded file's name so we can create a new one based on it
+      const extension = path.extname(file.originalname)
+      const basenameWithoutExtension = path.basename(file.originalname, extension)
+      // create a new filename with a timestamp in the middle
+      const newName = `${basenameWithoutExtension}-${Date.now()}${extension}`
+      // tell multer to use this new filename for the uploaded file
+      cb(null, newName)
+    },
+})
+const fileFilter = (req, file, cb) => {
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png']
+    if(allowedTypes.includes(file.mimetype)){
+        cb(null, true)
+    }
+    else{
+        cb(null, false)
+    }
+}
+const upload = multer({ storage, fileFilter })
+
+// public featuredArtwork route
+router.get("/featuredArtwork", async (req, res) => {
+    try{
+        // get most recent uploaded artwork and populate with artist name
+        const featuredArtworkInArray = await Artwork.find({}).sort({ _id: -1}).limit(1).populate({path: 'artist_id', select: 'name'})
+        const featuredArtwork = featuredArtworkInArray[0]
+        return res.status(200).json(featuredArtwork)
+    } catch (err){
+        res.status(500).json(err)
+    }
+})
 
 // creating && saving a new artwork
-router.post("/", async (req, res) => {
+router.post("/AddArt", auth, upload.array("user_uploads", 3), async (req, res, next) => {
     try{
-        const newArtwork = {
-            _id: req.body._id,
-            // for now, just id but later, we'll populate with an ARTIST schema
-            artist_id: req.body.artist_id,
-            name: req.body.name,
-            shortDescription: req.body.shortDescription,
-            price: req.body.price,
-            status: req.body.status,
-            thumbnailURL: req.body.thumbnailURL,
-            // for now, just id but later, we'll populate with an CATEGORIES schema
-            categories_id: req.body.categories_id,
-            imagesURL: req.body.imagesURL
+        if (!req.files || req.files.length == 0) {
+            return res.status(400).json({success: false, message: "Please upload some photos!"})
+        } 
+        else if (req.files.length > 3) {
+            return res.status(400).json({success: false, message: "rejected your files... try harder" })
         }
-        if(newArtwork._id === "" || newArtwork.artist_id === "" || newArtwork.shortDescription === "" || newArtwork.price === "" 
-            || (newArtwork.status !== "Available") || newArtwork.thumbnailURL === "" || (newArtwork.categories_id.length === 0) 
-            || (newArtwork.imagesURL.length === 0)){
-                return res.status(400).json("Artwork does not meet requirement!")
+        else{
+            const thumbnailPath = "/static/ProductImages/" + req.files[0].filename
+            const imagePaths = []
+            await req.files.forEach(file => imagePaths.push("/static/ProductImages/" + file.filename))
+            const newArtwork = {
+                artist_id: req.body.artist_id,
+                name: req.body.name,
+                shortDescription: req.body.shortDescription,
+                price: req.body.price,
+                status: "Available",
+                thumbnailURL: thumbnailPath,
+                categories_id: req.body.categories_id,
+                imagesURL: imagePaths
+            }
+            const saveArtwork = new Artwork(newArtwork)
+            const artwork = await saveArtwork.save({returnOriginal: false})
+
+            /* update each category */
+            const categories = await Category.updateMany({_id: req.body.categories_id}, {$addToSet: { products_id: artwork._id }}, {returnOriginal: false})
+            // update artist products_uploaded list
+            const userUpdate = await User.findByIdAndUpdate({_id: req.body.artist_id}, {$addToSet: { products_uploaded: artwork._id }}, {returnOriginal: false})
+                
+            const updatedUser = await User.findOne({_id: req.body.artist_id}).populate({path: 'products_uploaded'})
+            const updatedProductsList = updatedUser.products_uploaded
+            return res.status(200).json(updatedProductsList)
         }
-        // save to database (later when database integration sprint comes)
-        return res.status(200).json(newArtwork)
     } catch (err){
         res.status(500).json(err)
     }
 })
 
 // getting a list of all artworks
-router.get("/", async (req, res) => {
+// routing: done! 
+router.get("/", auth, async (req, res) => {
     try{
-        const artworks = ProductsList
+        const artworks = await Artwork.find({})
         res.status(200).json(artworks)
     } catch (err){
         res.status(500).json(err)
@@ -40,10 +97,10 @@ router.get("/", async (req, res) => {
 })
 
 // getting a list of all artworks sorted by price ASC (ascending/ low->high)
-router.get("/sortedASC", async (req, res) => {
+// routing: done! 
+router.get("/sortedASC", auth, async (req, res) => {
     try{
-        const ascPriceArtworks = ProductsList.sort((artwork1, artwork2) => (artwork1.price > artwork2.price) ? 1 : ((artwork1.price < artwork2.price) 
-        ? -1 : 0)) 
+        const ascPriceArtworks = await Artwork.find({}).sort({price: 1})
         res.status(200).json(ascPriceArtworks)
     } catch (err){
         res.status(500).json(err)
@@ -51,10 +108,10 @@ router.get("/sortedASC", async (req, res) => {
 })
 
 // getting a list of all artworks sorted by price DES (descending/ high->low)
-router.get("/sortedDES", async (req, res) => {
+// routing: done! 
+router.get("/sortedDES", auth, async (req, res) => {
     try{
-        const desPriceArtworks = ProductsList.sort((artwork1, artwork2) => (artwork1.price < artwork2.price) ? 1 : ((artwork1.price > artwork2.price) 
-        ? -1 : 0)) 
+        const desPriceArtworks = await Artwork.find({}).sort({price: -1})
         res.status(200).json(desPriceArtworks)
     } catch (err){
         res.status(500).json(err)
@@ -62,10 +119,10 @@ router.get("/sortedDES", async (req, res) => {
 })
 
 // getting artwork by id
+// routing: done! 
 router.get("/:id", async (req, res) => {
     try{
-        // will be changed with different function once connected to mongoose
-        const artwork = ProductsList.find(product => product._id == req.params.id)
+        const artwork = await Artwork.find({_id: req.params.id})
         res.status(200).json(artwork)
     } catch (err){
         res.status(500).json(err)
@@ -73,9 +130,10 @@ router.get("/:id", async (req, res) => {
 })
 
 // get artworks by artist_id
-router.get("/artist/:id", async (req, res) => {
+// routing: done! 
+router.get("/artist/:id", auth, async (req, res) => {
     try{
-        const artworksByArtist = ProductsList.filter(product => product.artist_id == req.params.id)
+        const artworksByArtist = await Artwork.find({artist_id: req.params.id})
         res.status(200).json(artworksByArtist)
     } catch (err){
         res.status(500).json(err)
@@ -83,9 +141,10 @@ router.get("/artist/:id", async (req, res) => {
 })
 
 // get artworks by category_id
-router.get("/category/:id", async (req, res) => {
+// routing: done! 
+router.get("/category/:id", auth, async (req, res) => {
     try{
-        const artworksByCategory = ProductsList.filter(product => product.categories_id.includes(req.params.id))
+        const artworksByCategory = await Artwork.find({categories_id: req.params.id})
         res.status(200).json(artworksByCategory)
     } catch (err){
         res.status(500).json(err)
@@ -93,31 +152,38 @@ router.get("/category/:id", async (req, res) => {
 })
 
 // get artworks in price range
-router.get("/priceRange/:lower/:higher", async (req, res) => {
+// routing: done! 
+router.get("/priceRange/:lower/:higher", auth, async (req, res) => {
     try{
-        const artworksInPriceRange = ProductsList.filter(product => (product.price <= req.params.higher && product.price >= req.params.lower))
+        const artworksInPriceRange = await Artwork.find({price: {$lte: req.params.higher, $gte: req.params.lower}})
         res.status(200).json(artworksInPriceRange)
+        if (req.params.lower > req.params.higher){
+            return res.status(400).json("Minimum Price is larger than Maximum Price! Correct it!")
+        }
     } catch (err){
         res.status(500).json(err)
     }
 })
 
 // get artworks by status
-router.get("/activeStatus/:status", async (req, res) => {
+// routing: done! 
+router.get("/activeStatus/:status", auth, async (req, res) => {
     try{
-        const artworksByStatus = ProductsList.filter(product => product.status.toLowerCase() === req.params.status.toLowerCase())
+        const artworksByStatus = await Artwork.find({status: req.params.status})
         res.status(200).json(artworksByStatus)
     } catch (err){
         res.status(500).json(err)
     }
 })
 
-// update a single artwork status
-router.put("/:id/activeStatus/:newStatus", async (req, res) => {
+// update status of an artwork
+router.put("/artwork/:id/changeStatus/:newStatus", auth, async (req, res) => {
     try{
-        
+        const newStatusString = req.params.newStatus.trim().toLowerCase()
+        const artworkWithUpdatedStatus = await Artwork.findByIdAndUpdate({_id: req.params.id}, {$set: { "status": newStatusString}}, {returnOriginal: false})
+        res.status(200).json(artworkWithUpdatedStatus.status)
     } catch (err){
-
+        res.status(500).json(err)
     }
 })
 

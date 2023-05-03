@@ -1,6 +1,12 @@
-.cartHeading__Container, .CartProductsDisplay__Container{
+.CartProductsDisplay__Container{
     width: var(--container-width-lg);
     overflow: hidden;
+}
+.banner_cartHeading{
+    background-color: black;
+    overflow: hidden;
+    color: white;
+    text-align: center;
 }
 .CartSavedSwitch{
     display: grid;
@@ -17,7 +23,7 @@
 }
 .CartSavedSwitch .cartButton-primary{
     text-decoration: underline;
-    background-color: black;
+    background: linear-gradient(90deg, rgb(180, 29, 255) 0%, rgb(133, 12, 255) 50%, rgb(66, 129, 255) 100%);
     color: white;
 }
 .CartProductsDisplay__Container{
@@ -78,6 +84,22 @@
     color: #357637;
     text-transform: uppercase;
 }
+.cartCheckout{
+    padding-top: 2rem;
+}
+.cartCheckout button{
+    background: linear-gradient(90deg, rgb(180, 29, 255) 0%, rgb(133, 12, 255) 50%, rgb(66, 129, 255) 100%);
+    color: white;
+    border: 1px solid white;
+    border-radius: 2rem;
+    padding: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 1s ease all;
+    box-shadow: 0 0 1rem rgb(87, 87, 87);
+}
+
 /* FOR TABLETS */
 @media screen and (max-width: 1024px){
     .cartHeading__Container, .CartProductsDisplay__Container{

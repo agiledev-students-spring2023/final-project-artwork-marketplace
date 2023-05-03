@@ -2,35 +2,188 @@
     width: var(--container-width-lg);
     align-items: center;
     text-align: center;
+    padding-top: 2rem;
     padding-bottom: 10rem;
 }
-.profile_container .profile_title{
-    overflow-wrap: break-word;
-    max-width: 100%;
+.profile_container .profile_information{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-.profile_container .profile_contact{
+.profile_container .profile_information .profile_title{
+    padding-bottom: 1rem;
+}
+.profile_picAndActions{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    gap: 2rem;
+}
+.profile_picAndChangePic form label{
+    position: absolute;
+    cursor: pointer;
+    background: linear-gradient(90deg, rgb(180, 29, 255) 0%, rgb(133, 12, 255) 50%, rgb(66, 129, 255) 100%);
+    box-shadow: 0 0 1rem rgb(80, 80, 80);
+    border-radius: 50%;
+    border: 1px solid white;
+    margin-left: 3rem;
+    margin-top: 12rem;
+    padding: 1rem;
+    z-index: 2;
+    color: white;
+}
+.profile_picAndChangePic .profile_closeChangePic{
+    position: absolute;
+    z-index: 2;
+    margin-left: 3rem;
+    padding: 1rem;
+    color: white;
+    background: linear-gradient(70deg, #7a1a1a 0%, #b02424 10%, #7a1a1a 50%, #b02424 90%, #7a1a1a 100% );
+    box-shadow: 0 0 1rem rgb(80, 80, 80);
+    border-radius: 50%;
+    border: 1px solid white;
+    cursor: pointer;
+    transition: 1s ease all;
+}
+.profile_picAndChangePic .profile_submitChangePic{
+    position: absolute;
+    z-index: 2;
+    margin-left: 5rem;
+    margin-top: 3rem;
+    padding: 1rem;
+    color: white;
+    background: linear-gradient(70deg, #357637 0%, #439246 10%, #357637 50%, #439246 90%, #357637 100% );
+    box-shadow: 0 0 1rem rgb(80, 80, 80);
+    border-radius: 50%;
+    border: 1px solid white;
+    cursor: pointer;
+    transition: 1s ease all;
+}
+.profile_uploadedProducts_title{
+    text-align: start;
+    padding-left: 2rem;
+    padding-top: 2rem;
+    font-weight: 400;
+    font-style: italic;
+}
+.profile_picAndActions .profile_userSince{
+    font-size: smaller;
+    font-weight: 400;
+    color: rgb(80, 80, 80);
+    text-transform: capitalize;
+    font-style: italic;
+    margin: 0;
+    padding: 0;
+}
+.profile_picAndActions .profile_ff{
+    display: flex;
+    flex-direction: row;
+    width: 15rem;
+    justify-content: space-evenly;
+}
+.profile_picAndActions .profile_ff div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1rem;
+    box-shadow: 0 0 1rem rgb(80, 80, 80);
+    overflow: hidden;
+}
+.profile_picAndActions .profile_ff button{
+    border: none;
+    padding: 0.5rem;
+    font-weight: 300;
+    color: white;
+    background-color: black;
+}
+
+.profile_picAndActions .profile_ff a{
+    border: none;
+    padding: 0.5rem;
+    font-weight: 300;
+    color: white;
+    background-color: black;
+}
+
+.profile_picAndActions .follow_button{
+    border-radius: 3rem;
+    padding: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    border: none;
+    cursor: pointer;
+    font-weight: 800;
+    transition: 1s ease all;
+    color: white;
+}
+.profile_picAndActions .follow_button.followed{
+    background-color: #7a1a1a;
+    border: 1px solid #7a1a1a;
+    box-shadow: 0 0 1rem rgb(162, 58, 58);
+}
+.profile_picAndActions .follow_button.follow{
+    background-color: rgb(180, 180, 180);
+    border: 1px solid #7a1a1a;
+    box-shadow: 0 0 1rem rgb(80, 80, 80);
+}
+.profile_picAndActions .profile_ff h5{
+    margin: 0;
+    padding: 0.5rem;
+    font-size: larger;
+    font-weight: 700;
+    pointer-events: none;
+}
+.profile_picAndActions .profile_pic{
+    width: 15rem;
+    height: 15rem;
+    border: 1px solid white;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0rem 0rem 1rem rgb(80, 80, 80);
+    margin-bottom: 1rem;
+    transition: 1s ease all;
+}
+.profile_picAndActions .profile_pic img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 1s ease all;
+}
+.profile_information .profile_title{
+    overflow-wrap: break-word;
+    align-self: center;
+    max-width: 100%;
+    text-transform: capitalize;
+}
+.profile_information .profile_contact{
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
 }
-.profile_container .profile_contact h4{
+.profile_information .profile_contact h4{
     justify-self: end;
     align-self: center;
 }
-.profile_container .profile_contact .user_email{
+.profile_information .profile_contact .user_email{
     justify-self: start;
     align-self: center;
-    background-color: black;
+    background: linear-gradient(90deg, rgb(180, 29, 255) 0%, rgb(133, 12, 255) 50%, rgb(66, 129, 255) 100%);
+    box-shadow: 0rem 0rem 1rem rgb(80, 80, 80);
     border-radius: 3rem;
     padding: 0.5rem;
     transition: 1s ease all;
 }
-.profile_container .profile_contact .user_email:hover{
-    background-color: rgb(120, 120, 120);
+.profile_information .profile_contact .user_email:hover{
+    box-shadow: 0rem 0rem 1rem rgb(133, 12, 255);
 }
-.profile_container .profile_contact .user_email a{
+.profile_information .profile_contact .user_email a{
     color: white;
     text-decoration: none;
+}
+.profile_emptyProducts{
+    text-transform: capitalize;
 }
 .my-masonry-grid {
     display: -webkit-box; /* Not needed if autoprefixing */
@@ -45,33 +198,34 @@
     padding-top: 2rem;
 }
 .my-masonry-grid_column > .profile_product_card{
-    padding-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
     text-align: center;
     align-items: center;
+    background: black;
+    border-bottom-left-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+    box-shadow: 0rem 0rem 1rem rgb(87, 87, 87);
+    margin-bottom: 2rem;
 }
-.my-masonry-grid_column > .profile_product_card img{ /* change div to reference your elements you put in <Masonry> */
+.my-masonry-grid_column > .profile_product_card .product_photo{ /* change div to reference your elements you put in <Masonry> */
     width: 100%;
+    height: 80%;
+    transition: 1s ease all;
+}
+.my-masonry-grid_column > .profile_product_card .product_photo img{ /* change div to reference your elements you put in <Masonry> */
+    width: 100%;
+    height: auto;
     transition: 1s ease all;
 }
 .my-masonry-grid_column > .profile_product_card .product_info{ /* change div to reference your elements you put in <Masonry> */
-    max-width: 100%;
-    border-radius: 3rem;
-    background-color: black;
-    padding-bottom: 0.5rem;
+    width: 100%;
     padding-top: 0.5rem;
-    padding-left: 0.25rem;
-    padding-right: 0.25rem;
-    transition: 1s ease all;
+    padding-bottom: 0.8rem;
 }
 .my-masonry-grid_column > .profile_product_card .product_info a{ /* change div to reference your elements you put in <Masonry> */
     color: white;
     text-decoration: none;
-}
-.my-masonry-grid_column > .profile_product_card .product_info:hover{
-    background-color: rgb(120, 120, 120);
-}
-.my-masonry-grid_column > .profile_product_card img:hover, .my-masonry-grid_column > .profile_product_card .product_info:hover{
-    box-shadow: 0rem 0rem 2rem rgb(87, 87, 87)
 }
 .my-masonry-grid_column > .profile_product_card .product_info h3{
     margin: 0;
@@ -81,7 +235,14 @@
     margin: 0;
     overflow-wrap: break-word;
 }
-
+.my-masonry-grid_column > .profile_product_card .product_info .product_price.sold{
+    text-decoration: line-through;
+    color: #7a1a1a;
+}
+.my-masonry-grid_column > .profile_product_card .product_info .product_price.available{
+    text-decoration: none;
+    color: #357637;
+}
 /* FOR TABLETS */
 @media screen and (max-width: 1024px){
     .profile_container{
@@ -105,4 +266,42 @@
         justify-self: center;
         align-self: center;
     }
+    .profile_container .profile_picAndActions .changeprofilebutton{
+        grid-template-columns: 1fr;
+        gap: 0rem;
+    }
+    .profile_container .profile_picAndActions .changeprofilebutton h4{
+        justify-self: center;
+        align-self: center;
+    }
+    .profile_container .profile_picAndActions .changeprofilebutton .content{
+        justify-self: center;
+        align-self: center;
+    }
+    .profile_uploadedProducts_title{
+        text-align: center;
+        padding-left: 0;
+    }
+}
+
+.profile_information .profile_picAndActions .changeprofilebutton{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+.profile_information .profile_picAndActions .changeprofilebutton .content{
+    justify-self: end;
+    align-self: center;
+    background: linear-gradient(90deg, rgb(180, 29, 255) 0%, rgb(133, 12, 255) 50%, rgb(66, 129, 255) 100%);
+    box-shadow: 0rem 0rem 1rem rgb(80, 80, 80);
+    border-radius: 3rem;
+    padding: 0.5rem;
+    transition: 1s ease all;
+}
+.profile_information .profile_picAndActions .changeprofilebutton .content:hover{
+    box-shadow: 0rem 0rem 1rem rgb(133, 12, 255);
+}
+.profile_information .profile_picAndActions .changeprofilebutton .content a{
+    color: white;
+    text-decoration: none;
 }
