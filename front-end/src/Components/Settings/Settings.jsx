@@ -2,17 +2,30 @@ import React, { useState, useEffect } from 'react'
 import { FiMenu } from 'react-icons/fi'
 import { AiOutlineClose } from 'react-icons/ai'
 import { motion, AnimatePresence } from 'framer-motion'
+import axios from 'axios'
 import Switch from 'react-switch'
 import './settings.css'
+import { useNavigate } from 'react-router-dom'
 
 const Settings = props => {
+  const navigate = useNavigate()
   const [collapse, setCollapse] = useState(false)
   const [userType, setUserType] = useState(props.user.user)
   const [checked, setChecked] = useState(true)
   
+  const handleLogOut = async () => {
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/logout`, {withCredentials: true})
+    if (res.data.success === true){
+        alert("You have been logged out. Please Log In again to continue.")
+        localStorage.removeItem("user")
+        props.setuser({})
+        navigate("/")
+    }
+  }
+
   useEffect(() => {
     const checkChecked = () => {
-        if(props.user.user === "Artist"){
+        if(props.user.user === "artist"){
             setChecked(true)
         }
         else{
@@ -27,22 +40,56 @@ const Settings = props => {
     setCollapse(negation)
   }
 
-  const handleLogOut = () => {
-    props.setuser({})
-  }
-
-  const handleUserChange = (async () => {
-    if(props.user.user === "Artist"){
-        setUserType("Customer")
-        props.setuser({... props.user, user: "Customer"})
-        setChecked(false)
+  const handleUserChange = async () => {
+    if(props.user.user === "artist"){
+        try {
+            const res = await axios.put(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/user/${props.user._id}/changeToType/customer`, 
+                {},
+                {withCredentials: true, credentials: 'include'}
+            )
+            if(res.status === 200){
+                const userObject = JSON.parse(localStorage.getItem("user"))
+                userObject.user = res.data
+                localStorage.setItem("user", JSON.stringify(userObject))
+                setUserType(res.data)
+                props.setuser({...props.user, user: res.data})
+                setChecked(false)
+            }
+        } catch (err) {
+            if(err.response.status === 401){
+                handleLogOut()
+            }
+            else{
+                console.log(err)
+            }
+        }
+        
     }
     else{
-        setUserType("Artist")
-        props.setuser({... props.user, user: "Artist"})
-        setChecked(true)
+        try {
+            const res = await axios.put(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/user/${props.user._id}/changeToType/artist`, 
+                {},
+                {withCredentials: true, credentials: 'include'}
+            )
+            if(res.status === 200){
+                const userObject = JSON.parse(localStorage.getItem("user"))
+                userObject.user = res.data
+                localStorage.setItem("user", JSON.stringify(userObject))
+                setUserType(res.data)
+                props.setuser({...props.user, user: res.data})
+                setChecked(true)
+            }
+        } catch (err) {
+            if(err.response.status === 401){
+                handleLogOut()
+            }
+            else{
+                console.log(err)
+            }
+        }
     }
-  })
+    navigate('/')
+  }
 
   return (
     <>
@@ -55,15 +102,16 @@ const Settings = props => {
                 transition={{duration:0.3}} 
                 exit={{opacity:0}}
             >
+                <h2 className="welcome_CustomerHeading">Welcome, {props.user.name.first}!</h2>
                 <button className='collapse_button collapse_button-Primary' onClick={handleCollapse}><FiMenu/></button>
             </motion.div>
         )}
         {collapse === true && (
-            <motion.div className='collapse_section collapse_section-Active'
+            <motion.div className='collapse_section-Active'
                 key={'collapse_section-Active'}
                 initial={{opacity:0}} 
                 animate={{opacity:1, y: '0%'}}
-                transition={{duration:0.5, ease: "easeInOut", delayChildren: 0.6}} 
+                transition={{duration:0.8, ease: "easeInOut", delayChildren: 0.6}} 
                 exit={{y: '-800%'}}
             >
                 <motion.button className='collapse_button' onClick={handleCollapse}
@@ -78,10 +126,10 @@ const Settings = props => {
                     transition={{duration:0.3}} 
                     exit={{opacity:0}}
                 >
-                    {userType === "Artist" &&(
+                    {userType === "artist" &&(
                         <h3>Customer</h3>
                     )}
-                    {userType === "Customer" &&(
+                    {userType === "customer" &&(
                         <h3 className='user_type'>{userType}</h3>
                     )}
                     <div className="switch">
@@ -96,10 +144,10 @@ const Settings = props => {
                             onChange={handleUserChange}
                         />
                     </div>
-                    {userType === "Artist" &&(
+                    {userType === "artist" &&(
                         <h3 className='user_type'>{userType}</h3>
                     )}
-                    {userType === "Customer" &&(
+                    {userType === "customer" &&(
                         <h3>Artist</h3>
                     )}
                     
@@ -132,4 +180,4 @@ const Settings = props => {
   )
 }
 
-export default Settings
+export default Settings 

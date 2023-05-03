@@ -9,17 +9,16 @@ const Loginsub = props => {
     const passwordRef = useRef()
 
     const [randomFeaturedProduct, setRFP] = useState({})
-    const [artistOfProd, setArtistOfProd] = useState({})
+    const [featuredArtist, setFA] = useState({})
+    const [loginError, setLoginError] = useState("")
 
     useEffect(() => {
         const getLatestFeatured = async () => {
-            const random_productID = Math.floor(Math.random() * 15) + 1;
-            const getRandomProduct = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks/${random_productID}`)
-            const random_product = getRandomProduct.data
-            const getArtist = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/${random_product.artist_id}`)
-            const artist = getArtist.data
-            setRFP(random_product)
-            setArtistOfProd(artist)
+            const getFeaturedProduct = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks/featuredArtwork`)
+            const featured_product = getFeaturedProduct.data
+            const featured_artist = featured_product.artist_id
+            setFA(featured_artist)
+            setRFP(featured_product)
         }
         getLatestFeatured()
     }, [])
@@ -31,26 +30,47 @@ const Loginsub = props => {
           password: passwordRef.current.value,
         };
         try{
-            const res = await axios.post(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/login`, newUser)
-            const user = res.data
-            props.setuser(user)
-            navigate("/")
+            const res = await axios.post(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/login`, newUser, {withCredentials: true})
+            if(res.status === 200){
+                setLoginError("")
+                if(res.data.success && res.data._id){
+                    try {
+                        const getUser = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/user/${res.data._id}`, {withCredentials: true})                        
+                        const user = getUser.data
+                        localStorage.setItem("user", JSON.stringify(user))
+                        props.setuser(user)
+                        navigate("/")
+                    } catch (err) {
+                        setLoginError(err.response.data.message)
+                    }
+                }
+            }
         } catch (err){
-            console.log(err)
+            if(err.response.status === 400){
+                setLoginError(err.response.data.message)
+            }
+            else{
+                console.log(err.response.data)
+            } 
         }      
     }
 
     return(
         <div className='container LogIn__container'>
-    	<div className="login_loginheader">
+            {loginError && (
+                <div className="login_error">
+                    {loginError}
+                </div>
+            )}
+        <div className="login_loginheader">
             <div className="login_featured">
                 {/* Featured Artwork */}
-                {randomFeaturedProduct && artistOfProd.name && (
+                {randomFeaturedProduct && featuredArtist && featuredArtist.name && (
                     <>
                         <h2>FEATURED ART OF THE DAY</h2>
-                        <img className='login_featuredpic' src={randomFeaturedProduct.thumbnailURL} alt="" />
+                        <img className='login_featuredpic' src={process.env.REACT_APP_SERVER_HOSTNAME + randomFeaturedProduct.thumbnailURL} alt="" />
                         <h5 className="login_featuredInfo">
-                            "{randomFeaturedProduct.name}" - {artistOfProd.name.full} 
+                            "{randomFeaturedProduct.name}" - {featuredArtist.name.full} 
                         </h5>
                     </>
                 )}

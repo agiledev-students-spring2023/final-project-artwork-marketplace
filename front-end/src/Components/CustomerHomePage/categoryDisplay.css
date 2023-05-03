@@ -5,8 +5,11 @@
     padding-top: 2rem;
     padding-bottom: 1rem;
 }
+.searchBar_bg{
+    background-color: black;
+}
 .searchBar__container .searchBarTextField{
-    border: 2px solid black;
+    border: 1px solid black;
     border-radius: 3rem;
     padding: 1rem;
     transition: 1s ease all;
@@ -15,7 +18,8 @@
     width: auto;
 }
 .searchBar__container .searchBarTextField:focus{
-    box-shadow: 0rem 0rem 1.5rem rgb(87, 87, 87);
+    box-shadow: 0rem 0rem 1.5rem white;
+    border: 1px solid white;
 }
 .TopPicks a{
     text-decoration: none;
@@ -40,23 +44,66 @@
 }
 .categoryRow{
     text-align: start;
+    padding-top: 2rem;
 }
 .categoryRow .categoryName{
     text-transform: capitalize;
 }
-.categoryRow .categoryProductImages .SwiperProductImage img{
-    width: 100%;
-    height: 30vh;
-    user-select: none;
-    padding-bottom: 3rem;
-    object-fit: cover;
+.categoryRow .categoryProductImages .carousel .product_Card{
+    height: 25vh;
+    min-width: 25%;
+    max-width: 25%;
+    border-radius: 3rem;
+    overflow: hidden;
+    margin: 1rem;
+    box-shadow: 0rem 0rem 1rem rgb(87, 87, 87);
+    background: white;
+    display: flex;
+    flex-direction: column;
 }
-:root {
-    --swiper-theme-color: black!important;
+.categoryRow .categoryProductImages .carousel .product_Card .product_image_Display{
+    height: 80%;
+    width: 100%;
+}
+.categoryRow .categoryProductImages .carousel .product_Card .product_info_Display{
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(transparent , rgb(50, 50, 50) 60%);
+    text-align: center;
+    justify-content: end;
+}
+.categoryRow .categoryProductImages .carousel .product_Card .product_info_Display h4{
+    font-weight: 300;
+}
+.categoryRow .categoryProductImages .carousel .product_Card a{
+    height: 21%;
+    text-decoration: none;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    z-index: 3;
+}
+.categoryRow .categoryProductImages .carousel .product_Card img{
+    width: 100%;
+    min-height: 115%;
+    object-fit: cover;
+    pointer-events: none;
+    overflow: hidden;
+}
+.categoryRow .categoryProductImages .carousel .inner-carousel{
+    display: flex;
+    background: rgb(230, 230, 230);
+}
+.categoryRow .categoryProductImages .carousel{
+    cursor: grab;
+    overflow-x: hidden;
+    background: rgb(230, 230, 230);
+    border-radius: 3rem;
 }
 .category_button{
-    border: 2px solid black;
-    background-color: black;
+    background: linear-gradient(45deg, rgb(176, 176, 176) 0%, rgb(74, 74, 74) 20%, black 50%, rgb(74, 74, 74) 80%, rgb(176, 176, 176) 100%);
+    border: 2px solid rgb(120, 120, 120);
+    box-shadow: 0rem 0rem 1rem rgb(87, 87, 87);
     border-radius: 2rem;
     padding-top: 1rem;
     padding-bottom: 1rem;
@@ -72,11 +119,11 @@
     padding-bottom: 1rem;
     padding-left: 3rem;
     padding-right: 3rem;
-    font-weight: 500;
+    font-weight: 600;
 }
 .category_button:hover{
     background-color: rgb(120, 120, 120);
-    border: 2px solid rgb(120, 120, 120);
+    border: 2px solid white;
     cursor: pointer;
 }
 /* FOR TABLETS */
@@ -84,17 +131,10 @@
     .searchBar__container, .CategoryDisplay__container{
         width: var(--container-width-md);
     }
-    .categoryRow .categoryProductImages .swiper-container{
-        width: 1024px;
-    }
-    .categoryRow .categoryProductImages .SwiperProductImage img{
-        width: 100%;
-        min-height: 25vh;
-        max-height: 25vh;
-        user-select: none;
-    }
-    .categoryRow .categoryProductImages .SwiperProductImage{
-        max-height: 35vh;
+    .categoryRow .categoryProductImages .carousel .product_Card{
+        height: 30vh;
+        min-width: 40%;
+        max-width: 40%;
     }
     .category_button, .category_button a{
         padding-top: 0.75rem;
@@ -104,22 +144,18 @@
 /* FOR PHONES */
 @media screen and (max-width: 600px){
     .searchBar__container, .CategoryDisplay__container{
-        width: var(--container-width-sm);
+        width: var(--container-width-sm) ;
     }
     .searchBar__container{
         padding-top: 4rem;
     }
-    .categoryRow .categoryProductImages .swiper-container{
-        width: 600px;
-    }
-    .categoryRow .categoryProductImages .SwiperProductImage img{
-        max-width: 100%;
+    .categoryRow .categoryProductImages .carousel .product_Card{
         height: 30vh;
-        object-fit: cover;
-        user-select: none;
+        min-width: 50%;
+        max-width: 50%;
     }
-    .categoryRow .categoryProductImages .SwiperProductImage{
-        max-height: 40vh;
+    .categoryRow .categoryProductImages .carousel .product_Card .product_info_Display{
+        margin-top: -2.5%;
     }
     .category_button, .category_button a{
         padding-top: 0.5rem;

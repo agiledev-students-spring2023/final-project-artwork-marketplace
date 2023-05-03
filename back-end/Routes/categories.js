@@ -1,28 +1,25 @@
 const router = require("express").Router()
-const CategoryList = require("../SchemaSamples/AllCategories")
-const ProductsList = require("../SchemaSamples/AllProducts")
+const { auth } = require('../middleware/auth')
+
+const { User } = require('../models/User')
+const { Category } = require('../models/Category')
+const { Artwork } = require('../models/Artwork')
 
 // POST new category
-// WIP
-router.post("/", (req, res) => {
+router.post("/addCategory", auth, async (req, res) => {
+    const newCategory = new Category(req.body)
     try{
-        const newCategory = {
-            _id: req.body._id,
-            name: req.body.name,
-            products_id: req.body.products_id,
-        }
-        res.status(200).json(newCategory)
+        const savedCategory = await newCategory.save()
+        res.status(200).json(savedCategory)  
     } catch (err){
         res.status(500).json(err)
     }
 })
 
-
 // GET all categories + artworks 
-// WIP
-router.get("/", (req, res) => {
+router.get("/", auth, async (req, res) => {
     try{
-        const categories = CategoryList
+        const categories = await Category.find({}).populate({path: "products_id"})
         res.status(200).json(categories)
     } catch (err){
         res.status(500).json(err)
@@ -30,27 +27,23 @@ router.get("/", (req, res) => {
 })
 
 // GET category by ID
-// WIP
-router.get("/:id", (req, res) => {
+router.get("/category/:id", auth, async (req, res) => {
     try{
-        const categories = CategoryList.find(category => category._id == req.params.id)
-        res.status(200).json(categories)
+        const category = await Category.findOne({_id: req.params.id}).populate({path: "products_id"})
+        res.status(200).json(category)
     } catch (err){
         res.status(500).json(err)
     }
 })
 
-// GET category by product ID
-// WIP
-router.get("/product/:id", (req, res) => {
+// GET categories by product ID
+router.get("/product/:id", auth, async(req, res) => {
     try{
-        const thisProduct = ProductsList.find(product => product._id == req.params.id)
-        const productCategory = CategoryList.filter(category => thisProduct.categories_id.includes(category._id))
-        res.status(200).json(productCategory)
+        const artworkCategories = await Category.find({products_id: req.params.id}).populate({path: "products_id"})
+        res.status(200).json(artworkCategories)
     } catch (err){
         res.status(500).json(err)
     }
 })
 
 module.exports = router
-

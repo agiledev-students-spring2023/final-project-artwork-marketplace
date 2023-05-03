@@ -3,31 +3,50 @@ import { useParams, Link } from 'react-router-dom'
 import Masonry from 'react-masonry-css'
 import './productDisplay.css'
 import axios from "axios"
-import AllCategories from '../../SchemaSamples/AllCategories'
+import { useNavigate } from 'react-router-dom'
 
 const ProductDisplay = props => {
   const getCategoryID = useParams()
-  const [categoryy, setCategory] = useState([])
+  const [categoryy, setCategory] = useState({})
   const [products, setProducts] = useState([])
+  const [copyProducts, setCopyProducts] = useState([]) 
   const [searchValue, setSearchValue] = useState('')
-  const [hover, setHover] = useState('')
-  
+  const navigate = useNavigate()
+
+  const handleLogOut = async () => {
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/logout`, {withCredentials: true})
+    if (res.data.success === true){
+      alert("You have been logged out. Please Log In again to continue.")
+      localStorage.removeItem("user")
+      props.setuser({})
+      navigate("/")
+    }
+  }
+
   useEffect(() => {
     const findCategory = async () => {
       try{
-        const getProducts = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/artworks`)
-        const AllProducts = getProducts.data
         const ID = getCategoryID.categoryID
-        const foundCategory = AllCategories.find(category => category._id == ID)
-        const productsOfCategory = AllProducts.filter(product => foundCategory.products_id.includes(product._id))
+        const getCategory = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/categories/category/${ID}`,
+          {withCredentials: true}
+        )
+        const foundCategory = getCategory.data
+        const productsOfCategory = foundCategory.products_id
         setCategory(foundCategory)
         setProducts(productsOfCategory)
+        setCopyProducts(productsOfCategory)
       } catch (err) {
-        console.log(err)
+        if(err.response.status === 401){
+          handleLogOut()
+        }
+        else{
+          console.log(err)
+        }
       }
     }
     findCategory()
   }, [])
+
 
   // for responsive styling
   const breakpointColumnsObj = {
@@ -38,17 +57,13 @@ const ProductDisplay = props => {
 
   const handleSearch = (e) => {
     if(e.target.value == ''){
-        setProducts(categoryy[0].products)
+        setProducts(copyProducts)
     }
     else{
-        const SearchResult = products.filter(item => item.productName.toLowerCase().includes(e.target.value.toLowerCase()))
+        const SearchResult = products.filter(item => item.name.toLowerCase().includes(e.target.value.toLowerCase()))
         setProducts(SearchResult)
     }
     setSearchValue(e.target.value)
-  }
-
-  const handleMouseHover = (name) => {
-    setHover(name)
   }
 
   return (
@@ -69,17 +84,20 @@ const ProductDisplay = props => {
                   columnClassName="my-masonry-grid_column"
                 >
                   {products.map((product) =>
-                    <div className='artworkCard' onMouseOver={() => handleMouseHover(product.name)} onMouseLeave={() => setHover('')}>
+                    <div className='cat_artworkCard' key={product._id}>
+                      <div className="cat_artworkPhoto">
+                        <Link to={`/Item/${product._id}`} >
+                          <img className='artworkImagee' src={process.env.REACT_APP_SERVER_HOSTNAME + product.thumbnailURL} alt={product.name} />
+                        </Link>
+                      </div>
                       <Link to={`/Item/${product._id}`} >
-                        <img className='artworkImagee' src={product.thumbnailURL} alt={product.name} />
-                      </Link>
-                      
+                        <div className="cat_artworkInfo">
+                          <h5>"{product.name}"</h5>
+                        </div>    
+                      </Link>                  
                     </div>
                   )}
                 </Masonry>
-              )}
-              {hover && (
-                <div className="popup_productName"><h4>"{hover}"</h4></div>
               )}
               </div>
           </div>
