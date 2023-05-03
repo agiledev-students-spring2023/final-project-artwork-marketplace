@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { Link, useParams } from 'react-router-dom'
+import './followerBanner.css'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { format } from 'timeago.js'
@@ -37,12 +38,12 @@ const ViewFollowers = props => {
 
         <div>{followersList && (
             <div>{followersList.map((user) => 
+                <div className='followersStyle'>
                 <Link to={`/Profile/${user._id}`}>
-                <div>
-                    {user.name&&(<div>{user.name.full}</div>)}
+                    {user.name&&(<div className='fwrText'>{user.name.full}</div>)}
                     <div><img src={process.env.REACT_APP_SERVER_HOSTNAME+user.profilePicture_Path} alt="profile pic"/></div>
-                </div>
                 </Link>
+                </div>
                 )
                 }</div>
         )}</div>

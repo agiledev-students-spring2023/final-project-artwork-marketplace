@@ -71,7 +71,7 @@ const ProfileSub = props => {
             }          
         }
         getProductInfo()
-    }, [])
+    }, [userObject.followers, userObject.following, userId])
 
     // for responsive styling
     const breakpointColumnsObj = {
