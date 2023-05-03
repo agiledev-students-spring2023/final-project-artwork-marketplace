@@ -18,6 +18,7 @@ import AddCategory from './Pages/AddCategory'
 import Followers from './Pages/Followers'
 import Analytics from './Pages/Analytics'
 import Following from './Pages/Following'
+import Followinglist from './Pages/followingList'
 import Followerslist from './Pages/followersList'
 
 const App = props => {
@@ -83,6 +84,7 @@ const App = props => {
               {/* NON-EXCLUSIVE USER ROUTES */}
               <Route path="/Item/:productID" element={<ViewItem user={user} setuser={setUser}/>}/>
               <Route path="/Profile/:userID" element={<Profile user={user} setuser={setUser}/>}/> 
+              <Route path="/Profile/Followinglist" element={<Followinglist user={user} setuser={setUser}/>}/> 
               <Route path="/Profile/Followerslist" element={<Followerslist user={user} setuser={setUser}/>}/> 
             </>
           )}
