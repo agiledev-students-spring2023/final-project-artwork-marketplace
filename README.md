@@ -2,7 +2,7 @@
 
 Live Link: https://seahorse-app-qfrqt.ondigitalocean.app/
 
-Welcome aboard! This is the introduction page for the Artwork Marketplace project designed and composed by [Anh Tran](https://github.com/Anhtrr), [Zihan Zhang](https://github.com/StevenZhang0116), [Chloe Hawkins](https://github.com/chloeph323), and [Amy Yue](https://github.com/ay1534). 
+Welcome aboard! This is the introduction page for the Artwork Marketplace project designed and composed by [Anh Tran](https://github.com/Anhtrr), [Zihan Zhang](https://github.com/StevenZhang0116), and [Chloe Hawkins](https://github.com/chloeph323). 
 
 ## Project Description and Idea Origin
 
