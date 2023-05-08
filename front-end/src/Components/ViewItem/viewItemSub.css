@@ -220,7 +220,6 @@
 }
 .viewItem_card .viewItem_box .viewItem_button{
     color: white;
-    background: linear-gradient(90deg, rgb(180, 29, 255) 0%, rgb(133, 12, 255) 50%, rgb(66, 129, 255) 100%);
     box-shadow: 0rem 0rem 0.5rem rgb(87, 87, 87);
     border: 1px solid white;
     font-weight: 700;
@@ -229,6 +228,12 @@
     cursor: pointer;
     transition: 1s ease all;
     padding: 0.5rem;
+}
+.viewItem_card .viewItem_box .viewItem_button.cart{
+    background: linear-gradient(90deg, rgb(180, 29, 255) 0%, rgb(133, 12, 255) 50%, rgb(66, 129, 255) 100%);
+}
+.viewItem_card .viewItem_box .viewItem_button.save{
+    background: linear-gradient(70deg, #7a1a1a 0%, #b02424 10%, #7a1a1a 50%, #b02424 90%, #7a1a1a 100% );
 }
 /* FOR TABLETS */
 @media screen and (max-width: 1024px){

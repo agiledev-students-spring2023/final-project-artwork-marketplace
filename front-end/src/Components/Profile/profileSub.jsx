@@ -17,6 +17,8 @@ const ProfileSub = props => {
     const [userObject, setUserObject] = useState(props.user)
     const [userInfo, setUserInfo] = useState({})
     const [userUploadedProducts, setUserUploadedProducts] = useState([])
+    const [userPurchasedProducts, setUserPurchasedProducts] = useState([])
+    const [userSavedProducts, setUserSavedProducts] = useState([])
     const [followersList, setFollowersList] = useState([{}])
     const [followingList, setFollowingList] = useState([{}])
     const [displayPicture, setDisplayPicture] = useState("")
@@ -37,15 +39,20 @@ const ProfileSub = props => {
 
     useEffect(() => {
         const getProductInfo = async () => {
+            handleCloseViewF()
             if(userObject._id === userId){
                 const followers = userObject.followers
                 const following = userObject.following
                 const DPPath = process.env.REACT_APP_SERVER_HOSTNAME + userObject.profilePicture_Path
+                const purchasedProducts = userObject.purchased
+                const savedProducts = userObject.saved
                 setDisplayPicture(DPPath)
                 setFollowersList(followers)
                 setFollowingList(following)
                 setUserInfo(userObject)
                 setUserUploadedProducts(userObject.products_uploaded)
+                setUserSavedProducts(savedProducts)
+                setUserPurchasedProducts(purchasedProducts)
             }
             else{
                 try{
@@ -56,11 +63,14 @@ const ProfileSub = props => {
                     const products = user.products_uploaded
                     const followers = user.followers
                     const following = user.following
+                    const purchasedProducts = user.purchased
+                    const savedProducts = user.saved
                     setFollowersList(followers)
                     setFollowingList(following)
                     setUserInfo(user)
                     setUserUploadedProducts(products)
-                    // this.forceUpdate()
+                    setUserSavedProducts(savedProducts)
+                    setUserPurchasedProducts(purchasedProducts)
                 } catch (err){
                     if(err.response.status === 401){
                         handleLogOut()
@@ -209,7 +219,7 @@ const ProfileSub = props => {
             {userInfo && userInfo.name && viewFType === "" && (
                 <>
                     <div className='profile_information'>
-                        <h2 className='profile_title'>{userInfo.name.full}'s Artist Profile</h2>
+                        <h2 className='profile_title'>{userInfo.name.full}'s Profile</h2>
                         <div className="profile_picAndActions">
                             <div className="profile_picAndChangePic">
                                 {userObject._id === userId && (
@@ -264,9 +274,9 @@ const ProfileSub = props => {
                             exit={{opacity: 0, y: '-100%'}}
                             transition={{delay: 0.5, duration: 1}}
                         >
-                        {userUploadedProducts.length > 0 && (
-                          <>
                             <h2 className='profile_uploadedProducts_title'>Uploaded Artworks</h2>
+                        {userUploadedProducts.length > 0 ? (
+                          <>
                             <Masonry 
                                 breakpointCols={breakpointColumnsObj}
                                 className="my-masonry-grid"
@@ -293,9 +303,90 @@ const ProfileSub = props => {
                                 )}
                             </Masonry>
                           </>
-                        )}
-                        {userUploadedProducts.length === 0 && (
+                        ) : (
                             <div className='profile_emptyProducts'>{userInfo.name.full} Has Not Published Any Artworks Yet!</div>
+                        )}
+                        </motion.div>
+                    )}
+                    {userSavedProducts && (
+                        <motion.div
+                            initial={{opacity: 0, y: '100%'}}
+                            animate={{opacity: 1, y: '0%'}}
+                            exit={{opacity: 0, y: '-100%'}}
+                            transition={{delay: 1, duration: 1}}
+                        >
+                            <h2 className='profile_uploadedProducts_title'>Saved Artworks</h2>
+                        {userSavedProducts.length > 0 ? (
+                          <>
+                            <Masonry 
+                                breakpointCols={breakpointColumnsObj}
+                                className="my-masonry-grid"
+                                columnClassName="my-masonry-grid_column"
+                            >
+                                {userSavedProducts.map((product) => 
+                                <div className="profile_product_card" key={product._id}>
+                                    <div className="product_photo">
+                                        <Link to={`/Item/${product._id}`}>
+                                            <img src={process.env.REACT_APP_SERVER_HOSTNAME + product.thumbnailURL} alt={product.name}/>
+                                        </Link>
+                                    </div>
+                                    <div className="product_info">
+                                        <Link to={`/Item/${product._id}`}>
+                                            <h3 className="product_name">
+                                                "{product.name}"
+                                            </h3>
+                                            <h4 className={`product_price ${product.status.toLowerCase() === "sold" ? "sold" : "available"}` }>
+                                                ${" " + product.price}
+                                            </h4>
+                                        </Link>
+                                    </div>
+                                </div>
+                                )}
+                            </Masonry>
+                          </>
+                        ) : (
+                            <div className='profile_emptyProducts'>{userInfo.name.full} Has Not Saved Any Artworks!</div>
+                        )}
+                        </motion.div>
+                    )}
+                    {userPurchasedProducts && (
+                        <motion.div
+                            initial={{opacity: 0, y: '100%'}}
+                            animate={{opacity: 1, y: '0%'}}
+                            exit={{opacity: 0, y: '-100%'}}
+                            transition={{delay: 1.5, duration: 1}}
+                        >
+                            <h2 className='profile_uploadedProducts_title'>Purchased Artworks</h2>
+                        {userPurchasedProducts.length > 0 ? (
+                          <>
+                            <Masonry 
+                                breakpointCols={breakpointColumnsObj}
+                                className="my-masonry-grid"
+                                columnClassName="my-masonry-grid_column"
+                            >
+                                {userPurchasedProducts.map((product) => 
+                                <div className="profile_product_card" key={product._id}>
+                                    <div className="product_photo">
+                                        <Link to={`/Item/${product._id}`}>
+                                            <img src={process.env.REACT_APP_SERVER_HOSTNAME + product.thumbnailURL} alt={product.name}/>
+                                        </Link>
+                                    </div>
+                                    <div className="product_info">
+                                        <Link to={`/Item/${product._id}`}>
+                                            <h3 className="product_name">
+                                                "{product.name}"
+                                            </h3>
+                                            <h4 className={`product_price ${product.status.toLowerCase() === "sold" ? "sold" : "available"}` }>
+                                                ${" " + product.price}
+                                            </h4>
+                                        </Link>
+                                    </div>
+                                </div>
+                                )}
+                            </Masonry>
+                          </>
+                        ) : (
+                            <div className='profile_emptyProducts'>{userInfo.name.full} Has Not Purchased Any Artworks!</div>
                         )}
                         </motion.div>
                     )}

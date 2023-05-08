@@ -95,6 +95,30 @@ const ViewItemSub = props => {
     }
   }
 
+  const addItemToSaved = async (id) => {
+    try {
+      const userId = props.user._id 
+      const res = await axios.put(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/user/${userId}/addToSaved/${id}`,
+        {},
+        {withCredentials: true}
+      )
+      if(res.status === 200){
+        const userObject = JSON.parse(localStorage.getItem("user"))
+        userObject.saved = res.data
+        localStorage.setItem("user", JSON.stringify(userObject))
+        props.setuser({...props.user, saved: res.data})
+        navigate("/Cart")
+      }
+    } catch (err) {
+      if(err.response.status === 401){
+        handleLogOut()
+      }
+      else{
+        console.log(err)
+      }
+    }
+  }
+
   const handleSmallPhotoClick = (index) => {
     setActiveImageIndex(index)
   }
@@ -167,8 +191,13 @@ const ViewItemSub = props => {
             </div>
           </div>
           <h5 className="viewItem_postedTimeAgo">Posted {format(product.createdAt)}</h5>
+          {props.user.user === "customer" && props.user._id !== productArtist._id &&(
+            <button className="viewItem_button save" onClick={() => addItemToSaved(product._id)}>
+              Save
+            </button>
+          )}
           {props.user.user === "customer" && productStatus.toLowerCase() !== "sold" && props.user._id !== productArtist._id &&(
-            <button className="viewItem_button" onClick={() => addItemToCart(product._id)}>
+            <button className="viewItem_button cart" onClick={() => addItemToCart(product._id)}>
               Add To Cart
             </button>
           )}
