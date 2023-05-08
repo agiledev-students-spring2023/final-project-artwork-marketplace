@@ -94,7 +94,7 @@ const Settings = props => {
   return (
     <>
         <AnimatePresence mode={'wait'}>
-        {collapse === false && (
+        {collapse === false ? (
             <motion.div className='collapse_section' 
                 key={'collapse_section'}    
                 initial={{opacity:0}} 
@@ -105,8 +105,7 @@ const Settings = props => {
                 <h2 className="welcome_CustomerHeading">Welcome, {props.user.name.first}!</h2>
                 <button className='collapse_button collapse_button-Primary' onClick={handleCollapse}><FiMenu/></button>
             </motion.div>
-        )}
-        {collapse === true && (
+        ) : (
             <motion.div className='collapse_section-Active'
                 key={'collapse_section-Active'}
                 initial={{opacity:0}} 

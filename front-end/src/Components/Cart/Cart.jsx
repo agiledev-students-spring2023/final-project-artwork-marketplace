@@ -259,7 +259,7 @@ const Cart = props => {
                                 <div className="artworkCartCard" key={artwork._id}>
                                     <div className="artworkCardImage">
                                         <Link to={`/ViewItem/${artwork._id}`}>
-                                            <img src={process.env.REACT_APP_SERVER_HOSTNAME + artwork.thumbnailURL} />
+                                            <img src={process.env.REACT_APP_SERVER_HOSTNAME + artwork.thumbnailURL} alt={artwork.name} />
                                         </Link>
                                     </div>
                                     <div className="artworkCartText">
@@ -313,7 +313,7 @@ const Cart = props => {
                                 <div className="artworkCartCard">
                                     <div className="artworkCardImage">
                                         <Link to={`/ViewItem/${artwork._id}`}>
-                                            <img src={process.env.REACT_APP_SERVER_HOSTNAME + artwork.thumbnailURL} />
+                                            <img src={process.env.REACT_APP_SERVER_HOSTNAME + artwork.thumbnailURL} alt={artwork.name} />
                                         </Link>
                                     </div>
                                     <div className="artworkCartText">
@@ -334,7 +334,9 @@ const Cart = props => {
                                         </div>
                                         <div className="artworkCartActions">
                                             <button onClick={() => handleRemoveFromSaved(artwork._id)}>Remove</button>
-                                            <button onClick={() => handleMoveToCart(artwork._id)}>Add To Cart</button>
+                                            {artwork.status.toLowerCase() === "available" && (
+                                                <button onClick={() => handleMoveToCart(artwork._id)}>Add To Cart</button>
+                                            )}
                                         </div>
                                     </div>
                                 </div>

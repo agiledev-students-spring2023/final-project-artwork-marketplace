@@ -28,14 +28,14 @@
     user-select: none;
     width: var(--container-width-lg);
 }
-.categoryRow{
+.ArtistCategoryDisplay_container .categoryRow{
     text-align: start;
     padding-top: 2rem;
 }
-.categoryRow .categoryName{
+.ArtistCategoryDisplay_container .categoryRow .categoryName{
     text-transform: capitalize;
 }
-.categoryRow .categoryProductImages .carousel .product_Card{
+.ArtistCategoryDisplay_container .categoryRow .categoryProductImages .carousel .product_Card{
     height: 25vh;
     min-width: 25%;
     max-width: 25%;
@@ -47,46 +47,46 @@
     display: flex;
     flex-direction: column;
 }
-.categoryRow .categoryProductImages .carousel .product_Card .product_image_Display{
+.ArtistCategoryDisplay_container .categoryRow .categoryProductImages .carousel .product_Card .product_image_Display{
     height: 80%;
     width: 100%;
 }
-.categoryRow .categoryProductImages .carousel .product_Card .product_info_Display{
-    height: 100%;
-    width: 100%;
-    background: linear-gradient(transparent , rgb(50, 50, 50) 60%);
-    text-align: center;
-    justify-content: end;
-}
-.categoryRow .categoryProductImages .carousel .product_Card .product_info_Display h4{
-    font-weight: 300;
-}
-.categoryRow .categoryProductImages .carousel .product_Card a{
-    height: 21%;
+.ArtistCategoryDisplay_container .categoryRow .categoryProductImages .carousel .product_Card a{
+    height: 22%;
     text-decoration: none;
     color: white;
     display: flex;
     flex-direction: column;
     z-index: 3;
 }
-.categoryRow .categoryProductImages .carousel .product_Card img{
+.ArtistCategoryDisplay_container .categoryRow .categoryProductImages .carousel .product_Card .product_info_Display{
+    height: 100%;
     width: 100%;
-    min-height: 115%;
+    background: linear-gradient(transparent , rgb(50, 50, 50) 60%);
+    text-align: center;
+    justify-content: end;
+}
+.ArtistCategoryDisplay_container .categoryRow .categoryProductImages .carousel .product_Card .product_info_Display h4{
+    font-weight: 300;
+}
+.ArtistCategoryDisplay_container .categoryRow .categoryProductImages .carousel .product_Card img{
+    width: 100%;
+    height: 140%;
     object-fit: cover;
     pointer-events: none;
     overflow: hidden;
 }
-.categoryRow .categoryProductImages .carousel .inner-carousel{
+.ArtistCategoryDisplay_container .categoryRow .categoryProductImages .carousel .inner-carousel{
     display: flex;
     background: rgb(230, 230, 230);
 }
-.categoryRow .categoryProductImages .carousel{
+.ArtistCategoryDisplay_container .categoryRow .categoryProductImages .carousel{
     cursor: grab;
     overflow-x: hidden;
     background: rgb(230, 230, 230);
     border-radius: 3rem;
 }
-.category_button{
+.ArtistCategoryDisplay_container .category_button{
     background: linear-gradient(45deg, rgb(176, 176, 176) 0%, rgb(74, 74, 74) 20%, black 50%, rgb(74, 74, 74) 80%, rgb(176, 176, 176) 100%);
     border: 2px solid rgb(120, 120, 120);
     box-shadow: 0rem 0rem 1rem rgb(87, 87, 87);
@@ -98,7 +98,7 @@
     transition: 1s ease all;
     width: fit-content;
 }
-.category_button a{
+.ArtistCategoryDisplay_container .category_button a{
     color: white;
     text-decoration: none;
     padding-top: 1rem;
@@ -107,7 +107,7 @@
     padding-right: 3rem;
     font-weight: 600;
 }
-.category_button:hover{
+.ArtistCategoryDisplay_container .category_button:hover{
     background-color: rgb(120, 120, 120);
     border: 2px solid white;
     cursor: pointer;
@@ -117,12 +117,12 @@
     .searchBar__container, .CategoryDisplay__container{
         width: var(--container-width-md);
     }
-    .categoryRow .categoryProductImages .carousel .product_Card{
+    .ArtistCategoryDisplay_container .categoryRow .categoryProductImages .carousel .product_Card{
         height: 30vh;
         min-width: 40%;
         max-width: 40%;
     }
-    .category_button, .category_button a{
+    .ArtistCategoryDisplay_container .category_button, .ArtistCategoryDisplay_container .category_button a{
         padding-top: 0.75rem;
         padding-bottom: 0.75rem;
     }
@@ -135,15 +135,15 @@
     .searchBar__container{
         padding-top: 4rem;
     }
-    .categoryRow .categoryProductImages .carousel .product_Card{
+    .ArtistCategoryDisplay_container .categoryRow .categoryProductImages .carousel .product_Card{
         height: 30vh;
         min-width: 50%;
         max-width: 50%;
     }
-    .categoryRow .categoryProductImages .carousel .product_Card .product_info_Display{
+    .ArtistCategoryDisplay_container .categoryRow .categoryProductImages .carousel .product_Card .product_info_Display{
         margin-top: -2.5%;
     }
-    .category_button, .category_button a{
+    .ArtistCategoryDisplay_container .category_button, .ArtistCategoryDisplay_container .category_button a{
         padding-top: 0.5rem;
         padding-bottom: 0.5rem;
     }
