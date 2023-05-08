@@ -7,7 +7,7 @@
     flex-direction: column;
     gap: 2rem;
 }
-.chart_quantityCard, .chart_priceCard{
+.chart_quantityCard, .chart_priceCard, .analytics_itemsCard{
     background: rgb(227, 227, 227);
     width: 100%;
     padding: 1rem;
@@ -16,10 +16,119 @@
     box-shadow: 0rem 0rem 1rem rgb(87, 87, 87);
     transition: 1s ease all;
 }
-.chart_quantityCard .analytics_row, .chart_priceCard .analytics_row{
+.chart_quantityCard .analytics_row, .chart_priceCard .analytics_row, .analytics_itemsCard .analytics_items{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+}
+.analytics_itemsCard .analytics_items{
+    gap: 1rem;
+}
+.items_soldItems, .items_unsoldItems{
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+}
+.items_soldItems .items_heading, .items_unsoldItems .items_heading{
+    padding-bottom: 1rem;
+    font-weight: 700;
+    font-style: italic;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 0;
+}
+.items_heading.sold{
+    color: #357637;
+}
+.items_heading.unsold{
+    color: #7a1a1a;
+}
+.items_soldItems .items_itemsList, .items_unsoldItems .items_itemsList{
+    max-height: 17rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding: 2rem;
+    background: white;
+    border-radius: 3rem;
+    box-shadow: 0rem 0rem 1rem rgb(87, 87, 87);
+    text-align: start;
+    overflow: scroll;
+}
+.items_itemsList .items_noItems{
+    text-align: center;
+    font-weight: 700;
+    font-style: italic;
+    text-transform: uppercase;
+    color: #575757;
+}
+.items_itemsList .items_itemCard{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background: rgb(227, 227, 227);
+    border-radius: 3rem;
+    box-shadow: 0rem 0rem 1rem rgb(87, 87, 87);
+    color: #575757;
+    height: 100%;
+    text-decoration: none;
+}
+.items_itemCard .item_nameImagePriceDate{
+    height: 100%;
+    width: 90%;
+    display: flex;
+    gap: 0;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+}
+.items_itemCard .item_index{
+    width: 10%;
+    font-weight: 700;
+    font-style: italic;
+    text-transform: uppercase;
+    font-size: large;
+    text-align: center;
+}
+.items_unsoldItems .items_itemCard .item_index, .items_unsoldItems .items_itemCard .item_nameImagePriceDate .item_name{
+    color: #7a1a1a;
+}
+.items_soldItems .items_itemCard .item_index, .items_soldItems .items_itemCard .item_nameImagePriceDate .item_name{
+    color: #357637;
+}
+.items_itemCard .item_nameImagePriceDate .item_name{
+    margin: 0;
+    width: 100%;
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+    font-weight: 700;
+    font-size: medium;
+}
+.items_itemCard .item_nameImagePriceDate .item_image{
+    margin: 0;
+    width: 90%;
+    height: 75%;
+    object-fit: cover;
+    overflow: hidden;
+    border-radius: 3rem;
+    box-shadow: 0 0 0.5rem rgb(87, 87, 87);
+    margin: auto;
+}
+.items_itemCard .item_nameImagePriceDate .item_uploadedDate{
+    width: 100%;
+    height: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    font-weight: 400;
+    font-style: italic;
 }
 .analytics_row .analytics_summary{
     display: flex;
@@ -56,7 +165,7 @@
     padding-left: 1rem;
     margin-bottom: 0;
 }
-.chart_quantityCard h3, .chart_priceCard h3{
+.chart_quantityCard h3, .chart_priceCard h3, .analytics_itemsCard h3{
     margin-top: 0;
     text-align: center;
     margin-left: auto;
@@ -98,6 +207,16 @@
     .analytics_row .analytics_summary{
         width: 40%;
     }
+    .analytics_itemsCard .analytics_items{
+        gap: 0.5rem;
+    }
+    .items_soldItems, .items_unsoldItems{
+        width: 45%;
+    }
+    .items_soldItems .items_itemsList, .items_unsoldItems .items_itemsList{
+        gap: 2rem;
+        padding: 1rem;
+    }
 }
   
 /* FOR PHONES */
@@ -105,9 +224,15 @@
     .priceAnalytics_container{
         width: var(--container-width-sm);
     }
-    .chart_quantityCard .analytics_row, .chart_priceCard .analytics_row{
+    .chart_quantityCard .analytics_row, .chart_priceCard .analytics_row, .analytics_itemsCard .analytics_items{
         flex-direction: column;
         justify-content: center;
+    }
+    .analytics_itemsCard .analytics_items{
+        gap: 1rem;
+    }
+    .items_soldItems, .items_unsoldItems{
+        width: 100%;
     }
     .chart_quantityCard .chart_quantityChart, .chart_priceCard .chart_priceChart{
         width: 310px;
@@ -119,6 +244,9 @@
         width: auto;
         padding-bottom: 0;
     }
+    .analytics_itemsCard{
+        width: auto;
+    }
     .analytics_row .analytics_summary{
         width: 100%;
     }
@@ -126,5 +254,9 @@
         border-radius: 2rem;
         padding-top: 2rem;
         padding-bottom: 2rem;
+    }
+    .items_soldItems .items_itemsList, .items_unsoldItems .items_itemsList{
+        max-height: 20rem;
+        padding: 2rem;
     }
 }
