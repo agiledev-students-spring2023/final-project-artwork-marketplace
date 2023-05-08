@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useId } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import { FiEdit2 } from 'react-icons/fi'
-import { IoClose } from 'react-icons/io5'
+import { IoClose, IoReturnUpBack } from 'react-icons/io5'
 import { GiConfirmed } from 'react-icons/gi'
 import './profileSub.css'
 import axios from 'axios'
@@ -21,8 +21,9 @@ const ProfileSub = props => {
     const [followingList, setFollowingList] = useState([{}])
     const [displayPicture, setDisplayPicture] = useState("")
     const [formDisplayPicture, setFormDisplayPicture] = useState({})
-
     const [changeProfilePic, setChangeProfilePic] = useState(false)
+    const [viewFType, setViewFType] = useState("")
+    const [viewFList, setViewFList] = useState([])
 
     const handleLogOut = async () => {
         const res = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/logout`, {withCredentials: true})
@@ -71,7 +72,7 @@ const ProfileSub = props => {
             }          
         }
         getProductInfo()
-    }, [userObject.followers, userObject.following, userId])
+    }, [userId])
 
     // for responsive styling
     const breakpointColumnsObj = {
@@ -91,6 +92,7 @@ const ProfileSub = props => {
     
     const handleFollow = async () => {
         if (checkFollow()){
+            // unfollow
             try {
                 const res = await axios.put(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/${userObject._id}/unfollow/${userId}`, 
                     {},
@@ -103,6 +105,8 @@ const ProfileSub = props => {
                     localStorage.setItem("user", JSON.stringify(userObject))
                     props.setuser({...props.user, following: updatedFollowing})
                     setUserObject({...userObject, following: updatedFollowing})
+                    setUserInfo({...userInfo, followers: userInfo.followers.filter(user => user._id !== userObject._id)})
+                    setFollowersList(followersList.filter(user => user._id !== userObject._id))
                 }
             } catch (err) {
                 if(err.response.status === 401){
@@ -126,6 +130,8 @@ const ProfileSub = props => {
                     localStorage.setItem("user", JSON.stringify(userObject))
                     props.setuser({...props.user, following: updatedFollowing})
                     setUserObject({...userObject, following: updatedFollowing})
+                    setUserInfo({...userInfo, followers: [...userInfo.followers, userObject]})
+                    setFollowersList([...followersList, userObject])
                 }
             } catch (err) {
                 if(err.response.status === 401){
@@ -160,6 +166,7 @@ const ProfileSub = props => {
                 localStorage.setItem("user", JSON.stringify(userObject))
                 props.setuser({...props.user, profilePicture_Path: res.data})
                 setUserObject({...userObject, profilePicture_Path: res.data})
+                setUserInfo({...userInfo, profilePicture_Path: res.data})
             })
         } catch (err){
             // if invalid token
@@ -182,9 +189,24 @@ const ProfileSub = props => {
         setChangeProfilePic(false)
     }
 
+    const handleFollowingClick = () => {
+        setViewFType("Following")
+        setViewFList(followingList)
+    }
+
+    const handleFollowersClick = () => {
+        setViewFType("Followers")
+        setViewFList(followersList)
+    }
+
+    const handleCloseViewF = () => {
+        setViewFType("")
+        setViewFList([])
+    }
+
     return(
         <div className="container profile_container">
-            {userInfo && userInfo.name && (
+            {userInfo && userInfo.name && viewFType === "" && (
                 <>
                     <div className='profile_information'>
                         <h2 className='profile_title'>{userInfo.name.full}'s Artist Profile</h2>
@@ -222,21 +244,11 @@ const ProfileSub = props => {
                             <div className='profile_ff'>
                                 <div className="profile_followers">
                                 <h5>{followersList.length}</h5>
-                                    {userObject._id !== userId &&(
-                                        <button>Followers</button>  
-                                    )}
-                                    {userObject._id === userId &&(
-                                        <Link to={`/Profile/Followerslist`}>Followers</Link>                                         
-                                    )}
+                                    <button onClick={() => handleFollowersClick()}>Followers</button>  
                                 </div>
                                 <div className="profile_following">
                                     <h5>{followingList.length}</h5>
-                                    {userObject._id !== userId &&(
-                                        <button>Following</button>  
-                                    )}
-                                    {userObject._id === userId &&(
-                                        <Link to={`/Profile/Followinglist`}>Following</Link>                                         
-                                    )}
+                                    <button onClick={() => handleFollowingClick()}>Following</button>  
                                 </div>             
                             </div>
                         </div>
@@ -288,6 +300,33 @@ const ProfileSub = props => {
                         </motion.div>
                     )}
                 </>
+            )}
+            {userInfo && userInfo.name && viewFType !== "" && (
+                <div className="profile_viewF">
+                    <button className="profile_closeviewFButton" type='button' onClick={handleCloseViewF}>
+                        <IoReturnUpBack/>
+                    </button>
+                    <div className="profile_viewF_header">
+                        <h2>{userInfo.name.first}'s {viewFType}</h2>
+                    </div>
+                    <div className="profile_viewF_list">
+                        {viewFList && viewFList.length > 0 && viewFList.map((user) =>
+                            <Link to={`/Profile/${user._id}`}>
+                                <div className="profile_viewF_user" key={user._id}>
+                                    <div className="profile_viewF_user_pic">
+                                        <img src={process.env.REACT_APP_SERVER_HOSTNAME + user.profilePicture_Path} alt={user.name.full}/>
+                                    </div>
+                                    <div className="profile_viewF_user_name">
+                                        {user.name.full}
+                                    </div>
+                                </div>
+                            </Link>
+                        )}
+                        {viewFList && viewFList.length === 0 && (
+                            <div className="profile_viewF_empty">No {viewFType} Yet!</div>
+                        )}
+                    </div>
+                </div>
             )}
         </div>
     )

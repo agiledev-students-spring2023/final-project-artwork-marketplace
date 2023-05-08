@@ -35,7 +35,7 @@ const ViewFollowers = props => {
         exit={{opacity: 0, y: '-100%'}}
         transition={{delay: 0.5, duration: 1}}
         >
-
+        <h2 className="followersTitle">Followers</h2>
         <div>{followersList && (
             <div>{followersList.map((user) => 
                 <div className='followersStyle'>

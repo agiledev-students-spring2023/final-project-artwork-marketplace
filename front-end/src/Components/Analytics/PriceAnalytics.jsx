@@ -1,8 +1,9 @@
 import React, { useEffect, useState, PureComponent } from 'react'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts'
 import { motion } from 'framer-motion'
+import { format } from 'timeago.js'
 import './PriceAnalytics.css'
 
 const PriceAnalytics = props => {
@@ -249,6 +250,58 @@ const PriceAnalytics = props => {
                         </div>
                     </motion.div>
                 )}
+                    <motion.div className='analytics_itemsCard'
+                        initial={{opacity: 0, y: '100%'}}
+                        animate={{opacity: 1, y: '0%'}}
+                        exit={{opacity: 0, y: '-100%'}}
+                        transition={{delay: 0.5, duration: 0.25}}
+                    >
+                        <h3 className='analytics_itemsHeading'>Artworks</h3>
+                        <div className='analytics_items'>
+                            <div className="items_soldItems">
+                                <p className='items_heading sold'>Sold Artworks:</p>
+                                {soldProducts.length !== 0 ? (
+                                    <div className='items_itemsList'>
+                                        {soldProducts.map((product, index) => 
+                                            <Link to={`/Item/${product._id}`} className='items_itemCard' key={index}>
+                                                <h5 className='item_index'>{index+1}</h5>
+                                                <div className="item_nameImagePriceDate">
+                                                    <h5 className='item_name'>"{product.name}"</h5>
+                                                    <img className='item_image' src={process.env.REACT_APP_SERVER_HOSTNAME + product.thumbnailURL} alt={product.name} />
+                                                    <h5 className='item_soldDate'>Sold for ${product.price}, {format(product.updatedAt)}</h5>
+                                                </div>
+                                            </Link>
+                                        )}
+                                    </div>
+                                ) : (
+                                    <div className='items_itemsList'>
+                                        <h5 className='items_noItems'>No items sold</h5>
+                                    </div>
+                                )}
+                            </div>
+                            <div className="items_unsoldItems">
+                                <p className='items_heading unsold'>Unsold Artworks:</p>
+                                {unsoldProducts.length !== 0 ? (
+                                    <div className='items_itemsList'>
+                                        {unsoldProducts.map((product, index) => 
+                                            <Link to={`/Item/${product._id}`} className='items_itemCard' key={index}>
+                                                <h5 className='item_index'>{index+1}</h5>
+                                                <div className="item_nameImagePriceDate">
+                                                    <h5 className='item_name'>"{product.name}"</h5>
+                                                    <img className='item_image' src={process.env.REACT_APP_SERVER_HOSTNAME + product.thumbnailURL} alt={product.name} />
+                                                    <h5 className='item_uploadedDate'>Uploaded for ${product.price}, {format(product.createdAt)}</h5>
+                                                </div>
+                                            </Link>
+                                        )}
+                                    </div>
+                                ) : (
+                                    <div className='items_itemsList'>
+                                        <h5 className='items_noItems'>No items sold</h5>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </motion.div>
                 </>
             )}
             {allUploadedProducts.length === 0 && (
