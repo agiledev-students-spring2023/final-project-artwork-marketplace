@@ -1,0 +1,145 @@
+.CartProductsDisplay__Container{
+    width: var(--container-width-lg);
+    overflow: hidden;
+}
+.banner_cartHeading{
+    background-color: black;
+    overflow: hidden;
+    color: white;
+    text-align: center;
+}
+.CartSavedSwitch{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.CartSavedSwitch .cartButton{
+    text-align: center;
+    padding: 1rem;
+    font-size: larger;
+    font-weight: 600;
+    border: 2px solid black;
+    cursor: pointer;
+    transition: 1s ease all;
+}
+.CartSavedSwitch .cartButton-primary{
+    text-decoration: underline;
+    background: linear-gradient(90deg, rgb(180, 29, 255) 0%, rgb(133, 12, 255) 50%, rgb(66, 129, 255) 100%);
+    color: white;
+}
+.CartProductsDisplay__Container{
+    padding-bottom: 10rem;
+}
+.CartProductsDisplay__Container .artworkColumnDisplay{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding-top: 2rem;
+}
+.CartProductsDisplay__Container .artworkColumnDisplay .artworkCartCard{
+    border-bottom: 1px solid gray;
+    padding-bottom: 2rem;
+    display: grid;
+    grid-template-columns: 30% 60%;
+    gap: 2rem; 
+}
+.CartProductsDisplay__Container .artworkColumnDisplay .artworkCartCard .artworkCardImage{
+    max-width: 100%;
+}
+.CartProductsDisplay__Container .artworkColumnDisplay .artworkCartCard .artworkCardImage img{
+    max-width: 100%;
+}
+.CartProductsDisplay__Container .artworkColumnDisplay .artworkCartCard .artworkCartText{
+    display: grid;
+    grid-template-columns: 1fr;
+    text-align: start;
+}
+.CartProductsDisplay__Container .artworkColumnDisplay .artworkCartCard .artworkCartText .artworkCartInformation .artworkCartName{
+    font-size: larger;
+}
+.CartProductsDisplay__Container .artworkColumnDisplay .artworkCartCard .artworkCartText .artworkCartActions{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4rem;
+}
+.CartProductsDisplay__Container .artworkColumnDisplay .artworkCartCard .artworkCartText .artworkCartActions button{
+    color: white;
+    background-color: black;
+    border-radius: 2rem;
+    font-weight: 500;
+    height: fit-content;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: 1s all ease;
+    border: 2px solid black;
+}
+.CartProductsDisplay__Container .artworkColumnDisplay .artworkCartCard .artworkCartText .artworkCartActions button:hover{
+    border: 2px solid rgb(120, 120, 120);
+    background-color: rgb(120, 120, 120);
+}
+.CartProductsDisplay__Container .artworkColumnDisplay .artworkCartCard .artworkCartText .artworkCartInformation .sold{
+    color: #7a1a1a;
+    text-transform: uppercase;
+}
+.CartProductsDisplay__Container .artworkColumnDisplay .artworkCartCard .artworkCartText .artworkCartInformation .available{
+    color: #357637;
+    text-transform: uppercase;
+}
+.cartCheckout{
+    padding-top: 2rem;
+}
+.cartCheckout button{
+    background: linear-gradient(90deg, rgb(180, 29, 255) 0%, rgb(133, 12, 255) 50%, rgb(66, 129, 255) 100%);
+    color: white;
+    border: 1px solid white;
+    border-radius: 2rem;
+    padding: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 1s ease all;
+    box-shadow: 0 0 1rem rgb(87, 87, 87);
+}
+
+/* FOR TABLETS */
+@media screen and (max-width: 1024px){
+    .cartHeading__Container, .CartProductsDisplay__Container{
+        width: var(--container-width-md);
+    }
+    .CartProductsDisplay__Container .artworkColumnDisplay .artworkCartCard{
+        grid-template-columns: 35% 50%;
+        min-height: fit-content;
+    }
+    .CartProductsDisplay__Container .artworkColumnDisplay .artworkCartCard .artworkCartText .artworkCartInformation{
+        overflow: scroll;
+    }
+    .CartProductsDisplay__Container .artworkColumnDisplay .artworkCartCard .artworkCartText .artworkCartInformation .artworkCartName{
+        font-size: medium;
+        text-overflow: ellipsis;
+        max-width: 100%;
+    }
+    .CartProductsDisplay__Container .artworkColumnDisplay .artworkCartCard .artworkCartText .artworkCartActions{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+}
+  
+/* FOR PHONES */
+@media screen and (max-width: 600px){
+    .cartHeading__Container, .CartProductsDisplay__Container{
+        width: var(--container-width-sm);
+    }
+    .CartProductsDisplay__Container .artworkColumnDisplay .artworkCartCard{
+        grid-template-columns: 50% 40%;
+        min-height: fit-content;
+    }
+    .CartProductsDisplay__Container .artworkColumnDisplay .artworkCartCard .artworkCartText .artworkCartActions{
+        display: grid;
+        grid-template-columns: 1fr;
+        height: fit-content;
+        gap: 0.2rem; 
+    }
+    .CartProductsDisplay__Container .artworkColumnDisplay .artworkCartCard .artworkCartText{
+        text-align: center;
+    }
+}

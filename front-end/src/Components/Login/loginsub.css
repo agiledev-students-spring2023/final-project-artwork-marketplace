@@ -1,0 +1,75 @@
+.LogIn__container{
+    width: var(--container-width-lg);
+    display: block;
+    padding: 0.7rem 1.7rem;
+    position: fixed;
+    left: 50%;
+    transform:translateX(-50%);
+    bottom: 2rem;
+    align-items: center;
+    text-align: center;
+}
+.login_loginset{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-right: 20vw;
+    margin-left: 20vw;
+    padding-bottom: 15vh;
+}
+.login_loginset .textField{
+    border: 2px solid black;
+    border-radius: 3rem;
+    padding: 1rem;
+    transition: 1s ease all;
+    color: black;
+    text-decoration: none;
+}
+.login_loginset .textField:focus{
+    box-shadow: 0rem 0rem 1.5rem rgb(87, 87, 87);
+}
+.login_loginheader{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 2rem;
+}
+.login_loginheader .login_featured .login_featuredpic{
+    max-height: 25vh;
+    max-width: 100%;
+    box-shadow: 0rem 0rem 1rem rgb(87, 87, 87);
+    border-radius: 1rem;
+}
+.login_featuredInfo{
+  text-transform: capitalize;
+}
+
+/* FOR TABLETS */
+@media screen and (max-width: 1024px){
+  .LogIn__container{
+    width: var(--container-width-md);
+  }
+  .login_loginset{
+    margin-right: 10vw;
+    margin-left: 10vw;
+    padding-bottom: 0;
+  }
+}
+
+/* FOR PHONES */
+@media screen and (max-width: 600px){
+  .LogIn__container{
+    width: var(--container-width-sm);
+  }
+  .login_loginset{
+    margin-right: 10vw;
+    margin-left: 10vw;
+    padding-bottom: 0;
+  }
+  .login_loginheader .login_featured .login_featuredpic{
+    max-height: 30vh;
+    max-width: 100%;
+  }
+}

@@ -1,0 +1,166 @@
+.SignUp__container{
+  width: var(--container-width-lg);
+  display: block;
+  padding: 0.7rem 1.7rem;
+  position: fixed;
+  left: 50%;
+  transform:translateX(-50%);
+  bottom: 2rem;
+  align-items: center;
+  text-align: center;
+}
+.SignUp__container .errorMessage{
+  background-color: rgb(111, 0, 0);
+  color: white;
+  border-radius: 3rem;
+  transition: 1s ease all;
+  margin-right: 20vw;
+  margin-left: 20vw;
+  margin-bottom: 2rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+:root{
+  --container-width-lg: 75%;
+  --container-width-md: 86%;
+  --container-width-sm: 90%;
+}
+html{
+  scroll-behavior: smooth;
+}
+::-webkit-scrollbar{
+  display: none;
+}
+
+.s_l{
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.signup_logopic_phrase{
+  max-height: 7vh;
+}
+
+.signup_check{
+  display: flex;
+  gap: 3rem;
+  margin: 1rem;
+  justify-content: center;
+}
+.signup_check .radioButton{
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+.signup_check .radioButton input[type=radio]{
+  accent-color: black;
+  height: 2rem;
+}
+.signup_check .radioButton input[type=radio]:hover{
+  cursor: pointer;
+}
+.signup_check .radioButton p{
+  font-weight: 500;
+}
+.signup_signupset{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-right: 20vw;
+  margin-left: 20vw;
+  padding-bottom: 15vh;
+}
+.signup_signupset .signup_nameInputs{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.signup_signupset .textField{
+  border: 2px solid black;
+  border-radius: 3rem;
+  padding: 1rem;
+  transition: 1s ease all;
+  color: black;
+  text-decoration: none;
+}
+.signup_signupset .textField:focus{
+  box-shadow: 0rem 0rem 1.5rem rgb(87, 87, 87);
+}
+
+.signup_button{
+  border: 2px solid black;
+  border-radius: 3rem;
+  padding: 1rem;
+  transition: 1s ease all;
+  color: black;
+}
+.signup_button:hover{
+  color: white;
+  background-color: rgb(120, 120, 120);
+  border: 2px solid rgb(120, 120, 120);
+  cursor: pointer;
+}
+.signup_button-Primary{
+  color: white;
+  background-color: rgb(20, 20, 20);
+  text-transform: capitalize;
+}
+
+/* FOR TABLETS */
+@media screen and (max-width: 1024px){
+  .SignUp__container{
+    width: var(--container-width-md);
+  }
+  .signup_signupset{
+    margin-right: 10vw;
+    margin-left: 10vw;
+    padding-bottom: 0;
+  }
+  .SignUp__container .errorMessage{
+    margin-right: 10vw;
+    margin-left: 10vw;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+  }
+  .signup_check{
+    padding: 1rem;
+    padding-top: 8rem;
+  }
+  .signup_logopic{
+    max-height: 25vh;
+  }
+}
+
+/* FOR PHONES */
+@media screen and (max-width: 600px){
+  .SignUp__container{
+    width: var(--container-width-sm);
+  }
+  .signup_signupset{
+    margin-right: 10vw;
+    margin-left: 10vw;
+    padding-bottom: 0;
+  }
+  .SignUp__container .errorMessage{
+    transition: 1s ease all;
+    margin-right: 10vw;
+    margin-left: 10vw;
+    margin-bottom: 0rem;
+    padding-top: 0.01rem;
+    padding-bottom: 0.01rem;
+  }
+  .signup_check{
+    padding: 1rem;
+    padding-top: 4rem;
+  }
+  .signup_signupset .signup_nameInputs{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}

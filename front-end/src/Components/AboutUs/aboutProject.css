@@ -1,0 +1,55 @@
+.titleProject{
+    text-align: center;
+}
+
+.aboutProject__items{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+}
+
+.aboutProject__item .subTitle{
+    text-align: center;
+}
+
+:root{
+    --container-width-lg: 75%;
+    --container-width-md: 86%;
+    --container-width-sm: 90%;
+}
+  
+html{
+    scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar{
+    display: none;
+}
+
+.aboutProject__container{
+    width: var(--container-width-lg);
+    margin: 0 auto;
+    padding-top: 4rem;
+    align-items: center;
+}
+
+/* FOR TABLETS */
+@media screen and (max-width: 1024px){
+    
+    .aboutProject__items{
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 1rem;
+    }
+
+}
+
+/* FOR PHONES */
+@media screen and (max-width: 600px){
+    .aboutProject__items{
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 1rem;
+    }
+
+}
